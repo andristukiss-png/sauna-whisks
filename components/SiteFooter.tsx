@@ -35,6 +35,7 @@ export function SiteFooter() {
         <Link href="/about">About</Link>
         <Link href="/status">Launch status</Link>
         <Link href="/site-map">Site map</Link>
+        <Link href="/data">Public data</Link>
         <Link href="/standards">Standards</Link>
         <Link href="/operations">Operations</Link>
         <Link href="/claims">Claims standard</Link>
