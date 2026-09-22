@@ -1,15 +1,18 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
   title: "Returns & Refunds",
-  description: "Pre-launch returns and refunds information for SaunaWhisks.com."
+  description: "Pre-launch returns and refunds information for SaunaWhisks.com.",
+  alternates: { canonical: "/returns" }
 };
 
 export default function ReturnsPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Returns" }]} />
       <article className="legal-page">
         <p className="section-kicker">RETURNS & REFUNDS</p>
         <h1>Before sales open</h1>
