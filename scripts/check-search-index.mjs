@@ -14,9 +14,11 @@ const requiredCollections = [
   "comparisons.map",
   "faqTopics.map",
   "articleTopics.map",
-  "productConditions.map"
+  "productConditions.map",
+  "useCases.map",
+  "techniques.map"
 ];
-const requiredPages = ["/quality", "/resources", "/templates", "/catalog", "/claims", "/status"];
+const requiredPages = ["/quality", "/resources", "/templates", "/catalog", "/claims", "/status", "/help", "/tools"];
 
 const errors = [];
 requiredCollections.forEach((item) => {
