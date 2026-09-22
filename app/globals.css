@@ -118,3 +118,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .enquiry-form select{width:100%;border:1px solid var(--line);background:rgba(255,255,255,.28);color:var(--ink);font:17px/1.5 Georgia,serif;padding:15px 16px;border-radius:0;outline:none}.enquiry-form select:focus{border-color:var(--moss);background:rgba(255,255,255,.5)}
 @media(max-width:900px){.product-support{grid-template-columns:1fr;gap:55px}}
 @media(max-width:560px){.breadcrumbs{padding-left:6vw;padding-right:6vw}.product-support,.product-faq{padding-left:6vw;padding-right:6vw}.product-support h2{font-size:40px}.related-products a{grid-template-columns:70px 1fr}.related-products em{grid-column:2}}
+
+
+/* Supplier + partnership acquisition */
+.supplier-grid,.partner-grid{padding:0 7vw 110px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px}.partner-grid{grid-template-columns:repeat(3,1fr)}.supplier-grid article,.partner-grid article{border:1px solid var(--line);margin-right:-1px;padding:38px}.supplier-grid span,.partner-grid span{font-size:9px;letter-spacing:.14em;opacity:.5}.supplier-grid h2,.partner-grid h2{font:400 28px Georgia,serif;margin:20px 0 14px}.supplier-grid p,.partner-grid p{font:15px/1.6 Georgia,serif;margin:0}
+@media(max-width:900px){.supplier-grid,.partner-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.supplier-grid,.partner-grid{grid-template-columns:1fr;padding-left:6vw;padding-right:6vw}}
