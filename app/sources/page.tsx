@@ -29,6 +29,11 @@ export default function SourcesPage() {
         </p>
       </section>
 
+      <section className="source-policy-links">
+        <a href="/editorial-policy">Editorial & source policy →</a>
+        <a href="/corrections">Corrections policy →</a>
+        <a href="/claims">Product claims standard →</a>
+      </section>
       <section className="source-list">
         {unique.map((source, index) => (
           <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>
