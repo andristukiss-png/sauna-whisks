@@ -43,6 +43,7 @@ const pages: SiteSearchItem[] = [
   { title: "Public data", description: "Read-only JSON, CSV and feed endpoints for SaunaWhisks.com.", href: "/data", type: "Page", keywords: ["api", "json", "csv", "feed", "data"] },
   { title: "Quality", description: "Product standards, testing, provenance, claims and sample evaluation.", href: "/quality", type: "Page", keywords: ["quality", "testing", "provenance", "standards"] },
   { title: "Resources", description: "Learning, source, public-data and operational resources.", href: "/resources", type: "Page", keywords: ["resources", "sources", "help", "data"] },
+  { title: "Help", description: "Product, shipping, learning, trade and contact help.", href: "/help", type: "Page", keywords: ["help", "support", "contact", "shipping", "faq"] },
   { title: "Templates & downloads", description: "Supplier, product-data and trade-trial CSV templates.", href: "/templates", type: "Page", keywords: ["template", "csv", "supplier", "trade"] },
   { title: "Supplier requirements", description: "Working data and documentation requirements for sauna-whisk producers.", href: "/suppliers/requirements", type: "Page", keywords: ["supplier", "requirements", "producer", "origin"] },
   { title: "Supplier sample evaluation", description: "Repeatable sample testing workflow for supplier comparison.", href: "/suppliers/sample-evaluation", type: "Page", keywords: ["sample", "testing", "supplier", "quality"] },
