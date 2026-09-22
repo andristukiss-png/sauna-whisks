@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./a11y.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://saunawhisks.com"),
@@ -71,7 +72,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema).replace(/</g, "\\u003c") }}
         />
         <a className="skip-link" href="#main-content">Skip to content</a>
-        <div id="main-content">{children}</div>
+        <div id="main-content" tabIndex={-1}>{children}</div>
       </body>
     </html>
   );
