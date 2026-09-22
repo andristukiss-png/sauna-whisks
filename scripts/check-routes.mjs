@@ -14,6 +14,8 @@ const dataFiles = [
   ["lib/faqTopics.ts", /slug:\s*"([^"]+)"/g],
   ["lib/articleTopics.ts", /slug:\s*"([^"]+)"/g],
   ["lib/productConditions.ts", /slug:\s*"([^"]+)"/g],
+  ["lib/useCases.ts", /slug:\s*"([^"]+)"/g],
+  ["lib/techniques.ts", /slug:\s*"([^"]+)"/g],
 ];
 
 const errors = [];
@@ -68,6 +70,8 @@ const expectedDynamicRoutes = [
   "app/faq/topic/[slug]/page.tsx",
   "app/journal/topic/[slug]/page.tsx",
   "app/conditions/[slug]/page.tsx",
+  "app/use-cases/[slug]/page.tsx",
+  "app/techniques/[slug]/page.tsx",
 ];
 
 for (const route of expectedDynamicRoutes) {
