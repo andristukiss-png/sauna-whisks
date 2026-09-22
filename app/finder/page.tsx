@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhiskFinder } from "@/components/WhiskFinder";
 
@@ -12,6 +13,7 @@ export default function FinderPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Whisk finder" }]} />
       <section className="page-hero compact-hero">
         <p className="section-kicker">WHISK FINDER</p>
         <h1>Choose by feel, not jargon.</h1>
