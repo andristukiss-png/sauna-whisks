@@ -21,7 +21,21 @@ export default async function TechniquePage({params}:{params:Promise<{slug:strin
   const item=getTechnique(slug);
   if(!item) notFound();
 
+  const schema={
+    "@context":"https://schema.org",
+    "@type":"HowTo",
+    name:item.name,
+    description:item.summary,
+    step:item.steps.map((text,index)=>({
+      "@type":"HowToStep",
+      position:index+1,
+      name:"Step "+(index+1),
+      text
+    }))
+  };
+
   return <main>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,"\\u003c")}}/>
     <Header/>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Techniques",href:"/techniques"},{label:item.name}]}/>
     <section className="page-hero">
