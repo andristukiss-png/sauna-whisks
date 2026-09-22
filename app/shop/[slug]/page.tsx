@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 import { EnquiryForm } from "@/components/EnquiryForm";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getWhisk, saunaWhisks } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -16,7 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!whisk) return {};
   return {
     title: whisk.name,
-    description: whisk.description
+    description: whisk.description,
+    alternates: { canonical: `/shop/${whisk.slug}` }
   };
 }
 
@@ -39,6 +41,22 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
     url: `https://saunawhisks.com/shop/${whisk.slug}`
   };
 
+  const faqItems = [
+    ["Is this product available now?", "Not yet. SaunaWhisks.com is pre-launch and is not accepting payment for this product."],
+    ["Will the final origin be published?", "Yes. Final origin, condition and producer information will be published when verified for the commercial SKU."],
+    ["How should I prepare it?", "Use the product-specific instructions supplied at launch. General preparation guidance is available in the sauna library."]
+  ];
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map(([question, answer]) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer }
+    }))
+  };
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -59,7 +77,16 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
+      />
       <Header />
+      <Breadcrumbs items={[
+        { label: "Home", href: "/" },
+        { label: "Shop", href: "/shop" },
+        { label: whisk.name }
+      ]} />
       <section className="product-detail">
         <div className="product-detail-art">
           <LeafMark />
@@ -97,6 +124,40 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
           <Link className="text-link" href="/traditions">Learn the wider sauna ritual →</Link>
         </div>
       </section>
+      <section className="product-support">
+        <div>
+          <p className="section-kicker">GOOD NEXT READS</p>
+          <h2>Understand the ritual before buying.</h2>
+          <div className="support-links">
+            <Link href="/journal/how-to-use-a-sauna-whisk">How to use a sauna whisk →</Link>
+            <Link href="/journal/how-to-prepare-dried-sauna-whisk">How to prepare a dried whisk →</Link>
+            <Link href="/compare">Birch vs oak vs eucalyptus →</Link>
+          </div>
+        </div>
+        <div>
+          <p className="section-kicker">OTHER WHISKS</p>
+          <div className="related-products">
+            {saunaWhisks.filter((item) => item.slug !== whisk.slug).map((item) => (
+              <Link href={`/shop/${item.slug}`} key={item.slug}>
+                <span>{item.material}</span>
+                <b>{item.name}</b>
+                <em>{item.plannedPrice} →</em>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="product-faq">
+        <p className="section-kicker">PRODUCT FAQ</p>
+        {faqItems.map(([question, answer]) => (
+          <details key={question}>
+            <summary>{question}<i>+</i></summary>
+            <p>{answer}</p>
+          </details>
+        ))}
+      </section>
+
       <section className="product-enquiry" id="product-enquiry">
         <p className="section-kicker">PRODUCT ENQUIRY</p>
         <h2>Ask about {whisk.name}.</h2>
