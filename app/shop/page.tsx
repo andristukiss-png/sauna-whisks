@@ -42,8 +42,8 @@ export default function ShopPage() {
       </section>
 
       <section className="shop-tools">
-        <a href="/finder"><span>Not sure?</span><b>Use the whisk finder →</b></a>
-        <a href="/checklist"><span>Comparing samples?</span><b>Open quality checklist →</b></a>
+        <Link href="/finder"><span>Not sure?</span><b>Use the whisk finder →</b></Link>
+        <Link href="/checklist"><span>Comparing samples?</span><b>Open quality checklist →</b></Link>
       </section>
       <p className="shop-price-note">All displayed prices are planned pre-launch prices in USD. Shipping, taxes and duties are not included.</p>
       <section className="catalog-grid">
