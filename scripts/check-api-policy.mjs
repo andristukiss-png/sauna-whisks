@@ -80,10 +80,10 @@ for (const [needle, label] of helperRequirements) {
 }
 
 const searchApi = fs.readFileSync("app/api/search/route.ts", "utf8");
-if (!searchApi.includes("MAX_QUERY_LENGTH")) errors.push("Search API query length is not bounded.");
-if (!searchApi.includes('type = allowedTypes.has(requestedType) ? requestedType : "All"')) {
-  errors.push("Search API does not normalize invalid type filters.");
-}
+if (!searchApi.includes("MAX_SEARCH_QUERY_LENGTH")) errors.push("Search API query length is not bounded.");
+if (!searchApi.includes("isSiteSearchFilter")) errors.push("Search API does not use shared filter validation.");
+if (!searchApi.includes("filterSiteSearchItems")) errors.push("Search API does not use shared search filtering.");
+if (!searchApi.includes("normalizeSearchQuery")) errors.push("Search API does not use shared query normalization.");
 
 const enquiry = fs.readFileSync("app/api/enquiry/route.ts", "utf8");
 const enquiryGuards = [
