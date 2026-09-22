@@ -46,25 +46,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const sameTopic = articles.filter((candidate) => candidate.slug !== article.slug && candidate.eyebrow === article.eyebrow);
   const related = [...sameTopic, ...articles.filter((candidate) => candidate.slug !== article.slug && candidate.eyebrow !== article.eyebrow)].slice(0, 3);
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://saunawhisks.com" },
-      { "@type": "ListItem", position: 2, name: "Journal", item: "https://saunawhisks.com/journal" },
-      { "@type": "ListItem", position: 3, name: article.title, item: `https://saunawhisks.com/journal/${article.slug}` }
-    ]
-  };
-
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
       />
       <Header />
       <Breadcrumbs items={[
