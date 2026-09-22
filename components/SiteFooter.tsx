@@ -23,6 +23,8 @@ export function SiteFooter() {
         <Link prefetch={false} href="/care">Care</Link>
         <Link prefetch={false} href="/conditions">Conditions</Link>
         <Link prefetch={false} href="/guides">Buying guides</Link>
+        <Link prefetch={false} href="/use-cases">Use cases</Link>
+        <Link prefetch={false} href="/techniques">Techniques</Link>
         <Link prefetch={false} href="/finder">Whisk finder</Link>
         <Link prefetch={false} href="/checklist">Quality checklist</Link>
         <Link prefetch={false} href="/compare">Compare</Link>
