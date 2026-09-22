@@ -13,9 +13,13 @@ export const metadata = {
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string; type?: string }>;
 }) {
-  const { q = "" } = await searchParams;
+  const { q = "", type = "All" } = await searchParams;
+  const allowed = ["All", "Product", "Guide", "Market", "Trade", "Page"] as const;
+  const initialType = allowed.includes(type as (typeof allowed)[number])
+    ? (type as (typeof allowed)[number])
+    : "All";
 
   return (
     <main>
@@ -26,7 +30,7 @@ export default async function SearchPage({
         <h1>Find the branch you need.</h1>
         <p>Search products, materials, preparation guides, traditions, launch markets and trade information.</p>
       </section>
-      <SiteSearch items={siteSearchItems} initialQuery={q} />
+      <SiteSearch items={siteSearchItems} initialQuery={q} initialType={initialType} />
       <SiteFooter />
     </main>
   );
