@@ -20,7 +20,7 @@ export default function USAPage() {
           and bundles that make international logistics sensible. US orders are not open yet.
         </p>
         <div className="usa-actions">
-          <a className="button button-dark" href="mailto:hello@saunawhisks.com?subject=US%20launch%20waitlist">
+          <a className="button button-dark" href="mailto:info@saunawhisks.com?subject=US%20launch%20waitlist">
             Join the US launch list
           </a>
           <Link className="text-link" href="/standards">Read our product standard →</Link>
