@@ -57,25 +57,11 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
     }))
   };
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://saunawhisks.com" },
-      { "@type": "ListItem", position: 2, name: "Shop", item: "https://saunawhisks.com/shop" },
-      { "@type": "ListItem", position: 3, name: whisk.name, item: `https://saunawhisks.com/shop/${whisk.slug}` }
-    ]
-  };
-
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema).replace(/</g, "\\u003c") }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
       />
       <script
         type="application/ld+json"
