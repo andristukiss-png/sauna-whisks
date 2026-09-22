@@ -1,7 +1,8 @@
 import { saunaWhisks } from "@/lib/products";
+import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
-  return Response.json({
+  return publicJson({
     status: "pre-launch",
     currency: "USD",
     products: saunaWhisks.map((whisk) => ({
