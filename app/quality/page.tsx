@@ -15,7 +15,9 @@ const links = [
   ["/operations/provenance", "Provenance", "Harvest origin, producer identity, condition and supporting evidence."],
   ["/checklist", "Quality checklist", "Interactive sample-evaluation checklist."],
   ["/claims", "Claims standard", "Observable product facts without unsupported health marketing."],
-  ["/catalog", "Product data", "Current pre-launch product verification status."]
+  ["/catalog", "Product data", "Current pre-launch product verification status."],
+  ["/tools/supplier-scorecard", "Supplier scorecard", "Evidence-based internal comparison of producer candidates."],
+  ["/tools/launch-readiness", "Launch readiness", "Track the major gates before checkout opens."]
 ];
 
 export default function QualityPage() {
