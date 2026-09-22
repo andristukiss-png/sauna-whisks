@@ -38,7 +38,12 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
       "@type": "Brand",
       name: "Sauna Whisks"
     },
-    url: `https://saunawhisks.com/shop/${whisk.slug}`
+    url: `https://saunawhisks.com/shop/${whisk.slug}`,
+    additionalProperty: [
+      { "@type": "PropertyValue", name: "Status", value: whisk.status },
+      { "@type": "PropertyValue", name: "Planned condition", value: whisk.plannedCondition },
+      { "@type": "PropertyValue", name: "Verification", value: whisk.verification }
+    ]
   };
 
   const faqItems = [
