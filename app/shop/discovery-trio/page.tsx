@@ -29,25 +29,11 @@ export default function DiscoveryTrioPage() {
     url: "https://saunawhisks.com/shop/discovery-trio"
   };
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://saunawhisks.com" },
-      { "@type": "ListItem", position: 2, name: "Shop", item: "https://saunawhisks.com/shop" },
-      { "@type": "ListItem", position: 3, name: "Discovery Trio", item: "https://saunawhisks.com/shop/discovery-trio" }
-    ]
-  };
-
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema).replace(/</g, "\\u003c") }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
       />
       <Header />
       <Breadcrumbs items={[
