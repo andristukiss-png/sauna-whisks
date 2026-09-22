@@ -34,5 +34,6 @@
 - lint green
 - typecheck green
 - next build green
+- local production HTTP smoke green
 - Vercel deployment green
 - production smoke check green
