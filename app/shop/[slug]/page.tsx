@@ -25,8 +25,40 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
   const whisk = getWhisk(slug);
   if (!whisk) notFound();
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: whisk.name,
+    description: whisk.description,
+    category: "Sauna whisk",
+    material: whisk.material,
+    brand: {
+      "@type": "Brand",
+      name: "Sauna Whisks"
+    },
+    url: `https://saunawhisks.com/shop/${whisk.slug}`
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://saunawhisks.com" },
+      { "@type": "ListItem", position: 2, name: "Shop", item: "https://saunawhisks.com/shop" },
+      { "@type": "ListItem", position: 3, name: whisk.name, item: `https://saunawhisks.com/shop/${whisk.slug}` }
+    ]
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
+      />
       <Header />
       <section className="product-detail">
         <div className="product-detail-art">
@@ -60,7 +92,10 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
             </div>
           ))}
         </div>
-        <Link className="text-link" href="/traditions">Learn the wider sauna ritual →</Link>
+        <div className="preparation-links">
+          <Link className="text-link" href="/journal/how-to-use-a-sauna-whisk">How to use a sauna whisk →</Link>
+          <Link className="text-link" href="/traditions">Learn the wider sauna ritual →</Link>
+        </div>
       </section>
       <section className="product-enquiry" id="product-enquiry">
         <p className="section-kicker">PRODUCT ENQUIRY</p>
