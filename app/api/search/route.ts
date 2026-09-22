@@ -1,30 +1,26 @@
 import { siteSearchItems } from "@/lib/siteSearch";
 import { noStoreJson } from "@/lib/publicApi";
-
-const allowedTypes = new Set(["Product", "Guide", "Market", "Trade", "Page"]);
-const MAX_QUERY_LENGTH = 200;
+import {
+  filterSiteSearchItems,
+  isSiteSearchFilter,
+  MAX_SEARCH_QUERY_LENGTH,
+  normalizeSearchQuery,
+} from "@/lib/search";
 
 export function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const query = (searchParams.get("q") || "").trim().slice(0, MAX_QUERY_LENGTH).toLowerCase();
+  const rawQuery = searchParams.get("q") || "";
+  const query = normalizeSearchQuery(rawQuery);
   const requestedType = searchParams.get("type") || "";
-  const type = allowedTypes.has(requestedType) ? requestedType : "All";
-  const typed = type === "All"
-    ? siteSearchItems
-    : siteSearchItems.filter((item) => item.type === type);
+  const type = isSiteSearchFilter(requestedType) ? requestedType : "All";
+  const limit = query ? 40 : 18;
+  const results = filterSiteSearchItems(siteSearchItems, query, type, limit);
 
-  if (!query) {
-    return noStoreJson({ query: "", type, count: Math.min(18, typed.length), results: typed.slice(0, 18) });
-  }
-
-  const results = typed
-    .filter((item) =>
-      [item.title, item.description, item.type, ...(item.keywords || [])]
-        .join(" ")
-        .toLowerCase()
-        .includes(query)
-    )
-    .slice(0, 40);
-
-  return noStoreJson({ query, type, count: results.length, results });
+  return noStoreJson({
+    query,
+    type,
+    maxQueryLength: MAX_SEARCH_QUERY_LENGTH,
+    count: results.length,
+    results,
+  });
 }
