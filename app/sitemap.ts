@@ -11,6 +11,7 @@ import { buyerGuides } from "@/lib/buyerGuides";
 import { comparisons } from "@/lib/comparisons";
 import { faqTopics } from "@/lib/faqTopics";
 import { articleTopics } from "@/lib/articleTopics";
+import { productConditions } from "@/lib/productConditions";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://saunawhisks.com";
@@ -49,6 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/status",
     "/site-map",
     "/legal",
+    "/conditions",
     "/journal/topics"
   ];
 
@@ -127,6 +129,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...articleTopics.map((topic) => ({
       url: `${base}/journal/topic/${topic.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.65,
+    })),
+    ...productConditions.map((item) => ({
+      url: `${base}/conditions/${item.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.65,
