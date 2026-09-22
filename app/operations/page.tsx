@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { operationGuides } from "@/lib/operations";
 
@@ -13,6 +14,7 @@ export default function OperationsPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Operations" }]} />
       <section className="page-hero">
         <p className="section-kicker">PRODUCT OPERATIONS</p>
         <h1>Make a natural product measurable.</h1>
