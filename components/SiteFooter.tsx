@@ -12,6 +12,7 @@ export function SiteFooter() {
       <div>
         <b>Explore</b>
         <Link href="/shop">Shop</Link>
+        <Link href="/compare">Compare</Link>
         <Link href="/traditions">Traditions</Link>
         <Link href="/journal">Journal</Link>
         <Link href="/glossary">Glossary</Link>
@@ -24,6 +25,7 @@ export function SiteFooter() {
         <Link href="/faq">FAQ</Link>
         <Link href="/wholesale">Wholesale</Link>
         <Link href="/contact">Contact</Link>
+        <Link href="/privacy">Privacy</Link>
       </div>
       <div className="footer-note">
         Traditional sauna culture,<br />presented with modern standards.
