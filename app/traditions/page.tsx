@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
+import Link from "next/link";
 
 export const metadata = {
   title: "Sauna Whisk Traditions",
@@ -21,27 +22,32 @@ export default function TraditionsPage() {
       </section>
 
       <section className="tradition-grid">
-        <article>
+        <Link href="/traditions/latvian-pirts">
           <span>LATVIA / BALTICS</span>
           <h2>Sauna and pirts culture</h2>
           <p>
             In Latvia, the sauna tradition is closely tied to pirts culture, plants, seasonal harvesting and a more intentional ritual than simple heat exposure.
           </p>
-        </article>
-        <article>
+        </Link>
+        <Link href="/traditions/finnish-vihta-vasta">
           <span>FINLAND</span>
           <h2>Vihta / vasta</h2>
           <p>
             Finnish terminology varies by region, but birch remains the classic material associated with traditional sauna whisking.
           </p>
-        </article>
-        <article>
+        </Link>
+        <Link href="/traditions/banya-venik">
           <span>BANYA</span>
           <h2>Venik</h2>
           <p>
             In banya traditions, the venik is often used more vigorously, with oak and birch among the best-known materials.
           </p>
-        </article>
+        </Link>
+        <Link href="/traditions/baltic-sauna-whisks">
+          <span>BALTICS</span>
+          <h2>Specialist whisk culture</h2>
+          <p>Seasonal plant materials, dried preservation and a wider botanical assortment across the Baltic region.</p>
+        </Link>
       </section>
 
       <section className="knowledge-copy">
