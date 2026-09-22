@@ -29,7 +29,6 @@ export function SiteSearch({ items }: { items: SiteSearchItem[] }) {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Try birch, venik, USA, storage..."
-          autoFocus
         />
       </label>
 
