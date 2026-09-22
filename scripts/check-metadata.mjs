@@ -13,7 +13,6 @@ const errors = [];
 
 for (const file of pages) {
   const text = fs.readFileSync(file, "utf8");
-  const isDynamic = file.includes("[");
   const isHome = file === path.join("app", "page.tsx");
 
   if (isHome) continue;
@@ -23,11 +22,17 @@ for (const file of pages) {
 
   if (!hasStaticMetadata && !hasDynamicMetadata) {
     errors.push("Missing metadata export: " + file);
+    continue;
   }
 
-  if (!isDynamic && hasStaticMetadata && !text.includes("alternates:")) {
-    errors.push("Static page missing canonical metadata: " + file);
+  if (!text.includes("alternates:")) {
+    errors.push("Page missing canonical metadata: " + file);
   }
+}
+
+const searchPage = fs.readFileSync("app/search/page.tsx", "utf8");
+if (!/robots\s*:\s*\{\s*index\s*:\s*false\s*,\s*follow\s*:\s*true\s*\}/s.test(searchPage)) {
+  errors.push("Search page must remain noindex, follow.");
 }
 
 if (errors.length) {
