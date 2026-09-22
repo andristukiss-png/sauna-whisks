@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
+import { EnquiryForm } from "@/components/EnquiryForm";
 import { getWhisk, saunaWhisks } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -43,7 +44,7 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
             <div><span>Botanical group</span><b>{whisk.latin}</b></div>
             <div><span>Planned launch price</span><b>{whisk.plannedPrice}</b></div>
           </div>
-          <button className="button button-dark" type="button">Coming soon</button>
+          <a className="button button-dark" href="#product-enquiry">Ask about this whisk</a>
           <p className="fineprint">Final origin, harvest and producer information will be published only after verification.</p>
         </div>
       </section>
@@ -60,6 +61,15 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
           ))}
         </div>
         <Link className="text-link" href="/traditions">Learn the wider sauna ritual →</Link>
+      </section>
+      <section className="product-enquiry" id="product-enquiry">
+        <p className="section-kicker">PRODUCT ENQUIRY</p>
+        <h2>Ask about {whisk.name}.</h2>
+        <p>
+          Questions about availability, wholesale quantities, shipping or preparation?
+          Send us a message below.
+        </p>
+        <EnquiryForm subject={`SaunaWhisks.com enquiry — ${whisk.name}`} />
       </section>
       <SiteFooter />
     </main>
