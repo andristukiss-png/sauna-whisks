@@ -14,6 +14,8 @@ export function SiteFooter() {
         <Link href="/shop">Shop</Link>
         <Link href="/catalog">Product data</Link>
         <Link href="/learn">Learn</Link>
+        <Link href="/resources">Resources</Link>
+        <Link href="/quality">Quality</Link>
         <Link href="/search">Search</Link>
         <Link href="/beginners">Beginners</Link>
         <Link href="/materials">Materials</Link>
