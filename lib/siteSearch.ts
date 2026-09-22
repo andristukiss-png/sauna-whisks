@@ -10,6 +10,7 @@ import { buyerGuides } from "@/lib/buyerGuides";
 import { comparisons } from "@/lib/comparisons";
 import { faqTopics } from "@/lib/faqTopics";
 import { articleTopics } from "@/lib/articleTopics";
+import { productConditions } from "@/lib/productConditions";
 
 export type SiteSearchItem = {
   title: string;
@@ -130,6 +131,13 @@ export const siteSearchItems: SiteSearchItem[] = [
     href: `/journal/topic/${topic.slug}`,
     type: "Guide" as const,
     keywords: topic.slugs
+  })),
+  ...productConditions.map((item) => ({
+    title: item.name,
+    description: item.summary,
+    href: `/conditions/${item.slug}`,
+    type: "Page" as const,
+    keywords: [item.status, ...item.advantages, ...item.constraints]
   })),
   ...pages,
 ];
