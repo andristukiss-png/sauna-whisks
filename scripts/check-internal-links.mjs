@@ -18,13 +18,17 @@ const staticRoutes = new Set([
   "/compare", "/privacy", "/shipping", "/terms", "/returns", "/cookies", "/accessibility",
   "/suppliers", "/partners", "/learn", "/beginners", "/materials", "/care", "/markets",
   "/trade", "/search", "/operations", "/sources", "/guides", "/status", "/site-map",
-  "/legal", "/conditions", "/catalog", "/claims", "/data", "/finder", "/checklist"
+  "/legal", "/conditions", "/catalog", "/claims", "/data", "/finder", "/checklist",
+  "/quality", "/resources", "/help", "/templates", "/tools", "/tools/supplier-scorecard",
+  "/tools/landed-cost", "/tools/trade-demand", "/tools/launch-readiness", "/use-cases",
+  "/techniques", "/company", "/press", "/editorial-policy", "/corrections",
+  "/suppliers/requirements", "/suppliers/sample-evaluation", "/trade/trial"
 ]);
 
 const dynamicPrefixes = [
   "/shop/", "/journal/", "/markets/", "/trade/", "/operations/", "/glossary/",
   "/materials/", "/traditions/", "/guides/", "/compare/", "/faq/topic/",
-  "/journal/topic/", "/conditions/"
+  "/journal/topic/", "/conditions/", "/use-cases/", "/techniques/"
 ];
 
 const allowedTechnical = [
