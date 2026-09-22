@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -13,11 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const segment = getTradeSegment(slug);
   if (!segment) return {};
-  return {
+  return pageMetadata({
     title: `${segment.name} | Trade Sauna Whisks`,
     description: segment.summary,
-    alternates: { canonical: `/trade/${segment.slug}` }
-  };
+    canonical: `/trade/${segment.slug}`,
+  });
 }
 
 export default async function TradeSegmentPage({ params }: { params: Promise<{ slug: string }> }) {
