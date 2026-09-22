@@ -2,17 +2,19 @@ import { siteSearchItems } from "@/lib/siteSearch";
 import { noStoreJson } from "@/lib/publicApi";
 
 const allowedTypes = new Set(["Product", "Guide", "Market", "Trade", "Page"]);
+const MAX_QUERY_LENGTH = 200;
 
 export function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const query = (searchParams.get("q") || "").trim().toLowerCase();
-  const type = searchParams.get("type") || "";
-  const typed = allowedTypes.has(type)
-    ? siteSearchItems.filter((item) => item.type === type)
-    : siteSearchItems;
+  const query = (searchParams.get("q") || "").trim().slice(0, MAX_QUERY_LENGTH).toLowerCase();
+  const requestedType = searchParams.get("type") || "";
+  const type = allowedTypes.has(requestedType) ? requestedType : "All";
+  const typed = type === "All"
+    ? siteSearchItems
+    : siteSearchItems.filter((item) => item.type === type);
 
   if (!query) {
-    return noStoreJson({ query: "", type: type || "All", results: typed.slice(0, 18) });
+    return noStoreJson({ query: "", type, count: Math.min(18, typed.length), results: typed.slice(0, 18) });
   }
 
   const results = typed
@@ -24,5 +26,5 @@ export function GET(request: Request) {
     )
     .slice(0, 40);
 
-  return noStoreJson({ query, type: type || "All", count: results.length, results });
+  return noStoreJson({ query, type, count: results.length, results });
 }
