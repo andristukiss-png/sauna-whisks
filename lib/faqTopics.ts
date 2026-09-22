@@ -60,6 +60,39 @@ export const faqTopics: FAQTopic[] = [
       ["Will there be retail packs?", "Consumer-ready retail packs are planned for specialist stockists."],
       ["Can distributors contact you?", "Yes. Distributor discussions are welcome, but volume programs will follow stable product specifications and compliance."]
     ]
+  },
+  {
+    slug: "quality",
+    title: "Quality & verification",
+    description: "Questions about provenance, sample testing and what makes a commercial whisk trustworthy.",
+    items: [
+      ["What does verified origin mean?", "It means the harvest or production location is supported by supplier or batch information rather than inferred from the seller's address."],
+      ["Why test leaf retention?", "A dry product photo cannot show how well leaves stay attached after correct preparation and normal use."],
+      ["Do natural whisks have to be identical?", "No. Natural variation is expected, but dimensions, construction and prepared performance should still fall within a useful commercial range."],
+      ["Why publish unknown fields?", "Leaving a field pending is more trustworthy than filling it with an unsupported heritage or origin claim."]
+    ]
+  },
+  {
+    slug: "suppliers",
+    title: "Suppliers & producers",
+    description: "Questions from producers interested in supplying SaunaWhisks.com.",
+    items: [
+      ["What supplier information do you need?", "Origin, material, preservation condition, typical dimensions, preparation, capacity, packaging and available export documentation."],
+      ["Do you require samples?", "Yes. Commercial evaluation should include representative prepared samples rather than photos alone."],
+      ["Can small producers contact you?", "Yes. Capacity and MOQ should simply be stated clearly so the right commercial format can be assessed."],
+      ["Will producer names be public?", "Where commercial agreements and verification allow it, named producer information is preferred over anonymous sourcing."]
+    ]
+  },
+  {
+    slug: "launch",
+    title: "Launch & pre-launch status",
+    description: "Questions about why checkout is disabled and what has to happen before commercial sales open.",
+    items: [
+      ["Why is checkout disabled?", "Supplier, product, import, fulfilment, legal and payment gates are still being verified."],
+      ["Can I reserve a product?", "An enquiry does not create a reservation or order. Commercial ordering will open only when the relevant market and SKU are ready."],
+      ["Are the displayed prices final?", "No. Displayed prices are planned pre-launch prices in USD and may change after landed-cost validation."],
+      ["How will I know when a market opens?", "Market and shipping pages will be updated when a product can actually be sold and fulfilled there."]
+    ]
   }
 ];
 
