@@ -19,7 +19,7 @@ The command reports:
 - `/sitemap.xml`
 - the `www` redirect target
 
-Use a different host only when intentionally testing a preview or alternate production hostname:
+Use a different host only when intentionally testing a preview or alternate production hostname. Alternate-host runs skip the canonical `www` DNS/redirect checks:
 
 ```bash
 SAUNAWHISKS_BASE_URL=https://example.com npm run verify:production
