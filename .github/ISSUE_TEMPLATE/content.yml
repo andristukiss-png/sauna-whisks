@@ -1,0 +1,19 @@
+name: Content improvement
+description: Suggest or track a content improvement
+title: "[Content] "
+labels: ["content"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources / evidence
