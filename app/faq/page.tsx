@@ -47,7 +47,7 @@ export default function FAQPage() {
       </section>
       <section className="faq-topic-grid">
         {faqTopics.map((topic) => (
-          <Link href={"/faq/topic/" + topic.slug} key={topic.slug}>
+          <Link prefetch={false} href={"/faq/topic/" + topic.slug} key={topic.slug}>
             <h2>{topic.title}</h2>
             <p>{topic.description}</p>
             <b>Browse topic →</b>
