@@ -1,4 +1,5 @@
 import { articles } from "@/lib/articles";
+import { publicText } from "@/lib/publicApi";
 
 function escapeXml(value: string) {
   return value
@@ -33,10 +34,8 @@ export function GET() {
   </channel>
 </rss>`;
 
-  return new Response(xml, {
-    headers: {
-      "Content-Type": "application/rss+xml; charset=utf-8",
-      "Cache-Control": "public, max-age=3600",
-    },
+  return publicText(xml, {
+    contentType: "application/rss+xml; charset=utf-8",
+    maxAge: 3600,
   });
 }

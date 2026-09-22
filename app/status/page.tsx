@@ -1,21 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
+import { launchStatus } from "@/lib/status";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Launch Status",
   description: "Current SaunaWhisks.com commercial launch status.",
-  alternates: { canonical: "/status" }
-};
-
-const items = [
-  ["Brand & website", "In development", "Core website, education, enquiry and product architecture are built."],
-  ["Supplier verification", "Open", "Producer, product and batch documentation still needs commercial verification."],
-  ["Import compliance", "Researching", "Destination-market checks are required before plant products are offered for sale."],
-  ["Fulfilment", "Open", "Warehouse, packaging and shipping processes are not final."],
-  ["Payments", "Disabled", "Checkout remains intentionally off until product and fulfilment gates are complete."],
-  ["Customer enquiries", "Open", "Pre-launch product, supplier, trade and market enquiries are accepted."]
-];
+  canonical: "/status",
+});
 
 export default function StatusPage() {
   return (
@@ -28,12 +21,12 @@ export default function StatusPage() {
         <p>We would rather open later with verified products than accept payment before the supply chain is ready.</p>
       </section>
       <section className="status-list">
-        {items.map(([area, status, copy], index) => (
+        {launchStatus.items.map(({ area, status, description }, index) => (
           <div key={area}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <h2>{area}</h2>
             <b>{status}</b>
-            <p>{copy}</p>
+            <p>{description}</p>
           </div>
         ))}
       </section>

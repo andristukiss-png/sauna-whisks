@@ -1,14 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Shipping & Availability",
-  description:
-    "Current pre-launch shipping and availability status for SaunaWhisks.com.",
-  alternates: { canonical: "/shipping" }
-};
+  description: "Current pre-launch shipping and availability status for SaunaWhisks.com.",
+  canonical: "/shipping",
+});
 
 const markets = [
   ["European Union", "Planned", "Initial fulfilment and VAT/shipping setup is being prepared."],

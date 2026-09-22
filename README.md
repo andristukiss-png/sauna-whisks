@@ -124,7 +124,10 @@ ENQUIRY_FROM_EMAIL=Sauna Whisks <website@SaunaWhisks.com>
 
 ## Development
 
+Use Node 22. The repository pins the version in `.nvmrc` and `.node-version`.
+
 ```bash
+nvm use
 npm install
 npm run dev
 ```

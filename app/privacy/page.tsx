@@ -1,12 +1,13 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Privacy",
   description: "Privacy information for SaunaWhisks.com.",
-  alternates: { canonical: "/privacy" }
-};
+  canonical: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

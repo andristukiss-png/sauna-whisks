@@ -1,13 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articles } from "@/lib/articles";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sources",
   description: "Primary and supporting sources referenced across the SaunaWhisks.com knowledge library.",
-  alternates: { canonical: "/sources" }
-};
+  canonical: "/sources",
+});
 
 export default function SourcesPage() {
   const unique = Array.from(
@@ -30,9 +32,9 @@ export default function SourcesPage() {
       </section>
 
       <section className="source-policy-links">
-        <a href="/editorial-policy">Editorial & source policy →</a>
-        <a href="/corrections">Corrections policy →</a>
-        <a href="/claims">Product claims standard →</a>
+        <Link href="/editorial-policy">Editorial & source policy →</Link>
+        <Link href="/corrections">Corrections policy →</Link>
+        <Link href="/claims">Product claims standard →</Link>
       </section>
       <section className="source-list">
         {unique.map((source, index) => (

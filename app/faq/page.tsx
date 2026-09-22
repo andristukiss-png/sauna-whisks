@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -15,11 +16,11 @@ const faqs = [
   ["Are your products made in Latvia?", "The brand is Latvia-based. Final product pages will state the verified harvest and production origin of each individual whisk."]
 ];
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk FAQ",
   description: "Answers to common questions about sauna whisks, venik, vihta, vasta, birch, oak, preparation and shipping.",
-  alternates: { canonical: "/faq" }
-};
+  canonical: "/faq",
+});
 
 export default function FAQPage() {
   const schema = {

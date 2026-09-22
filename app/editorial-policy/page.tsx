@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { sourceHierarchy } from "@/lib/editorial";
 
-export const metadata={
-  title:"Editorial & Source Policy",
-  description:"How SaunaWhisks.com sources, reviews and separates cultural, regulatory and commercial claims.",
-  alternates:{canonical:"/editorial-policy"}
-};
+export const metadata = pageMetadata({
+  title: "Editorial & Source Policy",
+  description: "How SaunaWhisks.com sources, reviews and separates cultural, regulatory and commercial claims.",
+  canonical: "/editorial-policy",
+});
 
 export default function EditorialPolicyPage(){
   return <main>

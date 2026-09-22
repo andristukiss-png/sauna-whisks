@@ -1,40 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { publicDataEndpoints } from "@/lib/publicData";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Public Data",
-  description: "Public pre-launch SaunaWhisks.com JSON, CSV and feed endpoints.",
-  alternates: { canonical: "/data" }
-};
-
-const endpoints = [
-  ["/api/catalog", "Product catalog JSON"],
-  ["/api/catalog.csv", "Product catalog CSV"],
-  ["/api/articles", "Journal index JSON"],
-  ["/api/materials", "Materials JSON"],
-  ["/api/conditions", "Product conditions JSON"],
-  ["/api/markets", "Market plans JSON"],
-  ["/api/trade", "Trade segments JSON"],
-  ["/api/glossary", "Glossary JSON"],
-  ["/api/guides", "Buyer guides JSON"],
-  ["/api/operations", "Operations standards JSON"],
-  ["/api/company", "Company facts JSON"],
-  ["/api/use-cases", "Use cases JSON"],
-  ["/api/techniques", "Techniques JSON"],
-  ["/api/faq", "FAQ topics JSON"],
-  ["/api/traditions", "Traditions JSON"],
-  ["/api/comparisons", "Comparisons JSON"],
-  ["/api/editorial", "Editorial/source-policy JSON"],
-  ["/api/tools", "Tools index JSON"],
-  ["/api/sources", "Source library JSON"],
-  ["/api/sources.csv", "Source library CSV"],
-  ["/api/product-data-template.csv", "Product data template CSV"],
-  ["/api/supplier-sample-template.csv", "Supplier sample evaluation CSV"],
-  ["/api/trade-trial-template.csv", "Trade trial template CSV"],
-  ["/feed.xml", "RSS feed"],
-  ["/feed.json", "JSON Feed"],
-];
+  description: "Public pre-launch SaunaWhisks.com JSON, CSV, feed and machine-readable endpoints.",
+  canonical: "/data",
+});
 
 export default function DataPage() {
   return (
@@ -44,13 +18,13 @@ export default function DataPage() {
       <section className="page-hero">
         <p className="section-kicker">PUBLIC DATA</p>
         <h1>Use the same information the site uses.</h1>
-        <p>Read-only pre-launch endpoints for product, content, market, trade and source data.</p>
+        <p>Read-only pre-launch endpoints for product, content, market, trade, source and machine-readable site data.</p>
       </section>
       <section className="data-endpoints">
-        {endpoints.map(([href, label]) => (
-          <a href={href} key={href}>
+        {publicDataEndpoints.map(({ path, label }) => (
+          <a href={path} key={path}>
             <h2>{label}</h2>
-            <code>{href}</code>
+            <code>{path}</code>
             <b>Open →</b>
           </a>
         ))}

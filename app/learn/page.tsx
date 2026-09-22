@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Learn Sauna Whisks",
   description: "A structured learning hub for sauna whisk materials, care, traditions and terminology.",
-  alternates: { canonical: "/learn" }
-};
+  canonical: "/learn",
+});
 
 const sections = [
   ["/beginners", "Start here", "A four-step path for your first sauna whisk."],

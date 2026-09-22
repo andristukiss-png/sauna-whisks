@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Legal & Policies",
   description: "Legal, privacy, returns, cookie and accessibility information for SaunaWhisks.com.",
-  alternates: { canonical: "/legal" }
-};
+  canonical: "/legal",
+});
 
 const links = [
   ["/privacy", "Privacy", "How enquiry information is handled."],

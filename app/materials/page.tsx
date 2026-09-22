@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk Materials",
   description: "Explore birch, oak and eucalyptus sauna whisk materials and how they differ.",
-  alternates: { canonical: "/materials" }
-};
+  canonical: "/materials",
+});
 
 const materials = [
   ["/materials/birch", "Birch", "Soft, leafy and the classic starting point."],

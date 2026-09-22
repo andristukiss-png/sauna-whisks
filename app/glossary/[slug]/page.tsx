@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -13,11 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const item = getGlossaryTerm(slug);
   if (!item) return {};
-  return {
+  return pageMetadata({
     title: `${item.term} — Sauna Glossary`,
     description: item.definition,
-    alternates: { canonical: `/glossary/${item.slug}` }
-  };
+    canonical: `/glossary/${item.slug}`,
+  });
 }
 
 export default async function GlossaryTermPage({ params }: { params: Promise<{ slug: string }> }) {

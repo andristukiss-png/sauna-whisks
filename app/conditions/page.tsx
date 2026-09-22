@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { productConditions } from "@/lib/productConditions";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk Conditions & Preservation",
   description: "Compare dried, fresh, frozen and preserved sauna whisk formats.",
-  alternates: { canonical: "/conditions" }
-};
+  canonical: "/conditions",
+});
 
 export default function ConditionsPage() {
   return (

@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -9,11 +10,15 @@ export function generateStaticParams(){
   return techniques.map((item)=>({slug:item.slug}));
 }
 
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}){
-  const {slug}=await params;
-  const item=getTechnique(slug);
-  if(!item) return {};
-  return {title:item.name+" — Sauna Whisk Technique",description:item.summary,alternates:{canonical:"/techniques/"+item.slug}};
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const item = getTechnique(slug);
+  if (!item) return {};
+  return pageMetadata({
+    title: item.name + " — Sauna Whisk Technique",
+    description: item.summary,
+    canonical: "/techniques/" + item.slug,
+  });
 }
 
 export default async function TechniquePage({params}:{params:Promise<{slug:string}>}){

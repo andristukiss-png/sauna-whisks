@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -13,11 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const item = getMaterialKnowledge(slug);
   if (!item) return {};
-  return {
+  return pageMetadata({
     title: `${item.name} Sauna Whisks`,
     description: item.summary,
-    alternates: { canonical: `/materials/${item.slug}` }
-  };
+    canonical: `/materials/${item.slug}`,
+  });
 }
 
 export default async function MaterialPage({ params }: { params: Promise<{ slug: string }> }) {

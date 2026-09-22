@@ -15,9 +15,6 @@ export const metadata: Metadata = {
   publisher: "Sauna Whisks",
   category: "Sauna and wellness",
   openGraph: {
-    title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
-    description: "Traditional sauna whisks and the living sauna traditions behind them.",
-    url: "https://saunawhisks.com",
     siteName: "Sauna Whisks",
     type: "website",
   },
@@ -28,9 +25,7 @@ export const metadata: Metadata = {
     }
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
-    description: "Traditional sauna whisks and the living sauna traditions behind them."
+    card: "summary_large_image"
   },
 };
 
@@ -71,8 +66,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema).replace(/</g, "\\u003c") }}
         />
-        <a className="skip-link" href="#main-content">Skip to content</a>
-        <div id="main-content" tabIndex={-1}>{children}</div>
+        {children}
       </body>
     </html>
   );

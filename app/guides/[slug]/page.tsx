@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -13,11 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const guide = getBuyerGuide(slug);
   if (!guide) return {};
-  return {
+  return pageMetadata({
     title: guide.title,
     description: guide.description,
-    alternates: { canonical: `/guides/${guide.slug}` }
-  };
+    canonical: `/guides/${guide.slug}`,
+  });
 }
 
 export default async function BuyerGuidePage({ params }: { params: Promise<{ slug: string }> }) {

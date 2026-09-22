@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata={
-  title:"Help",
-  description:"Find product, shipping, learning, trade and contact help for SaunaWhisks.com.",
-  alternates:{canonical:"/help"}
-};
+export const metadata = pageMetadata({
+  title: "Help",
+  description: "Find product, shipping, learning, trade and contact help for SaunaWhisks.com.",
+  canonical: "/help",
+});
 
 const links=[
   ["/search","Search the site","Find products, guides, markets, trade pages and terminology."],

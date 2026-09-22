@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Supplier Requirements",
   description: "Working supplier requirements for SaunaWhisks.com sauna whisk producers.",
-  alternates: { canonical: "/suppliers/requirements" }
-};
+  canonical: "/suppliers/requirements",
+});
 
 const requirements = [
   ["Origin", "Harvest country and production country must be distinguishable."],

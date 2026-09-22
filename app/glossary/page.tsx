@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import Link from "next/link";
@@ -5,11 +6,11 @@ import { glossaryTerms } from "@/lib/glossaryTerms";
 
 const terms = glossaryTerms.map(({ slug, term, definition }) => [slug, term, definition]);
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk Glossary",
   description: "Definitions of sauna whisk, pirts, pirtnieks, venik, vihta, vasta and other sauna terms.",
-  alternates: { canonical: "/glossary" }
-};
+  canonical: "/glossary",
+});
 
 export default function GlossaryPage() {
   const schema = {

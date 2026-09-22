@@ -10,6 +10,10 @@
 
 The Vercel project is connected directly to the GitHub repository. Pushes to `main` are the production source; branches and pull requests should be treated as preview work.
 
+## Runtime
+
+Builds are pinned to Node 22 through `.nvmrc`, `.node-version`, `package.json#engines` and the GitHub Actions workflow.
+
 ## Before deploy
 
 Run the full local quality gate:

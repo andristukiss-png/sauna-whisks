@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -13,11 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const item = getProductCondition(slug);
   if (!item) return {};
-  return {
+  return pageMetadata({
     title: item.name,
     description: item.summary,
-    alternates: { canonical: `/conditions/${item.slug}` }
-  };
+    canonical: `/conditions/${item.slug}`,
+  });
 }
 
 export default async function ConditionPage({ params }: { params: Promise<{ slug: string }> }) {

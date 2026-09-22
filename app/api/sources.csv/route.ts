@@ -1,8 +1,6 @@
 import { articles } from "@/lib/articles";
-
-function csv(value: string) {
-  return '"' + value.replace(/"/g, '""') + '"';
-}
+import { encodeCsv } from "@/lib/csv";
+import { publicCsv } from "@/lib/publicApi";
 
 export function GET() {
   const sources = Array.from(
@@ -14,11 +12,6 @@ export function GET() {
     ["label","url"],
     ...sources.map((source) => [source.label, source.url]),
   ];
-  return new Response(rows.map((row) => row.map((value) => csv(value)).join(",")).join("\n"), {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": 'inline; filename="saunawhisks-sources.csv"',
-      "Cache-Control": "public, max-age=3600",
-    },
-  });
+
+  return publicCsv(encodeCsv(rows), "saunawhisks-sources.csv");
 }

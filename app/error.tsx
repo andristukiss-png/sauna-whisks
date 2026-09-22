@@ -9,7 +9,7 @@ export default function ErrorPage({
   reset: () => void;
 }) {
   return (
-    <main className="route-error">
+    <main className="route-error" role="alert" aria-live="assertive">
       <p className="section-kicker">ERROR</p>
       <h1>This page hit a knot.</h1>
       <p>Try again, return home, or email info@SaunaWhisks.com if the problem continues.</p>

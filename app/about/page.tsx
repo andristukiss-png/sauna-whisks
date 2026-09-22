@@ -1,13 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "About Sauna Whisks",
   description: "SaunaWhisks.com is a Latvia-based specialist brand focused on sauna whisks, ritual knowledge and Baltic sourcing.",
-  alternates: { canonical: "/about" }
-};
+  canonical: "/about",
+});
 
 export default function AboutPage() {
   return (
@@ -35,10 +37,10 @@ export default function AboutPage() {
         </div>
       </section>
       <section className="about-links">
-        <a href="/company">Company hub →</a>
-        <a href="/press">Press facts →</a>
-        <a href="/editorial-policy">Editorial policy →</a>
-        <a href="/status">Launch status →</a>
+        <Link href="/company">Company hub →</Link>
+        <Link href="/press">Press facts →</Link>
+        <Link href="/editorial-policy">Editorial policy →</Link>
+        <Link href="/status">Launch status →</Link>
       </section>
       <SiteFooter />
     </main>

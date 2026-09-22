@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Suppliers & Producers",
-  description:
-    "SaunaWhisks.com is looking for experienced sauna-whisk producers and botanical suppliers in Latvia and the wider Baltic region.",
-  alternates: { canonical: "/suppliers" }
-};
+  description: "SaunaWhisks.com is looking for experienced sauna-whisk producers and botanical suppliers in Latvia and the wider Baltic region.",
+  canonical: "/suppliers",
+});
 
 export default function SuppliersPage() {
   return (
@@ -32,10 +33,10 @@ export default function SuppliersPage() {
       </section>
 
       <section className="supplier-resource-links">
-        <a href="/suppliers/requirements">Supplier requirements →</a>
-        <a href="/suppliers/sample-evaluation">Sample evaluation →</a>
-        <a href="/templates">Templates & downloads →</a>
-        <a href="/tools/supplier-scorecard">Supplier scorecard →</a>
+        <Link href="/suppliers/requirements">Supplier requirements →</Link>
+        <Link href="/suppliers/sample-evaluation">Sample evaluation →</Link>
+        <Link href="/templates">Templates & downloads →</Link>
+        <Link href="/tools/supplier-scorecard">Supplier scorecard →</Link>
       </section>
 
       <section className="trade-contact">

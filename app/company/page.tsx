@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata={
-  title:"Company",
-  description:"SaunaWhisks.com company, launch, partnership, supplier, editorial and policy information.",
-  alternates:{canonical:"/company"}
-};
+export const metadata = pageMetadata({
+  title: "Company",
+  description: "SaunaWhisks.com company, launch, partnership, supplier, editorial and policy information.",
+  canonical: "/company",
+});
 
 const links=[
   ["/about","About","Why SaunaWhisks.com is being built in Latvia and what the specialist focus is."],

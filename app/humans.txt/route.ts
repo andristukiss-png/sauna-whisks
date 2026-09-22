@@ -1,5 +1,7 @@
+import { publicText } from "@/lib/publicApi";
+
 export function GET() {
-  return new Response(
+  return publicText(
     [
       "SaunaWhisks.com",
       "Built in Latvia.",
@@ -7,11 +9,6 @@ export function GET() {
       "Contact: info@SaunaWhisks.com",
       "Principle: publish what can be verified.",
     ].join("\n"),
-    {
-      headers: {
-        "Content-Type": "text/plain; charset=utf-8",
-        "Cache-Control": "public, max-age=86400",
-      },
-    }
+    { maxAge: 86400 }
   );
 }

@@ -7,6 +7,10 @@
 - Avoid unsupported health claims.
 - Prefer existing routes over near-duplicate SEO pages.
 
+## Runtime
+
+Use Node 22. Run `nvm use` (or use a tool that honors `.node-version`) before installing dependencies.
+
 ## Required checks
 Run:
 

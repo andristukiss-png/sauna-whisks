@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { getMarketPath, markets } from "@/lib/markets";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Markets",
   description: "Planned SaunaWhisks.com launch markets and current availability status.",
-  alternates: { canonical: "/markets" }
-};
+  canonical: "/markets",
+});
 
 export default function MarketsPage() {
   return (

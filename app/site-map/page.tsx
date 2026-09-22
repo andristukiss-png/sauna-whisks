@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -9,11 +10,11 @@ import { tradeSegments } from "@/lib/tradeSegments";
 import { useCases } from "@/lib/useCases";
 import { techniques } from "@/lib/techniques";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Site Map",
   description: "Human-readable map of SaunaWhisks.com.",
-  alternates: { canonical: "/site-map" }
-};
+  canonical: "/site-map",
+});
 
 const staticGroups = [
   {

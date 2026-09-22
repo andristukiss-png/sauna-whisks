@@ -1,3 +1,5 @@
+import { publicText } from "@/lib/publicApi";
+
 export function GET() {
   const body = [
     "# SaunaWhisks.com",
@@ -22,10 +24,5 @@ export function GET() {
     "- Public contact: info@SaunaWhisks.com",
   ].join("\n");
 
-  return new Response(body, {
-    headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=3600",
-    },
-  });
+  return publicText(body, { maxAge: 3600 });
 }

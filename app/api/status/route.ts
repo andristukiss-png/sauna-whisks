@@ -1,10 +1,6 @@
 import { noStoreJson } from "@/lib/publicApi";
+import { launchStatus } from "@/lib/status";
+
 export function GET() {
-  return noStoreJson({
-    status: "pre-launch",
-    checkoutEnabled: false,
-    enquiriesOpen: true,
-    sourceOfTruth: "GitHub main",
-    contact: "info@SaunaWhisks.com",
-  });
+  return noStoreJson(launchStatus);
 }

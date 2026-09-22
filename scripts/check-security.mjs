@@ -37,8 +37,39 @@ if (!expires || Number.isNaN(Date.parse(expires))) {
   errors.push("security.txt Expires timestamp is less than 30 days away.");
 }
 
-if (!security.includes('"Content-Type": "text/plain; charset=utf-8"')) {
-  errors.push("security.txt must be served as text/plain UTF-8.");
+const publicApi = fs.readFileSync("lib/publicApi.ts", "utf8");
+if (!security.includes("publicText")) {
+  errors.push("security.txt must use the shared public text response helper.");
+}
+if (!publicApi.includes('contentType = "text/plain; charset=utf-8"')) {
+  errors.push("Shared public text helper must default to text/plain UTF-8.");
+}
+
+
+function walk(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const absolute = dir + "/" + entry.name;
+    return entry.isDirectory() ? walk(absolute) : [absolute];
+  });
+}
+
+const renderFiles = ["app", "components"]
+  .flatMap((dir) => walk(dir))
+  .filter((file) => /\.(ts|tsx)$/.test(file));
+
+for (const file of renderFiles) {
+  const text = fs.readFileSync(file, "utf8");
+  if (!text.includes("dangerouslySetInnerHTML")) continue;
+
+  if (!text.includes('type="application/ld+json"')) {
+    errors.push("dangerouslySetInnerHTML used outside JSON-LD: " + file);
+  }
+  if (!text.includes("JSON.stringify(")) {
+    errors.push("JSON-LD must serialize structured data with JSON.stringify: " + file);
+  }
+  if (!text.includes('.replace(/</g')) {
+    errors.push("JSON-LD must escape < characters before injection: " + file);
+  }
 }
 
 if (errors.length) {

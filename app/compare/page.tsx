@@ -1,15 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { comparisons } from "@/lib/comparisons";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Birch vs Oak vs Eucalyptus Sauna Whisks",
-  description:
-    "Compare birch, oak and eucalyptus sauna whisks by feel, aroma, ritual character and who each material suits.",
-  alternates: { canonical: "/compare" }
-};
+  description: "Compare birch, oak and eucalyptus sauna whisks by feel, aroma, ritual character and who each material suits.",
+  canonical: "/compare",
+});
 
 const rows = [
   ["Feel", "Soft / leafy", "Firm / dense", "Light / aromatic"],

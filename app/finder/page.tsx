@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhiskFinder } from "@/components/WhiskFinder";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk Finder",
   description: "A simple three-question tool to choose between birch, oak, eucalyptus and the Discovery Trio.",
-  alternates: { canonical: "/finder" }
-};
+  canonical: "/finder",
+});
 
 export default function FinderPage() {
   return (

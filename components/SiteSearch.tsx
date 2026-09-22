@@ -3,9 +3,14 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { SiteSearchItem } from "@/lib/siteSearch";
-
-const filters = ["All", "Product", "Guide", "Market", "Trade", "Page"] as const;
-type Filter = (typeof filters)[number];
+import {
+  filterSiteSearchItems,
+  isSiteSearchFilter,
+  MAX_SEARCH_QUERY_LENGTH,
+  normalizeSearchQuery,
+  siteSearchFilters,
+  type SiteSearchFilter,
+} from "@/lib/search";
 
 export function SiteSearch({
   items,
@@ -14,28 +19,23 @@ export function SiteSearch({
 }: {
   items: SiteSearchItem[];
   initialQuery?: string;
-  initialType?: Filter;
+  initialType?: SiteSearchFilter;
 }) {
-  const [query, setQuery] = useState(initialQuery);
-  const [type, setType] = useState<Filter>(filters.includes(initialType) ? initialType : "All");
-  const normalized = query.trim().toLowerCase();
+  const [query, setQuery] = useState(initialQuery.slice(0, MAX_SEARCH_QUERY_LENGTH));
+  const [type, setType] = useState<SiteSearchFilter>(
+    isSiteSearchFilter(initialType) ? initialType : "All"
+  );
+  const normalized = normalizeSearchQuery(query);
 
-  const matches = useMemo(() => {
-    const typed = type === "All" ? items : items.filter((item) => item.type === type);
-    if (!normalized) return typed.slice(0, 18);
-    return typed
-      .filter((item) =>
-        [item.title, item.description, item.type, ...(item.keywords || [])]
-          .join(" ")
-          .toLowerCase()
-          .includes(normalized)
-      )
-      .slice(0, 40);
-  }, [items, normalized, type]);
+  const matches = useMemo(
+    () => filterSiteSearchItems(items, query, type, normalized ? 40 : 18),
+    [items, query, type, normalized]
+  );
 
-  function syncUrl(nextQuery: string, nextType: Filter) {
+  function syncUrl(nextQuery: string, nextType: SiteSearchFilter) {
+    const normalizedQuery = normalizeSearchQuery(nextQuery);
     const params = new URLSearchParams();
-    if (nextQuery.trim()) params.set("q", nextQuery.trim());
+    if (normalizedQuery) params.set("q", normalizedQuery);
     if (nextType !== "All") params.set("type", nextType);
     const suffix = params.toString();
     window.history.replaceState(null, "", suffix ? "/search?" + suffix : "/search");
@@ -48,6 +48,7 @@ export function SiteSearch({
         <input
           type="search"
           value={query}
+          maxLength={MAX_SEARCH_QUERY_LENGTH}
           onChange={(event) => {
             const value = event.target.value;
             setQuery(value);
@@ -58,8 +59,8 @@ export function SiteSearch({
         />
       </label>
 
-      <div className="search-filter-row" aria-label="Filter search results">
-        {filters.map((filter) => (
+      <div className="search-filter-row" role="group" aria-label="Filter search results">
+        {siteSearchFilters.map((filter) => (
           <button
             type="button"
             key={filter}

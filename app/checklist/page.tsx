@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { QualityChecklist } from "@/components/QualityChecklist";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk Quality Checklist",
   description: "Interactive checklist for evaluating sauna whisk provenance, construction and prepared performance.",
-  alternates: { canonical: "/checklist" }
-};
+  canonical: "/checklist",
+});
 
 export default function ChecklistPage() {
   return (

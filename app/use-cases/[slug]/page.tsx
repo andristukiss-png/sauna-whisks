@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -9,11 +10,15 @@ export function generateStaticParams(){
   return useCases.map((item)=>({slug:item.slug}));
 }
 
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}){
-  const {slug}=await params;
-  const item=getUseCase(slug);
-  if(!item) return {};
-  return {title:item.name+" — Sauna Whisk Use Case",description:item.summary,alternates:{canonical:"/use-cases/"+item.slug}};
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const item = getUseCase(slug);
+  if (!item) return {};
+  return pageMetadata({
+    title: item.name + " — Sauna Whisk Use Case",
+    description: item.summary,
+    canonical: "/use-cases/" + item.slug,
+  });
 }
 
 export default async function UseCasePage({params}:{params:Promise<{slug:string}>}){
