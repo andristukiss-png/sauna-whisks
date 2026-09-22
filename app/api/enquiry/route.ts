@@ -6,35 +6,43 @@ type EnquiryPayload = {
   message?: string;
   subject?: string;
   website?: string;
+  topic?: string;
+  business?: string;
+  country?: string;
+  quantity?: string;
 };
 
 function validEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+function cleanOptional(value: string | undefined, max = 200) {
+  return (value || "").replace(/[\r\n]+/g, " ").trim().slice(0, max);
+}
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as EnquiryPayload;
 
-    const name = (body.name || "").trim();
-    const email = (body.email || "").trim();
+    const name = cleanOptional(body.name, 120);
+    const email = cleanOptional(body.email, 200);
     const message = (body.message || "").trim();
-    const subject = (body.subject || "SaunaWhisks.com enquiry")
-      .replace(/[\r\n]+/g, " ")
-      .trim()
-      .slice(0, 160);
-    const website = (body.website || "").trim();
+    const subject = cleanOptional(body.subject || "SaunaWhisks.com enquiry", 160);
+    const website = cleanOptional(body.website, 200);
+    const topic = cleanOptional(body.topic, 120);
+    const business = cleanOptional(body.business, 200);
+    const country = cleanOptional(body.country, 120);
+    const quantity = cleanOptional(body.quantity, 120);
 
-    // Honeypot field: bots often fill this invisible field.
     if (website) {
       return NextResponse.json({ ok: true });
     }
 
-    if (name.length < 2 || name.length > 120) {
+    if (name.length < 2) {
       return NextResponse.json({ error: "Please enter your name." }, { status: 400 });
     }
 
-    if (!validEmail(email) || email.length > 200) {
+    if (!validEmail(email)) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
@@ -51,13 +59,17 @@ export async function POST(request: Request) {
 
     if (!apiKey) {
       return NextResponse.json(
-        {
-          error: "Email delivery is not configured yet.",
-          fallback: "mailto",
-        },
+        { error: "Email delivery is not configured yet.", fallback: "mailto" },
         { status: 503 }
       );
     }
+
+    const context = [
+      topic ? `Topic: ${topic}` : "",
+      business ? `Business: ${business}` : "",
+      country ? `Country: ${country}` : "",
+      quantity ? `Approx. monthly requirement: ${quantity}` : "",
+    ].filter(Boolean);
 
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -73,6 +85,7 @@ export async function POST(request: Request) {
         text: [
           `Name: ${name}`,
           `Email: ${email}`,
+          ...context,
           "",
           message,
         ].join("\n"),
