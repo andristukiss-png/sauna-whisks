@@ -1,6 +1,6 @@
 import { articles } from "@/lib/articles";
 import { saunaWhisks } from "@/lib/products";
-import { markets } from "@/lib/markets";
+import { getMarketPath, markets } from "@/lib/markets";
 import { tradeSegments } from "@/lib/tradeSegments";
 import { operationGuides } from "@/lib/operations";
 import { glossaryTerms } from "@/lib/glossaryTerms";
@@ -88,7 +88,7 @@ export const siteSearchItems: SiteSearchItem[] = [
   ...markets.map((market) => ({
     title: market.name,
     description: market.summary,
-    href: `/markets/${market.slug}`,
+    href: getMarketPath(market),
     type: "Market" as const,
     keywords: [market.status, ...market.priorities]
   })),
