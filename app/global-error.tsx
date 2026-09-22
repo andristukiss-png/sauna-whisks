@@ -9,7 +9,7 @@ export default function GlobalError({
   return (
     <html lang="en">
       <body>
-        <main className="fatal-error">
+        <main className="fatal-error" role="alert" aria-live="assertive">
           <p>SAUNA WHISKS</p>
           <h1>Something went wrong.</h1>
           <p>Please try the page again. If the problem continues, email info@SaunaWhisks.com.</p>
