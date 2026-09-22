@@ -39,6 +39,7 @@ export default function TradePage() {
         <a href="/trade/trial">Trade trial plan →</a>
         <a href="/templates">Templates & downloads →</a>
         <a href="/wholesale">Wholesale enquiry →</a>
+        <a href="/tools/trade-demand">Demand estimator →</a>
       </section>
       <SiteFooter />
     </main>
