@@ -3,11 +3,13 @@ import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 import { EnquiryForm } from "@/components/EnquiryForm";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata = {
   title: "Sauna Whisk Discovery Trio",
   description:
-    "Planned three-whisk bundle with birch, oak and eucalyptus for comparing the main sauna whisk materials."
+    "Planned three-whisk bundle with birch, oak and eucalyptus for comparing the main sauna whisk materials.",
+  alternates: { canonical: "/shop/discovery-trio" }
 };
 
 const items = [
@@ -17,9 +19,42 @@ const items = [
 ];
 
 export default function DiscoveryTrioPage() {
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: "Sauna Whisk Discovery Trio",
+    description: "Planned three-whisk bundle with birch, oak and eucalyptus.",
+    brand: { "@type": "Brand", name: "Sauna Whisks" },
+    category: "Sauna whisk bundle",
+    url: "https://saunawhisks.com/shop/discovery-trio"
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://saunawhisks.com" },
+      { "@type": "ListItem", position: 2, name: "Shop", item: "https://saunawhisks.com/shop" },
+      { "@type": "ListItem", position: 3, name: "Discovery Trio", item: "https://saunawhisks.com/shop/discovery-trio" }
+    ]
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
+      />
       <Header />
+      <Breadcrumbs items={[
+        { label: "Home", href: "/" },
+        { label: "Shop", href: "/shop" },
+        { label: "Discovery Trio" }
+      ]} />
 
       <section className="bundle-detail">
         <div className="bundle-detail-art">
