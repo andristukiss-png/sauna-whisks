@@ -4,12 +4,34 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const metadata = {
   title: "Wholesale Sauna Whisks",
-  description: "Trade supply for sauna clubs, bathhouses, hotels, spas, retailers and sauna builders."
+  description: "Trade supply for sauna clubs, bathhouses, hotels, spas, retailers and sauna builders.",
+  alternates: { canonical: "/wholesale" }
 };
 
+const wholesaleFaq = [
+  ["Do you have a trade price list?", "Not yet. Trade pricing will be finalized after the first supplier and landed-cost models are confirmed."],
+  ["What order sizes are you planning?", "The working plan includes smaller retail cases and larger recurring venue quantities. Exact pack sizes are still being validated."],
+  ["Can you supply the United States?", "US trade supply is a priority, but each plant-product SKU must be cleared for import and documentation before orders open."],
+  ["Can you private-label whisks?", "Potentially later. The initial focus is consistent Sauna Whisks branded supply and verified product provenance."]
+];
+
 export default function WholesalePage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: wholesaleFaq.map(([question, answer]) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer }
+    }))
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
+      />
       <Header />
       <section className="page-hero dark-page">
         <p className="section-kicker light">TRADE / WHOLESALE</p>
@@ -24,6 +46,16 @@ export default function WholesalePage() {
         <div><span>01</span><h2>Recurring supply</h2><p>Planned case quantities for venues that need dependable replenishment.</p></div>
         <div><span>02</span><h2>Retail packs</h2><p>Consumer-ready units for sauna stores, builders and wellness retailers.</p></div>
         <div><span>03</span><h2>Seasonal harvests</h2><p>Future harvest-based programs for buyers who want provenance and seasonality.</p></div>
+      </section>
+
+      <section className="wholesale-faq">
+        <p className="section-kicker">TRADE FAQ</p>
+        {wholesaleFaq.map(([question, answer]) => (
+          <details key={question}>
+            <summary>{question}<i>+</i></summary>
+            <p>{answer}</p>
+          </details>
+        ))}
       </section>
 
       <section className="trade-contact">
