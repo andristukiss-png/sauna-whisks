@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { operationGuides } from "@/lib/operations";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Product Operations",
   description: "SaunaWhisks.com working standards for provenance, testing, harvest, packaging, specifications and import compliance.",
-  alternates: { canonical: "/operations" }
-};
+  canonical: "/operations",
+});
 
 export default function OperationsPage() {
   return (
