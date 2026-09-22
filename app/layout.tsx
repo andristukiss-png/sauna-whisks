@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   },
   description:
     "Traditional sauna whisks, veniks, vihta and Baltic sauna knowledge from Latvia. Birch, oak, eucalyptus and herbal sauna rituals for homes, saunas and trade partners.",
+  applicationName: "Sauna Whisks",
+  creator: "Sauna Whisks",
+  publisher: "Sauna Whisks",
+  category: "Sauna and wellness",
   openGraph: {
     title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
     description: "Traditional sauna whisks and the living sauna traditions behind them.",
@@ -17,6 +21,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   alternates: {
+    canonical: "/",
     types: {
       "application/rss+xml": "https://saunawhisks.com/feed.xml"
     }
