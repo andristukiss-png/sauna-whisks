@@ -26,7 +26,7 @@ export default function OperationsPage() {
 
       <section className="operations-grid">
         {operationGuides.map((guide, index) => (
-          <Link href={"/operations/" + guide.slug} key={guide.slug}>
+          <Link prefetch={false} href={"/operations/" + guide.slug} key={guide.slug}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <p>{guide.eyebrow}</p>
             <h2>{guide.title}</h2>
