@@ -42,6 +42,8 @@ const requiredCollections = [
   "faqTopics.map",
   "articleTopics.map",
   "productConditions.map",
+  "useCases.map",
+  "techniques.map",
 ];
 
 for (const collection of requiredCollections) {
