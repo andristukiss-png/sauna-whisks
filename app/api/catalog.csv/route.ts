@@ -1,8 +1,6 @@
 import { saunaWhisks } from "@/lib/products";
-
-function csv(value: string) {
-  return '"' + value.replace(/"/g, '""') + '"';
-}
+import { encodeCsv } from "@/lib/csv";
+import { publicCsv } from "@/lib/publicApi";
 
 export function GET() {
   const rows = [
@@ -20,11 +18,6 @@ export function GET() {
       String(whisk.availableForPurchase),
     ]),
   ];
-  return new Response(rows.map((row) => row.map((value) => csv(value)).join(",")).join("\n"), {
-    headers: {
-      "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": 'inline; filename="saunawhisks-catalog.csv"',
-      "Cache-Control": "public, max-age=3600",
-    },
-  });
+
+  return publicCsv(encodeCsv(rows), "saunawhisks-catalog.csv");
 }
