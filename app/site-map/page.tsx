@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { saunaWhisks } from "@/lib/products";
 import { articles } from "@/lib/articles";
@@ -50,6 +51,7 @@ export default function SiteMapPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Site map" }]} />
       <section className="page-hero compact-hero">
         <p className="section-kicker">SITE MAP</p>
         <h1>Everything, without the maze.</h1>
