@@ -22,7 +22,7 @@ export function TradeDemandEstimator(){
     </div>
     <div className="demand-result">
       <span>WORKING MONTHLY REQUIREMENT</span>
-      <b>{monthly}</b>
+      <b aria-live="polite">{monthly}</b>
       <p>whisks / month</p>
       <small>Uses 4.33 weeks/month. Real consumption depends on material, venue practice and whether reuse is appropriate.</small>
     </div>
