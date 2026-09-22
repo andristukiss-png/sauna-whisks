@@ -22,7 +22,7 @@ export default function GuidesPage() {
       </section>
       <section className="guide-card-grid">
         {buyerGuides.map((guide, index) => (
-          <Link href={"/guides/" + guide.slug} key={guide.slug}>
+          <Link prefetch={false} href={"/guides/" + guide.slug} key={guide.slug}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <h2>{guide.title}</h2>
             <p>{guide.description}</p>
