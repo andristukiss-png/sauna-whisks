@@ -35,6 +35,11 @@ export default function TradePage() {
         ))}
       </section>
 
+      <section className="trade-resource-links">
+        <a href="/trade/trial">Trade trial plan →</a>
+        <a href="/templates">Templates & downloads →</a>
+        <a href="/wholesale">Wholesale enquiry →</a>
+      </section>
       <SiteFooter />
     </main>
   );
