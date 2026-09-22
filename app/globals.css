@@ -211,3 +211,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .catalog-status-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.catalog-status-row>span{font-size:8px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:5px 7px}.catalog-status-row .product-latin{margin-right:auto}
 .data-catalog{padding:0 7vw 110px;display:grid;gap:35px}.data-catalog article{border:1px solid var(--line);padding:32px}.data-catalog-head{display:grid;grid-template-columns:120px 1fr auto;gap:25px;align-items:center;padding-bottom:24px;border-bottom:1px solid var(--line)}.data-catalog-head>span{font-size:9px;letter-spacing:.12em;text-transform:uppercase}.data-catalog-head h2{font:400 32px Georgia,serif;margin:0}.data-catalog-head a{font-size:9px;letter-spacing:.1em;text-transform:uppercase}.data-catalog dl{margin:0}.data-catalog dl>div{display:grid;grid-template-columns:190px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line)}.data-catalog dt{font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.55}.data-catalog dd{font:15px/1.45 Georgia,serif;margin:0}
 @media(max-width:650px){.data-catalog{padding-left:6vw;padding-right:6vw}.data-catalog-head{grid-template-columns:1fr}.data-catalog dl>div{grid-template-columns:1fr;gap:7px}}
+
+
+/* Public data */
+.data-endpoints{padding:0 7vw 110px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px}.data-endpoints>a{border:1px solid var(--line);margin:-1px 0 0 -1px;padding:30px;display:flex;flex-direction:column;min-height:160px}.data-endpoints h2{font:400 24px Georgia,serif;margin:0 0 18px}.data-endpoints code{font-size:11px;overflow-wrap:anywhere;opacity:.65}.data-endpoints b{font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-top:auto;padding-top:24px}
+
+/* Print */
+@media print{
+  .prelaunch-bar,.site-header,.mobile-menu,.header-cta,footer,.breadcrumbs,.article-related,.enquiry-form,.button,.text-link{display:none!important}
+  body{background:#fff;color:#000;font-family:Georgia,"Times New Roman",serif}
+  .article-header,.article-body,.article-content,.legal-page,.page-hero{padding-left:0!important;padding-right:0!important;max-width:none!important}
+  .article-body{display:block!important}
+  .article-body aside{display:none!important}
+  a{color:#000;text-decoration:none}
+  .article-content p,.legal-page p{font-size:12pt;line-height:1.55}
+  h1,h2,h3{break-after:avoid}
+  section,article{break-inside:avoid-page}
+}
+@media(max-width:700px){.data-endpoints{grid-template-columns:1fr;padding-left:6vw;padding-right:6vw}}
