@@ -32,6 +32,8 @@ Before treating a release as deployable:
 npm run check
 ```
 
+CI then starts the built production server with `npm start` and runs `npm run smoke:local` against real HTTP responses before the branch is considered green.
+
 After the production deployment is Ready:
 
 ```bash
