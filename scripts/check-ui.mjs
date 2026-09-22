@@ -47,6 +47,9 @@ const header = fs.readFileSync("components/Header.tsx", "utf8");
 if (!header.includes('href="#main-content"')) errors.push("Skip link missing main-content target.");
 if (!header.includes('id="main-content"')) errors.push("Post-header skip target missing.");
 if (!header.includes("tabIndex={-1}")) errors.push("Skip target is not programmatically focusable.");
+if (header.includes('id="main-content"') && header.includes('aria-hidden="true"')) {
+  errors.push("Focusable skip target must not be hidden from assistive technology.");
+}
 if (!header.includes('aria-label="Mobile navigation"')) errors.push("Mobile navigation landmark label missing.");
 
 const layout = fs.readFileSync("app/layout.tsx", "utf8");
