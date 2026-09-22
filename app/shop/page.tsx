@@ -39,6 +39,10 @@ export default function ShopPage() {
         </p>
       </section>
 
+      <section className="shop-tools">
+        <a href="/finder"><span>Not sure?</span><b>Use the whisk finder →</b></a>
+        <a href="/checklist"><span>Comparing samples?</span><b>Open quality checklist →</b></a>
+      </section>
       <section className="catalog-grid">
         {saunaWhisks.map((whisk, index) => (
           <article className="catalog-card" key={whisk.slug}>
