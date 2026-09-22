@@ -2,10 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
+    id: "/",
     name: "Sauna Whisks",
     short_name: "Sauna Whisks",
     description: "Traditional sauna whisks and Baltic sauna knowledge from Latvia.",
     start_url: "/",
+    scope: "/",
+    lang: "en",
     display: "standalone",
     background_color: "#f1eee5",
     theme_color: "#203629",
@@ -13,7 +16,8 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         src: "/icon.svg",
         sizes: "any",
-        type: "image/svg+xml"
+        type: "image/svg+xml",
+        purpose: "any"
       }
     ]
   };
