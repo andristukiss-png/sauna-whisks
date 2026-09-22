@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -12,11 +13,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const guide = getOperationGuide(slug);
   if (!guide) return {};
-  return {
+  return pageMetadata({
     title: guide.title,
     description: guide.description,
-    alternates: { canonical: `/operations/${guide.slug}` }
-  };
+    canonical: `/operations/${guide.slug}`,
+  });
 }
 
 export default async function OperationGuidePage({ params }: { params: Promise<{ slug: string }> }) {
