@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -57,7 +58,7 @@ export default async function MarketPage({ params }: { params: Promise<{ slug: s
         <section className="market-dedicated">
           <p className="section-kicker">DETAILED US PLAN</p>
           <h2>See the dedicated United States launch page.</h2>
-          <a className="button button-dark" href="/usa">Open USA plan</a>
+          <Link className="button button-dark" href="/usa">Open USA plan</Link>
         </section>
       ) : null}
 
