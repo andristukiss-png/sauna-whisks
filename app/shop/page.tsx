@@ -48,6 +48,10 @@ export default function ShopPage() {
           Oak feels firmer and fuller. Eucalyptus is the most aromatic.
           The eventual Discovery Trio is designed to let customers compare all three.
         </p>
+        <div className="editorial-actions">
+          <Link href="/compare" className="button button-light">Compare materials</Link>
+          <Link href="/contact" className="text-link">Ask a question →</Link>
+        </div>
       </section>
 
       <SiteFooter />
