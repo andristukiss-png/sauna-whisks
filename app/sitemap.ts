@@ -52,6 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/legal",
     "/conditions",
     "/catalog",
+    "/claims",
     "/finder",
     "/checklist",
     "/journal/topics"
