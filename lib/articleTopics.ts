@@ -11,13 +11,49 @@ export const articleTopics = [
     slug: "materials",
     title: "Materials",
     description: "Birch, oak, eucalyptus and condition comparisons.",
-    slugs: ["birch-vs-oak-sauna-whisk", "fresh-vs-dried-sauna-whisks"]
+    slugs: ["birch-vs-oak-sauna-whisk", "fresh-birch-sauna-whisk-guide", "fresh-vs-dried-sauna-whisks"]
   },
   {
     slug: "care",
     title: "Care & preparation",
     description: "Preparation, storage, reuse and troubleshooting.",
-    slugs: ["how-to-prepare-dried-sauna-whisk", "how-to-store-sauna-whisks", "how-long-does-a-sauna-whisk-last", "why-sauna-whisk-leaves-fall-off"]
+    slugs: [
+      "how-to-prepare-dried-sauna-whisk",
+      "how-to-store-sauna-whisks",
+      "how-long-does-a-sauna-whisk-last",
+      "why-sauna-whisk-leaves-fall-off",
+      "common-dried-sauna-whisk-mistakes",
+      "can-sauna-whisk-go-on-hot-stones"
+    ]
+  },
+  {
+    slug: "quality",
+    title: "Quality & construction",
+    description: "Dimensions, tying, handles, inspection and performance checks.",
+    slugs: [
+      "sauna-whisk-size-and-weight",
+      "how-a-sauna-whisk-is-tied",
+      "sauna-whisk-handle-quality",
+      "sauna-whisk-quality-checklist",
+      "inspect-sauna-whisk-before-use"
+    ]
+  },
+  {
+    slug: "preservation",
+    title: "Preservation",
+    description: "Drying, freezing, storage and product condition.",
+    slugs: [
+      "fresh-vs-dried-sauna-whisks",
+      "how-to-freeze-sauna-whisk",
+      "how-to-store-sauna-whisks",
+      "how-to-prepare-dried-sauna-whisk"
+    ]
+  },
+  {
+    slug: "harvest",
+    title: "Harvest & season",
+    description: "Why growing season and harvest timing shape a natural sauna product.",
+    slugs: ["sauna-whisk-seasonality", "fresh-birch-sauna-whisk-guide"]
   },
   {
     slug: "traditions",
