@@ -33,7 +33,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/materials",
     "/care",
     "/markets",
-    "/trade"
+    "/trade",
+    "/search"
   ];
 
   return [
