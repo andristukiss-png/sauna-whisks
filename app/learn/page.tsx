@@ -22,7 +22,9 @@ const sections = [
   ["/finder", "Whisk finder", "Three questions to choose a planned core product."],
   ["/checklist", "Quality checklist", "Evaluate origin, construction and prepared performance."],
   ["/quality", "Quality hub", "Standards, provenance, testing and claims."],
-  ["/resources", "Resources", "Sources, data, FAQ and site navigation."]
+  ["/resources", "Resources", "Sources, data, FAQ and site navigation."],
+  ["/use-cases", "Use cases", "Choose by home, venue, retail, builder or gifting context."],
+  ["/techniques", "Techniques", "Fanning, brushing, pressing, rhythmic use and cleanup."]
 ];
 
 export default function LearnPage() {
