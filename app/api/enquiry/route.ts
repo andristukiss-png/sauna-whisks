@@ -14,6 +14,8 @@ type EnquiryPayload = {
   startedAt?: string;
 };
 
+const MAX_BODY_BYTES = 20_000;
+
 function validEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
@@ -53,12 +55,27 @@ export async function POST(request: Request) {
       return reply({ error: "Unsupported request." }, 415);
     }
 
-    const contentLength = Number(request.headers.get("content-length") || "0");
-    if (contentLength > 20_000) {
+    const contentLengthHeader = request.headers.get("content-length");
+    const contentLength = contentLengthHeader ? Number(contentLengthHeader) : 0;
+    if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
       return reply({ error: "Request too large." }, 413);
     }
 
-    const body = (await request.json()) as EnquiryPayload;
+    const rawBody = await request.text();
+    if (new TextEncoder().encode(rawBody).byteLength > MAX_BODY_BYTES) {
+      return reply({ error: "Request too large." }, 413);
+    }
+
+    let body: EnquiryPayload;
+    try {
+      const parsed = JSON.parse(rawBody) as unknown;
+      if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+        return reply({ error: "Invalid request." }, 400);
+      }
+      body = parsed as EnquiryPayload;
+    } catch {
+      return reply({ error: "Invalid JSON." }, 400);
+    }
 
     const name = cleanOptional(body.name, 120);
     const email = cleanOptional(body.email, 200);
