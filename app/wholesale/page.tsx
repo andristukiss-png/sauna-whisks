@@ -42,6 +42,12 @@ export default function WholesalePage() {
         </p>
       </section>
 
+      <section className="wholesale-segment-link">
+        <p className="section-kicker">BY BUSINESS TYPE</p>
+        <h2>See the trade plan for your business.</h2>
+        <a className="button button-dark" href="/trade">Explore trade segments</a>
+      </section>
+
       <section className="wholesale-grid">
         <div><span>01</span><h2>Recurring supply</h2><p>Planned case quantities for venues that need dependable replenishment.</p></div>
         <div><span>02</span><h2>Retail packs</h2><p>Consumer-ready units for sauna stores, builders and wellness retailers.</p></div>
