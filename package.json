@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "validate": "node scripts/check-content.mjs",
-    "check": "npm run validate && npm run lint && npm run typecheck && npm run build"
+    "validate": "node scripts/check-content.mjs && npm run validate:routes",
+    "check": "npm run validate && npm run lint && npm run typecheck && npm run build",
+    "validate:routes": "node scripts/check-routes.mjs"
   },
   "dependencies": {
     "next": "^16.0.0",
