@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { buyerGuides } from "@/lib/buyerGuides";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk Buying Guides",
   description: "Practical buying guides for first-time users, home saunas, gifting, materials and trade trials.",
-  alternates: { canonical: "/guides" }
-};
+  canonical: "/guides",
+});
 
 export default function GuidesPage() {
   return (
