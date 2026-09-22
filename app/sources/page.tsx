@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -30,9 +31,9 @@ export default function SourcesPage() {
       </section>
 
       <section className="source-policy-links">
-        <a href="/editorial-policy">Editorial & source policy →</a>
-        <a href="/corrections">Corrections policy →</a>
-        <a href="/claims">Product claims standard →</a>
+        <Link href="/editorial-policy">Editorial & source policy →</Link>
+        <Link href="/corrections">Corrections policy →</Link>
+        <Link href="/claims">Product claims standard →</Link>
       </section>
       <section className="source-list">
         {unique.map((source, index) => (
