@@ -78,7 +78,7 @@ export default function Home() {
         <Link href="/shop/discovery-trio" className="bundle-callout bundle-link">
           <div><span>01 / DISCOVERY</span><h3>Three forests.<br />One ritual.</h3></div>
           <p>Birch + oak + eucalyptus. Designed as the natural first order for anyone learning the differences between sauna whisks.</p>
-          <strong>$69 <small>planned launch price · view bundle →</small></strong>
+          <strong>US$69 <small>planned launch price · view bundle →</small></strong>
         </Link>
       </section>
 
