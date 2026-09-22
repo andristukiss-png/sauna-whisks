@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
+import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const metadata = {
   title: "Contact",
@@ -13,11 +14,18 @@ export default function ContactPage() {
       <section className="contact-page">
         <p className="section-kicker">CONTACT</p>
         <h1>Talk to Sauna Whisks.</h1>
-        <div className="contact-grid">
-          <div><span>GENERAL</span><a href="mailto:info@saunawhisks.com">info@saunawhisks.com</a></div>
-          <div><span>TRADE</span><a href="mailto:info@saunawhisks.com">info@saunawhisks.com</a></div>
+        <p className="contact-intro">
+          Product question, wholesale request, sourcing enquiry or something else?
+          Send us a message and we will reply from <strong>info@SaunaWhisks.com</strong>.
+        </p>
+
+        <EnquiryForm />
+
+        <div className="contact-meta">
+          <div><span>EMAIL</span><a href="mailto:info@SaunaWhisks.com">info@SaunaWhisks.com</a></div>
           <div><span>BASE</span><p>Latvia · European Union</p></div>
         </div>
+
         <p className="fineprint">Full legal company details will be added before commercial launch.</p>
       </section>
       <SiteFooter />
