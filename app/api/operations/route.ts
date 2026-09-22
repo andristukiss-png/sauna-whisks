@@ -1,7 +1,8 @@
 import { operationGuides } from "@/lib/operations";
+import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
-  return Response.json({
+  return publicJson({
     count: operationGuides.length,
     operations: operationGuides.map((guide) => ({
       slug: guide.slug,
