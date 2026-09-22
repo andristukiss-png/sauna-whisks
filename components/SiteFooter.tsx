@@ -12,11 +12,16 @@ export function SiteFooter() {
       <div>
         <b>Explore</b>
         <Link href="/shop">Shop</Link>
+        <Link href="/learn">Learn</Link>
+        <Link href="/beginners">Beginners</Link>
+        <Link href="/materials">Materials</Link>
+        <Link href="/care">Care</Link>
         <Link href="/compare">Compare</Link>
         <Link href="/traditions">Traditions</Link>
         <Link href="/journal">Journal</Link>
         <Link href="/glossary">Glossary</Link>
         <Link href="/usa">USA</Link>
+        <a href="/feed.xml">RSS</a>
       </div>
       <div>
         <b>Company</b>
