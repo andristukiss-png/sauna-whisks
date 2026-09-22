@@ -1,14 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sourcing & Product Standards",
-  description:
-    "The sourcing, botanical, harvest and product information SaunaWhisks.com intends to publish for every sauna whisk.",
-  alternates: { canonical: "/standards" }
-};
+  description: "The sourcing, botanical, harvest and product information SaunaWhisks.com intends to publish for every sauna whisk.",
+  canonical: "/standards",
+});
 
 const standards = [
   ["Botanical identity", "Species or botanical group wherever the producer can verify it."],
