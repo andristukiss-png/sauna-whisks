@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -13,11 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const topic = getArticleTopic(slug);
   if (!topic) return {};
-  return {
+  return pageMetadata({
     title: `${topic.title} — Sauna Whisk Journal`,
     description: topic.description,
-    alternates: { canonical: `/journal/topic/${topic.slug}` }
-  };
+    canonical: `/journal/topic/${topic.slug}`,
+  });
 }
 
 export default async function JournalTopicPage({ params }: { params: Promise<{ slug: string }> }) {
