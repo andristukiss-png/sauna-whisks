@@ -85,8 +85,12 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
           <p className="detail-character">{whisk.character}</p>
           <p className="detail-description">{whisk.description}</p>
           <div className="detail-meta">
+            <div><span>Status</span><b>{whisk.status}</b></div>
             <div><span>Material</span><b>{whisk.material}</b></div>
             <div><span>Botanical group</span><b>{whisk.latin}</b></div>
+            <div><span>Planned condition</span><b>{whisk.plannedCondition}</b></div>
+            <div><span>Origin</span><b>{whisk.origin}</b></div>
+            <div><span>Verification</span><b>{whisk.verification}</b></div>
             <div><span>Planned launch price</span><b>{whisk.plannedPrice}</b></div>
           </div>
           <a className="button button-dark" href="#product-enquiry">Ask about this whisk</a>
