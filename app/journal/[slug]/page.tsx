@@ -124,10 +124,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </div>
         </section>
 
-        <div className="article-body article-body-tail">
-          <div /> 
-          <div>
-        </div>
       </article>
       <SiteFooter />
     </main>
