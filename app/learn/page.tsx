@@ -17,7 +17,9 @@ const sections = [
   ["/journal", "Journal", "All long-form guides and source-backed articles."],
   ["/glossary", "Glossary", "The language of whisking in one place."],
   ["/guides", "Buying guides", "Choose by use case, material and ritual preference."],
-  ["/compare", "Compare", "Direct material, condition and bundle comparisons."]
+  ["/compare", "Compare", "Direct material, condition and bundle comparisons."],
+  ["/finder", "Whisk finder", "Three questions to choose a planned core product."],
+  ["/checklist", "Quality checklist", "Evaluate origin, construction and prepared performance."]
 ];
 
 export default function LearnPage() {
