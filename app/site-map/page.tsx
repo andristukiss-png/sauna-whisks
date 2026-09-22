@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { saunaWhisks } from "@/lib/products";
 import { articles } from "@/lib/articles";
-import { markets } from "@/lib/markets";
+import { getMarketPath, markets } from "@/lib/markets";
 import { tradeSegments } from "@/lib/tradeSegments";
 import { useCases } from "@/lib/useCases";
 import { techniques } from "@/lib/techniques";
@@ -74,7 +74,7 @@ export default function SiteMapPage() {
         </div>
         <div>
           <h2>Markets</h2>
-          {markets.map((market) => <Link prefetch={false} href={"/markets/" + market.slug} key={market.slug}>{market.name} →</Link>)}
+          {markets.map((market) => <Link prefetch={false} href={getMarketPath(market)} key={market.slug}>{market.name} →</Link>)}
         </div>
         <div>
           <h2>Trade</h2>
