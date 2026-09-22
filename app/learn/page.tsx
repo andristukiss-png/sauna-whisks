@@ -14,7 +14,9 @@ const sections = [
   ["/care", "Care", "Preparation, storage, reuse and troubleshooting."],
   ["/traditions", "Traditions", "Latvian pirts, Finnish vihta/vasta and banya venik context."],
   ["/journal", "Journal", "All long-form guides and source-backed articles."],
-  ["/glossary", "Glossary", "The language of whisking in one place."]
+  ["/glossary", "Glossary", "The language of whisking in one place."],
+  ["/guides", "Buying guides", "Choose by use case, material and ritual preference."],
+  ["/compare", "Compare", "Direct material, condition and bundle comparisons."]
 ];
 
 export default function LearnPage() {
