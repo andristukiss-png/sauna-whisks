@@ -1,5 +1,7 @@
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
+import Link from "next/link";
+import { faqTopics } from "@/lib/faqTopics";
 
 const faqs = [
   ["What is a sauna whisk?", "A tied bundle of leafy branches used to move warm air, release plant aroma and work with the body during sauna bathing."],
@@ -40,6 +42,15 @@ export default function FAQPage() {
         <p className="section-kicker">FAQ</p>
         <h1>Start with the questions.</h1>
         <p>Short answers to the things people usually need to know before choosing or using a sauna whisk.</p>
+      </section>
+      <section className="faq-topic-grid">
+        {faqTopics.map((topic) => (
+          <Link href={"/faq/topic/" + topic.slug} key={topic.slug}>
+            <h2>{topic.title}</h2>
+            <p>{topic.description}</p>
+            <b>Browse topic →</b>
+          </Link>
+        ))}
       </section>
       <section className="faq-list">
         {faqs.map(([question, answer], index) => (
