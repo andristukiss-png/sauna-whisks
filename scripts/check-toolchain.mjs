@@ -1,0 +1,44 @@
+import fs from "node:fs";
+
+const errors = [];
+const expectedMajor = "22";
+
+for (const file of [".nvmrc", ".node-version"]) {
+  if (!fs.existsSync(file)) {
+    errors.push("Missing Node version file: " + file);
+    continue;
+  }
+  const value = fs.readFileSync(file, "utf8").trim();
+  if (value !== expectedMajor) {
+    errors.push(file + " must pin Node " + expectedMajor + ".");
+  }
+}
+
+const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+if (pkg.engines?.node !== ">=22 <23") {
+  errors.push("package.json engines.node must stay on Node 22.");
+}
+if (!pkg.scripts?.["validate:toolchain"]) {
+  errors.push("package.json missing validate:toolchain script.");
+}
+
+const workflow = fs.readFileSync(".github/workflows/build.yml", "utf8");
+if (!workflow.includes('node-version-file: ".nvmrc"')) {
+  errors.push("CI must read its Node version from .nvmrc.");
+}
+
+const dependabot = fs.readFileSync(".github/dependabot.yml", "utf8");
+if (!dependabot.includes('package-ecosystem: "npm"')) {
+  errors.push("Dependabot npm updates missing.");
+}
+if (!dependabot.includes('package-ecosystem: "github-actions"')) {
+  errors.push("Dependabot GitHub Actions updates missing.");
+}
+
+if (errors.length) {
+  console.error("Toolchain validation failed:");
+  errors.forEach((error) => console.error("- " + error));
+  process.exit(1);
+}
+
+console.log("Toolchain validation passed.");
