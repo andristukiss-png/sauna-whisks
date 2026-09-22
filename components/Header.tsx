@@ -3,7 +3,7 @@ import { LeafMark } from "./LeafMark";
 
 const links = [
   ["/shop", "Whisks"],
-  ["/traditions", "Traditions"],
+  ["/learn", "Learn"],
   ["/journal", "Journal"],
   ["/about", "About"],
   ["/wholesale", "Wholesale"]
