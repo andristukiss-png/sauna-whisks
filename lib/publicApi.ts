@@ -2,11 +2,16 @@ const publicAccessHeaders = {
   "Access-Control-Allow-Origin": "*",
 } as const;
 
+function publicCacheControl(maxAge: number) {
+  const safeMaxAge = Math.max(0, Math.floor(maxAge));
+  return `public, max-age=0, s-maxage=${safeMaxAge}, stale-while-revalidate=${safeMaxAge * 6}`;
+}
+
 export function publicJson(data: unknown, maxAge = 3600) {
   return Response.json(data, {
     headers: {
       ...publicAccessHeaders,
-      "Cache-Control": `public, max-age=0, s-maxage=${maxAge}, stale-while-revalidate=${maxAge * 6}`,
+      "Cache-Control": publicCacheControl(maxAge),
     },
   });
 }
@@ -36,7 +41,7 @@ export function publicText(
   const headers: Record<string, string> = {
     ...publicAccessHeaders,
     "Content-Type": contentType,
-    "Cache-Control": `public, max-age=${maxAge}`,
+    "Cache-Control": publicCacheControl(maxAge),
   };
 
   if (contentDisposition) headers["Content-Disposition"] = contentDisposition;
