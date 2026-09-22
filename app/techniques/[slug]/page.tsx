@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getTechnique, techniques } from "@/lib/techniques";
 
-export function generateStaticParams(){
+export const dynamicParams = false;\n\nexport function generateStaticParams(){
   return techniques.map((item)=>({slug:item.slug}));
 }
 
