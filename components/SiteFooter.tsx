@@ -27,6 +27,10 @@ export function SiteFooter() {
         <Link href="/contact">Contact</Link>
         <Link href="/shipping">Shipping</Link>
         <Link href="/privacy">Privacy</Link>
+        <Link href="/terms">Terms</Link>
+        <Link href="/returns">Returns</Link>
+        <Link href="/cookies">Cookies</Link>
+        <Link href="/accessibility">Accessibility</Link>
       </div>
       <div className="footer-note">
         Traditional sauna culture,<br />presented with modern standards.
