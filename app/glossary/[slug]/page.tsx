@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getGlossaryTerm, glossaryTerms } from "@/lib/glossaryTerms";
 
-export function generateStaticParams() {
+export const dynamicParams = false;\n\nexport function generateStaticParams() {
   return glossaryTerms.map((item) => ({ slug: item.slug }));
 }
 
