@@ -30,7 +30,7 @@ export const saunaWhisks: SaunaWhisk[] = [
       "Warm gradually in the sauna before use.",
       "Avoid boiling water, which can damage dried leaves."
     ],
-    plannedPrice: "$24",
+    plannedPrice: "US$24",
     status: "Pre-launch",
     plannedCondition: "Dried",
     verification: "Supplier, species and harvest origin pending",
@@ -51,7 +51,7 @@ export const saunaWhisks: SaunaWhisk[] = [
       "Warm in the sauna before use.",
       "Use controlled, rhythmic movements rather than striking hard."
     ],
-    plannedPrice: "$28",
+    plannedPrice: "US$28",
     status: "Pre-launch",
     plannedCondition: "Dried",
     verification: "Supplier, species and harvest origin pending",
@@ -72,7 +72,7 @@ export const saunaWhisks: SaunaWhisk[] = [
       "Let the sauna heat release the aroma gradually.",
       "Use lightly around the face and upper body."
     ],
-    plannedPrice: "$29",
+    plannedPrice: "US$29",
     status: "Pre-launch",
     plannedCondition: "Dried / preserved format under validation",
     verification: "Supplier, preservation process and harvest origin pending",
