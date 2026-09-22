@@ -195,7 +195,42 @@ export const articles: Article[] = [
       { label: "Latvia.eu — Pirts, the Latvian sauna", url: "https://www.latvia.eu/sauna/" },
       { label: "Latvia Travel — Bathing traditions in Latvia", url: "https://www.latvia.travel/en/bathing-traditions-latvia" }
     ]
+  }  ,
+  {
+    slug: "sauna-whisk-vs-sauna-broom",
+    title: "Sauna whisk vs sauna broom",
+    eyebrow: "TERMINOLOGY",
+    description:
+      "Two English labels for closely related products. Here is why both terms appear online and why SaunaWhisks.com uses 'whisk' as the primary category.",
+    readTime: "4 min",
+    sections: [
+      {
+        heading: "Why both terms exist",
+        paragraphs: [
+          "English-language marketplaces and specialist retailers use both 'sauna whisk' and 'sauna broom' for leafy branch bundles used in sauna and banya bathing.",
+          "The product is the same broad category, but the word choice often reflects translation, regional tradition or how a seller has chosen to explain venik, vihta or vasta to English-speaking customers."
+        ]
+      },
+      {
+        heading: "Why we prefer 'whisk'",
+        paragraphs: [
+          "For our brand, 'whisk' better communicates an active sauna tool rather than a cleaning broom. It also sits naturally beside the verb 'whisking', which describes moving heat and working with the body.",
+          "We still use 'sauna broom' in educational content because people genuinely search and shop using that term."
+        ]
+      },
+      {
+        heading: "Search term, not cultural replacement",
+        paragraphs: [
+          "Neither English phrase replaces the original cultural vocabulary. When we discuss Finnish sauna we use vihta and vasta where relevant; when we discuss banya we use venik; and when we discuss Latvian pirts we describe the local ritual in its own context."
+        ]
+      }
+    ],
+    sources: [
+      { label: "Etsy — Sauna brooms marketplace", url: "https://www.etsy.com/market/sauna_brooms" },
+      { label: "Holy Banya — Sauna whisks collection", url: "https://holybanya.com/collections/sauna-whisks" }
+    ]
   }
+
 ];
 
 export function getArticle(slug: string) {
