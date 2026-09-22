@@ -1,7 +1,8 @@
 import { productConditions } from "@/lib/productConditions";
+import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
-  return Response.json({
+  return publicJson({
     count: productConditions.length,
     conditions: productConditions.map((item) => ({
       slug: item.slug,
