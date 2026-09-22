@@ -5,6 +5,7 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 export const metadata = {
   title: "Contact",
   description: "Contact SaunaWhisks.com in Latvia for product, trade and sourcing enquiries."
+  alternates: { canonical: "/contact" }
 };
 
 export default function ContactPage() {
