@@ -46,6 +46,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/operations",
     "/sources",
     "/guides",
+    "/status",
+    "/site-map",
+    "/legal",
     "/journal/topics"
   ];
 
