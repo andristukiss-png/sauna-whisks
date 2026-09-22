@@ -17,6 +17,7 @@ export function SiteFooter() {
         <Link href="/beginners">Beginners</Link>
         <Link href="/materials">Materials</Link>
         <Link href="/care">Care</Link>
+        <Link href="/guides">Buying guides</Link>
         <Link href="/compare">Compare</Link>
         <Link href="/traditions">Traditions</Link>
         <Link href="/journal">Journal</Link>
