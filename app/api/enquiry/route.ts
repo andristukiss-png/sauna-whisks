@@ -19,7 +19,10 @@ export async function POST(request: Request) {
     const name = (body.name || "").trim();
     const email = (body.email || "").trim();
     const message = (body.message || "").trim();
-    const subject = (body.subject || "SaunaWhisks.com enquiry").trim();
+    const subject = (body.subject || "SaunaWhisks.com enquiry")
+      .replace(/[\r\n]+/g, " ")
+      .trim()
+      .slice(0, 160);
     const website = (body.website || "").trim();
 
     // Honeypot field: bots often fill this invisible field.
