@@ -17,6 +17,8 @@ export function GET() {
       "/api/glossary",
       "/api/guides",
       "/api/operations",
+      "/api/use-cases",
+      "/api/techniques",
       "/api/sources",
       "/api/sources.csv",
       "/api/product-data-template.csv",
