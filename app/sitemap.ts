@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { saunaWhisks } from "@/lib/products";
 import { articles } from "@/lib/articles";
-import { markets } from "@/lib/markets";
+import { getMarketPath, markets } from "@/lib/markets";
 import { tradeSegments } from "@/lib/tradeSegments";
 import { operationGuides } from "@/lib/operations";
 import { glossaryTerms } from "@/lib/glossaryTerms";
@@ -94,8 +94,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.75,
     })),
-    ...markets.map((market) => ({
-      url: `${base}/markets/${market.slug}`,
+    ...markets.filter((market) => market.slug !== "united-states").map((market) => ({
+      url: `${base}${getMarketPath(market)}`,
       changeFrequency: "monthly" as const,
       priority: 0.65,
     })),
