@@ -3,6 +3,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteSearch } from "@/components/SiteSearch";
 import { siteSearchItems } from "@/lib/siteSearch";
+import { isSiteSearchFilter } from "@/lib/search";
 
 export const metadata = {
   title: "Search",
@@ -17,10 +18,7 @@ export default async function SearchPage({
   searchParams: Promise<{ q?: string; type?: string }>;
 }) {
   const { q = "", type = "All" } = await searchParams;
-  const allowed = ["All", "Product", "Guide", "Market", "Trade", "Page"] as const;
-  const initialType = allowed.includes(type as (typeof allowed)[number])
-    ? (type as (typeof allowed)[number])
-    : "All";
+  const initialType = isSiteSearchFilter(type) ? type : "All";
 
   return (
     <main>
