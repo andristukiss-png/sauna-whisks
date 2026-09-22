@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -46,7 +47,7 @@ export default function StandardsPage() {
         <h2>See the working product operations.</h2>
         <p>Provenance, testing, harvest, packaging, import compliance and specifications each have their own working standard.</p>
         <div className="standards-actions">
-          <a className="button button-dark" href="/operations">Explore product operations</a>
+          <Link className="button button-dark" href="/operations">Explore product operations</Link>
           <a className="text-link" href="/claims">Read product claims standard →</a>
         </div>
       </section>
