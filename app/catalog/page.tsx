@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { saunaWhisks } from "@/lib/products";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Pre-launch Product Catalog",
   description: "Transparent pre-launch catalog with product status, planned condition and verification state.",
-  alternates: { canonical: "/catalog" }
-};
+  canonical: "/catalog",
+});
 
 export default function CatalogPage() {
   return (
