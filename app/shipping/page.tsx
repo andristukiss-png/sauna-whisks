@@ -58,7 +58,12 @@ export default function ShippingPage() {
         <p>
           Send your country and what you are interested in. We can use that demand to prioritize launch markets.
         </p>
-        <EnquiryForm subject="SaunaWhisks.com shipping enquiry" />
+        <EnquiryForm
+          subject="SaunaWhisks.com shipping enquiry"
+          countryField
+          topics={["Home customer", "Trade / business", "Future market interest"]}
+          messagePlaceholder="Tell us which products and shipping destination you are interested in..."
+        />
       </section>
 
       <SiteFooter />
