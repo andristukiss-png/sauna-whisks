@@ -46,6 +46,8 @@ export function SiteFooter() {
         <Link prefetch={false} href="/operations">Operations</Link>
         <Link prefetch={false} href="/claims">Claims standard</Link>
         <Link prefetch={false} href="/sources">Sources</Link>
+        <Link prefetch={false} href="/editorial-policy">Editorial policy</Link>
+        <Link prefetch={false} href="/corrections">Corrections</Link>
         <Link prefetch={false} href="/faq">FAQ</Link>
         <Link prefetch={false} href="/trade">Trade</Link>
         <Link prefetch={false} href="/wholesale">Wholesale</Link>
