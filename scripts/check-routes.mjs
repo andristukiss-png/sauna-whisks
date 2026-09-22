@@ -50,6 +50,8 @@ const expectedApiRoutes = [
   "app/api/product-data-template.csv/route.ts",
   "app/api/supplier-sample-template.csv/route.ts",
   "app/api/trade-trial-template.csv/route.ts",
+  "app/api/use-cases/route.ts",
+  "app/api/techniques/route.ts",
 ];
 
 for (const route of expectedApiRoutes) {
