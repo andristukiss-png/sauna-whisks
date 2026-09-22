@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { buyerGuides, getBuyerGuide } from "@/lib/buyerGuides";
 
-export function generateStaticParams() {
+export const dynamicParams = false;\n\nexport function generateStaticParams() {
   return buyerGuides.map((guide) => ({ slug: guide.slug }));
 }
 
