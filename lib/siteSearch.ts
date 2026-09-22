@@ -39,6 +39,8 @@ const pages: SiteSearchItem[] = [
   { title: "Site map", description: "Human-readable map of SaunaWhisks.com.", href: "/site-map", type: "Page", keywords: ["index", "navigation"] },
   { title: "Legal & policies", description: "Privacy, terms, returns, cookies, accessibility and shipping policies.", href: "/legal", type: "Page", keywords: ["privacy", "terms", "returns", "cookies"] },
   { title: "Public data", description: "Read-only JSON, CSV and feed endpoints for SaunaWhisks.com.", href: "/data", type: "Page", keywords: ["api", "json", "csv", "feed", "data"] },
+  { title: "Quality", description: "Product standards, testing, provenance, claims and sample evaluation.", href: "/quality", type: "Page", keywords: ["quality", "testing", "provenance", "standards"] },
+  { title: "Resources", description: "Learning, source, public-data and operational resources.", href: "/resources", type: "Page", keywords: ["resources", "sources", "help", "data"] },
   { title: "Product claims standard", description: "How SaunaWhisks.com separates product facts from unsupported health marketing.", href: "/claims", type: "Page", keywords: ["claims", "evidence", "health", "quality"] },
   { title: "Product data catalog", description: "Pre-launch product status, planned condition and verification fields.", href: "/catalog", type: "Page", keywords: ["product data", "verification", "status", "catalog"] },
   { title: "Whisk finder", description: "Three-question tool for choosing birch, oak, eucalyptus or the Discovery Trio.", href: "/finder", type: "Page", keywords: ["recommendation", "quiz", "choose"] },
