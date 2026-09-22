@@ -11,7 +11,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "validate": "node scripts/check-content.mjs && npm run validate:routes && npm run validate:prelaunch && npm run validate:status && npm run validate:claims && npm run validate:articles && npm run validate:products && npm run validate:sitemap && npm run validate:metadata && npm run validate:links && npm run validate:ui && npm run validate:docs && npm run validate:env && npm run validate:toolchain && npm run validate:domain && npm run validate:redirects && npm run validate:search && npm run validate:api && npm run validate:data && npm run validate:security && npm run validate:duplicates",
+    "validate": "node scripts/check-content.mjs && npm run validate:routes && npm run validate:prelaunch && npm run validate:status && npm run validate:claims && npm run validate:articles && npm run validate:products && npm run validate:sitemap && npm run validate:feeds && npm run validate:manifest && npm run validate:metadata && npm run validate:links && npm run validate:ui && npm run validate:docs && npm run validate:env && npm run validate:toolchain && npm run validate:domain && npm run validate:redirects && npm run validate:search && npm run validate:api && npm run validate:data && npm run validate:security && npm run validate:duplicates",
     "check": "npm run validate && npm run lint && npm run typecheck && npm run build",
     "verify:production": "node scripts/production-smoke.mjs",
     "validate:routes": "node scripts/check-routes.mjs",
@@ -33,7 +33,9 @@
     "validate:api": "node scripts/check-api-policy.mjs",
     "validate:data": "node scripts/check-public-data.mjs",
     "validate:security": "node scripts/check-security.mjs",
-    "validate:duplicates": "node scripts/check-duplicates.mjs"
+    "validate:duplicates": "node scripts/check-duplicates.mjs",
+    "validate:feeds": "node scripts/check-feeds.mjs",
+    "validate:manifest": "node scripts/check-manifest.mjs"
   },
   "dependencies": {
     "next": "^16.0.0",

@@ -6,6 +6,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getTraditionDetail, traditionDetails } from "@/lib/traditionDetails";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return traditionDetails.map((item) => ({ slug: item.slug }));
 }

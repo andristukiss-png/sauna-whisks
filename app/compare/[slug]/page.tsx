@@ -6,6 +6,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { comparisons, getComparison } from "@/lib/comparisons";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return comparisons.map((item) => ({ slug: item.slug }));
 }

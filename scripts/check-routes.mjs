@@ -95,7 +95,21 @@ const expectedDynamicRoutes = [
 ];
 
 for (const route of expectedDynamicRoutes) {
-  if (!fs.existsSync(route)) errors.push(`Missing dynamic route: ${route}`);
+  if (!fs.existsSync(route)) {
+    errors.push(`Missing dynamic route: ${route}`);
+    continue;
+  }
+
+  const source = fs.readFileSync(route, "utf8");
+  if (!source.includes("generateStaticParams")) {
+    errors.push(`Dynamic route missing generateStaticParams: ${route}`);
+  }
+  if (!source.includes("export const dynamicParams = false;")) {
+    errors.push(`Finite dynamic route must disable runtime params: ${route}`);
+  }
+  if (source.includes(String.raw`dynamicParams = false;\\n`)) {
+    errors.push(`Dynamic route contains escaped newline corruption: ${route}`);
+  }
 }
 
 if (errors.length) {

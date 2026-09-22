@@ -5,6 +5,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getOperationGuide, operationGuides } from "@/lib/operations";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return operationGuides.map((guide) => ({ slug: guide.slug }));
 }

@@ -5,6 +5,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { faqTopics, getFAQTopic } from "@/lib/faqTopics";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return faqTopics.map((topic) => ({ slug: topic.slug }));
 }

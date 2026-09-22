@@ -7,6 +7,8 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { getMarket, getMarketPath, markets } from "@/lib/markets";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return markets.map((market) => ({ slug: market.slug }));
 }

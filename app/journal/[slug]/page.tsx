@@ -8,6 +8,8 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ArticleTools } from "@/components/ArticleTools";
 import { editorialReviewDate } from "@/lib/editorial";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
 }
