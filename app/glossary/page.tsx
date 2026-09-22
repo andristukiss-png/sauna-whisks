@@ -17,6 +17,7 @@ const terms = [
 export const metadata = {
   title: "Sauna Whisk Glossary",
   description: "Definitions of sauna whisk, pirts, pirtnieks, venik, vihta, vasta and other sauna terms."
+  alternates: { canonical: "/glossary" }
 };
 
 export default function GlossaryPage() {
