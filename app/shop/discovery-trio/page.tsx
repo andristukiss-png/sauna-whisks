@@ -60,7 +60,7 @@ export default function DiscoveryTrioPage() {
 
           <div className="detail-meta">
             <div><span>Includes</span><b>3 sauna whisks</b></div>
-            <div><span>Planned launch price</span><b>$69</b></div>
+            <div><span>Planned launch price</span><b>US$69</b></div>
             <div><span>Status</span><b>Pre-launch</b></div>
           </div>
 
