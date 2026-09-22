@@ -12,6 +12,8 @@ import { comparisons } from "@/lib/comparisons";
 import { faqTopics } from "@/lib/faqTopics";
 import { articleTopics } from "@/lib/articleTopics";
 import { productConditions } from "@/lib/productConditions";
+import { useCases } from "@/lib/useCases";
+import { techniques } from "@/lib/techniques";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://saunawhisks.com";
@@ -56,6 +58,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/data",
     "/quality",
     "/resources",
+    "/use-cases",
+    "/techniques",
     "/templates",
     "/suppliers/requirements",
     "/suppliers/sample-evaluation",
@@ -146,6 +150,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...productConditions.map((item) => ({
       url: `${base}/conditions/${item.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.65,
+    })),
+    ...useCases.map((item) => ({
+      url: `${base}/use-cases/${item.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...techniques.map((item) => ({
+      url: `${base}/techniques/${item.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.65,
