@@ -45,6 +45,7 @@ export default function ShopPage() {
         <a href="/finder"><span>Not sure?</span><b>Use the whisk finder →</b></a>
         <a href="/checklist"><span>Comparing samples?</span><b>Open quality checklist →</b></a>
       </section>
+      <p className="shop-price-note">All displayed prices are planned pre-launch prices in USD. Shipping, taxes and duties are not included.</p>
       <section className="catalog-grid">
         {saunaWhisks.map((whisk, index) => (
           <article className="catalog-card" key={whisk.slug}>
@@ -77,7 +78,7 @@ export default function ShopPage() {
           </p>
         </div>
         <div className="shop-bundle-price">
-          <strong>$69</strong>
+          <strong>US$69</strong>
           <span>planned launch price</span>
           <Link href="/shop/discovery-trio" className="button button-dark">View Discovery Trio</Link>
         </div>
