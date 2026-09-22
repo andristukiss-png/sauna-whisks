@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
@@ -13,6 +14,7 @@ export default function PartnersPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Partners / Press" }]} />
       <section className="page-hero dark-page">
         <p className="section-kicker light">PARTNERSHIPS / PRESS</p>
         <h1>Build the sauna-whisk category with us.</h1>
