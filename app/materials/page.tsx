@@ -9,9 +9,14 @@ export const metadata = {
 };
 
 const materials = [
-  ["/shop/baltic-birch", "Birch", "Soft, leafy and the classic starting point."],
-  ["/shop/latvian-oak", "Oak", "Broader leaves and a denser, firmer ritual feel."],
-  ["/shop/eucalyptus", "Eucalyptus", "Aroma-led and distinctive rather than the traditional Baltic benchmark."]
+  ["/materials/birch", "Birch", "Soft, leafy and the classic starting point."],
+  ["/materials/oak", "Oak", "Broader leaves and a denser, firmer ritual feel."],
+  ["/materials/eucalyptus", "Eucalyptus", "Aroma-led and distinctive rather than the traditional Baltic benchmark."],
+  ["/materials/linden", "Linden", "A softer future assortment material."],
+  ["/materials/juniper", "Juniper", "Textured and resinous; a specialist future material."],
+  ["/materials/maple", "Maple", "A broad-leaf future assortment candidate."],
+  ["/materials/herbal", "Herbal mixes", "Mixed botanical bundles built around aroma."],
+  ["/materials/mixed-whisks", "Mixed whisks", "Multi-species whisks with layered character."]
 ];
 
 export default function MaterialsPage() {
