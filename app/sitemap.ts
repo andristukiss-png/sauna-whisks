@@ -56,6 +56,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/data",
     "/quality",
     "/resources",
+    "/templates",
+    "/suppliers/requirements",
+    "/suppliers/sample-evaluation",
+    "/trade/trial",
     "/finder",
     "/checklist",
     "/journal/topics"
