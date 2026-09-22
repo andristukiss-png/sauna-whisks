@@ -11,7 +11,19 @@ export const metadata={
 };
 
 export default function TechniquesPage(){
+  const schema={
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    name:"Sauna Whisk Techniques",
+    hasPart:techniques.map((item)=>({
+      "@type":"HowTo",
+      name:item.name,
+      url:"https://saunawhisks.com/techniques/"+item.slug
+    }))
+  };
+
   return <main>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,"\\u003c")}}/>
     <Header/>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Techniques"}]}/>
     <section className="page-hero">
