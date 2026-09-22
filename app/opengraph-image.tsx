@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "Sauna Whisks — Baltic sauna tradition from Latvia";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -17,11 +16,10 @@ export default function Image() {
           color: "#f1eee5",
           padding: "70px 78px",
           position: "relative",
-          fontFamily: "serif"
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", width: "100%" }}>
-          <div style={{ fontSize: 24, letterSpacing: "0.18em", fontFamily: "sans-serif" }}>
+          <div style={{ fontSize: 24, letterSpacing: "0.18em" }}>
             LATVIA · BALTIC TRADITION
           </div>
           <div>
@@ -30,7 +28,7 @@ export default function Image() {
               <br />
               in the sauna.
             </div>
-            <div style={{ fontSize: 30, marginTop: 38, opacity: 0.78, fontFamily: "sans-serif" }}>
+            <div style={{ fontSize: 30, marginTop: 38, opacity: 0.78 }}>
               SAUNA WHISKS
             </div>
           </div>
@@ -43,7 +41,7 @@ export default function Image() {
             width: 480,
             height: 480,
             borderRadius: 480,
-            border: "2px solid rgba(241,238,229,.25)"
+            border: "2px solid rgba(241,238,229,.25)",
           }}
         />
         <div
@@ -54,7 +52,7 @@ export default function Image() {
             width: 390,
             height: 390,
             borderRadius: 390,
-            border: "2px solid rgba(241,238,229,.18)"
+            border: "2px solid rgba(241,238,229,.18)",
           }}
         />
       </div>
