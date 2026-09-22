@@ -15,7 +15,9 @@ const links = [
   ["/returns", "Returns & refunds", "Pre-launch policy and future commercial expectations."],
   ["/cookies", "Cookies", "Current minimal tracking position."],
   ["/accessibility", "Accessibility", "Accessibility approach and contact path."],
-  ["/shipping", "Shipping & availability", "Market status and pre-launch shipping policy."]
+  ["/shipping", "Shipping & availability", "Market status and pre-launch shipping policy."],
+  ["/editorial-policy", "Editorial policy", "Source hierarchy and factual-review approach."],
+  ["/corrections", "Corrections", "How factual and product-data corrections are handled."]
 ];
 
 export default function LegalPage() {
