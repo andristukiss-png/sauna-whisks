@@ -31,12 +31,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     headline: article.title,
     description: article.description,
     mainEntityOfPage: `https://saunawhisks.com/journal/${article.slug}`,
+    author: {
+      "@type": "Organization",
+      name: "Sauna Whisks"
+    },
     publisher: {
       "@type": "Organization",
       name: "Sauna Whisks",
       url: "https://saunawhisks.com"
-    }
+    },
+    citation: article.sources.map((source) => source.url)
   };
+
+  const sameTopic = articles.filter((candidate) => candidate.slug !== article.slug && candidate.eyebrow === article.eyebrow);
+  const related = [...sameTopic, ...articles.filter((candidate) => candidate.slug !== article.slug && candidate.eyebrow !== article.eyebrow)].slice(0, 3);
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -100,6 +108,25 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
             <Link href="/journal" className="text-link">← Back to the sauna library</Link>
           </div>
+        </div>
+
+        <section className="article-related">
+          <p className="section-kicker">READ NEXT</p>
+          <div>
+            {related.map((item) => (
+              <Link href={"/journal/" + item.slug} key={item.slug}>
+                <span>{item.eyebrow}</span>
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
+                <b>{item.readTime} →</b>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <div className="article-body article-body-tail">
+          <div /> 
+          <div>
         </div>
       </article>
       <SiteFooter />
