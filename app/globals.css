@@ -253,3 +253,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
 
 .shop-price-note{margin:0;padding:18px 5vw 28px;font-size:10px;line-height:1.5;letter-spacing:.04em;opacity:.62;border-bottom:1px solid var(--line)}
+
+
+/* Use-case detail */
+.use-case-plan{padding:80px 7vw 110px;display:grid;grid-template-columns:1fr 1fr;gap:80px}.use-case-plan>div{border-top:1px solid var(--line);padding-top:28px}.use-case-plan>div:first-child>p:not(.section-kicker){display:grid;grid-template-columns:50px 1fr;gap:18px;font:17px/1.55 Georgia,serif;padding:14px 0;border-bottom:1px solid var(--line);margin:0}.use-case-plan span{font:9px Arial,sans-serif;letter-spacing:.14em;opacity:.5}.use-case-plan h2{font:400 42px/1.08 Georgia,serif;margin:0 0 28px}
+@media(max-width:700px){.use-case-plan{grid-template-columns:1fr;gap:45px;padding-left:6vw;padding-right:6vw}}
