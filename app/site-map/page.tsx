@@ -88,6 +88,14 @@ export default function SiteMapPage() {
           <h2>Techniques</h2>
           {techniques.map((item) => <Link prefetch={false} href={"/techniques/" + item.slug} key={item.slug}>{item.name} →</Link>)}
         </div>
+        <div>
+          <h2>Tools</h2>
+          <Link prefetch={false} href="/tools">Tools hub →</Link>
+          <Link prefetch={false} href="/tools/supplier-scorecard">Supplier scorecard →</Link>
+          <Link prefetch={false} href="/tools/landed-cost">Landed-cost calculator →</Link>
+          <Link prefetch={false} href="/tools/trade-demand">Trade demand estimator →</Link>
+          <Link prefetch={false} href="/tools/launch-readiness">Launch readiness →</Link>
+        </div>
         <div className="sitemap-journal">
           <h2>Journal</h2>
           {articles.map((article) => <Link prefetch={false} href={"/journal/" + article.slug} key={article.slug}>{article.title} →</Link>)}
