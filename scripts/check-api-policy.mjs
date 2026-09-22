@@ -41,6 +41,27 @@ for (const file of noStore) {
   if (!text.includes("noStoreJson")) errors.push("Dynamic API missing no-store helper: " + file);
 }
 
+
+const cachedCsv = [
+  "app/api/catalog.csv/route.ts",
+  "app/api/sources.csv/route.ts",
+  "app/api/product-data-template.csv/route.ts",
+  "app/api/supplier-sample-template.csv/route.ts",
+  "app/api/trade-trial-template.csv/route.ts"
+];
+
+for (const file of cachedCsv) {
+  const text = fs.readFileSync(file, "utf8");
+  if (!text.includes('"Cache-Control"')) errors.push("Public CSV missing cache policy: " + file);
+  if (!text.includes('"Content-Type"')) errors.push("Public CSV missing content type: " + file);
+}
+
+const searchApi = fs.readFileSync("app/api/search/route.ts", "utf8");
+if (!searchApi.includes("MAX_QUERY_LENGTH")) errors.push("Search API query length is not bounded.");
+if (!searchApi.includes('type = allowedTypes.has(requestedType) ? requestedType : "All"')) {
+  errors.push("Search API does not normalize invalid type filters.");
+}
+
 const enquiry = fs.readFileSync("app/api/enquiry/route.ts", "utf8");
 const enquiryGuards = [
   ["same-origin guard", 'headers.get("origin")'],
