@@ -53,7 +53,10 @@ export default function ShopPage() {
               <LeafMark />
               <LeafMark />
             </div>
-            <p className="product-latin">{whisk.latin.toUpperCase()} · {whisk.character.toUpperCase()}</p>
+            <div className="catalog-status-row">
+              <p className="product-latin">{whisk.latin.toUpperCase()} · {whisk.character.toUpperCase()}</p>
+              <span>{whisk.status}</span>
+            </div>
             <h2>{whisk.name}</h2>
             <p>{whisk.description}</p>
             <div className="catalog-bottom">
