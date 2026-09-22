@@ -1,12 +1,13 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata={
-  title:"Press Facts",
-  description:"Verified pre-launch facts about SaunaWhisks.com for media and editorial reference.",
-  alternates:{canonical:"/press"}
-};
+export const metadata = pageMetadata({
+  title: "Press Facts",
+  description: "Verified pre-launch facts about SaunaWhisks.com for media and editorial reference.",
+  canonical: "/press",
+});
 
 const facts=[
   ["Brand","Sauna Whisks / SaunaWhisks.com"],
