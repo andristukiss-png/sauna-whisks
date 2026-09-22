@@ -1,14 +1,17 @@
 # Release process
 
 ## Normal website release
+
 1. Make focused changes on a branch when practical.
 2. Run validation, lint, typecheck and build.
 3. Review product/claims/pre-launch implications.
-4. Merge to main only when checks pass.
-5. Confirm Vercel deployment success.
-6. Smoke-check homepage, shop, one product, journal, contact and sitemap.
+4. Merge to `main` only when checks pass.
+5. Confirm the Vercel production deployment is Ready.
+6. Run the production smoke check.
+7. Smoke-check homepage, shop, one product, journal, contact and sitemap.
 
 ## Commercial-impact change
+
 Any change involving price, availability, checkout, shipping countries, supplier identity or product origin also requires:
 - product-data review
 - commercial/landed-cost review
@@ -16,15 +19,23 @@ Any change involving price, availability, checkout, shipping countries, supplier
 - policy review where relevant
 
 ## Rollback
+
 Use the last known-good Git commit / Vercel deployment. Do not “fix forward” a broken production checkout while customers can transact.
 
+A domain or TLS incident is not automatically an application-release failure. Diagnose deployment, domain attachment, DNS, certificate state and HTTP routing separately before rolling back source code.
 
-## Verification command
+## Verification commands
 
-Before treating a release as deployable, run:
+Before treating a release as deployable:
 
 ```bash
 npm run check
+```
+
+After the production deployment is Ready:
+
+```bash
+npm run verify:production
 ```
 
 A release is considered technically green only when:
@@ -33,3 +44,4 @@ A release is considered technically green only when:
 - TypeScript passes
 - `next build` passes
 - Vercel reports the deployment Ready
+- the production smoke check passes for the canonical host and `www` redirect
