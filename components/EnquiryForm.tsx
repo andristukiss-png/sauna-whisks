@@ -5,30 +5,42 @@ import { FormEvent, useState } from "react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
+type EnquiryFormProps = {
+  subject?: string;
+  topics?: string[];
+  businessFields?: boolean;
+  messagePlaceholder?: string;
+};
+
 export function EnquiryForm({
   subject = "SaunaWhisks.com enquiry",
-}: {
-  subject?: string;
-}) {
+  topics,
+  businessFields = false,
+  messagePlaceholder = "Tell us what you are looking for...",
+}: EnquiryFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [statusMessage, setStatusMessage] = useState(
     "Your enquiry will be sent to info@SaunaWhisks.com."
   );
 
-  function openMailFallback(name: string, email: string, message: string) {
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
+  function openMailFallback(fields: Record<string, string>) {
+    const lines = [
+      `Name: ${fields.name}`,
+      `Email: ${fields.email}`,
+      fields.topic ? `Topic: ${fields.topic}` : "",
+      fields.business ? `Business: ${fields.business}` : "",
+      fields.country ? `Country: ${fields.country}` : "",
+      fields.quantity ? `Approx. monthly requirement: ${fields.quantity}` : "",
       "",
       "Enquiry:",
-      message,
-    ].join("\n");
+      fields.message,
+    ].filter(Boolean);
 
     window.location.href =
       "mailto:info@SaunaWhisks.com?subject=" +
       encodeURIComponent(subject) +
       "&body=" +
-      encodeURIComponent(body);
+      encodeURIComponent(lines.join("\n"));
   }
 
   async function submitEnquiry(event: FormEvent<HTMLFormElement>) {
@@ -37,10 +49,16 @@ export function EnquiryForm({
 
     const element = event.currentTarget;
     const form = new FormData(element);
-    const name = String(form.get("name") || "").trim();
-    const email = String(form.get("email") || "").trim();
-    const message = String(form.get("message") || "").trim();
-    const website = String(form.get("website") || "").trim();
+    const fields = {
+      name: String(form.get("name") || "").trim(),
+      email: String(form.get("email") || "").trim(),
+      message: String(form.get("message") || "").trim(),
+      website: String(form.get("website") || "").trim(),
+      topic: String(form.get("topic") || "").trim(),
+      business: String(form.get("business") || "").trim(),
+      country: String(form.get("country") || "").trim(),
+      quantity: String(form.get("quantity") || "").trim(),
+    };
 
     setStatus("sending");
     setStatusMessage("Sending your enquiry…");
@@ -49,7 +67,7 @@ export function EnquiryForm({
       const response = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message, website, subject }),
+        body: JSON.stringify({ ...fields, subject }),
       });
 
       const data = (await response.json()) as {
@@ -68,7 +86,7 @@ export function EnquiryForm({
       if (data.fallback === "mailto") {
         setStatus("error");
         setStatusMessage("Opening your email app as a fallback…");
-        openMailFallback(name, email, message);
+        openMailFallback(fields);
         return;
       }
 
@@ -77,7 +95,7 @@ export function EnquiryForm({
     } catch {
       setStatus("error");
       setStatusMessage("Opening your email app as a fallback…");
-      openMailFallback(name, email, message);
+      openMailFallback(fields);
     }
   }
 
@@ -94,6 +112,35 @@ export function EnquiryForm({
         </label>
       </div>
 
+      {topics?.length ? (
+        <label>
+          <span>Enquiry type</span>
+          <select name="topic" defaultValue="">
+            <option value="">Choose a topic</option>
+            {topics.map((topic) => <option value={topic} key={topic}>{topic}</option>)}
+          </select>
+        </label>
+      ) : null}
+
+      {businessFields ? (
+        <>
+          <div className="enquiry-two">
+            <label>
+              <span>Business / venue</span>
+              <input name="business" type="text" autoComplete="organization" />
+            </label>
+            <label>
+              <span>Country</span>
+              <input name="country" type="text" autoComplete="country-name" />
+            </label>
+          </div>
+          <label>
+            <span>Approx. monthly requirement</span>
+            <input name="quantity" type="text" placeholder="e.g. 24, 100, 500 whisks" />
+          </label>
+        </>
+      ) : null}
+
       <label className="enquiry-honeypot" aria-hidden="true">
         <span>Website</span>
         <input name="website" type="text" tabIndex={-1} autoComplete="off" />
@@ -106,7 +153,7 @@ export function EnquiryForm({
           rows={7}
           minLength={10}
           maxLength={5000}
-          placeholder="Tell us what you are looking for..."
+          placeholder={messagePlaceholder}
           required
         />
       </label>
