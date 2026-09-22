@@ -20,9 +20,9 @@ export function WhiskFinder() {
     }
     if (feel === "firm") {
       return {
-        name: "Latvian Oak",
+        name: "Baltic Oak",
         copy: "Oak is the clearest choice when you want a broader, denser and firmer whisk.",
-        href: "/shop/latvian-oak",
+        href: "/shop/baltic-oak",
       };
     }
     if (feel === "aroma") {
