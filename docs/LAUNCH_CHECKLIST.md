@@ -33,8 +33,9 @@ Checkout stays disabled until the critical gates below are complete.
 - [ ] Contribution margin model approved
 
 ## Technical
-- [ ] GitHub connected directly to Vercel
+- [x] GitHub connected directly to Vercel
 - [ ] Production build passes CI
+- [ ] Production domain/TLS smoke check passes
 - [ ] Enquiry email provider configured
 - [ ] SaunaWhisks.com sender domain verified
 - [ ] Checkout/payment provider configured
