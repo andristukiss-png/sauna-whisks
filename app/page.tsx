@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 
 const products = [
   { name: "Baltic Birch", latin: "BETULA · CLASSIC", note: "Soft leaves · aromatic · traditional", price: "$24" },
-  { name: "Latvian Oak", latin: "QUERCUS · ROBUST", note: "Fuller body · firm leaf · enduring", price: "$28" },
+  { name: "Baltic Oak", latin: "QUERCUS · ROBUST", note: "Fuller body · firm leaf · enduring", price: "$28" },
   { name: "Eucalyptus", latin: "EUCALYPTUS · AROMATIC", note: "Cooling aroma · vivid ritual", price: "$29" },
 ];
 
@@ -74,7 +74,7 @@ export default function Home() {
               <p className="product-latin">{p.latin}</p>
               <div className="product-title-row"><h3>{p.name}</h3><strong>{p.price}</strong></div>
               <p>{p.note}</p>
-              <Link className="product-link" href={i === 0 ? "/shop/baltic-birch" : i === 1 ? "/shop/latvian-oak" : "/shop/eucalyptus"}>View whisk <span>→</span></Link>
+              <Link className="product-link" href={i === 0 ? "/shop/baltic-birch" : i === 1 ? "/shop/baltic-oak" : "/shop/eucalyptus"}>View whisk <span>→</span></Link>
             </article>
           ))}
         </div>
