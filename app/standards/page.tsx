@@ -45,7 +45,10 @@ export default function StandardsPage() {
         <p className="section-kicker">FROM PRINCIPLE TO PROCESS</p>
         <h2>See the working product operations.</h2>
         <p>Provenance, testing, harvest, packaging, import compliance and specifications each have their own working standard.</p>
-        <a className="button button-dark" href="/operations">Explore product operations</a>
+        <div className="standards-actions">
+          <a className="button button-dark" href="/operations">Explore product operations</a>
+          <a className="text-link" href="/claims">Read product claims standard →</a>
+        </div>
       </section>
       <section className="knowledge-copy">
         <p className="section-kicker">A WORKING STANDARD</p>
