@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -5,12 +6,11 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { articles } from "@/lib/articles";
 import { JournalSearch } from "@/components/JournalSearch";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk Journal",
-  description:
-    "Practical guides to sauna whisks, Latvian pirts, venik, vihta, vasta, materials, preparation and sauna traditions.",
-  alternates: { canonical: "/journal" }
-};
+  description: "Practical guides to sauna whisks, Latvian pirts, venik, vihta, vasta, materials, preparation and sauna traditions.",
+  canonical: "/journal",
+});
 
 export default function JournalPage() {
   return (
