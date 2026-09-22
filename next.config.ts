@@ -22,6 +22,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      { source: "/shop/latvian-oak", destination: "/shop/baltic-oak", permanent: true },
       { source: "/sauna-broom", destination: "/journal/sauna-whisk-vs-sauna-broom", permanent: true },
       { source: "/sauna-brooms", destination: "/journal/sauna-whisk-vs-sauna-broom", permanent: true },
       { source: "/venik", destination: "/journal/venik-vihta-vasta", permanent: true },
