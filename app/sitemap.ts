@@ -3,6 +3,7 @@ import { saunaWhisks } from "@/lib/products";
 import { articles } from "@/lib/articles";
 import { markets } from "@/lib/markets";
 import { tradeSegments } from "@/lib/tradeSegments";
+import { operationGuides } from "@/lib/operations";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://saunawhisks.com";
@@ -34,7 +35,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/care",
     "/markets",
     "/trade",
-    "/search"
+    "/search",
+    "/operations",
+    "/sources"
   ];
 
   return [
@@ -67,6 +70,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.65,
+    })),
+    ...operationGuides.map((guide) => ({
+      url: `${base}/operations/${guide.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     }))
   ];
 }
