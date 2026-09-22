@@ -10,8 +10,24 @@ export const metadata = {
 };
 
 export default function ShopPage() {
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Sauna Whisks collection",
+    itemListElement: saunaWhisks.map((whisk, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: whisk.name,
+      url: `https://saunawhisks.com/shop/${whisk.slug}`
+    }))
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema).replace(/</g, "\\u003c") }}
+      />
       <Header />
       <section className="page-hero">
         <p className="section-kicker">THE COLLECTION</p>
