@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -20,7 +20,10 @@ export function EnquiryForm({
   countryField = false,
   messagePlaceholder = "Tell us what you are looking for...",
 }: EnquiryFormProps) {
-  const startedAt = useRef(Date.now());
+  const startedAt = useRef(0);
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
   const [status, setStatus] = useState<Status>("idle");
   const [statusMessage, setStatusMessage] = useState(
     "Your enquiry will be sent to info@SaunaWhisks.com."
