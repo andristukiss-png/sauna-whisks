@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { tradeSegments } from "@/lib/tradeSegments";
 
@@ -13,6 +14,7 @@ export default function TradePage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Trade" }]} />
       <section className="page-hero dark-page">
         <p className="section-kicker light">TRADE</p>
         <h1>Different businesses need different whisk programs.</h1>
