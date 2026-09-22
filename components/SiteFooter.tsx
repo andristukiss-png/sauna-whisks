@@ -37,6 +37,7 @@ export function SiteFooter() {
         <Link href="/site-map">Site map</Link>
         <Link href="/standards">Standards</Link>
         <Link href="/operations">Operations</Link>
+        <Link href="/claims">Claims standard</Link>
         <Link href="/sources">Sources</Link>
         <Link href="/faq">FAQ</Link>
         <Link href="/trade">Trade</Link>
