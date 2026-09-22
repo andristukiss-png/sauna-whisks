@@ -2,20 +2,19 @@
 
 import { FormEvent, useState } from "react";
 
+type Status = "idle" | "sending" | "success" | "error";
+
 export function EnquiryForm({
   subject = "SaunaWhisks.com enquiry",
 }: {
   subject?: string;
 }) {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [statusMessage, setStatusMessage] = useState(
+    "Your enquiry will be sent to info@SaunaWhisks.com."
+  );
 
-  function submitEnquiry(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const name = String(form.get("name") || "").trim();
-    const email = String(form.get("email") || "").trim();
-    const message = String(form.get("message") || "").trim();
-
+  function openMailFallback(name: string, email: string, message: string) {
     const body = [
       `Name: ${name}`,
       `Email: ${email}`,
@@ -24,14 +23,61 @@ export function EnquiryForm({
       message,
     ].join("\n");
 
-    const href =
+    window.location.href =
       "mailto:info@SaunaWhisks.com?subject=" +
       encodeURIComponent(subject) +
       "&body=" +
       encodeURIComponent(body);
+  }
 
-    setSent(true);
-    window.location.href = href;
+  async function submitEnquiry(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (status === "sending") return;
+
+    const element = event.currentTarget;
+    const form = new FormData(element);
+    const name = String(form.get("name") || "").trim();
+    const email = String(form.get("email") || "").trim();
+    const message = String(form.get("message") || "").trim();
+    const website = String(form.get("website") || "").trim();
+
+    setStatus("sending");
+    setStatusMessage("Sending your enquiry…");
+
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message, website, subject }),
+      });
+
+      const data = (await response.json()) as {
+        ok?: boolean;
+        error?: string;
+        fallback?: string;
+      };
+
+      if (response.ok && data.ok) {
+        setStatus("success");
+        setStatusMessage("Thank you. Your enquiry has been sent.");
+        element.reset();
+        return;
+      }
+
+      if (data.fallback === "mailto") {
+        setStatus("error");
+        setStatusMessage("Opening your email app as a fallback…");
+        openMailFallback(name, email, message);
+        return;
+      }
+
+      setStatus("error");
+      setStatusMessage(data.error || "Please try again.");
+    } catch {
+      setStatus("error");
+      setStatusMessage("Opening your email app as a fallback…");
+      openMailFallback(name, email, message);
+    }
   }
 
   return (
@@ -47,24 +93,42 @@ export function EnquiryForm({
         </label>
       </div>
 
+      <label className="enquiry-honeypot" aria-hidden="true">
+        <span>Website</span>
+        <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </label>
+
       <label>
         <span>Your enquiry</span>
         <textarea
           name="message"
           rows={7}
+          minLength={10}
+          maxLength={5000}
           placeholder="Tell us what you are looking for..."
           required
         />
       </label>
 
       <div className="enquiry-submit">
-        <button className="button button-dark" type="submit">
-          Send enquiry
+        <button
+          className="button button-dark"
+          type="submit"
+          disabled={status === "sending"}
+        >
+          {status === "sending" ? "Sending…" : "Send enquiry"}
         </button>
-        <p>
-          {sent
-            ? "Your email app should open with the enquiry prepared."
-            : "Your enquiry will be addressed to info@SaunaWhisks.com."}
+        <p
+          className={
+            status === "success"
+              ? "form-status success"
+              : status === "error"
+                ? "form-status error"
+                : "form-status"
+          }
+          aria-live="polite"
+        >
+          {statusMessage}
         </p>
       </div>
     </form>
