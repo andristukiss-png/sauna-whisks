@@ -1,7 +1,8 @@
 import { tradeSegments } from "@/lib/tradeSegments";
+import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
-  return Response.json({
+  return publicJson({
     status: "pre-launch",
     segments: tradeSegments.map((segment) => ({
       slug: segment.slug,
