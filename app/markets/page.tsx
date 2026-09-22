@@ -26,7 +26,7 @@ export default function MarketsPage() {
 
       <section className="market-grid">
         {markets.map((market, index) => (
-          <Link href={"/markets/" + market.slug} key={market.slug}>
+          <Link prefetch={false} href={"/markets/" + market.slug} key={market.slug}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <b>{market.status}</b>
             <h2>{market.name}</h2>
