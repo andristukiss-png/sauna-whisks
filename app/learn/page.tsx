@@ -42,7 +42,7 @@ export default function LearnPage() {
 
       <section className="learn-grid">
         {sections.map(([href, title, copy], index) => (
-          <Link href={href} key={href}>
+          <Link prefetch={false} href={href} key={href}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <h2>{title}</h2>
             <p>{copy}</p>
