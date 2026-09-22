@@ -19,6 +19,8 @@ const sections = [
   ["/faq", "FAQ", "Common buyer, care, shipping and trade questions."],
   ["/status", "Launch status", "Current pre-launch commercial status."],
   ["/templates", "Templates", "Supplier, product-data and trade-trial downloads."],
+  ["/editorial-policy", "Editorial policy", "Source hierarchy and how cultural, regulatory and commercial claims are separated."],
+  ["/corrections", "Corrections", "How to report a factual or product-data error."],
   ["/tools", "Tools", "Supplier, commercial, trade-demand and launch-readiness tools."]
 ];
 
