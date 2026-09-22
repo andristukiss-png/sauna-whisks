@@ -7,7 +7,8 @@ import { comparisons } from "@/lib/comparisons";
 export const metadata = {
   title: "Birch vs Oak vs Eucalyptus Sauna Whisks",
   description:
-    "Compare birch, oak and eucalyptus sauna whisks by feel, aroma, ritual character and who each material suits."
+    "Compare birch, oak and eucalyptus sauna whisks by feel, aroma, ritual character and who each material suits.",
+  alternates: { canonical: "/compare" }
 };
 
 const rows = [
