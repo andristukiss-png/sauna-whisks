@@ -90,7 +90,11 @@ export default function DiscoveryTrioPage() {
         <p className="section-kicker">BUNDLE ENQUIRY</p>
         <h2>Interested in the first release?</h2>
         <p>Ask about launch timing, shipping plans or trade quantities.</p>
-        <EnquiryForm subject="SaunaWhisks.com enquiry — Discovery Trio" />
+        <EnquiryForm
+          subject="SaunaWhisks.com enquiry — Discovery Trio"
+          topics={["Availability / launch timing", "Shipping / country", "Gift / personal use", "Wholesale / trade", "Product specification", "Other"]}
+          messagePlaceholder="Tell us what you would like to know about the Discovery Trio..."
+        />
       </section>
 
       <SiteFooter />
