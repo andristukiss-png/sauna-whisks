@@ -4,7 +4,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 export const metadata = {
   title: "Sourcing & Product Standards",
   description:
-    "The sourcing, botanical, harvest and product information SaunaWhisks.com intends to publish for every sauna whisk."
+    "The sourcing, botanical, harvest and product information SaunaWhisks.com intends to publish for every sauna whisk.",
+  alternates: { canonical: "/standards" }
 };
 
 const standards = [
