@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -47,7 +48,7 @@ export default function WholesalePage() {
       <section className="wholesale-segment-link">
         <p className="section-kicker">BY BUSINESS TYPE</p>
         <h2>See the trade plan for your business.</h2>
-        <a className="button button-dark" href="/trade">Explore trade segments</a>
+        <Link className="button button-dark" href="/trade">Explore trade segments</Link>
       </section>
 
       <section className="wholesale-grid">
