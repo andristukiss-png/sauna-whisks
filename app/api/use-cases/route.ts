@@ -1,0 +1,15 @@
+import { useCases } from "@/lib/useCases";
+import { publicJson } from "@/lib/publicApi";
+
+export function GET(){
+  return publicJson({
+    count:useCases.length,
+    useCases:useCases.map((item)=>({
+      slug:item.slug,
+      name:item.name,
+      summary:item.summary,
+      recommendation:item.recommendation,
+      url:`https://saunawhisks.com/use-cases/${item.slug}`
+    }))
+  });
+}
