@@ -85,3 +85,7 @@ export const markets: Market[] = [
 export function getMarket(slug: string) {
   return markets.find((market) => market.slug === slug);
 }
+
+export function getMarketPath(market: Pick<Market, "slug">) {
+  return market.slug === "united-states" ? "/usa" : `/markets/${market.slug}`;
+}
