@@ -9,6 +9,7 @@ type EnquiryFormProps = {
   subject?: string;
   topics?: string[];
   businessFields?: boolean;
+  countryField?: boolean;
   messagePlaceholder?: string;
 };
 
@@ -16,6 +17,7 @@ export function EnquiryForm({
   subject = "SaunaWhisks.com enquiry",
   topics,
   businessFields = false,
+  countryField = false,
   messagePlaceholder = "Tell us what you are looking for...",
 }: EnquiryFormProps) {
   const startedAt = useRef(Date.now());
@@ -123,6 +125,13 @@ export function EnquiryForm({
             <option value="">Choose a topic</option>
             {topics.map((topic) => <option value={topic} key={topic}>{topic}</option>)}
           </select>
+        </label>
+      ) : null}
+
+      {countryField && !businessFields ? (
+        <label>
+          <span>Country</span>
+          <input name="country" type="text" autoComplete="country-name" required />
         </label>
       ) : null}
 
