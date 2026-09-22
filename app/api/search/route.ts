@@ -1,4 +1,5 @@
 import { siteSearchItems } from "@/lib/siteSearch";
+import { noStoreJson } from "@/lib/publicApi";
 
 const allowedTypes = new Set(["Product", "Guide", "Market", "Trade", "Page"]);
 
@@ -11,7 +12,7 @@ export function GET(request: Request) {
     : siteSearchItems;
 
   if (!query) {
-    return Response.json({ query: "", type: type || "All", results: typed.slice(0, 18) });
+    return noStoreJson({ query: "", type: type || "All", results: typed.slice(0, 18) });
   }
 
   const results = typed
@@ -23,5 +24,5 @@ export function GET(request: Request) {
     )
     .slice(0, 40);
 
-  return Response.json({ query, type: type || "All", count: results.length, results });
+  return noStoreJson({ query, type: type || "All", count: results.length, results });
 }
