@@ -1,12 +1,13 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Product Claims Standard",
   description: "How SaunaWhisks.com separates observable product characteristics from unsupported health marketing.",
-  alternates: { canonical: "/claims" }
-};
+  canonical: "/claims",
+});
 
 export default function ClaimsPage() {
   return (
