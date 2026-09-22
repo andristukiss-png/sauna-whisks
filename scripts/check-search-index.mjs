@@ -47,6 +47,8 @@ for (const requirement of sharedRequirements) {
 if (!searchApi.includes("filterSiteSearchItems")) errors.push("Search API bypasses shared search helper.");
 if (!searchUi.includes("filterSiteSearchItems")) errors.push("Search UI bypasses shared search helper.");
 if (!searchUi.includes("maxLength={MAX_SEARCH_QUERY_LENGTH}")) errors.push("Search UI input is not bounded to shared query length.");
+const searchPage = fs.readFileSync("app/search/page.tsx", "utf8");
+if (!searchPage.includes("isSiteSearchFilter")) errors.push("Search page bypasses shared filter validation.");
 
 if (errors.length) {
   console.error("Search-index validation failed:");
