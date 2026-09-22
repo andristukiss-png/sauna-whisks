@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
@@ -33,6 +34,7 @@ export default function WholesalePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
       />
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Wholesale" }]} />
       <section className="page-hero dark-page">
         <p className="section-kicker light">TRADE / WHOLESALE</p>
         <h1>Whisks for businesses that use them every week.</h1>
