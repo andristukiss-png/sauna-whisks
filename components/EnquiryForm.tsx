@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -18,6 +18,7 @@ export function EnquiryForm({
   businessFields = false,
   messagePlaceholder = "Tell us what you are looking for...",
 }: EnquiryFormProps) {
+  const startedAt = useRef(Date.now());
   const [status, setStatus] = useState<Status>("idle");
   const [statusMessage, setStatusMessage] = useState(
     "Your enquiry will be sent to info@SaunaWhisks.com."
@@ -31,6 +32,7 @@ export function EnquiryForm({
       fields.business ? `Business: ${fields.business}` : "",
       fields.country ? `Country: ${fields.country}` : "",
       fields.quantity ? `Approx. monthly requirement: ${fields.quantity}` : "",
+      fields.pageUrl ? `Page: ${fields.pageUrl}` : "",
       "",
       "Enquiry:",
       fields.message,
@@ -58,6 +60,8 @@ export function EnquiryForm({
       business: String(form.get("business") || "").trim(),
       country: String(form.get("country") || "").trim(),
       quantity: String(form.get("quantity") || "").trim(),
+      pageUrl: window.location.href,
+      startedAt: String(startedAt.current),
     };
 
     setStatus("sending");
