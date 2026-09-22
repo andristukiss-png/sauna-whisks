@@ -274,3 +274,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 /* Editorial trust metadata */
 .article-meta-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px}.article-meta-row span{font-size:9px;letter-spacing:.1em;text-transform:uppercase;opacity:.58}.source-policy-links{padding:32px 7vw 55px;display:flex;gap:24px;flex-wrap:wrap}.source-policy-links a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
 @media(max-width:560px){.source-policy-links{padding-left:6vw;padding-right:6vw}}
+
+
+/* Company / press trust resources */
+.press-facts{padding:0 7vw 110px}.press-facts>div{display:grid;grid-template-columns:180px 1fr;gap:25px;padding:20px 0;border-bottom:1px solid var(--line)}.press-facts>div:first-child{border-top:1px solid var(--line)}.press-facts span{font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.55}.press-facts p{font:17px/1.5 Georgia,serif;margin:0}
+.about-links,.partner-resource-links{padding:36px 7vw 60px;display:flex;gap:24px;flex-wrap:wrap;border-top:1px solid var(--line)}.about-links a,.partner-resource-links a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
+@media(max-width:560px){.press-facts,.about-links,.partner-resource-links{padding-left:6vw;padding-right:6vw}.press-facts>div{grid-template-columns:1fr;gap:8px}}
