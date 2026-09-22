@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articles } from "@/lib/articles";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sources",
   description: "Primary and supporting sources referenced across the SaunaWhisks.com knowledge library.",
-  alternates: { canonical: "/sources" }
-};
+  canonical: "/sources",
+});
 
 export default function SourcesPage() {
   const unique = Array.from(
