@@ -15,6 +15,7 @@ export function SiteFooter() {
         <Link href="/traditions">Traditions</Link>
         <Link href="/journal">Journal</Link>
         <Link href="/glossary">Glossary</Link>
+        <Link href="/usa">USA</Link>
       </div>
       <div>
         <b>Company</b>
