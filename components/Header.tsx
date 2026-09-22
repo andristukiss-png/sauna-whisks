@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { LeafMark } from "./LeafMark";
 
+const links = [
+  ["/shop", "Whisks"],
+  ["/traditions", "Traditions"],
+  ["/journal", "Journal"],
+  ["/about", "About"],
+  ["/wholesale", "Wholesale"]
+];
+
 export function Header() {
   return (
     <header className="site-header">
@@ -11,14 +19,21 @@ export function Header() {
           <small>LATVIA · BALTIC TRADITION</small>
         </span>
       </Link>
-      <nav aria-label="Primary navigation">
-        <Link href="/shop">Whisks</Link>
-        <Link href="/traditions">Traditions</Link>
-        <Link href="/journal">Journal</Link>
-        <Link href="/about">About</Link>
-        <Link href="/wholesale">Wholesale</Link>
+
+      <nav className="desktop-nav" aria-label="Primary navigation">
+        {links.map(([href, label]) => <Link href={href} key={href}>{label}</Link>)}
       </nav>
+
       <Link href="/shop" className="header-cta">Explore whisks</Link>
+
+      <details className="mobile-menu">
+        <summary aria-label="Open navigation">Menu</summary>
+        <div className="mobile-menu-panel">
+          {links.map(([href, label]) => <Link href={href} key={href}>{label}</Link>)}
+          <Link href="/faq">FAQ</Link>
+          <Link href="/contact">Contact</Link>
+        </div>
+      </details>
     </header>
   );
 }
