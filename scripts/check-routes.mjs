@@ -58,6 +58,18 @@ for (const route of expectedApiRoutes) {
   if (!fs.existsSync(route)) errors.push(`Missing API route: ${route}`);
 }
 
+const expectedStaticToolPages = [
+  "app/tools/page.tsx",
+  "app/tools/supplier-scorecard/page.tsx",
+  "app/tools/landed-cost/page.tsx",
+  "app/tools/trade-demand/page.tsx",
+  "app/tools/launch-readiness/page.tsx",
+];
+
+for (const route of expectedStaticToolPages) {
+  if (!fs.existsSync(route)) errors.push(`Missing tool page: ${route}`);
+}
+
 const expectedDynamicRoutes = [
   "app/journal/[slug]/page.tsx",
   "app/shop/[slug]/page.tsx",
