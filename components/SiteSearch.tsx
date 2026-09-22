@@ -58,7 +58,7 @@ export function SiteSearch({
         />
       </label>
 
-      <div className="search-filter-row" aria-label="Filter search results">
+      <div className="search-filter-row" role="group" aria-label="Filter search results">
         {filters.map((filter) => (
           <button
             type="button"
