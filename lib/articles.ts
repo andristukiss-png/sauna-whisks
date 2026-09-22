@@ -229,8 +229,7 @@ export const articles: Article[] = [
       { label: "Etsy — Sauna brooms marketplace", url: "https://www.etsy.com/market/sauna_brooms" },
       { label: "Holy Banya — Sauna whisks collection", url: "https://holybanya.com/collections/sauna-whisks" }
     ]
-  }
-  ,
+  },
   {
     slug: "how-to-use-a-sauna-whisk",
     title: "How to use a sauna whisk",
@@ -272,8 +271,149 @@ export const articles: Article[] = [
       { label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" },
       { label: "Latvia.eu — Pirts, the Latvian sauna", url: "https://www.latvia.eu/sauna/" }
     ]
+  },
+  {
+    slug: "fresh-vs-dried-sauna-whisks",
+    title: "Fresh vs dried sauna whisks",
+    eyebrow: "CONDITION GUIDE",
+    description:
+      "Fresh and dried whisks can both work well, but they differ in seasonality, storage, preparation and logistics.",
+    readTime: "6 min",
+    sections: [
+      {
+        heading: "Fresh is the traditional reference",
+        paragraphs: [
+          "The Finnish Sauna Society's quality guidance describes traditional fresh whisks as no more than two days old and recommends storing them in a cool, dry and airy place.",
+          "Freshness gives the leaves flexibility and aroma without the rehydration step required by a dried whisk."
+        ]
+      },
+      {
+        heading: "Dried is practical year-round",
+        paragraphs: [
+          "Drying makes seasonal plant material easier to store and distribute outside the harvest period. The same Finnish guidance describes hanging whisks in a cool, dark, well-ventilated place for drying.",
+          "A dried whisk needs preparation before use. The guidance describes warm-water immersion for approximately 1.5 to 2 hours."
+        ]
+      },
+      {
+        heading: "Neither format is automatically better",
+        paragraphs: [
+          "Fresh makes sense close to the source and in season. Dried makes more sense for year-round international ecommerce.",
+          "Quality still depends on branch selection, tying, drying, storage and how the whisk is prepared before use."
+        ]
+      }
+    ],
+    sources: [
+      { label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }
+    ]
+  },
+  {
+    slug: "how-to-store-sauna-whisks",
+    title: "How to store sauna whisks",
+    eyebrow: "CARE & STORAGE",
+    description:
+      "Storage matters for leaf condition, flexibility and aroma. Here is the conservative approach for fresh, dried and frozen whisks.",
+    readTime: "5 min",
+    sections: [
+      {
+        heading: "Fresh whisks",
+        paragraphs: [
+          "Traditional fresh whisks should be kept cool, dry and airy rather than sealed in a hot or damp place. The Finnish Sauna Society specifically warns against conditions that allow the whisk to heat or 'burn' in storage.",
+          "Fresh whisks are short-lived by nature, so storage is about protecting them briefly rather than turning them into a long-shelf-life product."
+        ]
+      },
+      {
+        heading: "Dried whisks",
+        paragraphs: [
+          "For drying, the Finnish guidance recommends a cool, dark location with good ventilation. Once dried, the same priorities remain useful: protect the whisk from moisture, excess heat and crushing.",
+          "Do not store a rehydrated whisk while it is still wet and compressed in a closed package."
+        ]
+      },
+      {
+        heading: "Frozen whisks",
+        paragraphs: [
+          "The Finnish Sauna Society also describes freezing as a preservation method: the fresh whisk is bagged, excess air is removed, and the package is frozen.",
+          "Their guidance suggests thawing at room temperature for approximately 1.5 to 2 hours before use."
+        ]
+      }
+    ],
+    sources: [
+      { label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }
+    ]
+  },
+  {
+    slug: "how-long-does-a-sauna-whisk-last",
+    title: "How long does a sauna whisk last?",
+    eyebrow: "CARE & REUSE",
+    description:
+      "There is no honest universal number. Lifespan depends on whether the whisk is fresh or dried, how it is prepared, and how intensely it is used.",
+    readTime: "5 min",
+    sections: [
+      {
+        heading: "Avoid fixed promises",
+        paragraphs: [
+          "A natural whisk does not behave like a manufactured brush with a predictable service life. Leaf retention varies with species, branch quality, harvest timing, preservation and preparation.",
+          "For that reason, SaunaWhisks.com will not promise a fixed number of sessions for every product."
+        ]
+      },
+      {
+        heading: "Preparation changes lifespan",
+        paragraphs: [
+          "A brittle dried whisk that is rushed into use is more likely to shed or break. Gradual rehydration and warming help restore flexibility before contact with the body.",
+          "The Finnish Sauna Society also warns against hot stones and hot benches, both of which can damage the whisk."
+        ]
+      },
+      {
+        heading: "Judge the actual condition",
+        paragraphs: [
+          "A whisk is nearing the end of useful life when leaves are heavily depleted, branches become brittle, tying loosens or the tool no longer feels comfortable to use.",
+          "Commercial product pages should eventually include product-specific reuse guidance based on real testing rather than generic claims."
+        ]
+      }
+    ],
+    sources: [
+      { label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }
+    ]
+  },
+  {
+    slug: "why-sauna-whisk-leaves-fall-off",
+    title: "Why do sauna whisk leaves fall off?",
+    eyebrow: "TROUBLESHOOTING",
+    description:
+      "Some shedding is natural. Heavy leaf loss can point to preservation, storage, preparation or handling problems.",
+    readTime: "6 min",
+    sections: [
+      {
+        heading: "A natural product will shed",
+        paragraphs: [
+          "Leaves are not permanently bonded to the branches, so some loss during soaking and use is normal. The useful question is whether shedding is moderate or excessive.",
+          "Natural variation means two apparently similar whisks can behave differently."
+        ]
+      },
+      {
+        heading: "Drying and storage matter",
+        paragraphs: [
+          "Whisks dried or stored in poor conditions can become fragile. The Finnish Sauna Society recommends cool, dark, well-ventilated conditions for drying and cool, dry, airy storage for fresh whisks.",
+          "Excess heat, moisture and compression can all work against leaf condition."
+        ]
+      },
+      {
+        heading: "Preparation can protect the leaves",
+        paragraphs: [
+          "Dried whisks need time to rehydrate. The Finnish guidance describes warm-water immersion for approximately 1.5 to 2 hours before use.",
+          "It also warns against placing a whisk on hot stones or leaving it on a hot sauna bench."
+        ]
+      },
+      {
+        heading: "This should become a quality metric",
+        paragraphs: [
+          "Leaf retention is one of the product characteristics SaunaWhisks.com intends to test across suppliers. A premium whisk should be evaluated not only by appearance when dry but also by how it performs after correct preparation."
+        ]
+      }
+    ],
+    sources: [
+      { label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }
+    ]
   }
-
 ];
 
 export function getArticle(slug: string) {
