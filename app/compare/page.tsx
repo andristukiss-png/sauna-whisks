@@ -55,7 +55,7 @@ export default function ComparePage() {
             <span>02</span>
             <h2>Choose oak for body</h2>
             <p>Oak is broader, denser and usually better suited to people who want a firmer tool.</p>
-            <Link className="text-link" href="/shop/latvian-oak">View Latvian Oak →</Link>
+            <Link className="text-link" href="/shop/baltic-oak">View Baltic Oak →</Link>
           </article>
           <article>
             <span>03</span>
