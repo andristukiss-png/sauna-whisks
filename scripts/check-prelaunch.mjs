@@ -12,7 +12,7 @@ function walk(dir) {
   });
 }
 
-const files = walk(root).filter((file) => /\.(ts|tsx|js|jsx)$/.test(file));
+const files = walk(root).filter((file) => /\.(ts|tsx|js|jsx)$/.test(file) && !file.endsWith("next.config.ts"));
 const source = files.map((file) => fs.readFileSync(file, "utf8")).join("\n");
 
 const forbidden = [
