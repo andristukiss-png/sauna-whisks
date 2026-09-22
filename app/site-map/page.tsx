@@ -62,25 +62,25 @@ export default function SiteMapPage() {
         {staticGroups.map((group) => (
           <div key={group.title}>
             <h2>{group.title}</h2>
-            {group.links.map(([href, label]) => <Link href={href} key={href}>{label} →</Link>)}
+            {group.links.map(([href, label]) => <Link prefetch={false} href={href} key={href}>{label} →</Link>)}
           </div>
         ))}
         <div>
           <h2>Products</h2>
-          {saunaWhisks.map((product) => <Link href={"/shop/" + product.slug} key={product.slug}>{product.name} →</Link>)}
-          <Link href="/shop/discovery-trio">Discovery Trio →</Link>
+          {saunaWhisks.map((product) => <Link prefetch={false} href={"/shop/" + product.slug} key={product.slug}>{product.name} →</Link>)}
+          <Link prefetch={false} href="/shop/discovery-trio">Discovery Trio →</Link>
         </div>
         <div>
           <h2>Markets</h2>
-          {markets.map((market) => <Link href={"/markets/" + market.slug} key={market.slug}>{market.name} →</Link>)}
+          {markets.map((market) => <Link prefetch={false} href={"/markets/" + market.slug} key={market.slug}>{market.name} →</Link>)}
         </div>
         <div>
           <h2>Trade</h2>
-          {tradeSegments.map((segment) => <Link href={"/trade/" + segment.slug} key={segment.slug}>{segment.name} →</Link>)}
+          {tradeSegments.map((segment) => <Link prefetch={false} href={"/trade/" + segment.slug} key={segment.slug}>{segment.name} →</Link>)}
         </div>
         <div className="sitemap-journal">
           <h2>Journal</h2>
-          {articles.map((article) => <Link href={"/journal/" + article.slug} key={article.slug}>{article.title} →</Link>)}
+          {articles.map((article) => <Link prefetch={false} href={"/journal/" + article.slug} key={article.slug}>{article.title} →</Link>)}
         </div>
       </section>
 
