@@ -98,3 +98,8 @@ footer{padding:60px 6vw;background:#142219;color:#e9ece4;display:grid;grid-templ
 @media(max-width:560px){.shop-bundle-feature{margin-left:0;margin-right:0;padding:42px 6vw}.shop-bundle-feature h2,.trio-breakdown h2{font-size:42px}.bundle-detail-copy,.trio-breakdown{padding-left:6vw;padding-right:6vw}.bundle-detail-copy h1{font-size:52px}.bundle-detail-art{padding:25px}.bundle-detail-art>div{height:350px}}
 
 .preparation-links{display:flex;align-items:center;gap:28px;flex-wrap:wrap}.enquiry-status-wrap{display:grid;gap:6px}.enquiry-status-wrap small{font-size:9px;line-height:1.45;opacity:.55}.enquiry-status-wrap small a{text-decoration:underline;text-underline-offset:2px}
+
+
+/* Shipping status */
+.shipping-status{padding:0 7vw 110px}.shipping-row{display:grid;grid-template-columns:60px 240px 120px 1fr;gap:28px;align-items:start;padding:28px 0;border-bottom:1px solid var(--line)}.shipping-row:first-child{border-top:1px solid var(--line)}.shipping-row>span{font-size:9px;letter-spacing:.14em;opacity:.5}.shipping-row h2{font:400 25px Georgia,serif;margin:0}.shipping-row b{font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding-top:6px}.shipping-row p{font:15px/1.6 Georgia,serif;margin:0;max-width:680px}
+@media(max-width:760px){.shipping-row{grid-template-columns:40px 1fr}.shipping-row b,.shipping-row p{grid-column:2}.shipping-status{padding-left:6vw;padding-right:6vw}}
