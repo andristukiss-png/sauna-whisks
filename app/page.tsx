@@ -51,7 +51,7 @@ export default function Home() {
             <span>TRADE SUPPLY</span>
           </div>
         </div>
-        <div className="hero-art" aria-label="Abstract botanical sauna whisk illustration">
+        <div className="hero-art" role="img" aria-label="Abstract botanical sauna whisk illustration">
           <div className="steam steam-one" />
           <div className="steam steam-two" />
           <div className="bundle">
