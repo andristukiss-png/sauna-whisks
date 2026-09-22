@@ -1,8 +1,24 @@
+import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import Link from "next/link";
 import { LeafMark } from "@/components/LeafMark";
 import { SiteFooter } from "@/components/SiteFooter";
 import { saunaWhisks } from "@/lib/products";
+
+export const metadata: Metadata = {
+  openGraph: {
+    title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
+    description: "Traditional sauna whisks and the living sauna traditions behind them.",
+    url: "https://saunawhisks.com",
+    siteName: "Sauna Whisks",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
+    description: "Traditional sauna whisks and the living sauna traditions behind them.",
+  },
+};
 
 const products = saunaWhisks;
 
