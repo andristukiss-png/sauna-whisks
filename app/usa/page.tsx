@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
+import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const metadata = {
   title: "Sauna Whisks USA — Planned US Launch",
@@ -20,9 +21,7 @@ export default function USAPage() {
           and bundles that make international logistics sensible. US orders are not open yet.
         </p>
         <div className="usa-actions">
-          <a className="button button-dark" href="mailto:info@saunawhisks.com?subject=US%20launch%20waitlist">
-            Join the US launch list
-          </a>
+          <a className="button button-dark" href="#usa-enquiry">Send US enquiry</a>
           <Link className="text-link" href="/standards">Read our product standard →</Link>
         </div>
       </section>
@@ -72,15 +71,14 @@ export default function USAPage() {
         </div>
       </section>
 
-      <section className="trade-contact">
-        <p className="section-kicker">US TRADE INTEREST</p>
-        <h2>Sauna clubs, builders and retailers.</h2>
+      <section className="trade-contact" id="usa-enquiry">
+        <p className="section-kicker">US ENQUIRIES</p>
+        <h2>Tell us what you are looking for.</h2>
         <p>
-          If you operate a US sauna business and want trade packs or recurring supply, tell us your location and approximate monthly requirement.
+          Home sauna owner, retailer, sauna club, builder or simply interested in the US launch —
+          send us a message below.
         </p>
-        <a className="button button-dark" href="mailto:info@saunawhisks.com?subject=US%20trade%20interest">
-          Contact trade
-        </a>
+        <EnquiryForm subject="SaunaWhisks.com USA enquiry" />
       </section>
 
       <SiteFooter />
