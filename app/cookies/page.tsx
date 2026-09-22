@@ -1,15 +1,18 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
   title: "Cookies",
-  description: "Cookie information for SaunaWhisks.com."
+  description: "Cookie information for SaunaWhisks.com.",
+  alternates: { canonical: "/cookies" }
 };
 
 export default function CookiesPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Cookies" }]} />
       <article className="legal-page">
         <p className="section-kicker">COOKIES</p>
         <h1>Minimal by default</h1>
