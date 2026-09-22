@@ -78,11 +78,11 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <div className="bundle-callout">
+        <Link href="/shop/discovery-trio" className="bundle-callout bundle-link">
           <div><span>01 / DISCOVERY</span><h3>Three forests.<br />One ritual.</h3></div>
           <p>Birch + oak + eucalyptus. Designed as the natural first order for anyone learning the differences between sauna whisks.</p>
-          <strong>$69 <small>planned launch price</small></strong>
-        </div>
+          <strong>$69 <small>planned launch price · view bundle →</small></strong>
+        </Link>
       </section>
 
       <section className="guide" id="guide">
@@ -129,7 +129,7 @@ export default function Home() {
         <p className="section-kicker light">TRADE / WHOLESALE</p>
         <h2>For saunas that use<br />whisks every week.</h2>
         <p>Trade packs and recurring supply for public saunas, bathhouses, hotels, wellness clubs, retailers and sauna builders.</p>
-        <a href="mailto:trade@saunawhisks.com" className="button button-light">Discuss trade supply</a>
+        <Link href="/wholesale" className="button button-light">Discuss trade supply</Link>
       </section>
 
       <SiteFooter />
