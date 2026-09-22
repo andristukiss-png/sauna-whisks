@@ -46,16 +46,30 @@ export function WhiskFinder() {
       <div className="finder-question">
         <span>01</span>
         <h2>How experienced are you?</h2>
-        <div>
-          <button type="button" className={experience === "new" ? "selected" : ""} onClick={() => setExperience("new")}>New to whisks</button>
-          <button type="button" className={experience === "experienced" ? "selected" : ""} onClick={() => setExperience("experienced")}>Used them before</button>
+        <div role="group" aria-label="Sauna whisk experience">
+          <button
+            type="button"
+            aria-pressed={experience === "new"}
+            className={experience === "new" ? "selected" : ""}
+            onClick={() => setExperience("new")}
+          >
+            New to whisks
+          </button>
+          <button
+            type="button"
+            aria-pressed={experience === "experienced"}
+            className={experience === "experienced" ? "selected" : ""}
+            onClick={() => setExperience("experienced")}
+          >
+            Used them before
+          </button>
         </div>
       </div>
 
       <div className="finder-question">
         <span>02</span>
         <h2>What matters most?</h2>
-        <div>
+        <div role="group" aria-label="Preferred whisk character">
           {[
             ["soft", "Soft / traditional"],
             ["firm", "Firm / substantial"],
@@ -65,6 +79,7 @@ export function WhiskFinder() {
             <button
               type="button"
               key={value}
+              aria-pressed={feel === value}
               className={feel === value ? "selected" : ""}
               onClick={() => setFeel(value as Feel)}
             >
@@ -77,13 +92,27 @@ export function WhiskFinder() {
       <div className="finder-question">
         <span>03</span>
         <h2>Do you want to compare materials?</h2>
-        <div>
-          <button type="button" className={compare === "yes" ? "selected" : ""} onClick={() => setCompare("yes")}>Yes</button>
-          <button type="button" className={compare === "no" ? "selected" : ""} onClick={() => setCompare("no")}>No</button>
+        <div role="group" aria-label="Compare materials">
+          <button
+            type="button"
+            aria-pressed={compare === "yes"}
+            className={compare === "yes" ? "selected" : ""}
+            onClick={() => setCompare("yes")}
+          >
+            Yes
+          </button>
+          <button
+            type="button"
+            aria-pressed={compare === "no"}
+            className={compare === "no" ? "selected" : ""}
+            onClick={() => setCompare("no")}
+          >
+            No
+          </button>
         </div>
       </div>
 
-      <div className="finder-result" aria-live="polite">
+      <div className="finder-result" role="status" aria-live="polite">
         <p>WORKING RECOMMENDATION</p>
         <h2>{result.name}</h2>
         <span>{result.copy}</span>
