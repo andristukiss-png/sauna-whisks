@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { articles, getArticle } from "@/lib/articles";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ArticleTools } from "@/components/ArticleTools";
+import { editorialReviewDate } from "@/lib/editorial";
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
@@ -41,7 +42,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       name: "Sauna Whisks",
       url: "https://saunawhisks.com"
     },
-    citation: article.sources.map((source) => source.url)
+    citation: article.sources.map((source) => source.url),
+    dateModified: editorialReviewDate
   };
 
   const sameTopic = articles.filter((candidate) => candidate.slug !== article.slug && candidate.eyebrow === article.eyebrow);
@@ -64,7 +66,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <p className="section-kicker">{article.eyebrow}</p>
           <h1>{article.title}</h1>
           <p className="article-deck">{article.description}</p>
-          <span>{article.readTime} read</span>
+          <div className="article-meta-row">
+            <span>{article.readTime} read</span>
+            <span><time dateTime={editorialReviewDate}>Reviewed Sep 22, 2026</time></span>
+            <span>{article.sources.length} source{article.sources.length === 1 ? "" : "s"}</span>
+          </div>
           <ArticleTools />
         </header>
 
