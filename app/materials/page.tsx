@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
@@ -23,6 +24,7 @@ export default function MaterialsPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Materials" }]} />
       <section className="page-hero">
         <p className="section-kicker">MATERIALS</p>
         <h1>The branch changes the ritual.</h1>
