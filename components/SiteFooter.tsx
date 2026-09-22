@@ -29,6 +29,8 @@ export function SiteFooter() {
         <b>Company</b>
         <Link href="/about">About</Link>
         <Link href="/standards">Standards</Link>
+        <Link href="/operations">Operations</Link>
+        <Link href="/sources">Sources</Link>
         <Link href="/faq">FAQ</Link>
         <Link href="/trade">Trade</Link>
         <Link href="/wholesale">Wholesale</Link>
