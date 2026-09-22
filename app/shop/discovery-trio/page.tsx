@@ -14,7 +14,7 @@ export const metadata = {
 
 const items = [
   ["Baltic Birch", "Soft, aromatic, traditional"],
-  ["Latvian Oak", "Firm, broad-leafed, substantial"],
+  ["Baltic Oak", "Firm, broad-leafed, substantial"],
   ["Eucalyptus", "Aromatic, cooling, vivid"]
 ];
 
