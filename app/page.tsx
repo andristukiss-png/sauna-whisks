@@ -121,7 +121,7 @@ export default function Home() {
           <h2>Built close to<br />the source.</h2>
           <p>SaunaWhisks.com is being built in Latvia, where sauna culture is not a trend imported from somewhere else. Our aim is to work with experienced Baltic producers and present their materials with better documentation, consistency and international service.</p>
           <p className="fineprint">We will publish producer, harvest and botanical details only when verified. No invented heritage stories; no anonymous commodity bundles.</p>
-          <Link href="/about" className="text-link">Our sourcing standard →</Link>
+          <Link href="/standards" className="text-link">Our sourcing standard →</Link>
         </div>
       </section>
 
