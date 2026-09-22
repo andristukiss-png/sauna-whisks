@@ -68,7 +68,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     term: "Oak",
     definition: "A broad-leafed whisk material that generally creates a denser, firmer tool than birch.",
     context: "Oak is commonly associated with banya use and is also found across Baltic sauna-whisk assortments.",
-    related: [{ label: "Latvian Oak", href: "/shop/latvian-oak" }, { label: "Compare materials", href: "/compare" }]
+    related: [{ label: "Baltic Oak", href: "/shop/baltic-oak" }, { label: "Compare materials", href: "/compare" }]
   },
   {
     slug: "eucalyptus",
