@@ -1,7 +1,8 @@
 import { articles } from "@/lib/articles";
+import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
-  return Response.json({
+  return publicJson({
     version: "https://jsonfeed.org/version/1.1",
     title: "Sauna Whisks Journal",
     home_page_url: "https://saunawhisks.com/journal",
