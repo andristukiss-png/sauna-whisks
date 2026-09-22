@@ -194,6 +194,7 @@ export function EnquiryForm({
                   ? "form-status error"
                   : "form-status"
             }
+            role="status"
             aria-live="polite"
           >
             {statusMessage}
