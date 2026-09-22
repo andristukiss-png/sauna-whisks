@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
@@ -26,6 +27,7 @@ export default function LearnPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Learn" }]} />
       <section className="page-hero">
         <p className="section-kicker">LEARN</p>
         <h1>Understand the whisk before you buy it.</h1>
