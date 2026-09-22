@@ -5,7 +5,8 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 export const metadata = {
   title: "Shipping & Availability",
   description:
-    "Current pre-launch shipping and availability status for SaunaWhisks.com."
+    "Current pre-launch shipping and availability status for SaunaWhisks.com.",
+  alternates: { canonical: "/shipping" }
 };
 
 const markets = [
