@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -12,11 +13,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const topic = getFAQTopic(slug);
   if (!topic) return {};
-  return {
+  return pageMetadata({
     title: `${topic.title} FAQ`,
     description: topic.description,
-    alternates: { canonical: `/faq/topic/${topic.slug}` }
-  };
+    canonical: `/faq/topic/${topic.slug}`,
+  });
 }
 
 export default async function FAQTopicPage({ params }: { params: Promise<{ slug: string }> }) {
