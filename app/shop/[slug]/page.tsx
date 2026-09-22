@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -15,11 +16,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const whisk = getWhisk(slug);
   if (!whisk) return {};
-  return {
+  return pageMetadata({
     title: whisk.name,
     description: whisk.description,
-    alternates: { canonical: `/shop/${whisk.slug}` }
-  };
+    canonical: `/shop/${whisk.slug}`,
+  });
 }
 
 export default async function WhiskPage({ params }: { params: Promise<{ slug: string }> }) {
