@@ -15,9 +15,6 @@ export const metadata: Metadata = {
   publisher: "Sauna Whisks",
   category: "Sauna and wellness",
   openGraph: {
-    title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
-    description: "Traditional sauna whisks and the living sauna traditions behind them.",
-    url: "https://saunawhisks.com",
     siteName: "Sauna Whisks",
     type: "website",
   },
@@ -28,9 +25,7 @@ export const metadata: Metadata = {
     }
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
-    description: "Traditional sauna whisks and the living sauna traditions behind them."
+    card: "summary_large_image"
   },
 };
 
