@@ -6,7 +6,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getMaterialKnowledge, materialKnowledge } from "@/lib/materialKnowledge";
 
-export const dynamicParams = false;\n\nexport function generateStaticParams() {
+export const dynamicParams = false;
+
+export function generateStaticParams() {
   return materialKnowledge.map((item) => ({ slug: item.slug }));
 }
 
