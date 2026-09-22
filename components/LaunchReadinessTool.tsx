@@ -18,7 +18,7 @@ export function LaunchReadinessTool(){
 
   return <div className="readiness-tool">
     <aside>
-      <b aria-live="polite">{pct}%</b>
+      <b role="status" aria-live="polite">{pct}%</b>
       <p>{done}/{flat.length} launch gates complete</p>
       <small>Commercial checkout should remain disabled until critical gates are genuinely complete.</small>
       <button type="button" onClick={()=>setChecked({})}>Reset</button>
