@@ -35,6 +35,7 @@ export default function SuppliersPage() {
         <a href="/suppliers/requirements">Supplier requirements →</a>
         <a href="/suppliers/sample-evaluation">Sample evaluation →</a>
         <a href="/templates">Templates & downloads →</a>
+        <a href="/tools/supplier-scorecard">Supplier scorecard →</a>
       </section>
 
       <section className="trade-contact">
