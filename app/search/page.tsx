@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteSearch } from "@/components/SiteSearch";
 import { siteSearchItems } from "@/lib/siteSearch";
@@ -13,6 +14,7 @@ export default function SearchPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Search" }]} />
       <section className="page-hero compact-hero">
         <p className="section-kicker">SEARCH</p>
         <h1>Find the branch you need.</h1>
