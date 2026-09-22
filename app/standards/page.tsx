@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
@@ -23,6 +24,7 @@ export default function StandardsPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Standards" }]} />
       <section className="page-hero">
         <p className="section-kicker">OUR STANDARD</p>
         <h1>Branches need provenance too.</h1>
