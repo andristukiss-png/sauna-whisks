@@ -18,7 +18,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/usa",
     "/compare",
-    "/privacy"
+    "/privacy",
+    "/shipping"
   ];
 
   return [
