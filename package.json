@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "validate": "node scripts/check-content.mjs && npm run validate:routes && npm run validate:prelaunch && npm run validate:claims && npm run validate:articles && npm run validate:products && npm run validate:sitemap && npm run validate:metadata && npm run validate:links && npm run validate:ui",
+    "validate": "node scripts/check-content.mjs && npm run validate:routes && npm run validate:prelaunch && npm run validate:claims && npm run validate:articles && npm run validate:products && npm run validate:sitemap && npm run validate:metadata && npm run validate:links && npm run validate:ui && npm run validate:docs && npm run validate:env && npm run validate:redirects && npm run validate:search && npm run validate:api && npm run validate:security",
     "check": "npm run validate && npm run lint && npm run typecheck && npm run build",
     "validate:routes": "node scripts/check-routes.mjs",
     "validate:prelaunch": "node scripts/check-prelaunch.mjs",
@@ -18,7 +18,13 @@
     "validate:sitemap": "node scripts/check-sitemap.mjs",
     "validate:metadata": "node scripts/check-metadata.mjs",
     "validate:links": "node scripts/check-internal-links.mjs",
-    "validate:ui": "node scripts/check-ui.mjs"
+    "validate:ui": "node scripts/check-ui.mjs",
+    "validate:docs": "node scripts/check-docs.mjs",
+    "validate:env": "node scripts/check-env.mjs",
+    "validate:redirects": "node scripts/check-redirects.mjs",
+    "validate:search": "node scripts/check-search-index.mjs",
+    "validate:api": "node scripts/check-api-policy.mjs",
+    "validate:security": "node scripts/check-security.mjs"
   },
   "dependencies": {
     "next": "^16.0.0",
