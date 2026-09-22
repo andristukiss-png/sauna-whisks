@@ -6,7 +6,8 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 export const metadata = {
   title: "Sauna Whisks USA — Planned US Launch",
   description:
-    "SaunaWhisks.com is preparing a US launch for Baltic sauna whisks. Learn about the planned assortment, product standards and import-compliance approach."
+    "SaunaWhisks.com is preparing a US launch for Baltic sauna whisks. Learn about the planned assortment, product standards and import-compliance approach.",
+  alternates: { canonical: "/usa" }
 };
 
 export default function USAPage() {
