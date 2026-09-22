@@ -19,26 +19,50 @@ function validEmail(value: string) {
 }
 
 function cleanOptional(value: string | undefined, max = 200) {
-  return (value || "").replace(/[\r\n]+/g, " ").trim().slice(0, max);
+  return (value || "").replace(/[\r\n\u0000]+/g, " ").trim().slice(0, max);
 }
 
 export async function POST(request: Request) {
+  const requestId = crypto.randomUUID();
+
+  const reply = (
+    body: Record<string, unknown>,
+    status = 200
+  ) =>
+    NextResponse.json(
+      { ...body, requestId },
+      {
+        status,
+        headers: {
+          "Cache-Control": "no-store, max-age=0",
+          "X-Request-ID": requestId,
+        },
+      }
+    );
+
   try {
+    const requestUrl = new URL(request.url);
+    const origin = request.headers.get("origin");
+
+    if (origin && origin !== requestUrl.origin) {
+      return reply({ error: "Unsupported origin." }, 403);
+    }
+
     const contentType = request.headers.get("content-type") || "";
     if (!contentType.includes("application/json")) {
-      return NextResponse.json({ error: "Unsupported request." }, { status: 415 });
+      return reply({ error: "Unsupported request." }, 415);
     }
 
     const contentLength = Number(request.headers.get("content-length") || "0");
     if (contentLength > 20_000) {
-      return NextResponse.json({ error: "Request too large." }, { status: 413 });
+      return reply({ error: "Request too large." }, 413);
     }
 
     const body = (await request.json()) as EnquiryPayload;
 
     const name = cleanOptional(body.name, 120);
     const email = cleanOptional(body.email, 200);
-    const message = (body.message || "").trim();
+    const message = (body.message || "").replace(/\u0000/g, "").trim();
     const subject = cleanOptional(body.subject || "SaunaWhisks.com enquiry", 160);
     const website = cleanOptional(body.website, 200);
     const topic = cleanOptional(body.topic, 120);
@@ -49,25 +73,25 @@ export async function POST(request: Request) {
     const startedAt = Number(body.startedAt || "0");
 
     if (website) {
-      return NextResponse.json({ ok: true });
+      return reply({ ok: true });
     }
 
     if (startedAt && Date.now() - startedAt < 1800) {
-      return NextResponse.json({ ok: true });
+      return reply({ ok: true });
     }
 
     if (name.length < 2) {
-      return NextResponse.json({ error: "Please enter your name." }, { status: 400 });
+      return reply({ error: "Please enter your name." }, 400);
     }
 
     if (!validEmail(email)) {
-      return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
+      return reply({ error: "Please enter a valid email address." }, 400);
     }
 
     if (message.length < 10 || message.length > 5000) {
-      return NextResponse.json(
+      return reply(
         { error: "Please enter an enquiry between 10 and 5000 characters." },
-        { status: 400 }
+        400
       );
     }
 
@@ -76,9 +100,9 @@ export async function POST(request: Request) {
     const to = process.env.ENQUIRY_TO_EMAIL || "info@SaunaWhisks.com";
 
     if (!apiKey) {
-      return NextResponse.json(
+      return reply(
         { error: "Email delivery is not configured yet.", fallback: "mailto" },
-        { status: 503 }
+        503
       );
     }
 
@@ -88,6 +112,7 @@ export async function POST(request: Request) {
       country ? `Country: ${country}` : "",
       quantity ? `Approx. monthly requirement: ${quantity}` : "",
       pageUrl ? `Page: ${pageUrl}` : "",
+      `Request ID: ${requestId}`,
     ].filter(Boolean);
 
     const response = await fetch("https://api.resend.com/emails", {
@@ -113,19 +138,19 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       const details = await response.text();
-      console.error("Resend enquiry error:", response.status, details);
-      return NextResponse.json(
+      console.error("Resend enquiry error", { requestId, status: response.status, details });
+      return reply(
         { error: "We could not send your enquiry right now.", fallback: "mailto" },
-        { status: 502 }
+        502
       );
     }
 
-    return NextResponse.json({ ok: true });
+    return reply({ ok: true });
   } catch (error) {
-    console.error("Enquiry route error:", error);
-    return NextResponse.json(
+    console.error("Enquiry route error", { requestId, error });
+    return reply(
       { error: "We could not send your enquiry right now.", fallback: "mailto" },
-      { status: 500 }
+      500
     );
   }
 }
