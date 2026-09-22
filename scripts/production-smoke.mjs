@@ -35,7 +35,15 @@ async function reportDns() {
   }
 }
 
-async function check(url, { redirect = "follow", expectJson = false } = {}) {
+async function check(
+  url,
+  {
+    redirect = "follow",
+    expectJson = false,
+    contentTypeIncludes,
+    requiredHeaders = [],
+  } = {}
+) {
   try {
     const response = await fetch(url, {
       redirect,
@@ -49,6 +57,19 @@ async function check(url, { redirect = "follow", expectJson = false } = {}) {
     if (response.status < 200 || response.status >= 400) {
       failures.push(`${url} returned ${response.status}`);
       return;
+    }
+
+    if (contentTypeIncludes) {
+      const type = response.headers.get("content-type") || "";
+      if (!type.includes(contentTypeIncludes)) {
+        failures.push(`${url} content-type did not include ${contentTypeIncludes}`);
+      }
+    }
+
+    for (const header of requiredHeaders) {
+      if (!response.headers.get(header)) {
+        failures.push(`${url} missing required header: ${header}`);
+      }
     }
 
     if (expectJson) {
@@ -69,10 +90,21 @@ async function check(url, { redirect = "follow", expectJson = false } = {}) {
 await reportDns();
 
 console.log("HTTP:");
-await check(`${baseUrl}/`);
+await check(`${baseUrl}/`, {
+  contentTypeIncludes: "text/html",
+  requiredHeaders: [
+    "strict-transport-security",
+    "x-content-type-options",
+    "x-frame-options",
+    "referrer-policy",
+  ],
+});
 await check(`${baseUrl}/api/health`, { expectJson: true });
-await check(`${baseUrl}/robots.txt`);
-await check(`${baseUrl}/sitemap.xml`);
+await check(`${baseUrl}/robots.txt`, { contentTypeIncludes: "text/plain" });
+await check(`${baseUrl}/sitemap.xml`, { contentTypeIncludes: "xml" });
+await check(`${baseUrl}/feed.xml`, { contentTypeIncludes: "application/rss+xml" });
+await check(`${baseUrl}/feed.json`, { contentTypeIncludes: "application/json" });
+await check(`${baseUrl}/.well-known/security.txt`, { contentTypeIncludes: "text/plain" });
 
 if (checkCanonicalWww) {
   try {
