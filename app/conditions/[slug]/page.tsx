@@ -6,7 +6,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getProductCondition, productConditions } from "@/lib/productConditions";
 
-export const dynamicParams = false;\n\nexport function generateStaticParams() {
+export const dynamicParams = false;
+
+export function generateStaticParams() {
   return productConditions.map((item) => ({ slug: item.slug }));
 }
 
