@@ -37,8 +37,12 @@ if (!expires || Number.isNaN(Date.parse(expires))) {
   errors.push("security.txt Expires timestamp is less than 30 days away.");
 }
 
-if (!security.includes('"Content-Type": "text/plain; charset=utf-8"')) {
-  errors.push("security.txt must be served as text/plain UTF-8.");
+const publicApi = fs.readFileSync("lib/publicApi.ts", "utf8");
+if (!security.includes("publicText")) {
+  errors.push("security.txt must use the shared public text response helper.");
+}
+if (!publicApi.includes('contentType = "text/plain; charset=utf-8"')) {
+  errors.push("Shared public text helper must default to text/plain UTF-8.");
 }
 
 if (errors.length) {
