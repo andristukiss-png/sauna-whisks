@@ -19,6 +19,8 @@ const endpoints = [
   ["/api/glossary", "Glossary JSON"],
   ["/api/guides", "Buyer guides JSON"],
   ["/api/operations", "Operations standards JSON"],
+  ["/api/use-cases", "Use cases JSON"],
+  ["/api/techniques", "Techniques JSON"],
   ["/api/sources", "Source library JSON"],
   ["/api/sources.csv", "Source library CSV"],
   ["/api/product-data-template.csv", "Product data template CSV"],
