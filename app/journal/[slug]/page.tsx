@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articles, getArticle } from "@/lib/articles";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { ArticleTools } from "@/components/ArticleTools";
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
@@ -64,6 +65,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <h1>{article.title}</h1>
           <p className="article-deck">{article.description}</p>
           <span>{article.readTime} read</span>
+          <ArticleTools />
         </header>
 
         <div className="article-body">
