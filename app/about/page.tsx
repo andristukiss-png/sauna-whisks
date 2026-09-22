@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 
@@ -12,6 +13,7 @@ export default function AboutPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "About" }]} />
       <section className="about-page">
         <div className="about-page-art"><LeafMark /><span>57° N · LATVIA</span></div>
         <div className="about-page-copy">
