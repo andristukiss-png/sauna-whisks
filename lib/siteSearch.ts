@@ -34,6 +34,9 @@ const pages: SiteSearchItem[] = [
   { title: "Sources", description: "External sources referenced across the sauna knowledge library.", href: "/sources", type: "Page", keywords: ["references", "evidence"] },
   { title: "Markets", description: "Current launch-market plans and availability status.", href: "/markets", type: "Page", keywords: ["usa", "canada", "uk", "germany", "australia", "finland", "eu"] },
   { title: "Trade", description: "Trade supply by business type.", href: "/trade", type: "Page", keywords: ["wholesale", "b2b", "venue", "retail"] },
+  { title: "Launch status", description: "Current commercial launch gates and what is open or still being validated.", href: "/status", type: "Page", keywords: ["status", "pre-launch", "checkout"] },
+  { title: "Site map", description: "Human-readable map of SaunaWhisks.com.", href: "/site-map", type: "Page", keywords: ["index", "navigation"] },
+  { title: "Legal & policies", description: "Privacy, terms, returns, cookies, accessibility and shipping policies.", href: "/legal", type: "Page", keywords: ["privacy", "terms", "returns", "cookies"] },
 ];
 
 export const siteSearchItems: SiteSearchItem[] = [
