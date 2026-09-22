@@ -17,7 +17,8 @@ const sections = [
   ["/data", "Public data", "Read-only JSON, CSV and feed endpoints."],
   ["/site-map", "Site map", "Human-readable navigation index."],
   ["/faq", "FAQ", "Common buyer, care, shipping and trade questions."],
-  ["/status", "Launch status", "Current pre-launch commercial status."]
+  ["/status", "Launch status", "Current pre-launch commercial status."],
+  ["/templates", "Templates", "Supplier, product-data and trade-trial downloads."]
 ];
 
 export default function ResourcesPage() {
