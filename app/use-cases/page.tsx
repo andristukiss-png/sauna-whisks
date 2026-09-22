@@ -11,7 +11,19 @@ export const metadata = {
 };
 
 export default function UseCasesPage(){
+  const schema={
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    name:"Sauna Whisk Use Cases",
+    hasPart:useCases.map((item)=>({
+      "@type":"WebPage",
+      name:item.name,
+      url:"https://saunawhisks.com/use-cases/"+item.slug
+    }))
+  };
+
   return <main>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,"\\u003c")}}/>
     <Header/>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Use cases"}]}/>
     <section className="page-hero">
