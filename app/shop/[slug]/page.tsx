@@ -124,6 +124,7 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
           <p className="section-kicker">GOOD NEXT READS</p>
           <h2>Understand the ritual before buying.</h2>
           <div className="support-links">
+            <Link href={"/materials/" + whisk.material.toLowerCase()}>Material profile →</Link>
             <Link href="/journal/how-to-use-a-sauna-whisk">How to use a sauna whisk →</Link>
             <Link href="/journal/how-to-prepare-dried-sauna-whisk">How to prepare a dried whisk →</Link>
             <Link href="/compare">Birch vs oak vs eucalyptus →</Link>
@@ -160,7 +161,11 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
           Questions about availability, wholesale quantities, shipping or preparation?
           Send us a message below.
         </p>
-        <EnquiryForm subject={`SaunaWhisks.com enquiry — ${whisk.name}`} />
+        <EnquiryForm
+          subject={`SaunaWhisks.com enquiry — ${whisk.name}`}
+          topics={["Availability / launch timing", "Shipping / country", "Preparation / care", "Wholesale / trade", "Product specification", "Other"]}
+          messagePlaceholder="Tell us what you would like to know about this whisk..."
+        />
       </section>
       <SiteFooter />
     </main>
