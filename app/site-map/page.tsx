@@ -27,8 +27,8 @@ const staticGroups = [
   {
     title: "Company",
     links: [
-      ["/about", "About"], ["/standards", "Standards"], ["/operations", "Operations"],
-      ["/sources", "Sources"], ["/contact", "Contact"], ["/partners", "Partners / Press"],
+      ["/company", "Company"], ["/about", "About"], ["/press", "Press facts"], ["/standards", "Standards"], ["/operations", "Operations"],
+      ["/sources", "Sources"], ["/editorial-policy", "Editorial policy"], ["/corrections", "Corrections"], ["/contact", "Contact"], ["/partners", "Partners / Press"],
       ["/suppliers", "Suppliers"]
     ]
   },
