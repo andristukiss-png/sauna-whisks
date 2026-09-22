@@ -22,7 +22,7 @@ export function QualityChecklist() {
       <div className="quality-score">
         <span>{count}/{items.length}</span>
         <p>checks complete</p>
-        <button onClick={() => setChecked(items.map(() => false))}>Reset</button>
+        <button type="button" onClick={() => setChecked(items.map(() => false))}>Reset</button>
       </div>
       <div className="quality-items">
         {items.map((item, index) => (
