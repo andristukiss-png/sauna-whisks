@@ -107,6 +107,9 @@ for (const route of expectedDynamicRoutes) {
   if (!source.includes("export const dynamicParams = false;")) {
     errors.push(`Finite dynamic route must disable runtime params: ${route}`);
   }
+  if (source.includes(String.raw`dynamicParams = false;\\n`)) {
+    errors.push(`Dynamic route contains escaped newline corruption: ${route}`);
+  }
 }
 
 if (errors.length) {
