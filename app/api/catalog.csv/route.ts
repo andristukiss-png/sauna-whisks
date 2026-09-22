@@ -24,6 +24,7 @@ export function GET() {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
       "Content-Disposition": 'inline; filename="saunawhisks-catalog.csv"',
+      "Cache-Control": "public, max-age=3600",
     },
   });
 }
