@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `Sauna Whisks in ${market.name}`,
     description: market.summary,
-    alternates: { canonical: `/markets/${market.slug}` }
+    alternates: { canonical: market.slug === "united-states" ? "/usa" : `/markets/${market.slug}` }
   };
 }
 
@@ -52,6 +52,14 @@ export default async function MarketPage({ params }: { params: Promise<{ slug: s
           <p>{market.logistics}</p>
         </div>
       </section>
+
+      {market.slug === "united-states" ? (
+        <section className="market-dedicated">
+          <p className="section-kicker">DETAILED US PLAN</p>
+          <h2>See the dedicated United States launch page.</h2>
+          <a className="button button-dark" href="/usa">Open USA plan</a>
+        </section>
+      ) : null}
 
       <section className="trade-contact">
         <p className="section-kicker">MARKET ENQUIRY</p>
