@@ -42,7 +42,7 @@ for (const route of requiredStatic) {
   if (!sitemap.includes('"' + route + '"')) errors.push("Sitemap missing static route: " + route);
 }
 
-const excludedStatic = ["/search"];
+const excludedStatic = ["/search", "/markets/united-states"];
 for (const route of excludedStatic) {
   if (sitemap.includes('"' + route + '"')) errors.push("Noindex route must not appear in sitemap: " + route);
 }
@@ -50,7 +50,7 @@ for (const route of excludedStatic) {
 const requiredCollections = [
   "saunaWhisks.map",
   "articles.map",
-  "markets.map",
+  "markets.filter",
   "tradeSegments.map",
   "operationGuides.map",
   "glossaryTerms.map",
