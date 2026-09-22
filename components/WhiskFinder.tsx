@@ -47,8 +47,8 @@ export function WhiskFinder() {
         <span>01</span>
         <h2>How experienced are you?</h2>
         <div>
-          <button className={experience === "new" ? "selected" : ""} onClick={() => setExperience("new")}>New to whisks</button>
-          <button className={experience === "experienced" ? "selected" : ""} onClick={() => setExperience("experienced")}>Used them before</button>
+          <button type="button" className={experience === "new" ? "selected" : ""} onClick={() => setExperience("new")}>New to whisks</button>
+          <button type="button" className={experience === "experienced" ? "selected" : ""} onClick={() => setExperience("experienced")}>Used them before</button>
         </div>
       </div>
 
@@ -77,8 +77,8 @@ export function WhiskFinder() {
         <span>03</span>
         <h2>Do you want to compare materials?</h2>
         <div>
-          <button className={compare === "yes" ? "selected" : ""} onClick={() => setCompare("yes")}>Yes</button>
-          <button className={compare === "no" ? "selected" : ""} onClick={() => setCompare("no")}>No</button>
+          <button type="button" className={compare === "yes" ? "selected" : ""} onClick={() => setCompare("yes")}>Yes</button>
+          <button type="button" className={compare === "no" ? "selected" : ""} onClick={() => setCompare("no")}>No</button>
         </div>
       </div>
 
