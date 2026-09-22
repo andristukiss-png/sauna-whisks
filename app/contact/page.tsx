@@ -15,7 +15,7 @@ export default function ContactPage() {
         <h1>Talk to Sauna Whisks.</h1>
         <div className="contact-grid">
           <div><span>GENERAL</span><a href="mailto:info@saunawhisks.com">info@saunawhisks.com</a></div>
-          <div><span>TRADE</span><a href="mailto:trade@saunawhisks.com">trade@saunawhisks.com</a></div>
+          <div><span>TRADE</span><a href="mailto:info@saunawhisks.com">info@saunawhisks.com</a></div>
           <div><span>BASE</span><p>Latvia · European Union</p></div>
         </div>
         <p className="fineprint">Full legal company details will be added before commercial launch.</p>
