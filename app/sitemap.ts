@@ -23,7 +23,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
     "/returns",
     "/cookies",
-    "/accessibility"
+    "/accessibility",
+    "/suppliers",
+    "/partners"
   ];
 
   return [
