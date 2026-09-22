@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { QualityChecklist } from "@/components/QualityChecklist";
 
@@ -13,6 +14,7 @@ export default function ChecklistPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Quality checklist" }]} />
       <section className="page-hero">
         <p className="section-kicker">QUALITY TOOL</p>
         <h1>Evaluate the whisk after preparation.</h1>
