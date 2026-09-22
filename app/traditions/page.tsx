@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 export const metadata = {
   title: "Sauna Whisk Traditions",
   description: "Learn how sauna whisks, venik, vihta and vasta fit into Baltic, Finnish and banya traditions."
+  alternates: { canonical: "/traditions" }
 };
 
 export default function TraditionsPage() {
