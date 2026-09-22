@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articleTopics } from "@/lib/articleTopics";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Journal Topics",
   description: "Browse SaunaWhisks.com guides by foundations, materials, care, traditions and terminology.",
-  alternates: { canonical: "/journal/topics" }
-};
+  canonical: "/journal/topics",
+});
 
 export default function JournalTopicsPage() {
   return (
