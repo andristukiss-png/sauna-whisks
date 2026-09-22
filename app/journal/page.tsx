@@ -6,7 +6,8 @@ import { articles } from "@/lib/articles";
 export const metadata = {
   title: "Sauna Whisk Journal",
   description:
-    "Practical guides to sauna whisks, Latvian pirts, venik, vihta, vasta, materials, preparation and sauna traditions."
+    "Practical guides to sauna whisks, Latvian pirts, venik, vihta, vasta, materials, preparation and sauna traditions.",
+  alternates: { canonical: "/journal" }
 };
 
 export default function JournalPage() {
