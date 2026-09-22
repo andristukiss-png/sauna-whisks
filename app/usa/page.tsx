@@ -79,7 +79,11 @@ export default function USAPage() {
           Home sauna owner, retailer, sauna club, builder or simply interested in the US launch —
           send us a message below.
         </p>
-        <EnquiryForm subject="SaunaWhisks.com USA enquiry" />
+        <EnquiryForm
+          subject="SaunaWhisks.com USA enquiry"
+          topics={["Home customer", "Retailer", "Public sauna / venue", "Sauna builder", "Distributor", "Other"]}
+          messagePlaceholder="Tell us what you are interested in and where in the US you are based..."
+        />
       </section>
 
       <SiteFooter />
