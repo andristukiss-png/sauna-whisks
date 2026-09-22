@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -35,10 +36,10 @@ export default function AboutPage() {
         </div>
       </section>
       <section className="about-links">
-        <a href="/company">Company hub →</a>
-        <a href="/press">Press facts →</a>
-        <a href="/editorial-policy">Editorial policy →</a>
-        <a href="/status">Launch status →</a>
+        <Link href="/company">Company hub →</Link>
+        <Link href="/press">Press facts →</Link>
+        <Link href="/editorial-policy">Editorial policy →</Link>
+        <Link href="/status">Launch status →</Link>
       </section>
       <SiteFooter />
     </main>
