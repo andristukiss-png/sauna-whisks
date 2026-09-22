@@ -4,6 +4,9 @@ import { articles } from "@/lib/articles";
 import { markets } from "@/lib/markets";
 import { tradeSegments } from "@/lib/tradeSegments";
 import { operationGuides } from "@/lib/operations";
+import { glossaryTerms } from "@/lib/glossaryTerms";
+import { materialKnowledge } from "@/lib/materialKnowledge";
+import { traditionDetails } from "@/lib/traditionDetails";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://saunawhisks.com";
@@ -76,6 +79,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+    ...glossaryTerms.map((item) => ({
+      url: `${base}/glossary/${item.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+    ...materialKnowledge.map((item) => ({
+      url: `${base}/materials/${item.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...traditionDetails.map((item) => ({
+      url: `${base}/traditions/${item.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.65,
     }))
   ];
 }
