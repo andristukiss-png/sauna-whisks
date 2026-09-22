@@ -2,6 +2,20 @@
 
 ## Pre-launch
 
+### 2026-09-22 maintenance batch
+- added canonical-domain configuration validation and live production smoke diagnostics
+- documented GitHub-to-Vercel deployment and domain/TLS incident handling
+- added global keyboard-focus and reduced-motion accessibility safeguards
+- improved live-result announcements across interactive tools
+- hardened enquiry payload parsing and actual request-size enforcement
+- normalized and bounded public search API inputs
+- standardized public CSV cache policies
+- removed noindex search and non-canonical US market URLs from the sitemap
+- removed synthetic per-build sitemap modification timestamps
+- centralized canonical market URL generation and legacy US-market redirect
+- hardened landed-cost calculator input ranges
+- strengthened CI, metadata, sitemap, UI, API and security validation
+
 ### Current
 - specialist sauna-whisk product architecture
 - searchable knowledge library
