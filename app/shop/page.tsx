@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 import { saunaWhisks } from "@/lib/products";
@@ -30,6 +31,7 @@ export default function ShopPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema).replace(/</g, "\\u003c") }}
       />
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop" }]} />
       <section className="page-hero">
         <p className="section-kicker">THE COLLECTION</p>
         <h1>Choose your whisk.</h1>
