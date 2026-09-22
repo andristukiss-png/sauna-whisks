@@ -11,6 +11,8 @@ const cached = [
   "app/api/guides/route.ts",
   "app/api/operations/route.ts",
   "app/api/sources/route.ts",
+  "app/api/use-cases/route.ts",
+  "app/api/techniques/route.ts",
   "app/api/route.ts",
   "app/feed.json/route.ts"
 ];
