@@ -34,7 +34,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "@type": "WebSite",
     name: "Sauna Whisks",
     url: "https://saunawhisks.com",
-    description: "Sauna whisks and sauna tradition knowledge from Latvia."
+    description: "Sauna whisks and sauna tradition knowledge from Latvia.",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://saunawhisks.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
   };
 
   const organizationSchema = {
