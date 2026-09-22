@@ -41,6 +41,23 @@ for (const file of files) {
       errors.push("img missing alt attribute: " + file);
     }
   }
+
+  const rawInternalAnchors = [...text.matchAll(/<a\b[^>]*href=["'](\/[^"'#?]*)["'][^>]*>/g)];
+  const technicalPrefixes = [
+    "/api/",
+    "/feed.",
+    "/sitemap.xml",
+    "/robots.txt",
+    "/llms.txt",
+    "/humans.txt",
+    "/.well-known/",
+  ];
+  for (const link of rawInternalAnchors) {
+    const href = link[1];
+    if (!technicalPrefixes.some((prefix) => href.startsWith(prefix))) {
+      errors.push("Internal page navigation should use Next Link: " + file + " -> " + href);
+    }
+  }
 }
 
 const header = fs.readFileSync("components/Header.tsx", "utf8");
