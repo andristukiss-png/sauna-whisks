@@ -3,7 +3,7 @@
 ## Commercial
 - /shop — sauna whisks
 - /shop/baltic-birch — birch sauna whisk
-- /shop/latvian-oak — oak sauna whisk
+- /shop/baltic-oak — oak sauna whisk
 - /shop/eucalyptus — eucalyptus sauna whisk
 - /shop/discovery-trio — sauna whisk set / bundle
 - /wholesale — wholesale sauna whisks
