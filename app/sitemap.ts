@@ -59,6 +59,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/quality",
     "/resources",
     "/help",
+    "/editorial-policy",
+    "/corrections",
     "/use-cases",
     "/techniques",
     "/tools",
