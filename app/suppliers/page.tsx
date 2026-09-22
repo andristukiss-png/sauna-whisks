@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
@@ -13,6 +14,7 @@ export default function SuppliersPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Suppliers" }]} />
       <section className="page-hero">
         <p className="section-kicker">SUPPLIERS / PRODUCERS</p>
         <h1>We want to know who made the whisk.</h1>
