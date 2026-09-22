@@ -62,6 +62,29 @@ const homePage = fs.readFileSync("app/page.tsx", "utf8");
 if (!homePage.includes("openGraph:")) errors.push("Homepage-specific Open Graph metadata missing.");
 if (!homePage.includes("twitter:")) errors.push("Homepage-specific Twitter metadata missing.");
 
+const socialImages = [
+  "app/opengraph-image.tsx",
+  "app/twitter-image.tsx",
+];
+
+for (const file of socialImages) {
+  if (!fs.existsSync(file)) {
+    errors.push("Missing social image route: " + file);
+    continue;
+  }
+  const source = fs.readFileSync(file, "utf8");
+  if (!source.includes("export const alt =")) errors.push("Social image missing alt text: " + file);
+  if (!source.includes("width: 1200") || !source.includes("height: 630")) {
+    errors.push("Social image must remain 1200x630: " + file);
+  }
+  if (!source.includes('export const contentType = "image/png"')) {
+    errors.push("Social image must declare PNG content type: " + file);
+  }
+  if (!source.includes("new ImageResponse(")) {
+    errors.push("Social image must use ImageResponse: " + file);
+  }
+}
+
 const searchPage = fs.readFileSync("app/search/page.tsx", "utf8");
 if (!/robots\s*:\s*\{\s*index\s*:\s*false\s*,\s*follow\s*:\s*true\s*\}/s.test(searchPage)) {
   errors.push("Search page must remain noindex, follow.");
