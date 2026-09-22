@@ -14,7 +14,7 @@ export default function ContactPage() {
         <p className="section-kicker">CONTACT</p>
         <h1>Talk to Sauna Whisks.</h1>
         <div className="contact-grid">
-          <div><span>GENERAL</span><a href="mailto:hello@saunawhisks.com">hello@saunawhisks.com</a></div>
+          <div><span>GENERAL</span><a href="mailto:info@saunawhisks.com">info@saunawhisks.com</a></div>
           <div><span>TRADE</span><a href="mailto:trade@saunawhisks.com">trade@saunawhisks.com</a></div>
           <div><span>BASE</span><p>Latvia · European Union</p></div>
         </div>
