@@ -1,15 +1,18 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
   title: "Terms",
-  description: "Pre-launch website terms for SaunaWhisks.com."
+  description: "Pre-launch website terms for SaunaWhisks.com.",
+  alternates: { canonical: "/terms" }
 };
 
 export default function TermsPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Terms" }]} />
       <article className="legal-page">
         <p className="section-kicker">TERMS</p>
         <h1>Website terms</h1>
