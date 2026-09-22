@@ -71,8 +71,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema).replace(/</g, "\\u003c") }}
         />
-        <a className="skip-link" href="#main-content">Skip to content</a>
-        <div id="main-content" tabIndex={-1}>{children}</div>
+        {children}
       </body>
     </html>
   );
