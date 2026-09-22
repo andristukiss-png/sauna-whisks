@@ -6,6 +6,8 @@ import { saunaWhisks } from "@/lib/products";
 import { articles } from "@/lib/articles";
 import { markets } from "@/lib/markets";
 import { tradeSegments } from "@/lib/tradeSegments";
+import { useCases } from "@/lib/useCases";
+import { techniques } from "@/lib/techniques";
 
 export const metadata = {
   title: "Site Map",
@@ -77,6 +79,14 @@ export default function SiteMapPage() {
         <div>
           <h2>Trade</h2>
           {tradeSegments.map((segment) => <Link prefetch={false} href={"/trade/" + segment.slug} key={segment.slug}>{segment.name} →</Link>)}
+        </div>
+        <div>
+          <h2>Use cases</h2>
+          {useCases.map((item) => <Link prefetch={false} href={"/use-cases/" + item.slug} key={item.slug}>{item.name} →</Link>)}
+        </div>
+        <div>
+          <h2>Techniques</h2>
+          {techniques.map((item) => <Link prefetch={false} href={"/techniques/" + item.slug} key={item.slug}>{item.name} →</Link>)}
         </div>
         <div className="sitemap-journal">
           <h2>Journal</h2>
