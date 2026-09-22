@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { launchStatus } from "@/lib/status";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Launch Status",
   description: "Current SaunaWhisks.com commercial launch status.",
-  alternates: { canonical: "/status" }
-};
+  canonical: "/status",
+});
 
 export default function StatusPage() {
   return (
