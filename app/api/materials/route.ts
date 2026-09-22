@@ -1,7 +1,8 @@
 import { materialKnowledge } from "@/lib/materialKnowledge";
+import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
-  return Response.json({
+  return publicJson({
     count: materialKnowledge.length,
     materials: materialKnowledge.map((item) => ({
       slug: item.slug,
