@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Resources",
   description: "SaunaWhisks.com learning, source, policy and public-data resources.",
-  alternates: { canonical: "/resources" }
-};
+  canonical: "/resources",
+});
 
 const sections = [
   ["/learn", "Learn", "Structured paths through materials, care, traditions and terminology."],
