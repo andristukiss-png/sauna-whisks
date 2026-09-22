@@ -21,8 +21,24 @@ export const metadata = {
 };
 
 export default function GlossaryPage() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    name: "Sauna Whisk Glossary",
+    url: "https://saunawhisks.com/glossary",
+    hasDefinedTerm: terms.map(([name, description]) => ({
+      "@type": "DefinedTerm",
+      name,
+      description
+    }))
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
+      />
       <Header />
       <section className="page-hero">
         <p className="section-kicker">GLOSSARY</p>
