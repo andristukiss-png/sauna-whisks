@@ -1,12 +1,13 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata={
-  title:"Corrections",
-  description:"How to report a factual or attribution error on SaunaWhisks.com.",
-  alternates:{canonical:"/corrections"}
-};
+export const metadata = pageMetadata({
+  title: "Corrections",
+  description: "How to report a factual or attribution error on SaunaWhisks.com.",
+  canonical: "/corrections",
+});
 
 export default function CorrectionsPage(){
   return <main>
