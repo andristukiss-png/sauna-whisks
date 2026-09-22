@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -5,11 +6,11 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 import { saunaWhisks } from "@/lib/products";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Shop Sauna Whisks",
   description: "Explore birch, oak and eucalyptus sauna whisks selected for traditional sauna ritual.",
-  alternates: { canonical: "/shop" }
-};
+  canonical: "/shop",
+});
 
 export default function ShopPage() {
   const itemListSchema = {
