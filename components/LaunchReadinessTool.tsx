@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 const groups = [
   ["Product",["Launch SKUs selected","Supplier identity verified","Origin documented","Condition confirmed","Preparation tested","Packaging approved"]],
@@ -13,12 +13,12 @@ const groups = [
 export function LaunchReadinessTool(){
   const flat=groups.flatMap(([,items])=>items);
   const [checked,setChecked]=useState<Record<string,boolean>>({});
-  const done=useMemo(()=>flat.filter((item)=>checked[item]).length,[checked,flat]);
+  const done=flat.filter((item)=>checked[item]).length;
   const pct=Math.round((done/flat.length)*100);
 
   return <div className="readiness-tool">
     <aside>
-      <b>{pct}%</b>
+      <b aria-live="polite">{pct}%</b>
       <p>{done}/{flat.length} launch gates complete</p>
       <small>Commercial checkout should remain disabled until critical gates are genuinely complete.</small>
       <button type="button" onClick={()=>setChecked({})}>Reset</button>
