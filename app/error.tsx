@@ -14,7 +14,7 @@ export default function ErrorPage({
       <h1>This page hit a knot.</h1>
       <p>Try again, return home, or email info@SaunaWhisks.com if the problem continues.</p>
       <div>
-        <button className="button button-dark" onClick={() => reset()}>Try again</button>
+        <button type="button" className="button button-dark" onClick={() => reset()}>Try again</button>
         <Link className="text-link" href="/">Return home →</Link>
       </div>
     </main>
