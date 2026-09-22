@@ -34,6 +34,28 @@ for (const file of files) {
       errors.push("target=_blank link missing safe rel: " + file);
     }
   }
+
+  const images = [...text.matchAll(/<img\b([^>]*)>/g)];
+  for (const image of images) {
+    if (!/\balt=/.test(image[1])) {
+      errors.push("img missing alt attribute: " + file);
+    }
+  }
+}
+
+const layout = fs.readFileSync("app/layout.tsx", "utf8");
+if (!layout.includes('href="#main-content"')) errors.push("Skip link missing main-content target.");
+if (!layout.includes('id="main-content"')) errors.push("Main-content target missing.");
+if (!layout.includes("tabIndex={-1}")) errors.push("Main-content skip target is not programmatically focusable.");
+
+const a11yFile = "app/a11y.css";
+if (!fs.existsSync(a11yFile)) {
+  errors.push("Accessibility stylesheet missing.");
+} else {
+  const css = fs.readFileSync(a11yFile, "utf8");
+  if (!css.includes(":focus-visible")) errors.push("Global focus-visible treatment missing.");
+  if (!css.includes("prefers-reduced-motion")) errors.push("Reduced-motion treatment missing.");
+  if (!css.includes(".skip-link:focus")) errors.push("Skip-link focus treatment missing.");
 }
 
 const unique = [...new Set(errors)];
