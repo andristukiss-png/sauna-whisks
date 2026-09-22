@@ -38,6 +38,7 @@ const pages: SiteSearchItem[] = [
   { title: "Launch status", description: "Current commercial launch gates and what is open or still being validated.", href: "/status", type: "Page", keywords: ["status", "pre-launch", "checkout"] },
   { title: "Site map", description: "Human-readable map of SaunaWhisks.com.", href: "/site-map", type: "Page", keywords: ["index", "navigation"] },
   { title: "Legal & policies", description: "Privacy, terms, returns, cookies, accessibility and shipping policies.", href: "/legal", type: "Page", keywords: ["privacy", "terms", "returns", "cookies"] },
+  { title: "Product claims standard", description: "How SaunaWhisks.com separates product facts from unsupported health marketing.", href: "/claims", type: "Page", keywords: ["claims", "evidence", "health", "quality"] },
   { title: "Product data catalog", description: "Pre-launch product status, planned condition and verification fields.", href: "/catalog", type: "Page", keywords: ["product data", "verification", "status", "catalog"] },
   { title: "Whisk finder", description: "Three-question tool for choosing birch, oak, eucalyptus or the Discovery Trio.", href: "/finder", type: "Page", keywords: ["recommendation", "quiz", "choose"] },
   { title: "Quality checklist", description: "Interactive checklist for evaluating whisk origin, construction and prepared performance.", href: "/checklist", type: "Page", keywords: ["quality", "supplier", "leaf retention", "testing"] },
