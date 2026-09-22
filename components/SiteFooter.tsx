@@ -25,6 +25,7 @@ export function SiteFooter() {
         <Link href="/faq">FAQ</Link>
         <Link href="/wholesale">Wholesale</Link>
         <Link href="/contact">Contact</Link>
+        <Link href="/shipping">Shipping</Link>
         <Link href="/privacy">Privacy</Link>
       </div>
       <div className="footer-note">
