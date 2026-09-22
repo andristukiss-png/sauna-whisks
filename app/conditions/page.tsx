@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { productConditions } from "@/lib/productConditions";
 
@@ -13,6 +14,7 @@ export default function ConditionsPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Conditions" }]} />
       <section className="page-hero">
         <p className="section-kicker">CONDITION & PRESERVATION</p>
         <h1>The same branch behaves differently after preservation.</h1>
