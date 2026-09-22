@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
@@ -21,6 +22,7 @@ export default function ShippingPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shipping" }]} />
 
       <section className="page-hero">
         <p className="section-kicker">SHIPPING & AVAILABILITY</p>
