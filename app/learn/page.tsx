@@ -12,6 +12,7 @@ const sections = [
   ["/beginners", "Start here", "A four-step path for your first sauna whisk."],
   ["/materials", "Materials", "Understand birch, oak and eucalyptus."],
   ["/care", "Care", "Preparation, storage, reuse and troubleshooting."],
+  ["/conditions", "Condition & preservation", "Fresh, dried, frozen and preserved formats."] ,
   ["/traditions", "Traditions", "Latvian pirts, Finnish vihta/vasta and banya venik context."],
   ["/journal", "Journal", "All long-form guides and source-backed articles."],
   ["/glossary", "Glossary", "The language of whisking in one place."],
