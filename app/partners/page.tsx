@@ -30,6 +30,11 @@ export default function PartnersPage() {
         <article><span>03</span><h2>Content</h2><p>Photography, demonstrations, harvest documentation and practitioner education.</p></article>
       </section>
 
+      <section className="partner-resource-links">
+        <a href="/press">Press facts →</a>
+        <a href="/company">Company hub →</a>
+        <a href="/editorial-policy">Editorial policy →</a>
+      </section>
       <section className="trade-contact">
         <p className="section-kicker">START A CONVERSATION</p>
         <h2>Tell us what you have in mind.</h2>
