@@ -34,7 +34,7 @@ export function Header() {
         <Link href="/shop" className="header-cta">Explore whisks</Link>
 
         <details className="mobile-menu">
-          <summary aria-label="Open navigation">Menu</summary>
+          <summary>Menu</summary>
           <nav className="mobile-menu-panel" aria-label="Mobile navigation">
             {links.map(([href, label]) => <Link href={href} key={href}>{label}</Link>)}
             <Link href="/faq">FAQ</Link>
@@ -46,7 +46,7 @@ export function Header() {
           </nav>
         </details>
       </header>
-      <span id="main-content" className="skip-target" tabIndex={-1} aria-hidden="true" />
+      <span id="main-content" className="skip-target" tabIndex={-1}>Main content</span>
     </>
   );
 }
