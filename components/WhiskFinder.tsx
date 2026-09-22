@@ -63,6 +63,7 @@ export function WhiskFinder() {
             ["unsure", "Not sure yet"],
           ].map(([value, label]) => (
             <button
+              type="button"
               key={value}
               className={feel === value ? "selected" : ""}
               onClick={() => setFeel(value as Feel)}
