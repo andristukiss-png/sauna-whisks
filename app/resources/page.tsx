@@ -18,7 +18,8 @@ const sections = [
   ["/site-map", "Site map", "Human-readable navigation index."],
   ["/faq", "FAQ", "Common buyer, care, shipping and trade questions."],
   ["/status", "Launch status", "Current pre-launch commercial status."],
-  ["/templates", "Templates", "Supplier, product-data and trade-trial downloads."]
+  ["/templates", "Templates", "Supplier, product-data and trade-trial downloads."],
+  ["/tools", "Tools", "Supplier, commercial, trade-demand and launch-readiness tools."]
 ];
 
 export default function ResourcesPage() {
