@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -25,7 +26,7 @@ export default function JournalPage() {
       </section>
 
       <div className="journal-topic-link">
-        <a className="text-link" href="/journal/topics">Browse by topic →</a>
+        <Link className="text-link" href="/journal/topics">Browse by topic →</Link>
       </div>
       <JournalSearch items={articles.map(({ slug, title, eyebrow, description, readTime }) => ({
         slug, title, eyebrow, description, readTime
