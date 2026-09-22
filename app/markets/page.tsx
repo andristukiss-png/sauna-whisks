@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { markets } from "@/lib/markets";
 
@@ -13,6 +14,7 @@ export default function MarketsPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Markets" }]} />
       <section className="page-hero">
         <p className="section-kicker">MARKETS</p>
         <h1>Launch where the logistics make sense.</h1>
