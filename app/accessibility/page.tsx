@@ -1,15 +1,18 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
   title: "Accessibility",
-  description: "Accessibility statement for SaunaWhisks.com."
+  description: "Accessibility statement for SaunaWhisks.com.",
+  alternates: { canonical: "/accessibility" }
 };
 
 export default function AccessibilityPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Accessibility" }]} />
       <article className="legal-page">
         <p className="section-kicker">ACCESSIBILITY</p>
         <h1>Designed to be usable</h1>
