@@ -6,7 +6,7 @@ import { saunaWhisks } from "@/lib/products";
 
 export const metadata = {
   title: "Shop Sauna Whisks",
-  description: "Explore birch, oak and eucalyptus sauna whisks selected for traditional sauna ritual."
+  description: "Explore birch, oak and eucalyptus sauna whisks selected for traditional sauna ritual.",
   alternates: { canonical: "/shop" }
 };
 
