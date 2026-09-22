@@ -38,7 +38,9 @@ export function SiteFooter() {
       </nav>
       <nav className="footer-links" aria-label="Company">
         <b>Company</b>
+        <Link prefetch={false} href="/company">Company</Link>
         <Link prefetch={false} href="/about">About</Link>
+        <Link prefetch={false} href="/press">Press facts</Link>
         <Link prefetch={false} href="/status">Launch status</Link>
         <Link prefetch={false} href="/site-map">Site map</Link>
         <Link prefetch={false} href="/data">Public data</Link>
