@@ -53,6 +53,21 @@ for (const endpoint of required) {
   if (!paths.includes(endpoint)) errors.push("Public data registry missing required endpoint: " + endpoint);
 }
 
+function sourceFor(endpoint) {
+  const path = endpoint.split("?")[0];
+  if (path === "/sitemap.xml") return "app/sitemap.ts";
+  if (path === "/robots.txt") return "app/robots.ts";
+  if (path.startsWith("/api")) return "app" + path + "/route.ts";
+  return "app" + path + "/route.ts";
+}
+
+for (const endpoint of paths) {
+  const source = sourceFor(endpoint);
+  if (!fs.existsSync(source)) {
+    errors.push("Public data endpoint has no route source: " + endpoint + " -> " + source);
+  }
+}
+
 if (errors.length) {
   console.error("Public data validation failed:");
   errors.forEach((error) => console.error("- " + error));
