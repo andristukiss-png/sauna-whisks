@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articles, getArticle } from "@/lib/articles";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
@@ -14,7 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!article) return {};
   return {
     title: article.title,
-    description: article.description
+    description: article.description,
+    alternates: { canonical: `/journal/${article.slug}` }
   };
 }
 
@@ -57,6 +59,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
       />
       <Header />
+      <Breadcrumbs items={[
+        { label: "Home", href: "/" },
+        { label: "Journal", href: "/journal" },
+        { label: article.title }
+      ]} />
       <article className="article-page">
         <header className="article-header">
           <p className="section-kicker">{article.eyebrow}</p>
