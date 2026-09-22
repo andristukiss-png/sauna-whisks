@@ -6,7 +6,9 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { getTradeSegment, tradeSegments } from "@/lib/tradeSegments";
 
-export const dynamicParams = false;\n\nexport function generateStaticParams() {
+export const dynamicParams = false;
+
+export function generateStaticParams() {
   return tradeSegments.map((segment) => ({ slug: segment.slug }));
 }
 
