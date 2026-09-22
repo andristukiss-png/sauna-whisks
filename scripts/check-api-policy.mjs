@@ -70,7 +70,7 @@ for (const file of publicTextRoutes) {
 const helper = fs.readFileSync("lib/publicApi.ts", "utf8");
 const helperRequirements = [
   ['"Access-Control-Allow-Origin": "*"', "read-only CORS header"],
-  ["max-age=0, s-maxage=", "CDN cache policy for public JSON"],
+  ["max-age=0, s-maxage=", "CDN cache policy for public JSON"],\n  ["publicCacheControl(maxAge)", "shared CDN cache policy for public text"],
   ['"Cache-Control": "no-store, max-age=0"', "no-store cache policy"],
   ['contentType = "text/plain; charset=utf-8"', "default text content type"],
   ['contentType: "text/csv; charset=utf-8"', "CSV content type"],
