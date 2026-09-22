@@ -17,7 +17,10 @@ export function GET() {
       "/api/guides",
       "/api/operations",
       "/api/sources",
-      "/api/sources.csv"
+      "/api/sources.csv",
+      "/api/product-data-template.csv",
+      "/api/supplier-sample-template.csv",
+      "/api/trade-trial-template.csv"
     ]
   });
 }
