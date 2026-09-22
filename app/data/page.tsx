@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { publicDataEndpoints } from "@/lib/publicData";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Public Data",
   description: "Public pre-launch SaunaWhisks.com JSON, CSV, feed and machine-readable endpoints.",
-  alternates: { canonical: "/data" }
-};
+  canonical: "/data",
+});
 
 export default function DataPage() {
   return (
