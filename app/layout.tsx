@@ -16,6 +16,11 @@ export const metadata: Metadata = {
     siteName: "Sauna Whisks",
     type: "website",
   },
+  alternates: {
+    types: {
+      "application/rss+xml": "https://saunawhisks.com/feed.xml"
+    }
+  },
   twitter: {
     card: "summary_large_image",
     title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
