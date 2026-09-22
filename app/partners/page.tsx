@@ -1,15 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Partnerships & Press",
-  description:
-    "Partnership, editorial, press and industry collaboration enquiries for SaunaWhisks.com.",
-  alternates: { canonical: "/partners" }
-};
+  description: "Partnership, editorial, press and industry collaboration enquiries for SaunaWhisks.com.",
+  canonical: "/partners",
+});
 
 export default function PartnersPage() {
   return (
