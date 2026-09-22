@@ -46,7 +46,7 @@ export const buyerGuides: BuyerGuide[] = [
     description: "For sauna users who want a broader, denser and firmer whisk.",
     recommendation: "Choose oak when you specifically want more body and broader leaf contact than birch.",
     reasons: ["Broad leaves create a different feel", "Oak is a useful contrast to birch", "Species/origin should be disclosed", "Preparation still matters for dried products"],
-    links: [{ label: "Latvian Oak", href: "/shop/latvian-oak" }, { label: "Birch vs oak", href: "/journal/birch-vs-oak-sauna-whisk" }]
+    links: [{ label: "Baltic Oak", href: "/shop/baltic-oak" }, { label: "Birch vs oak", href: "/journal/birch-vs-oak-sauna-whisk" }]
   },
   {
     slug: "aromatic-whisk",
