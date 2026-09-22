@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk Care",
   description: "Preparation, storage, reuse and troubleshooting guides for sauna whisks.",
-  alternates: { canonical: "/care" }
-};
+  canonical: "/care",
+});
 
 const guides = [
   ["/journal/how-to-prepare-dried-sauna-whisk", "Prepare a dried whisk", "Rehydrate slowly before the sauna."],
