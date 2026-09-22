@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useId, useRef, useState } from "react";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -21,6 +21,7 @@ export function EnquiryForm({
   messagePlaceholder = "Tell us what you are looking for...",
 }: EnquiryFormProps) {
   const startedAt = useRef(0);
+  const statusId = useId();
   useEffect(() => {
     startedAt.current = Date.now();
   }, []);
@@ -109,22 +110,22 @@ export function EnquiryForm({
   }
 
   return (
-    <form className="enquiry-form" onSubmit={submitEnquiry}>
+    <form className="enquiry-form" onSubmit={submitEnquiry} aria-busy={status === "sending"}>
       <div className="enquiry-two">
         <label>
           <span>Name</span>
-          <input name="name" type="text" autoComplete="name" required />
+          <input name="name" type="text" autoComplete="name" maxLength={120} required />
         </label>
         <label>
           <span>Email</span>
-          <input name="email" type="email" autoComplete="email" required />
+          <input name="email" type="email" autoComplete="email" inputMode="email" maxLength={200} required />
         </label>
       </div>
 
       {topics?.length ? (
         <label>
           <span>Enquiry type</span>
-          <select name="topic" defaultValue="">
+          <select name="topic" defaultValue="" aria-label="Enquiry type">
             <option value="">Choose a topic</option>
             {topics.map((topic) => <option value={topic} key={topic}>{topic}</option>)}
           </select>
@@ -134,7 +135,7 @@ export function EnquiryForm({
       {countryField && !businessFields ? (
         <label>
           <span>Country</span>
-          <input name="country" type="text" autoComplete="country-name" required />
+          <input name="country" type="text" autoComplete="country-name" maxLength={120} required />
         </label>
       ) : null}
 
@@ -143,16 +144,16 @@ export function EnquiryForm({
           <div className="enquiry-two">
             <label>
               <span>Business / venue</span>
-              <input name="business" type="text" autoComplete="organization" />
+              <input name="business" type="text" autoComplete="organization" maxLength={200} />
             </label>
             <label>
               <span>Country</span>
-              <input name="country" type="text" autoComplete="country-name" />
+              <input name="country" type="text" autoComplete="country-name" maxLength={120} />
             </label>
           </div>
           <label>
             <span>Approx. monthly requirement</span>
-            <input name="quantity" type="text" placeholder="e.g. 24, 100, 500 whisks" />
+            <input name="quantity" type="text" maxLength={120} placeholder="e.g. 24, 100, 500 whisks" />
           </label>
         </>
       ) : null}
@@ -170,6 +171,7 @@ export function EnquiryForm({
           minLength={10}
           maxLength={5000}
           placeholder={messagePlaceholder}
+          aria-describedby={statusId}
           required
         />
       </label>
@@ -184,6 +186,7 @@ export function EnquiryForm({
         </button>
         <div className="enquiry-status-wrap">
           <p
+            id={statusId}
             className={
               status === "success"
                 ? "form-status success"
