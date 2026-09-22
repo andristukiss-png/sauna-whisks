@@ -73,6 +73,19 @@ export function SiteSearch({
             {filter}
           </button>
         ))}
+        {(query || type !== "All") ? (
+          <button
+            type="button"
+            className="search-clear"
+            onClick={() => {
+              setQuery("");
+              setType("All");
+              syncUrl("", "All");
+            }}
+          >
+            Clear
+          </button>
+        ) : null}
       </div>
 
       <p className="search-count" role="status" aria-live="polite">
