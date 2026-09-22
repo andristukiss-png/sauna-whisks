@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
@@ -19,6 +20,7 @@ export default function BeginnersPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Beginners" }]} />
       <section className="page-hero">
         <p className="section-kicker">BEGIN HERE</p>
         <h1>Your first sauna whisk.</h1>
