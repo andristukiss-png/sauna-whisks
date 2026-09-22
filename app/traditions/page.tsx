@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import Link from "next/link";
 
@@ -12,6 +13,7 @@ export default function TraditionsPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Traditions" }]} />
       <section className="page-hero">
         <p className="section-kicker">TRADITIONS</p>
         <h1>Whisk. Venik. Vihta. Vasta.</h1>
