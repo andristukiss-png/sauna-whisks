@@ -6,6 +6,8 @@ import { operationGuides } from "@/lib/operations";
 import { glossaryTerms } from "@/lib/glossaryTerms";
 import { materialKnowledge } from "@/lib/materialKnowledge";
 import { traditionDetails } from "@/lib/traditionDetails";
+import { buyerGuides } from "@/lib/buyerGuides";
+import { comparisons } from "@/lib/comparisons";
 
 export type SiteSearchItem = {
   title: string;
@@ -95,6 +97,20 @@ export const siteSearchItems: SiteSearchItem[] = [
     href: `/traditions/${item.slug}`,
     type: "Page" as const,
     keywords: [item.region, ...item.terminology, ...item.principles]
+  })),
+  ...buyerGuides.map((guide) => ({
+    title: guide.title,
+    description: guide.description,
+    href: `/guides/${guide.slug}`,
+    type: "Guide" as const,
+    keywords: [guide.recommendation, ...guide.reasons]
+  })),
+  ...comparisons.map((item) => ({
+    title: item.title,
+    description: item.description,
+    href: `/compare/${item.slug}`,
+    type: "Guide" as const,
+    keywords: [item.left.name, item.right.name, item.conclusion]
   })),
   ...pages,
 ];
