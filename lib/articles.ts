@@ -413,6 +413,136 @@ export const articles: Article[] = [
     sources: [
       { label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }
     ]
+  },
+  {
+    slug: "sauna-whisk-size-and-weight",
+    title: "Sauna whisk size and weight",
+    eyebrow: "QUALITY GUIDE",
+    description: "Traditional Finnish quality guidance gives a useful reference for what a balanced birch sauna whisk looks like.",
+    readTime: "5 min",
+    sections: [
+      { heading: "A useful benchmark", paragraphs: ["The Finnish Sauna Society's quality guidance describes a traditional fresh birch whisk at 50 ± 5 cm in length and 350 ± 50 g in weight.", "That is a benchmark for one traditional format, not a rule that every commercial whisk in every tradition must match exactly."] },
+      { heading: "Why dimensions matter", paragraphs: ["A whisk that is too short can feel cramped; an unnecessarily long or heavy whisk can be tiring to control.", "For ecommerce, publishing approximate dimensions also helps customers understand packaging and storage needs."] },
+      { heading: "Natural tolerance is normal", paragraphs: ["A tied bundle of branches is not an injection-molded object. Honest specifications should include natural variation rather than promising identical pieces."] }
+    ],
+    sources: [{ label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }]
+  },
+  {
+    slug: "how-a-sauna-whisk-is-tied",
+    title: "How a sauna whisk is tied",
+    eyebrow: "CRAFT & QUALITY",
+    description: "Branch selection, handle clearing, bundle shape and tying all affect how a whisk performs.",
+    readTime: "6 min",
+    sections: [
+      { heading: "Shape before string", paragraphs: ["The Finnish Sauna Society describes a fan-shaped traditional whisk made from carefully selected birch branches.", "The finished form should distribute leaves usefully rather than becoming a random cylindrical bundle."] },
+      { heading: "The handle matters", paragraphs: ["Branches should be cleared of leaves at the handle so the whisk can be held comfortably.", "A clean handle also makes the tying point easier to inspect."] },
+      { heading: "Tying is part of quality", paragraphs: ["The bundle should stay together through soaking, warming and normal use.", "SaunaWhisks.com intends to treat tying integrity as a testable quality point rather than decorative craft language."] }
+    ],
+    sources: [{ label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }]
+  },
+  {
+    slug: "how-to-freeze-sauna-whisk",
+    title: "How to freeze a sauna whisk",
+    eyebrow: "PRESERVATION",
+    description: "Freezing is one traditional way to preserve a fresh whisk beyond the immediate harvest period.",
+    readTime: "5 min",
+    sections: [
+      { heading: "Freeze while fresh", paragraphs: ["The Finnish Sauna Society describes placing a fresh whisk in a bag, removing excess air and freezing it.", "Freezing preserves a different experience from drying because the leaves are not deliberately dehydrated first."] },
+      { heading: "Thaw before use", paragraphs: ["Their guidance suggests allowing a frozen whisk to thaw at room temperature for approximately 1.5 to 2 hours.", "Product-specific instructions should still take priority if a commercial producer uses a different preservation process."] },
+      { heading: "Harder to ship", paragraphs: ["Frozen whisks require an unbroken temperature-controlled logistics chain, which makes them less straightforward for international direct-to-consumer ecommerce than dried products."] }
+    ],
+    sources: [{ label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }]
+  },
+  {
+    slug: "fresh-birch-sauna-whisk-guide",
+    title: "Fresh birch sauna whisk guide",
+    eyebrow: "BIRCH GUIDE",
+    description: "The fresh birch whisk is the traditional reference point behind much of Northern European sauna-whisk quality guidance.",
+    readTime: "6 min",
+    sections: [
+      { heading: "Fresh means genuinely fresh", paragraphs: ["The Finnish Sauna Society's quality guidance describes the traditional fresh whisk as no more than two days old.", "That short window explains why a truly fresh whisk is primarily a local and seasonal product."] },
+      { heading: "Silver birch benchmark", paragraphs: ["The same guidance specifies silver birch for its traditional quality standard.", "Commercial international assortments may use other birch species, which is why botanical identity should be documented rather than assumed."] },
+      { heading: "Store carefully", paragraphs: ["Fresh whisks should be kept in a cool, dry and airy place and protected from conditions that allow the bundle to heat in storage."] }
+    ],
+    sources: [{ label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }]
+  },
+  {
+    slug: "sauna-whisk-handle-quality",
+    title: "What makes a good sauna whisk handle?",
+    eyebrow: "QUALITY GUIDE",
+    description: "The handle is easy to ignore in product photography but important during real use.",
+    readTime: "4 min",
+    sections: [
+      { heading: "Clear the grip", paragraphs: ["Traditional quality guidance calls for removing leaves from the handle area.", "That creates a cleaner, more comfortable grip and separates the working leafy end from the holding end."] },
+      { heading: "Check roughness", paragraphs: ["A handle should not force the user to grip sharp side branches or poorly trimmed protrusions.", "Natural variation is expected, but discomfort is not a premium feature."] },
+      { heading: "Inspect the tie", paragraphs: ["The tying point sits at the handle and should remain secure after preparation.", "A loose bundle can quickly turn a good branch selection into a poor product."] }
+    ],
+    sources: [{ label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }]
+  },
+  {
+    slug: "can-sauna-whisk-go-on-hot-stones",
+    title: "Can a sauna whisk go on the hot stones?",
+    eyebrow: "COMMON QUESTION",
+    description: "No: published Finnish quality guidance specifically warns against putting the whisk on the heater stones.",
+    readTime: "3 min",
+    sections: [
+      { heading: "Keep it off the heater", paragraphs: ["The Finnish Sauna Society advises that a sauna whisk should not be placed on hot sauna stones.", "Direct heat can damage the leaves and branches rather than preparing them."] },
+      { heading: "Do not cook it on the bench", paragraphs: ["The same guidance warns against leaving the whisk on a hot sauna bench.", "Warm the whisk through the sauna environment and correct soaking instead of baking the plant material."] },
+      { heading: "Preparation is gentler than that", paragraphs: ["For a dried whisk, gradual warm-water rehydration followed by normal sauna warming is the conservative approach."] }
+    ],
+    sources: [{ label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }]
+  },
+  {
+    slug: "common-dried-sauna-whisk-mistakes",
+    title: "Common dried sauna whisk mistakes",
+    eyebrow: "TROUBLESHOOTING",
+    description: "Most avoidable problems happen before or immediately after the whisk enters the sauna.",
+    readTime: "6 min",
+    sections: [
+      { heading: "Rushing rehydration", paragraphs: ["A brittle dried whisk needs time to become flexible. Rushing preparation increases the chance of uncomfortable branches and leaf loss.", "Use the product-specific instructions; the Finnish benchmark describes 1.5 to 2 hours in warm water."] },
+      { heading: "Using extreme heat", paragraphs: ["Boiling, direct heater contact and leaving the whisk on a hot bench can work against leaf condition.", "Warm does not mean cook."] },
+      { heading: "Ignoring storage", paragraphs: ["A well-prepared whisk can still arrive in poor condition if it has been exposed to moisture, crushing or excess heat before use."] }
+    ],
+    sources: [{ label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }]
+  },
+  {
+    slug: "sauna-whisk-quality-checklist",
+    title: "Sauna whisk quality checklist",
+    eyebrow: "BUYER CHECKLIST",
+    description: "A practical checklist for judging more than the product photo.",
+    readTime: "6 min",
+    sections: [
+      { heading: "Before preparation", paragraphs: ["Check material identity, origin, condition, approximate dimensions, leaf density, handle clarity and tying.", "For a dried product, some brittleness before rehydration is expected, but crushed or heavily depleted foliage is a different issue."] },
+      { heading: "After preparation", paragraphs: ["Check flexibility, leaf retention, tying integrity, aroma and whether the handle is comfortable.", "A premium product should be evaluated after correct preparation, not only while dry."] },
+      { heading: "After use", paragraphs: ["Record shedding, branch breakage and whether the preparation instructions produced a repeatable result.", "Those observations are useful both for customers and supplier quality control."] }
+    ],
+    sources: [{ label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }]
+  },
+  {
+    slug: "inspect-sauna-whisk-before-use",
+    title: "How to inspect a sauna whisk before use",
+    eyebrow: "PRACTICAL GUIDE",
+    description: "A quick inspection helps catch obvious damage before soaking and use.",
+    readTime: "4 min",
+    sections: [
+      { heading: "Look at the tie and handle", paragraphs: ["Make sure the bundle is still secure and there are no awkward broken branches at the grip.", "Natural variation is expected; obvious structural damage is different."] },
+      { heading: "Look at the leaves", paragraphs: ["A dried whisk will not look like a fresh one, but widespread crushing or severe leaf depletion should be noted before preparation.", "This is especially useful when comparing shipping and packaging methods."] },
+      { heading: "Smell and condition", paragraphs: ["Unexpected dampness or obvious deterioration should be treated cautiously.", "Commercial products should eventually carry batch and storage guidance that makes condition easier to assess."] }
+    ],
+    sources: [{ label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }]
+  },
+  {
+    slug: "sauna-whisk-seasonality",
+    title: "Why sauna whisks are seasonal",
+    eyebrow: "HARVEST",
+    description: "A leafy branch product starts with a growing season, even when the finished whisk is sold year-round.",
+    readTime: "5 min",
+    sections: [
+      { heading: "Leaves are agricultural", paragraphs: ["A whisk depends on living branches and mature leaves, so production quality changes through the growing season.", "This is fundamentally different from continuously manufactured sauna accessories."] },
+      { heading: "Preservation creates year-round inventory", paragraphs: ["Drying and freezing are ways to carry seasonal harvest material into later months.", "That makes summer production planning important even for winter ecommerce."] },
+      { heading: "Season should become product data", paragraphs: ["When suppliers can document it, harvest season or date should become part of product provenance rather than an invented storytelling device."] }
+    ],
+    sources: [{ label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" }]
   }
 ];
 
