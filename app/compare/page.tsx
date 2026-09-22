@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { comparisons } from "@/lib/comparisons";
 
@@ -21,6 +22,7 @@ export default function ComparePage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Compare" }]} />
       <section className="page-hero">
         <p className="section-kicker">COMPARE MATERIALS</p>
         <h1>Birch, oak or eucalyptus?</h1>
