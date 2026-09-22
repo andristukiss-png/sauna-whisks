@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk Quality",
   description: "A hub for SaunaWhisks.com product standards, testing, provenance, claims and quality tools.",
-  alternates: { canonical: "/quality" }
-};
+  canonical: "/quality",
+});
 
 const links = [
   ["/standards", "Product standards", "The fields we intend to publish for every commercial whisk."],
