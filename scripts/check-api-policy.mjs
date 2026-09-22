@@ -29,6 +29,21 @@ const noStore = [
   "app/api/health/route.ts"
 ];
 
+const cachedCsv = [
+  "app/api/catalog.csv/route.ts",
+  "app/api/sources.csv/route.ts",
+  "app/api/product-data-template.csv/route.ts",
+  "app/api/supplier-sample-template.csv/route.ts",
+  "app/api/trade-trial-template.csv/route.ts"
+];
+
+const publicTextRoutes = [
+  "app/feed.xml/route.ts",
+  "app/llms.txt/route.ts",
+  "app/humans.txt/route.ts",
+  "app/.well-known/security.txt/route.ts"
+];
+
 const errors = [];
 
 for (const file of cached) {
@@ -41,19 +56,27 @@ for (const file of noStore) {
   if (!text.includes("noStoreJson")) errors.push("Dynamic API missing no-store helper: " + file);
 }
 
-
-const cachedCsv = [
-  "app/api/catalog.csv/route.ts",
-  "app/api/sources.csv/route.ts",
-  "app/api/product-data-template.csv/route.ts",
-  "app/api/supplier-sample-template.csv/route.ts",
-  "app/api/trade-trial-template.csv/route.ts"
-];
-
 for (const file of cachedCsv) {
   const text = fs.readFileSync(file, "utf8");
-  if (!text.includes('"Cache-Control"')) errors.push("Public CSV missing cache policy: " + file);
-  if (!text.includes('"Content-Type"')) errors.push("Public CSV missing content type: " + file);
+  if (!text.includes("publicCsv")) errors.push("Public CSV missing shared response helper: " + file);
+  if (!text.includes("encodeCsv")) errors.push("Public CSV missing shared encoder: " + file);
+}
+
+for (const file of publicTextRoutes) {
+  const text = fs.readFileSync(file, "utf8");
+  if (!text.includes("publicText")) errors.push("Public text/feed route missing shared response helper: " + file);
+}
+
+const helper = fs.readFileSync("lib/publicApi.ts", "utf8");
+const helperRequirements = [
+  ['"Access-Control-Allow-Origin": "*"', "read-only CORS header"],
+  ["max-age=0, s-maxage=", "CDN cache policy for public JSON"],
+  ['"Cache-Control": "no-store, max-age=0"', "no-store cache policy"],
+  ['contentType = "text/plain; charset=utf-8"', "default text content type"],
+  ['contentType: "text/csv; charset=utf-8"', "CSV content type"],
+];
+for (const [needle, label] of helperRequirements) {
+  if (!helper.includes(needle)) errors.push("Public response helper missing " + label + ".");
 }
 
 const searchApi = fs.readFileSync("app/api/search/route.ts", "utf8");
@@ -79,9 +102,13 @@ for (const [label, needle] of enquiryGuards) {
   if (!enquiry.includes(needle)) errors.push("Enquiry API missing " + label + ".");
 }
 
+if (enquiry.includes("Access-Control-Allow-Origin") || enquiry.includes("publicJson") || enquiry.includes("noStoreJson")) {
+  errors.push("Enquiry POST must not inherit wildcard public-data CORS.");
+}
+
 if (errors.length) {
   console.error("API policy validation failed:");
   errors.forEach((error) => console.error("- " + error));
   process.exit(1);
 }
-console.log("API cache/security policy validation passed.");
+console.log("API cache/security/interoperability validation passed.");
