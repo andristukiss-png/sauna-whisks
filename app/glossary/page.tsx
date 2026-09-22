@@ -40,7 +40,7 @@ export default function GlossaryPage() {
       </section>
       <section className="glossary">
         {terms.map(([slug, term, definition], index) => (
-          <Link className="glossary-row" href={"/glossary/" + slug} key={slug}>
+          <Link prefetch={false} className="glossary-row" href={"/glossary/" + slug} key={slug}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <h2>{term}</h2>
             <p>{definition}</p>
