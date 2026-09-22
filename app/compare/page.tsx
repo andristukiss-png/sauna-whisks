@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
+import { comparisons } from "@/lib/comparisons";
 
 export const metadata = {
   title: "Birch vs Oak vs Eucalyptus Sauna Whisks",
@@ -63,6 +64,18 @@ export default function ComparePage() {
         </div>
       </section>
 
+      <section className="comparison-index">
+        <p className="section-kicker">MORE COMPARISONS</p>
+        <div>
+          {comparisons.map((item) => (
+            <Link href={"/compare/" + item.slug} key={item.slug}>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+              <b>Compare →</b>
+            </Link>
+          ))}
+        </div>
+      </section>
       <SiteFooter />
     </main>
   );
