@@ -16,6 +16,8 @@ export default function ErrorPage({
       <div>
         <button type="button" className="button button-dark" onClick={() => reset()}>Try again</button>
         <Link className="text-link" href="/">Return home →</Link>
+        <Link className="text-link" href="/status">Launch status →</Link>
+        <Link className="text-link" href="/help">Help →</Link>
       </div>
     </main>
   );
