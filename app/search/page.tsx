@@ -10,7 +10,13 @@ export const metadata = {
   alternates: { canonical: "/search" }
 };
 
-export default function SearchPage() {
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q = "" } = await searchParams;
+
   return (
     <main>
       <Header />
@@ -20,7 +26,7 @@ export default function SearchPage() {
         <h1>Find the branch you need.</h1>
         <p>Search products, materials, preparation guides, traditions, launch markets and trade information.</p>
       </section>
-      <SiteSearch items={siteSearchItems} />
+      <SiteSearch items={siteSearchItems} initialQuery={q} />
       <SiteFooter />
     </main>
   );
