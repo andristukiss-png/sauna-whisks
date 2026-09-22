@@ -8,7 +8,9 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getWhisk, saunaWhisks } from "@/lib/products";
 
-export const dynamicParams = false;\n\nexport function generateStaticParams() {
+export const dynamicParams = false;
+
+export function generateStaticParams() {
   return saunaWhisks.map((whisk) => ({ slug: whisk.slug }));
 }
 
