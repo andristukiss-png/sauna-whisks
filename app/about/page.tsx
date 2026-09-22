@@ -34,6 +34,12 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <section className="about-links">
+        <a href="/company">Company hub →</a>
+        <a href="/press">Press facts →</a>
+        <a href="/editorial-policy">Editorial policy →</a>
+        <a href="/status">Launch status →</a>
+      </section>
       <SiteFooter />
     </main>
   );
