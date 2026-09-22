@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articles } from "@/lib/articles";
+import { JournalSearch } from "@/components/JournalSearch";
 
 export const metadata = {
   title: "Sauna Whisk Journal",
@@ -22,19 +22,9 @@ export default function JournalPage() {
         </p>
       </section>
 
-      <section className="journal-list">
-        {articles.map((article, index) => (
-          <Link href={"/journal/" + article.slug} className="journal-row" key={article.slug}>
-            <span className="journal-index">0{index + 1}</span>
-            <div>
-              <p>{article.eyebrow}</p>
-              <h2>{article.title}</h2>
-              <p className="journal-description">{article.description}</p>
-            </div>
-            <span className="journal-time">{article.readTime} →</span>
-          </Link>
-        ))}
-      </section>
+      <JournalSearch items={articles.map(({ slug, title, eyebrow, description, readTime }) => ({
+        slug, title, eyebrow, description, readTime
+      }))} />
 
       <SiteFooter />
     </main>
