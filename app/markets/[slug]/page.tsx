@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
@@ -14,11 +15,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const market = getMarket(slug);
   if (!market) return {};
-  return {
+  return pageMetadata({
     title: `Sauna Whisks in ${market.name}`,
     description: market.summary,
-    alternates: { canonical: getMarketPath(market) }
-  };
+    canonical: getMarketPath(market),
+  });
 }
 
 export default async function MarketPage({ params }: { params: Promise<{ slug: string }> }) {
