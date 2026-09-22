@@ -31,6 +31,12 @@ export default function SuppliersPage() {
         <article><span>04</span><h2>Export experience</h2><p>Countries already supplied and any plant-product documentation routinely provided.</p></article>
       </section>
 
+      <section className="supplier-resource-links">
+        <a href="/suppliers/requirements">Supplier requirements →</a>
+        <a href="/suppliers/sample-evaluation">Sample evaluation →</a>
+        <a href="/templates">Templates & downloads →</a>
+      </section>
+
       <section className="trade-contact">
         <p className="section-kicker">BECOME A SUPPLY PARTNER</p>
         <h2>Introduce your production.</h2>
