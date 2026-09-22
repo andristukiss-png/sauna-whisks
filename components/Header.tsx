@@ -37,6 +37,10 @@ export function Header() {
         <div className="mobile-menu-panel">
           {links.map(([href, label]) => <Link href={href} key={href}>{label}</Link>)}
           <Link href="/faq">FAQ</Link>
+          <Link href="/resources">Resources</Link>
+          <Link href="/tools">Tools</Link>
+          <Link href="/trade">Trade</Link>
+          <Link href="/help">Help</Link>
           <Link href="/contact">Contact</Link>
         </div>
       </details>
