@@ -1,7 +1,8 @@
 import { articles } from "@/lib/articles";
+import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
-  return Response.json({
+  return publicJson({
     count: articles.length,
     articles: articles.map((article) => ({
       slug: article.slug,
