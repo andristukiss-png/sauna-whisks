@@ -78,7 +78,7 @@ export default function USAPage() {
         <p>
           If you operate a US sauna business and want trade packs or recurring supply, tell us your location and approximate monthly requirement.
         </p>
-        <a className="button button-dark" href="mailto:trade@saunawhisks.com?subject=US%20trade%20interest">
+        <a className="button button-dark" href="mailto:info@saunawhisks.com?subject=US%20trade%20interest">
           Contact trade
         </a>
       </section>
