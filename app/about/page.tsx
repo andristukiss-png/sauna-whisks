@@ -4,7 +4,7 @@ import { LeafMark } from "@/components/LeafMark";
 
 export const metadata = {
   title: "About Sauna Whisks",
-  description: "SaunaWhisks.com is a Latvia-based specialist brand focused on sauna whisks, ritual knowledge and Baltic sourcing."
+  description: "SaunaWhisks.com is a Latvia-based specialist brand focused on sauna whisks, ritual knowledge and Baltic sourcing.",
   alternates: { canonical: "/about" }
 };
 
