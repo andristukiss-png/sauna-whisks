@@ -1,15 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Suppliers & Producers",
-  description:
-    "SaunaWhisks.com is looking for experienced sauna-whisk producers and botanical suppliers in Latvia and the wider Baltic region.",
-  alternates: { canonical: "/suppliers" }
-};
+  description: "SaunaWhisks.com is looking for experienced sauna-whisk producers and botanical suppliers in Latvia and the wider Baltic region.",
+  canonical: "/suppliers",
+});
 
 export default function SuppliersPage() {
   return (
