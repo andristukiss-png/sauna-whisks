@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EnquiryForm } from "@/components/EnquiryForm";
-import { getMarket, markets } from "@/lib/markets";
+import { getMarket, getMarketPath, markets } from "@/lib/markets";
 
 export function generateStaticParams() {
   return markets.map((market) => ({ slug: market.slug }));
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `Sauna Whisks in ${market.name}`,
     description: market.summary,
-    alternates: { canonical: market.slug === "united-states" ? "/usa" : `/markets/${market.slug}` }
+    alternates: { canonical: getMarketPath(market) }
   };
 }
 
