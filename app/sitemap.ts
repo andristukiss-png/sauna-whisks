@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { saunaWhisks } from "@/lib/products";
 import { articles } from "@/lib/articles";
+import { markets } from "@/lib/markets";
+import { tradeSegments } from "@/lib/tradeSegments";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://saunawhisks.com";
@@ -29,7 +31,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/learn",
     "/beginners",
     "/materials",
-    "/care"
+    "/care",
+    "/markets",
+    "/trade"
   ];
 
   return [
@@ -50,6 +54,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.75,
+    })),
+    ...markets.map((market) => ({
+      url: `${base}/markets/${market.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.65,
+    })),
+    ...tradeSegments.map((segment) => ({
+      url: `${base}/trade/${segment.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.65,
     }))
   ];
 }
