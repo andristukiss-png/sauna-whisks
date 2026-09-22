@@ -1,7 +1,8 @@
 import { markets } from "@/lib/markets";
+import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
-  return Response.json({
+  return publicJson({
     status: "pre-launch",
     markets: markets.map((market) => ({
       slug: market.slug,
