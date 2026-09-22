@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   },
   description:
     "Traditional sauna whisks, veniks, vihta and Baltic sauna knowledge from Latvia. Birch, oak, eucalyptus and herbal sauna rituals for homes, saunas and trade partners.",
-  alternates: { canonical: "/" },
   openGraph: {
     title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
     description: "Traditional sauna whisks and the living sauna traditions behind them.",
@@ -20,9 +19,23 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Sauna Whisks",
+    url: "https://saunawhisks.com",
+    description: "Sauna whisks and sauna tradition knowledge from Latvia."
+  };
+
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c") }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
