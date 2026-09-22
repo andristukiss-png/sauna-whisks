@@ -1,5 +1,7 @@
 import { Header } from "@/components/Header";
+import Link from "next/link";
 import { LeafMark } from "@/components/LeafMark";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const products = [
   { name: "Baltic Birch", latin: "BETULA · CLASSIC", note: "Soft leaves · aromatic · traditional", price: "$24" },
@@ -27,8 +29,8 @@ export default function Home() {
             Traditional sauna whisks and the knowledge behind them — birch, oak, eucalyptus and herbs, selected for a serious sauna ritual.
           </p>
           <div className="hero-actions">
-            <a href="#whisks" className="button button-dark">Explore the collection</a>
-            <a href="#tradition" className="text-link">Discover the tradition →</a>
+            <Link href="/shop" className="button button-dark">Explore the collection</Link>
+            <Link href="/traditions" className="text-link">Discover the tradition →</Link>
           </div>
           <div className="trust-row">
             <span>LATVIAN ROOTS</span><i />
@@ -72,7 +74,7 @@ export default function Home() {
               <p className="product-latin">{p.latin}</p>
               <div className="product-title-row"><h3>{p.name}</h3><strong>{p.price}</strong></div>
               <p>{p.note}</p>
-              <button type="button">Coming soon <span>→</span></button>
+              <Link className="product-link" href={i === 0 ? "/shop/baltic-birch" : i === 1 ? "/shop/latvian-oak" : "/shop/eucalyptus"}>View whisk <span>→</span></Link>
             </article>
           ))}
         </div>
@@ -119,7 +121,7 @@ export default function Home() {
           <h2>Built close to<br />the source.</h2>
           <p>SaunaWhisks.com is being built in Latvia, where sauna culture is not a trend imported from somewhere else. Our aim is to work with experienced Baltic producers and present their materials with better documentation, consistency and international service.</p>
           <p className="fineprint">We will publish producer, harvest and botanical details only when verified. No invented heritage stories; no anonymous commodity bundles.</p>
-          <a href="#" className="text-link">Our sourcing standard →</a>
+          <Link href="/about" className="text-link">Our sourcing standard →</Link>
         </div>
       </section>
 
@@ -130,12 +132,7 @@ export default function Home() {
         <a href="mailto:trade@saunawhisks.com" className="button button-light">Discuss trade supply</a>
       </section>
 
-      <footer>
-        <div className="footer-brand"><LeafMark /><b>SAUNA WHISKS</b><span>LATVIA</span></div>
-        <div><b>Explore</b><a href="#whisks">Whisks</a><a href="#tradition">Traditions</a><a href="#guide">Guide</a></div>
-        <div><b>Company</b><a href="#about">About</a><a href="#wholesale">Wholesale</a><a href="mailto:hello@saunawhisks.com">Contact</a></div>
-        <div className="footer-note">Traditional sauna culture,<br />presented with modern standards.<small>© 2026 SaunaWhisks.com</small></div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
