@@ -11,6 +11,9 @@ const dataFiles = [
   ["lib/traditionDetails.ts", /slug:\s*"([^"]+)"/g],
   ["lib/buyerGuides.ts", /slug:\s*"([^"]+)"/g],
   ["lib/comparisons.ts", /slug:\s*"([^"]+)"/g],
+  ["lib/faqTopics.ts", /slug:\s*"([^"]+)"/g],
+  ["lib/articleTopics.ts", /slug:\s*"([^"]+)"/g],
+  ["lib/productConditions.ts", /slug:\s*"([^"]+)"/g],
 ];
 
 const errors = [];
@@ -37,6 +40,9 @@ const expectedDynamicRoutes = [
   "app/traditions/[slug]/page.tsx",
   "app/guides/[slug]/page.tsx",
   "app/compare/[slug]/page.tsx",
+  "app/faq/topic/[slug]/page.tsx",
+  "app/journal/topic/[slug]/page.tsx",
+  "app/conditions/[slug]/page.tsx",
 ];
 
 for (const route of expectedDynamicRoutes) {
