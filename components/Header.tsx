@@ -12,13 +12,13 @@ export function Header() {
         </span>
       </Link>
       <nav aria-label="Primary navigation">
-        <Link href="#whisks">Whisks</Link>
-        <Link href="#tradition">Traditions</Link>
-        <Link href="#guide">Guide</Link>
-        <Link href="#about">About</Link>
-        <Link href="#wholesale">Wholesale</Link>
+        <Link href="/shop">Whisks</Link>
+        <Link href="/traditions">Traditions</Link>
+        <Link href="/about">About</Link>
+        <Link href="/wholesale">Wholesale</Link>
+        <Link href="/contact">Contact</Link>
       </nav>
-      <Link href="#whisks" className="header-cta">Explore whisks</Link>
+      <Link href="/shop" className="header-cta">Explore whisks</Link>
     </header>
   );
 }
