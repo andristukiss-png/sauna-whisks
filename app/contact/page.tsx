@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Contact",
   description: "Contact SaunaWhisks.com in Latvia for product, trade and sourcing enquiries.",
-  alternates: { canonical: "/contact" }
-};
+  canonical: "/contact",
+});
 
 export default function ContactPage() {
   return (
