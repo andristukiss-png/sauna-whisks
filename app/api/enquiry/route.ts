@@ -10,6 +10,8 @@ type EnquiryPayload = {
   business?: string;
   country?: string;
   quantity?: string;
+  pageUrl?: string;
+  startedAt?: string;
 };
 
 function validEmail(value: string) {
@@ -22,6 +24,16 @@ function cleanOptional(value: string | undefined, max = 200) {
 
 export async function POST(request: Request) {
   try {
+    const contentType = request.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) {
+      return NextResponse.json({ error: "Unsupported request." }, { status: 415 });
+    }
+
+    const contentLength = Number(request.headers.get("content-length") || "0");
+    if (contentLength > 20_000) {
+      return NextResponse.json({ error: "Request too large." }, { status: 413 });
+    }
+
     const body = (await request.json()) as EnquiryPayload;
 
     const name = cleanOptional(body.name, 120);
@@ -33,8 +45,14 @@ export async function POST(request: Request) {
     const business = cleanOptional(body.business, 200);
     const country = cleanOptional(body.country, 120);
     const quantity = cleanOptional(body.quantity, 120);
+    const pageUrl = cleanOptional(body.pageUrl, 500);
+    const startedAt = Number(body.startedAt || "0");
 
     if (website) {
+      return NextResponse.json({ ok: true });
+    }
+
+    if (startedAt && Date.now() - startedAt < 1800) {
       return NextResponse.json({ ok: true });
     }
 
@@ -69,6 +87,7 @@ export async function POST(request: Request) {
       business ? `Business: ${business}` : "",
       country ? `Country: ${country}` : "",
       quantity ? `Approx. monthly requirement: ${quantity}` : "",
+      pageUrl ? `Page: ${pageUrl}` : "",
     ].filter(Boolean);
 
     const response = await fetch("https://api.resend.com/emails", {
