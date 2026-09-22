@@ -1,7 +1,8 @@
 import { glossaryTerms } from "@/lib/glossaryTerms";
+import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
-  return Response.json({
+  return publicJson({
     count: glossaryTerms.length,
     terms: glossaryTerms.map((item) => ({
       slug: item.slug,
