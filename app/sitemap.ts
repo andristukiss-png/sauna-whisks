@@ -54,6 +54,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/catalog",
     "/claims",
     "/data",
+    "/quality",
+    "/resources",
     "/finder",
     "/checklist",
     "/journal/topics"
