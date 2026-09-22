@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articles } from "@/lib/articles";
 
@@ -18,6 +19,7 @@ export default function SourcesPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Sources" }]} />
       <section className="page-hero">
         <p className="section-kicker">SOURCES</p>
         <h1>Show the source, not just the story.</h1>
