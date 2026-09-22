@@ -34,6 +34,8 @@ const pages: SiteSearchItem[] = [
   { title: "FAQ", description: "Common questions about sauna whisks and launch plans.", href: "/faq", type: "Page", keywords: ["questions", "help"] },
   { title: "Suppliers", description: "Producer and supplier intake for sauna whisk production partners.", href: "/suppliers", type: "Page", keywords: ["producer", "supplier", "latvia", "baltic"] },
   { title: "Partnerships & Press", description: "Industry, press, practitioner and content collaboration.", href: "/partners", type: "Page", keywords: ["press", "partner", "collaboration"] },
+  { title: "Company", description: "Company, launch, partnership, supplier, editorial and policy information.", href: "/company", type: "Page", keywords: ["company", "latvia", "brand", "status"] },
+  { title: "Press facts", description: "Verified pre-launch facts for media and editorial reference.", href: "/press", type: "Page", keywords: ["press", "media", "facts", "brand"] },
   { title: "Sources", description: "External sources referenced across the sauna knowledge library.", href: "/sources", type: "Page", keywords: ["references", "evidence"] },
   { title: "Editorial policy", description: "How SaunaWhisks.com selects sources and separates factual, cultural and commercial claims.", href: "/editorial-policy", type: "Page", keywords: ["editorial", "sources", "evidence", "policy"] },
   { title: "Corrections", description: "How factual and product-data corrections are reported and reviewed.", href: "/corrections", type: "Page", keywords: ["correction", "error", "accuracy", "contact"] },
