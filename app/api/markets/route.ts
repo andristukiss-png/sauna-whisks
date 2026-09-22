@@ -1,4 +1,4 @@
-import { markets } from "@/lib/markets";
+import { getMarketPath, markets } from "@/lib/markets";
 import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
@@ -9,7 +9,7 @@ export function GET() {
       name: market.name,
       status: market.status,
       summary: market.summary,
-      url: `https://saunawhisks.com/markets/${market.slug}`,
+      url: `https://saunawhisks.com${getMarketPath(market)}`,
     })),
   });
 }

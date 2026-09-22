@@ -135,6 +135,20 @@ Full quality gate:
 npm run check
 ```
 
+Canonical-domain configuration only:
+
+```bash
+npm run validate:domain
+```
+
+After a production deployment is Ready, verify public DNS/HTTPS/routes from a machine with public internet access:
+
+```bash
+npm run verify:production
+```
+
+See `docs/PRODUCTION_DIAGNOSTICS.md` for the domain/TLS incident playbook.
+
 The CI pipeline runs validation, lint, TypeScript and the production Next.js build.
 
 ## Commercial launch gates

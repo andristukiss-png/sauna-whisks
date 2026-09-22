@@ -42,10 +42,15 @@ for (const route of requiredStatic) {
   if (!sitemap.includes('"' + route + '"')) errors.push("Sitemap missing static route: " + route);
 }
 
+const excludedStatic = ["/search", "/markets/united-states"];
+for (const route of excludedStatic) {
+  if (sitemap.includes('"' + route + '"')) errors.push("Noindex route must not appear in sitemap: " + route);
+}
+
 const requiredCollections = [
   "saunaWhisks.map",
   "articles.map",
-  "markets.map",
+  "markets.filter",
   "tradeSegments.map",
   "operationGuides.map",
   "glossaryTerms.map",
@@ -62,6 +67,10 @@ const requiredCollections = [
 
 for (const collection of requiredCollections) {
   if (!sitemap.includes(collection)) errors.push("Sitemap missing dynamic collection: " + collection);
+}
+
+if (sitemap.includes("lastModified: new Date()")) {
+  errors.push("Sitemap must not invent current timestamps for unchanged content.");
 }
 
 if (errors.length) {

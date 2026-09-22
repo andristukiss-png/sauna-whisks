@@ -2,6 +2,7 @@ import fs from "node:fs";
 
 const text = fs.readFileSync("next.config.ts", "utf8");
 const required = [
+  ["/markets/united-states", "/usa"],
   ["/shop/latvian-oak", "/shop/baltic-oak"],
   ["/sauna-broom", "/journal/sauna-whisk-vs-sauna-broom"],
   ["/sauna-brooms", "/journal/sauna-whisk-vs-sauna-broom"],
