@@ -24,28 +24,37 @@ for (const file of requiredFiles) {
   }
 }
 
-const walk = (dir) =>
-  fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+function walk(dir) {
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const absolute = path.join(dir, entry.name);
-    if (entry.name === "node_modules" || entry.name === ".next" || entry.name === ".git") return [];
-    if (entry.isDirectory()) return walk(absolute);
-    return [absolute];
+    return entry.isDirectory() ? walk(absolute) : [absolute];
   });
+}
 
-const sourceFiles = walk(root).filter((file) => /\.(ts|tsx|md|mjs)$/.test(file));
+// Only scan user-facing/application source. Do not scan validators themselves,
+// because the forbidden strings necessarily appear inside their own rules.
+const publicRoots = ["app", "components", "lib"];
+const sourceFiles = publicRoots
+  .flatMap((dir) => walk(path.join(root, dir)))
+  .filter((file) => /\.(ts|tsx|md)$/.test(file));
+
 const joined = sourceFiles.map((file) => fs.readFileSync(file, "utf8")).join("\n");
+const lowered = joined.toLowerCase();
 
 for (const obsolete of ["hello@saunawhisks.com", "trade@saunawhisks.com"]) {
-  if (joined.toLowerCase().includes(obsolete)) {
+  if (lowered.includes(obsolete)) {
     errors.push(`Obsolete public email found: ${obsolete}`);
   }
 }
 
 if (!joined.includes("info@SaunaWhisks.com")) {
-  errors.push("Primary contact email is missing.");
+  errors.push("Primary contact email is missing from public application content.");
 }
 
-if (!joined.includes("Commercial launch gates")) {
+const readmePath = path.join(root, "README.md");
+const readme = fs.existsSync(readmePath) ? fs.readFileSync(readmePath, "utf8") : "";
+if (!readme.includes("Commercial launch gates")) {
   errors.push("README launch-gate documentation is missing.");
 }
 
