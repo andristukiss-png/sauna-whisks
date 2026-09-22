@@ -35,6 +35,8 @@ const pages: SiteSearchItem[] = [
   { title: "Suppliers", description: "Producer and supplier intake for sauna whisk production partners.", href: "/suppliers", type: "Page", keywords: ["producer", "supplier", "latvia", "baltic"] },
   { title: "Partnerships & Press", description: "Industry, press, practitioner and content collaboration.", href: "/partners", type: "Page", keywords: ["press", "partner", "collaboration"] },
   { title: "Sources", description: "External sources referenced across the sauna knowledge library.", href: "/sources", type: "Page", keywords: ["references", "evidence"] },
+  { title: "Editorial policy", description: "How SaunaWhisks.com selects sources and separates factual, cultural and commercial claims.", href: "/editorial-policy", type: "Page", keywords: ["editorial", "sources", "evidence", "policy"] },
+  { title: "Corrections", description: "How factual and product-data corrections are reported and reviewed.", href: "/corrections", type: "Page", keywords: ["correction", "error", "accuracy", "contact"] },
   { title: "Markets", description: "Current launch-market plans and availability status.", href: "/markets", type: "Page", keywords: ["usa", "canada", "uk", "germany", "australia", "finland", "eu"] },
   { title: "Trade", description: "Trade supply by business type.", href: "/trade", type: "Page", keywords: ["wholesale", "b2b", "venue", "retail"] },
   { title: "Launch status", description: "Current commercial launch gates and what is open or still being validated.", href: "/status", type: "Page", keywords: ["status", "pre-launch", "checkout"] },
