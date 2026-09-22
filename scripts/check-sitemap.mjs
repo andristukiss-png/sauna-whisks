@@ -22,6 +22,20 @@ const requiredStatic = [
   "/data",
   "/finder",
   "/checklist",
+  "/quality",
+  "/resources",
+  "/help",
+  "/templates",
+  "/tools",
+  "/use-cases",
+  "/techniques",
+  "/company",
+  "/press",
+  "/editorial-policy",
+  "/corrections",
+  "/suppliers/requirements",
+  "/suppliers/sample-evaluation",
+  "/trade/trial",
 ];
 
 for (const route of requiredStatic) {
