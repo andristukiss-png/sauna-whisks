@@ -29,7 +29,7 @@ export default function WholesalePage() {
         <p className="section-kicker">START A TRADE CONVERSATION</p>
         <h2>Tell us what you operate.</h2>
         <p>For now, email us with your business type, country and approximate monthly requirement.</p>
-        <a className="button button-dark" href="mailto:trade@saunawhisks.com">trade@saunawhisks.com</a>
+        <a className="button button-dark" href="mailto:info@saunawhisks.com">info@saunawhisks.com</a>
       </section>
       <SiteFooter />
     </main>
