@@ -39,7 +39,7 @@ export function JournalSearch({ items }: { items: JournalItem[] }) {
 
       <div className="journal-list">
         {filtered.map((article, index) => (
-          <Link href={"/journal/" + article.slug} className="journal-row" key={article.slug}>
+          <Link prefetch={false} href={"/journal/" + article.slug} className="journal-row" key={article.slug}>
             <span className="journal-index">{String(index + 1).padStart(2, "0")}</span>
             <div>
               <p>{article.eyebrow}</p>
