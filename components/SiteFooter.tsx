@@ -9,7 +9,7 @@ export function SiteFooter() {
         <b>SAUNA WHISKS</b>
         <span>LATVIA</span>
       </div>
-      <div>
+      <nav className="footer-links" aria-label="Explore">
         <b>Explore</b>
         <Link prefetch={false} href="/shop">Shop</Link>
         <Link prefetch={false} href="/catalog">Product data</Link>
@@ -32,8 +32,8 @@ export function SiteFooter() {
         <Link prefetch={false} href="/markets">Markets</Link>
         <Link prefetch={false} href="/usa">USA</Link>
         <a href="/feed.xml">RSS</a>
-      </div>
-      <div>
+      </nav>
+      <nav className="footer-links" aria-label="Company">
         <b>Company</b>
         <Link prefetch={false} href="/about">About</Link>
         <Link prefetch={false} href="/status">Launch status</Link>
@@ -56,7 +56,7 @@ export function SiteFooter() {
         <Link prefetch={false} href="/returns">Returns</Link>
         <Link prefetch={false} href="/cookies">Cookies</Link>
         <Link prefetch={false} href="/accessibility">Accessibility</Link>
-      </div>
+      </nav>
       <div className="footer-note">
         Traditional sauna culture,<br />presented with modern standards.
         <small>© 2026 SaunaWhisks.com</small>
