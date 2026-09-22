@@ -19,6 +19,8 @@ export function SiteFooter() {
         <Link href="/care">Care</Link>
         <Link href="/conditions">Conditions</Link>
         <Link href="/guides">Buying guides</Link>
+        <Link href="/finder">Whisk finder</Link>
+        <Link href="/checklist">Quality checklist</Link>
         <Link href="/compare">Compare</Link>
         <Link href="/traditions">Traditions</Link>
         <Link href="/journal">Journal</Link>
