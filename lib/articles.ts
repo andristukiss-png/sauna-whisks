@@ -230,6 +230,49 @@ export const articles: Article[] = [
       { label: "Holy Banya — Sauna whisks collection", url: "https://holybanya.com/collections/sauna-whisks" }
     ]
   }
+  ,
+  {
+    slug: "how-to-use-a-sauna-whisk",
+    title: "How to use a sauna whisk",
+    eyebrow: "PRACTICAL GUIDE",
+    description:
+      "A simple introduction to warming, air movement, brushing and rhythmic whisking without turning the ritual into a performance.",
+    readTime: "7 min",
+    sections: [
+      {
+        heading: "Prepare before you use it",
+        paragraphs: [
+          "A whisk should be flexible before it touches the body. Fresh whisks need less preparation; dried whisks need gradual rehydration according to their condition and the producer's instructions.",
+          "Warm the prepared whisk in the sauna so the leaves become supple and aromatic rather than using it cold and brittle."
+        ]
+      },
+      {
+        heading: "Start by moving heat",
+        paragraphs: [
+          "Whisking is not only about striking the skin. One of the gentlest techniques is to move hot air toward the body with controlled fanning movements.",
+          "This lets a beginner understand the whisk as a heat-management tool before moving into brushing or rhythmic contact."
+        ]
+      },
+      {
+        heading: "Brush and press",
+        paragraphs: [
+          "Use light brushing movements over the body and allow the leaves to make broad contact. You can also briefly press a warm whisk onto the body to transfer heat and aroma.",
+          "The goal is rhythm and comfort, not force."
+        ]
+      },
+      {
+        heading: "Respect the person and the material",
+        paragraphs: [
+          "A sauna ritual should be adjusted to heat tolerance, comfort and experience. Stop if anything feels unpleasant, and do not use a whisk on irritated or injured skin.",
+          "Natural whisks also vary. Leaf retention, flexibility and scent depend on species, harvest, drying and preparation."
+        ]
+      }
+    ],
+    sources: [
+      { label: "Finnish Sauna Society — Quality guidelines for sauna whisks", url: "https://sauna.fi/en/sauna-knowledge/quality-guidelines-for-sauna-whisks/" },
+      { label: "Latvia.eu — Pirts, the Latvian sauna", url: "https://www.latvia.eu/sauna/" }
+    ]
+  }
 
 ];
 
