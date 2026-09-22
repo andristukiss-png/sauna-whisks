@@ -44,7 +44,7 @@ export function LandedCostCalculator(){
         <input type="number" min="0" step="0.01" value={value} onChange={(e)=>setter(e.target.value)}/>
       </label>)}
     </div>
-    <div className="calculator-result">
+    <div className="calculator-result" aria-live="polite">
       <div><span>Inbound freight / unit</span><b>{money(calc.inbound)}</b></div>
       <div><span>Estimated variable cost / unit</span><b>{money(calc.total)}</b></div>
       <div><span>Contribution before CAC</span><b>{money(calc.contribution)}</b></div>
