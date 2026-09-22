@@ -22,7 +22,7 @@ export default function ConditionsPage() {
       </section>
       <section className="condition-grid">
         {productConditions.map((item, index) => (
-          <Link href={"/conditions/" + item.slug} key={item.slug}>
+          <Link prefetch={false} href={"/conditions/" + item.slug} key={item.slug}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <b>{item.status}</b>
             <h2>{item.name}</h2>
