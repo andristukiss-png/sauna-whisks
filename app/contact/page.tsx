@@ -19,7 +19,10 @@ export default function ContactPage() {
           Send us a message and we will reply from <strong>info@SaunaWhisks.com</strong>.
         </p>
 
-        <EnquiryForm />
+        <EnquiryForm
+          topics={["Product question", "Shipping / country availability", "Wholesale / trade", "Sourcing / supplier", "Press / partnership", "Other"]}
+          messagePlaceholder="Tell us how we can help..."
+        />
 
         <div className="contact-meta">
           <div><span>EMAIL</span><a href="mailto:info@SaunaWhisks.com">info@SaunaWhisks.com</a></div>
