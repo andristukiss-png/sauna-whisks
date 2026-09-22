@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
@@ -20,6 +21,7 @@ export default function StatusPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Launch status" }]} />
       <section className="page-hero">
         <p className="section-kicker">LAUNCH STATUS</p>
         <h1>Pre-launch, on purpose.</h1>
