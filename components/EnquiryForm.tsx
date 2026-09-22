@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 
 type Status = "idle" | "sending" | "success" | "error";
@@ -118,18 +119,23 @@ export function EnquiryForm({
         >
           {status === "sending" ? "Sending…" : "Send enquiry"}
         </button>
-        <p
-          className={
-            status === "success"
-              ? "form-status success"
-              : status === "error"
-                ? "form-status error"
-                : "form-status"
-          }
-          aria-live="polite"
-        >
-          {statusMessage}
-        </p>
+        <div className="enquiry-status-wrap">
+          <p
+            className={
+              status === "success"
+                ? "form-status success"
+                : status === "error"
+                  ? "form-status error"
+                  : "form-status"
+            }
+            aria-live="polite"
+          >
+            {statusMessage}
+          </p>
+          <small>
+            We use your details only to respond to this enquiry. <Link href="/privacy">Privacy</Link>.
+          </small>
+        </div>
       </div>
     </form>
   );
