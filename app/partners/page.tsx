@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -31,9 +32,9 @@ export default function PartnersPage() {
       </section>
 
       <section className="partner-resource-links">
-        <a href="/press">Press facts →</a>
-        <a href="/company">Company hub →</a>
-        <a href="/editorial-policy">Editorial policy →</a>
+        <Link href="/press">Press facts →</Link>
+        <Link href="/company">Company hub →</Link>
+        <Link href="/editorial-policy">Editorial policy →</Link>
       </section>
       <section className="trade-contact">
         <p className="section-kicker">START A CONVERSATION</p>
