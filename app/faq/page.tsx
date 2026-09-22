@@ -15,6 +15,7 @@ const faqs = [
 export const metadata = {
   title: "Sauna Whisk FAQ",
   description: "Answers to common questions about sauna whisks, venik, vihta, vasta, birch, oak, preparation and shipping."
+  alternates: { canonical: "/faq" }
 };
 
 export default function FAQPage() {
