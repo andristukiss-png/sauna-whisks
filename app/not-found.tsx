@@ -13,6 +13,8 @@ export default function NotFound() {
         <div>
           <Link className="button button-dark" href="/">Return home</Link>
           <Link className="text-link" href="/shop">Browse sauna whisks →</Link>
+          <Link className="text-link" href="/search">Search the site →</Link>
+          <Link className="text-link" href="/help">Open help →</Link>
         </div>
       </section>
       <SiteFooter />
