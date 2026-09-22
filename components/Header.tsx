@@ -14,9 +14,9 @@ export function Header() {
       <nav aria-label="Primary navigation">
         <Link href="/shop">Whisks</Link>
         <Link href="/traditions">Traditions</Link>
+        <Link href="/journal">Journal</Link>
         <Link href="/about">About</Link>
         <Link href="/wholesale">Wholesale</Link>
-        <Link href="/contact">Contact</Link>
       </nav>
       <Link href="/shop" className="header-cta">Explore whisks</Link>
     </header>
