@@ -13,7 +13,7 @@ export default function GlobalError({
           <p>SAUNA WHISKS</p>
           <h1>Something went wrong.</h1>
           <p>Please try the page again. If the problem continues, email info@SaunaWhisks.com.</p>
-          <button onClick={() => reset()}>Try again</button>
+          <button type="button" onClick={() => reset()}>Try again</button>
         </main>
       </body>
     </html>
