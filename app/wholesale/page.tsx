@@ -33,7 +33,12 @@ export default function WholesalePage() {
           Include your business type, country and approximate monthly requirement.
           We will reply from info@SaunaWhisks.com.
         </p>
-        <EnquiryForm subject="SaunaWhisks.com wholesale enquiry" />
+        <EnquiryForm
+          subject="SaunaWhisks.com wholesale enquiry"
+          topics={["Recurring venue supply", "Retail / stockist", "Sauna builder", "Hotel / spa", "Distributor", "Other trade enquiry"]}
+          businessFields
+          messagePlaceholder="Tell us about your business and what products you are interested in..."
+        />
       </section>
       <SiteFooter />
     </main>
