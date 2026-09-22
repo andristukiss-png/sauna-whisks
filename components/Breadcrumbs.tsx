@@ -5,16 +5,33 @@ export function Breadcrumbs({
 }: {
   items: Array<{ label: string; href?: string }>;
 }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      ...(item.href ? { item: new URL(item.href, "https://saunawhisks.com").toString() } : {})
+    }))
+  };
+
   return (
-    <nav className="breadcrumbs" aria-label="Breadcrumb">
-      <ol>
-        {items.map((item, index) => (
-          <li key={item.label}>
-            {item.href ? <Link href={item.href}>{item.label}</Link> : <span aria-current="page">{item.label}</span>}
-            {index < items.length - 1 ? <i aria-hidden="true">/</i> : null}
-          </li>
-        ))}
-      </ol>
-    </nav>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
+      />
+      <nav className="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          {items.map((item, index) => (
+            <li key={item.label}>
+              {item.href ? <Link href={item.href}>{item.label}</Link> : <span aria-current="page">{item.label}</span>}
+              {index < items.length - 1 ? <i aria-hidden="true">/</i> : null}
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </>
   );
 }
