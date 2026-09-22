@@ -17,3 +17,19 @@ Any change involving price, availability, checkout, shipping countries, supplier
 
 ## Rollback
 Use the last known-good Git commit / Vercel deployment. Do not “fix forward” a broken production checkout while customers can transact.
+
+
+## Verification command
+
+Before treating a release as deployable, run:
+
+```bash
+npm run check
+```
+
+A release is considered technically green only when:
+- custom validation passes
+- ESLint passes
+- TypeScript passes
+- `next build` passes
+- Vercel reports the deployment Ready
