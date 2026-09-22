@@ -1,5 +1,6 @@
+import { noStoreJson } from "@/lib/publicApi";
 export function GET() {
-  return Response.json({
+  return noStoreJson({
     status: "pre-launch",
     checkoutEnabled: false,
     enquiriesOpen: true,
