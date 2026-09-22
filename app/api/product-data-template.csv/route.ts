@@ -1,6 +1,5 @@
-function csv(value: string) {
-  return '"' + value.replace(/"/g, '""') + '"';
-}
+import { encodeCsv } from "@/lib/csv";
+import { publicCsv } from "@/lib/publicApi";
 
 export function GET() {
   const headers = [
@@ -12,12 +11,10 @@ export function GET() {
   const example = [
     "","Example product","Birch","Betula","","","","","","Dried","","","","","","","","","","","","",""
   ];
-  const body=[headers,example].map((row)=>row.map(csv).join(",")).join("\n");
-  return new Response(body,{
-    headers:{
-      "Content-Type":"text/csv; charset=utf-8",
-      "Content-Disposition":'attachment; filename="saunawhisks-product-data-template.csv"',
-      "Cache-Control":"public, max-age=3600"
-    }
-  });
+
+  return publicCsv(
+    encodeCsv([headers, example]),
+    "saunawhisks-product-data-template.csv",
+    "attachment"
+  );
 }
