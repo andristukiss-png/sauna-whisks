@@ -26,7 +26,7 @@ export default function TradePage() {
 
       <section className="trade-segment-grid">
         {tradeSegments.map((segment, index) => (
-          <Link href={"/trade/" + segment.slug} key={segment.slug}>
+          <Link prefetch={false} href={"/trade/" + segment.slug} key={segment.slug}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <h2>{segment.name}</h2>
             <p>{segment.summary}</p>
