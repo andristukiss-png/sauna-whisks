@@ -7,7 +7,8 @@ import { siteSearchItems } from "@/lib/siteSearch";
 export const metadata = {
   title: "Search",
   description: "Search SaunaWhisks.com products, guides, markets and trade information.",
-  alternates: { canonical: "/search" }
+  alternates: { canonical: "/search" },
+  robots: { index: false, follow: true }
 };
 
 export default async function SearchPage({
