@@ -1,5 +1,6 @@
+import { publicJson } from "@/lib/publicApi";
 export function GET() {
-  return Response.json({
+  return publicJson({
     service: "SaunaWhisks.com public data",
     status: "pre-launch",
     endpoints: [
