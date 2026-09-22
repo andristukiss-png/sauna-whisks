@@ -49,6 +49,11 @@ const pages: SiteSearchItem[] = [
   { title: "Trade trial plan", description: "Structured venue or retailer product trial before recurring supply.", href: "/trade/trial", type: "Trade", keywords: ["trade", "trial", "venue", "retailer", "reorder"] },
   { title: "Product claims standard", description: "How SaunaWhisks.com separates product facts from unsupported health marketing.", href: "/claims", type: "Page", keywords: ["claims", "evidence", "health", "quality"] },
   { title: "Product data catalog", description: "Pre-launch product status, planned condition and verification fields.", href: "/catalog", type: "Page", keywords: ["product data", "verification", "status", "catalog"] },
+  { title: "Operating tools", description: "Supplier, commercial, trade-demand and launch-readiness tools.", href: "/tools", type: "Page", keywords: ["tools", "supplier", "margin", "demand", "launch"] },
+  { title: "Supplier scorecard", description: "Score producer candidates using evidence-based criteria.", href: "/tools/supplier-scorecard", type: "Page", keywords: ["supplier", "scorecard", "producer", "evidence"] },
+  { title: "Landed-cost calculator", description: "Estimate variable unit cost and contribution before CAC.", href: "/tools/landed-cost", type: "Page", keywords: ["landed cost", "margin", "pricing", "commercial"] },
+  { title: "Trade demand estimator", description: "Estimate monthly whisk usage for a venue.", href: "/tools/trade-demand", type: "Trade", keywords: ["demand", "monthly", "venue", "wholesale"] },
+  { title: "Launch readiness", description: "Track product, compliance, commercial, technical and QA launch gates.", href: "/tools/launch-readiness", type: "Page", keywords: ["launch", "checklist", "readiness", "checkout"] },
   { title: "Whisk finder", description: "Three-question tool for choosing birch, oak, eucalyptus or the Discovery Trio.", href: "/finder", type: "Page", keywords: ["recommendation", "quiz", "choose"] },
   { title: "Quality checklist", description: "Interactive checklist for evaluating whisk origin, construction and prepared performance.", href: "/checklist", type: "Page", keywords: ["quality", "supplier", "leaf retention", "testing"] },
 ];
