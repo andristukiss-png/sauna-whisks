@@ -13,13 +13,16 @@ export function SiteFooter() {
         <b>Explore</b>
         <Link href="/shop">Shop</Link>
         <Link href="/traditions">Traditions</Link>
-        <Link href="/about">About</Link>
+        <Link href="/journal">Journal</Link>
+        <Link href="/glossary">Glossary</Link>
       </div>
       <div>
         <b>Company</b>
+        <Link href="/about">About</Link>
+        <Link href="/standards">Standards</Link>
+        <Link href="/faq">FAQ</Link>
         <Link href="/wholesale">Wholesale</Link>
         <Link href="/contact">Contact</Link>
-        <a href="mailto:hello@saunawhisks.com">Email</a>
       </div>
       <div className="footer-note">
         Traditional sauna culture,<br />presented with modern standards.
