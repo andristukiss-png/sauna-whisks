@@ -195,7 +195,7 @@ export const articles: Article[] = [
       { label: "Latvia.eu — Pirts, the Latvian sauna", url: "https://www.latvia.eu/sauna/" },
       { label: "Latvia Travel — Bathing traditions in Latvia", url: "https://www.latvia.travel/en/bathing-traditions-latvia" }
     ]
-  }  ,
+  },
   {
     slug: "sauna-whisk-vs-sauna-broom",
     title: "Sauna whisk vs sauna broom",
