@@ -12,7 +12,12 @@ const links = [
 
 export function Header() {
   return (
-    <header className="site-header">
+    <>
+      <div className="prelaunch-bar">
+        <span>PRE-LAUNCH · ENQUIRIES OPEN · CHECKOUT DISABLED</span>
+        <Link href="/status">Launch status →</Link>
+      </div>
+      <header className="site-header">
       <Link href="/" className="brand" aria-label="Sauna Whisks home">
         <LeafMark className="brand-mark" />
         <span>
@@ -35,6 +40,7 @@ export function Header() {
           <Link href="/contact">Contact</Link>
         </div>
       </details>
-    </header>
+      </header>
+    </>
   );
 }
