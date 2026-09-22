@@ -29,6 +29,8 @@ export function SiteFooter() {
       <div>
         <b>Company</b>
         <Link href="/about">About</Link>
+        <Link href="/status">Launch status</Link>
+        <Link href="/site-map">Site map</Link>
         <Link href="/standards">Standards</Link>
         <Link href="/operations">Operations</Link>
         <Link href="/sources">Sources</Link>
@@ -39,6 +41,7 @@ export function SiteFooter() {
         <Link href="/partners">Partners / Press</Link>
         <Link href="/contact">Contact</Link>
         <Link href="/shipping">Shipping</Link>
+        <Link href="/legal">Legal hub</Link>
         <Link href="/privacy">Privacy</Link>
         <Link href="/terms">Terms</Link>
         <Link href="/returns">Returns</Link>
