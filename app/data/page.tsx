@@ -21,6 +21,9 @@ const endpoints = [
   ["/api/operations", "Operations standards JSON"],
   ["/api/sources", "Source library JSON"],
   ["/api/sources.csv", "Source library CSV"],
+  ["/api/product-data-template.csv", "Product data template CSV"],
+  ["/api/supplier-sample-template.csv", "Supplier sample evaluation CSV"],
+  ["/api/trade-trial-template.csv", "Trade trial template CSV"],
   ["/feed.xml", "RSS feed"],
   ["/feed.json", "JSON Feed"],
 ];
