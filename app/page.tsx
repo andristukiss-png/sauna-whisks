@@ -106,10 +106,10 @@ export default function Home() {
             <p>A serious collection deserves serious information. Our journal will document materials, preparation, regional traditions and harvesting.</p>
           </div>
           <div className="article-list">
-            <a href="#"><span>01</span><b>What is a sauna whisk?</b><em>6 min</em></a>
-            <a href="#"><span>02</span><b>Venik, vihta or vasta?</b><em>8 min</em></a>
-            <a href="#"><span>03</span><b>Birch vs oak: how they feel</b><em>5 min</em></a>
-            <a href="#"><span>04</span><b>How to prepare a dried whisk</b><em>7 min</em></a>
+            <Link href="/journal/what-is-a-sauna-whisk"><span>01</span><b>What is a sauna whisk?</b><em>6 min</em></Link>
+            <Link href="/journal/venik-vihta-vasta"><span>02</span><b>Venik, vihta or vasta?</b><em>7 min</em></Link>
+            <Link href="/journal/birch-vs-oak-sauna-whisk"><span>03</span><b>Birch vs oak: how they feel</b><em>5 min</em></Link>
+            <Link href="/journal/how-to-prepare-dried-sauna-whisk"><span>04</span><b>How to prepare a dried whisk</b><em>6 min</em></Link>
           </div>
         </div>
       </section>
