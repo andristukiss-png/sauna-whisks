@@ -12,6 +12,7 @@ const required = [
   "docs/SEO_MAP.md",
   "docs/EMAIL_SETUP.md",
   "docs/DEPLOYMENT.md",
+  "docs/PRODUCTION_DIAGNOSTICS.md",
   "docs/ANALYTICS_PLAN.md",
   "docs/CONTENT_GUIDE.md",
   "docs/CLAIMS_POLICY.md",
