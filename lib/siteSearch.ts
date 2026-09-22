@@ -11,6 +11,8 @@ import { comparisons } from "@/lib/comparisons";
 import { faqTopics } from "@/lib/faqTopics";
 import { articleTopics } from "@/lib/articleTopics";
 import { productConditions } from "@/lib/productConditions";
+import { useCases } from "@/lib/useCases";
+import { techniques } from "@/lib/techniques";
 
 export type SiteSearchItem = {
   title: string;
@@ -149,6 +151,20 @@ export const siteSearchItems: SiteSearchItem[] = [
     href: `/conditions/${item.slug}`,
     type: "Page" as const,
     keywords: [item.status, ...item.advantages, ...item.constraints]
+  })),
+  ...useCases.map((item) => ({
+    title: item.name + " — use case",
+    description: item.summary,
+    href: `/use-cases/${item.slug}`,
+    type: "Guide" as const,
+    keywords: [...item.priorities, item.recommendation]
+  })),
+  ...techniques.map((item) => ({
+    title: item.name,
+    description: item.summary,
+    href: `/techniques/${item.slug}`,
+    type: "Guide" as const,
+    keywords: [...item.steps, item.caution]
   })),
   ...pages,
 ];
