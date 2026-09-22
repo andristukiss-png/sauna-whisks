@@ -1,15 +1,18 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
   title: "Privacy",
-  description: "Privacy information for SaunaWhisks.com."
+  description: "Privacy information for SaunaWhisks.com.",
+  alternates: { canonical: "/privacy" }
 };
 
 export default function PrivacyPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Privacy" }]} />
       <article className="legal-page">
         <p className="section-kicker">PRIVACY</p>
         <h1>Privacy at SaunaWhisks.com</h1>
