@@ -9,6 +9,9 @@
 - enquiry form validates
 - fallback email path works
 - sitemap/robots/feed/API endpoints respond
+- canonical apex host responds over HTTPS
+- `www` redirects to the canonical apex host
+- `/api/health` returns `ok: true`
 
 ## Content
 - one public email only
@@ -27,7 +30,9 @@
 
 ## Technical
 - validation green
+- canonical-domain validation green
 - lint green
 - typecheck green
 - next build green
 - Vercel deployment green
+- production smoke check green
