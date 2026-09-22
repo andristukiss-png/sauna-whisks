@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { articles } from "@/lib/articles";
 import { JournalSearch } from "@/components/JournalSearch";
@@ -14,6 +15,7 @@ export default function JournalPage() {
   return (
     <main>
       <Header />
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Journal" }]} />
       <section className="page-hero">
         <p className="section-kicker">THE SAUNA LIBRARY</p>
         <h1>Knowledge before commerce.</h1>
