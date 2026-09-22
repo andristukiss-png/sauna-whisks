@@ -8,6 +8,8 @@ import { materialKnowledge } from "@/lib/materialKnowledge";
 import { traditionDetails } from "@/lib/traditionDetails";
 import { buyerGuides } from "@/lib/buyerGuides";
 import { comparisons } from "@/lib/comparisons";
+import { faqTopics } from "@/lib/faqTopics";
+import { articleTopics } from "@/lib/articleTopics";
 
 export type SiteSearchItem = {
   title: string;
@@ -111,6 +113,20 @@ export const siteSearchItems: SiteSearchItem[] = [
     href: `/compare/${item.slug}`,
     type: "Guide" as const,
     keywords: [item.left.name, item.right.name, item.conclusion]
+  })),
+  ...faqTopics.map((topic) => ({
+    title: `${topic.title} FAQ`,
+    description: topic.description,
+    href: `/faq/topic/${topic.slug}`,
+    type: "Page" as const,
+    keywords: topic.items.flat()
+  })),
+  ...articleTopics.map((topic) => ({
+    title: `${topic.title} — Journal topic`,
+    description: topic.description,
+    href: `/journal/topic/${topic.slug}`,
+    type: "Guide" as const,
+    keywords: topic.slugs
   })),
   ...pages,
 ];
