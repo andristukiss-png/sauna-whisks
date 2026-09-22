@@ -2,6 +2,7 @@ import { articles } from "@/lib/articles";
 import { saunaWhisks } from "@/lib/products";
 import { markets } from "@/lib/markets";
 import { tradeSegments } from "@/lib/tradeSegments";
+import { operationGuides } from "@/lib/operations";
 
 export type SiteSearchItem = {
   title: string;
@@ -21,6 +22,11 @@ const pages: SiteSearchItem[] = [
   { title: "Sourcing standards", description: "How SaunaWhisks.com plans to document product origin and quality.", href: "/standards", type: "Page", keywords: ["origin", "quality", "supplier"] },
   { title: "Shipping & availability", description: "Current pre-launch shipping and market status.", href: "/shipping", type: "Page", keywords: ["shipping", "country", "availability"] },
   { title: "FAQ", description: "Common questions about sauna whisks and launch plans.", href: "/faq", type: "Page", keywords: ["questions", "help"] },
+  { title: "Suppliers", description: "Producer and supplier intake for sauna whisk production partners.", href: "/suppliers", type: "Page", keywords: ["producer", "supplier", "latvia", "baltic"] },
+  { title: "Partnerships & Press", description: "Industry, press, practitioner and content collaboration.", href: "/partners", type: "Page", keywords: ["press", "partner", "collaboration"] },
+  { title: "Sources", description: "External sources referenced across the sauna knowledge library.", href: "/sources", type: "Page", keywords: ["references", "evidence"] },
+  { title: "Markets", description: "Current launch-market plans and availability status.", href: "/markets", type: "Page", keywords: ["usa", "canada", "uk", "germany", "australia", "finland", "eu"] },
+  { title: "Trade", description: "Trade supply by business type.", href: "/trade", type: "Page", keywords: ["wholesale", "b2b", "venue", "retail"] },
 ];
 
 export const siteSearchItems: SiteSearchItem[] = [
@@ -58,6 +64,13 @@ export const siteSearchItems: SiteSearchItem[] = [
     href: `/trade/${segment.slug}`,
     type: "Trade" as const,
     keywords: [...segment.needs, ...segment.offer]
+  })),
+  ...operationGuides.map((guide) => ({
+    title: guide.title,
+    description: guide.description,
+    href: `/operations/${guide.slug}`,
+    type: "Page" as const,
+    keywords: [guide.eyebrow, ...guide.sections.map((section) => section.title)]
   })),
   ...pages,
 ];
