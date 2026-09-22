@@ -229,3 +229,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   section,article{break-inside:avoid-page}
 }
 @media(max-width:700px){.data-endpoints{grid-template-columns:1fr;padding-left:6vw;padding-right:6vw}}
+
+
+/* Generic hub cards */
+.hub-grid{padding:0 7vw 110px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px}.hub-grid>a{border:1px solid var(--line);margin:-1px 0 0 -1px;padding:38px;display:flex;flex-direction:column;min-height:235px}.hub-grid span{font-size:9px;letter-spacing:.14em;opacity:.5}.hub-grid h2{font:400 30px Georgia,serif;margin:24px 0 14px}.hub-grid p{font:15px/1.6 Georgia,serif;margin:0}.hub-grid b{font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-top:auto;padding-top:28px}
+@media(max-width:700px){.hub-grid{grid-template-columns:1fr;padding-left:6vw;padding-right:6vw}}
