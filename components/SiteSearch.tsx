@@ -4,8 +4,14 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { SiteSearchItem } from "@/lib/siteSearch";
 
-export function SiteSearch({ items }: { items: SiteSearchItem[] }) {
-  const [query, setQuery] = useState("");
+export function SiteSearch({
+  items,
+  initialQuery = "",
+}: {
+  items: SiteSearchItem[];
+  initialQuery?: string;
+}) {
+  const [query, setQuery] = useState(initialQuery);
   const normalized = query.trim().toLowerCase();
 
   const matches = useMemo(() => {
@@ -27,7 +33,12 @@ export function SiteSearch({ items }: { items: SiteSearchItem[] }) {
         <input
           type="search"
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={(event) => {
+            const value = event.target.value;
+            setQuery(value);
+            const url = value.trim() ? "/search?q=" + encodeURIComponent(value) : "/search";
+            window.history.replaceState(null, "", url);
+          }}
           placeholder="Try birch, venik, USA, storage..."
         />
       </label>
