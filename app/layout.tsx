@@ -16,6 +16,11 @@ export const metadata: Metadata = {
     siteName: "Sauna Whisks",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
+    description: "Traditional sauna whisks and the living sauna traditions behind them."
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
