@@ -48,7 +48,7 @@ export default function StandardsPage() {
         <p>Provenance, testing, harvest, packaging, import compliance and specifications each have their own working standard.</p>
         <div className="standards-actions">
           <Link className="button button-dark" href="/operations">Explore product operations</Link>
-          <a className="text-link" href="/claims">Read product claims standard →</a>
+          <Link className="text-link" href="/claims">Read product claims standard →</Link>
         </div>
       </section>
       <section className="knowledge-copy">
