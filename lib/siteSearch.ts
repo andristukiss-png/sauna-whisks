@@ -3,6 +3,9 @@ import { saunaWhisks } from "@/lib/products";
 import { markets } from "@/lib/markets";
 import { tradeSegments } from "@/lib/tradeSegments";
 import { operationGuides } from "@/lib/operations";
+import { glossaryTerms } from "@/lib/glossaryTerms";
+import { materialKnowledge } from "@/lib/materialKnowledge";
+import { traditionDetails } from "@/lib/traditionDetails";
 
 export type SiteSearchItem = {
   title: string;
@@ -71,6 +74,27 @@ export const siteSearchItems: SiteSearchItem[] = [
     href: `/operations/${guide.slug}`,
     type: "Page" as const,
     keywords: [guide.eyebrow, ...guide.sections.map((section) => section.title)]
+  })),
+  ...glossaryTerms.map((item) => ({
+    title: item.term,
+    description: item.definition,
+    href: `/glossary/${item.slug}`,
+    type: "Page" as const,
+    keywords: [item.context]
+  })),
+  ...materialKnowledge.map((item) => ({
+    title: `${item.name} sauna whisks`,
+    description: item.summary,
+    href: `/materials/${item.slug}`,
+    type: "Page" as const,
+    keywords: [item.latin, item.feel, item.aroma, ...item.notes]
+  })),
+  ...traditionDetails.map((item) => ({
+    title: item.name,
+    description: item.summary,
+    href: `/traditions/${item.slug}`,
+    type: "Page" as const,
+    keywords: [item.region, ...item.terminology, ...item.principles]
   })),
   ...pages,
 ];
