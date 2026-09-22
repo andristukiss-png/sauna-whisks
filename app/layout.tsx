@@ -32,6 +32,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     description: "Sauna whisks and sauna tradition knowledge from Latvia."
   };
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Sauna Whisks",
+    url: "https://saunawhisks.com",
+    email: "info@SaunaWhisks.com",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "LV"
+    }
+  };
+
   return (
     <html lang="en">
       <body>
@@ -39,7 +51,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c") }}
         />
-        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema).replace(/</g, "\\u003c") }}
+        />
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        <div id="main-content">{children}</div>
       </body>
     </html>
   );
