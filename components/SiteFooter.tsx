@@ -20,6 +20,7 @@ export function SiteFooter() {
         <Link href="/traditions">Traditions</Link>
         <Link href="/journal">Journal</Link>
         <Link href="/glossary">Glossary</Link>
+        <Link href="/markets">Markets</Link>
         <Link href="/usa">USA</Link>
         <a href="/feed.xml">RSS</a>
       </div>
@@ -28,6 +29,7 @@ export function SiteFooter() {
         <Link href="/about">About</Link>
         <Link href="/standards">Standards</Link>
         <Link href="/faq">FAQ</Link>
+        <Link href="/trade">Trade</Link>
         <Link href="/wholesale">Wholesale</Link>
         <Link href="/suppliers">Suppliers</Link>
         <Link href="/partners">Partners / Press</Link>
