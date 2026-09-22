@@ -234,3 +234,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 /* Generic hub cards */
 .hub-grid{padding:0 7vw 110px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px}.hub-grid>a{border:1px solid var(--line);margin:-1px 0 0 -1px;padding:38px;display:flex;flex-direction:column;min-height:235px}.hub-grid span{font-size:9px;letter-spacing:.14em;opacity:.5}.hub-grid h2{font:400 30px Georgia,serif;margin:24px 0 14px}.hub-grid p{font:15px/1.6 Georgia,serif;margin:0}.hub-grid b{font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-top:auto;padding-top:28px}
 @media(max-width:700px){.hub-grid{grid-template-columns:1fr;padding-left:6vw;padding-right:6vw}}
+
+
+/* Supplier / trade operational resources */
+.supplier-resource-links,.trade-resource-links{padding:40px 7vw 70px;display:flex;gap:24px;flex-wrap:wrap;border-top:1px solid var(--line)}.supplier-resource-links a,.trade-resource-links a{font-size:10px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
+.requirements-list{padding:0 7vw 110px}.requirements-list>div{display:grid;grid-template-columns:55px 220px 1fr;gap:28px;align-items:start;padding:24px 0;border-bottom:1px solid var(--line)}.requirements-list>div:first-child{border-top:1px solid var(--line)}.requirements-list span{font-size:9px;letter-spacing:.14em;opacity:.5}.requirements-list h2{font:400 24px Georgia,serif;margin:0}.requirements-list p{font:15px/1.6 Georgia,serif;margin:0;max-width:720px}.supplier-eval-links{display:flex;gap:24px;flex-wrap:wrap;margin-top:28px}
+@media(max-width:700px){.supplier-resource-links,.trade-resource-links,.requirements-list{padding-left:6vw;padding-right:6vw}.requirements-list>div{grid-template-columns:35px 1fr}.requirements-list p{grid-column:2}}
