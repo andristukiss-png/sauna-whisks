@@ -18,21 +18,38 @@ export default function Image() {
           position: "relative",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", width: "100%" }}>
-          <div style={{ fontSize: 24, letterSpacing: "0.18em" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <div style={{ display: "flex", fontSize: 24, letterSpacing: "0.18em" }}>
             LATVIA · BALTIC TRADITION
           </div>
-          <div>
-            <div style={{ fontSize: 108, lineHeight: 0.88, letterSpacing: "-0.045em" }}>
-              The forest belongs
-              <br />
-              in the sauna.
+
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                fontSize: 108,
+                lineHeight: 0.88,
+                letterSpacing: "-0.045em",
+              }}
+            >
+              <div style={{ display: "flex" }}>The forest belongs</div>
+              <div style={{ display: "flex" }}>in the sauna.</div>
             </div>
-            <div style={{ fontSize: 30, marginTop: 38, opacity: 0.78 }}>
+
+            <div style={{ display: "flex", fontSize: 30, marginTop: 38, opacity: 0.78 }}>
               SAUNA WHISKS
             </div>
           </div>
         </div>
+
         <div
           style={{
             position: "absolute",
@@ -42,8 +59,10 @@ export default function Image() {
             height: 480,
             borderRadius: 480,
             border: "2px solid rgba(241,238,229,.25)",
+            display: "flex",
           }}
         />
+
         <div
           style={{
             position: "absolute",
@@ -53,6 +72,7 @@ export default function Image() {
             height: 390,
             borderRadius: 390,
             border: "2px solid rgba(241,238,229,.18)",
+            display: "flex",
           }}
         />
       </div>
