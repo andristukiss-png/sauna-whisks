@@ -41,6 +41,22 @@ export default function ShopPage() {
         ))}
       </section>
 
+      <section className="shop-bundle-feature">
+        <div>
+          <p className="section-kicker">DISCOVERY TRIO</p>
+          <h2>Try the three core materials.</h2>
+          <p>
+            Birch + oak + eucalyptus in one planned bundle, built for first-time comparison
+            and more efficient shipping.
+          </p>
+        </div>
+        <div className="shop-bundle-price">
+          <strong>$69</strong>
+          <span>planned launch price</span>
+          <Link href="/shop/discovery-trio" className="button button-dark">View Discovery Trio</Link>
+        </div>
+      </section>
+
       <section className="editorial-band">
         <p className="section-kicker light">NOT SURE WHERE TO START?</p>
         <h2>Birch is the classic first whisk.</h2>
