@@ -110,6 +110,8 @@ for (const [needle, label] of [
   ["checkSecurityTxt", "live security.txt check"],
   ["daysRemaining < 30", "security.txt expiry threshold"],
   ["Expected commit must be 7-40 hexadecimal characters.", "expected-commit input validation"],
+  ["checkProductionRobots", "live production robots indexing check"],
+  ["production robots.txt disallows the entire site", "production robots disallow-all failure"],
 ]) {
   if (!productionSmoke.includes(needle)) {
     errors.push("Production smoke missing " + label + ".");
