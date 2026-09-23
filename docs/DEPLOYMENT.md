@@ -5,7 +5,7 @@
 - GitHub repository: `andristukiss-png/sauna-whisks`
 - Production branch: `main`
 - Vercel project: `sauna-whisks-main`
-- Canonical production URL: `https://saunawhisks.com`
+- Canonical production URL: `https://saunawhisks.com` (application source: `config/site.json`)
 - `www.saunawhisks.com` redirects permanently to the canonical apex host.
 
 The Vercel project is connected directly to the GitHub repository. Pushes to `main` are the production source; branches and pull requests should be treated as preview work.
@@ -30,7 +30,7 @@ See `.env.example` and `docs/EMAIL_SETUP.md`.
 
 ## Domain ownership and DNS
 
-The Vercel project Domain settings are authoritative for which hostnames are attached and which DNS targets Vercel currently expects.
+`config/site.json` is the application source of truth for canonical identity. Vercel project Domain settings are authoritative for which hostnames are actually attached and which DNS targets Vercel currently expects.
 
 The external DNS provider controls the public records. Do not guess or permanently document a project-specific CNAME target because Vercel may change the required target. When a domain issue occurs:
 
