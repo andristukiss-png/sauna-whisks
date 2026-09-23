@@ -152,7 +152,7 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
         <p className="section-kicker">PRODUCT FAQ</p>
         {faqItems.map(([question, answer]) => (
           <details key={question}>
-            <summary>{question}<i>+</i></summary>
+            <summary>{question}<i aria-hidden="true">+</i></summary>
             <p>{answer}</p>
           </details>
         ))}
