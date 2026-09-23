@@ -142,6 +142,19 @@ for (const [needle, label] of [
   if (!localSmoke.includes(needle)) errors.push("Local smoke missing " + label + ".");
 }
 
+const productionSmoke = fs.readFileSync("scripts/production-smoke.mjs", "utf8");
+for (const [needle, label] of [
+  ["async function checkHomepageDocument", "live homepage document verifier"],
+  ['htmlLinkHref(html, "canonical")', "live canonical-link check"],
+  ['htmlPropertyContent(html, "og:url")', "live Open Graph URL check"],
+  ["production HTML unexpectedly has robots noindex", "live HTML noindex guard"],
+  ["production response unexpectedly has X-Robots-Tag noindex", "live header noindex guard"],
+]) {
+  if (!productionSmoke.includes(needle)) {
+    errors.push("Production smoke missing " + label + ".");
+  }
+}
+
 const robotsPolicy = fs.readFileSync("app/robots.ts", "utf8");
 if (!robotsPolicy.includes('disallow: ["/api"]')) {
   errors.push("Production robots policy must disallow the API prefix.");
