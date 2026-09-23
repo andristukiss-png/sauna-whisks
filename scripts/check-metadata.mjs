@@ -117,6 +117,21 @@ for (const [needle, label] of [
   }
 }
 
+const nextConfigSource = fs.readFileSync("next.config.ts", "utf8");
+const robotsSource = fs.readFileSync("app/robots.ts", "utf8");
+for (const [needle, label] of [
+  ['const isPreviewDeployment = process.env.VERCEL_ENV === "preview";', "preview deployment detector"],
+  ['value: "noindex, nofollow, noarchive"', "preview X-Robots-Tag"],
+]) {
+  if (!nextConfigSource.includes(needle)) errors.push("Next config missing " + label + ".");
+}
+if (!robotsSource.includes('process.env.VERCEL_ENV === "preview"')) {
+  errors.push("robots.ts must detect preview deployments.");
+}
+if (!robotsSource.includes('disallow: "/"')) {
+  errors.push("Preview robots policy must disallow all crawling.");
+}
+
 const searchPage = fs.readFileSync("app/search/page.tsx", "utf8");
 if (!/robots\s*:\s*\{\s*index\s*:\s*false\s*,\s*follow\s*:\s*true\s*\}/s.test(searchPage)) {
   errors.push("Search page must remain noindex, follow.");
