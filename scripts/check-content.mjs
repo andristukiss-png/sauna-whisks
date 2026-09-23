@@ -2,8 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+const site = JSON.parse(fs.readFileSync(path.join(root, "config/site.json"), "utf8"));
 
 const requiredFiles = [
+  "config/site.json",
   "app/page.tsx",
   "app/shop/page.tsx",
   "app/journal/page.tsx",
@@ -48,7 +50,7 @@ for (const obsolete of ["hello@saunawhisks.com", "trade@saunawhisks.com"]) {
   }
 }
 
-if (!joined.includes("info@SaunaWhisks.com")) {
+if (!joined.includes(site.publicEmail)) {
   errors.push("Primary contact email is missing from public application content.");
 }
 
