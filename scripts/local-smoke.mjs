@@ -486,6 +486,19 @@ await expectJson("/api/search?q=birch", (body, response) => {
   expectHeader(response, "cache-control", "no-store", "/api/search");
 });
 
+const statusPost = await request("/api/status", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: "{}",
+});
+expectStatus(statusPost, 405, "/api/status POST");
+
+const noStorePublicPaths = new Set([
+  "/api/health",
+  "/api/status",
+  "/api/search",
+]);
+
 const apiIndexResponse = await request("/api");
 expectStatus(apiIndexResponse, 200, "/api");
 expectHeader(apiIndexResponse, "content-type", "application/json", "/api");
@@ -513,6 +526,13 @@ if (apiIndexResponse?.ok) {
       if (!["/sitemap.xml", "/robots.txt"].includes(path)) {
         expectHeader(response, "x-saunawhisks-data-version", "1", path);
         expectHeader(response, "access-control-expose-headers", "x-saunawhisks-data-version", path);
+
+        const publicPathname = new URL(path, site.origin).pathname;
+        if (noStorePublicPaths.has(publicPathname)) {
+          expectHeader(response, "cache-control", "no-store", path);
+        } else {
+          expectHeader(response, "cache-control", "s-maxage=", path);
+        }
       }
 
       await validatePublicEndpointBody(response, path);
