@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { articles } from "@/lib/articles";
 import { publicJson } from "@/lib/publicApi";
 
@@ -9,7 +10,7 @@ export function GET() {
       title: article.title,
       description: article.description,
       readTime: article.readTime,
-      url: `https://saunawhisks.com/journal/${article.slug}`,
+      url: `${site.origin}/journal/${article.slug}`,
     })),
   });
 }
