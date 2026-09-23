@@ -100,6 +100,8 @@ for (const [needle, label] of [
   ['role="status"', "journal search live status"],
   ['aria-live="polite"', "journal search polite live region"],
   ['id="journal-search-results"', "journal search result container id"],
+  ['maxLength={MAX_SEARCH_QUERY_LENGTH}', "journal search query length bound"],
+  ['aria-atomic="true"', "journal search atomic announcement"],
 ]) {
   if (!journalSearch.includes(needle)) errors.push("Journal search missing " + label + ".");
 }
@@ -109,8 +111,17 @@ for (const [needle, label] of [
   ['aria-describedby="site-search-count"', "site search count description"],
   ['id="site-search-count"', "site search count id"],
   ['aria-controls="site-search-results"', "site search controls relationship"],
+  ['aria-atomic="true"', "site search atomic announcement"],
 ]) {
   if (!siteSearch.includes(needle)) errors.push("Site search missing " + label + ".");
+}
+
+const enquiryForm = fs.readFileSync("components/EnquiryForm.tsx", "utf8");
+for (const [needle, label] of [
+  ['minLength={2}', "enquiry name minimum length"],
+  ['aria-atomic="true"', "enquiry status atomic announcement"],
+]) {
+  if (!enquiryForm.includes(needle)) errors.push("Enquiry form missing " + label + ".");
 }
 
 const unique = [...new Set(errors)];
