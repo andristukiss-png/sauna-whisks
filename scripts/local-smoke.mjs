@@ -509,6 +509,42 @@ if (nonObjectBody.error !== "Invalid request.") {
   fail("/api/enquiry non-object JSON returned unexpected error text.");
 }
 
+const invalidNameType = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    name: { nested: true },
+    email: "test@example.com",
+    message: "A valid test enquiry.",
+  }),
+});
+const invalidNameTypeBody = await verifyEnquiryResponse(
+  invalidNameType,
+  400,
+  "/api/enquiry invalid name field type"
+);
+if (invalidNameTypeBody.error !== "Invalid field type.") {
+  fail("/api/enquiry invalid name field type returned unexpected error text.");
+}
+
+const invalidMessageType = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    name: "Test User",
+    email: "test@example.com",
+    message: 12345,
+  }),
+});
+const invalidMessageTypeBody = await verifyEnquiryResponse(
+  invalidMessageType,
+  400,
+  "/api/enquiry invalid message field type"
+);
+if (invalidMessageTypeBody.error !== "Invalid field type.") {
+  fail("/api/enquiry invalid message field type returned unexpected error text.");
+}
+
 const invalidName = await request("/api/enquiry", {
   method: "POST",
   headers: { "content-type": "application/json" },
