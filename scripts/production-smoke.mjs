@@ -314,8 +314,20 @@ if (checkCanonicalWww) {
     console.log(`- ${wwwUrl}: ${response.status}${location ? ` -> ${location}` : ""}`);
     if (![301, 302, 307, 308].includes(response.status)) {
       failures.push(`${wwwUrl} did not redirect`);
-    } else if (!location || !location.startsWith(`https://${canonicalProductionHost}`)) {
-      failures.push(`${wwwUrl} redirected somewhere other than https://${canonicalProductionHost}`);
+    } else if (!location) {
+      failures.push(`${wwwUrl} redirect is missing a Location header`);
+    } else {
+      try {
+        const target = new URL(location, wwwUrl);
+        if (target.origin !== site.origin) {
+          failures.push(`${wwwUrl} redirected to unexpected origin ${target.origin}`);
+        }
+        if (target.pathname !== "/" || target.search || target.hash) {
+          failures.push(`${wwwUrl} root redirect changed the root URL: ${target.href}`);
+        }
+      } catch {
+        failures.push(`${wwwUrl} returned an invalid redirect Location: ${location}`);
+      }
     }
   } catch (error) {
     console.log(`- ${wwwUrl}: ERROR ${error.cause?.code || error.code || error.message}`);
