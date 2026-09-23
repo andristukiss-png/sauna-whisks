@@ -152,6 +152,9 @@ for (const [label, needle] of enquiryGuards) {
 if (enquiry.includes("Access-Control-Allow-Origin") || enquiry.includes("publicJson") || enquiry.includes("noStoreJson")) {
   errors.push("Enquiry POST must not inherit wildcard public-data CORS.");
 }
+if (enquiry.includes("const details = await response.text()")) {
+  errors.push("Enquiry provider failures must not log provider response bodies.");
+}
 
 const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
 for (const [needle, label] of [

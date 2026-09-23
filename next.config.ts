@@ -10,6 +10,7 @@ const contentSecurityPolicy = [
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
+  "frame-src 'none'",
   "object-src 'none'",
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
