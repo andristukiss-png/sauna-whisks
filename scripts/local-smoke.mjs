@@ -3,6 +3,7 @@ import fs from "node:fs";
 const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
 const baseUrl = (process.env.LOCAL_SMOKE_BASE_URL || "http://127.0.0.1:3000").replace(/\/$/, "");
 const failures = [];
+const expectedCommit = (process.env.LOCAL_SMOKE_EXPECTED_COMMIT || "").trim().toLowerCase();
 const observedPageTitles = [];
 const attempts = 40;
 const pauseMs = 500;
@@ -205,6 +206,19 @@ if (home) {
 await expectJson("/api/health", (body, response) => {
   if (body.ok !== true) fail("/api/health did not report ok=true");
   if (body.status !== "pre-launch") fail("/api/health status is not pre-launch");
+  if (!body.deployment || typeof body.deployment !== "object") {
+    fail("/api/health deployment field is missing.");
+  } else if (expectedCommit) {
+    const commit = typeof body.deployment.commit === "string" ? body.deployment.commit.toLowerCase() : "";
+    if (!commit) {
+      fail("/api/health deployment commit is missing.");
+    } else if (!expectedCommit.startsWith(commit) && !commit.startsWith(expectedCommit)) {
+      fail("/api/health deployment commit does not match the expected CI commit.");
+    }
+    if (body.deployment.environment !== "development") {
+      fail("/api/health deployment environment did not preserve the CI test environment.");
+    }
+  }
   expectHeader(response, "cache-control", "no-store", "/api/health");
   expectHeader(response, "access-control-allow-origin", "*", "/api/health");
   expectHeader(response, "x-robots-tag", "noindex", "/api/health");
@@ -338,6 +352,11 @@ for (const path of [
 ]) {
   const response = await request(path);
   expectStatus(response, 404, path);
+  if (response) {
+    expectHeader(response, "content-type", "text/html", path);
+    const html = await response.text();
+    if (!hasNoindex(html)) fail(path + " 404 response must render noindex.");
+  }
 }
 
 const legacyUs = await request("/markets/united-states");

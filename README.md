@@ -149,6 +149,12 @@ After a production deployment is Ready, verify public DNS/HTTPS/routes from a ma
 npm run verify:production
 ```
 
+For release verification against a known commit:
+
+```bash
+SAUNAWHISKS_EXPECTED_COMMIT=<git-sha> npm run verify:production
+```
+
 See `docs/PRODUCTION_DIAGNOSTICS.md` for the domain/TLS incident playbook.
 
 The CI pipeline uses the committed npm lockfile, runs validation, lint, TypeScript and the production Next.js build, then boots the built server and runs HTTP smoke tests.

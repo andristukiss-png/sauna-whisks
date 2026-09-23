@@ -103,6 +103,16 @@ if (!searchApi.includes("isSiteSearchFilter")) errors.push("Search API does not 
 if (!searchApi.includes("filterSiteSearchItems")) errors.push("Search API does not use shared search filtering.");
 if (!searchApi.includes("normalizeSearchQuery")) errors.push("Search API does not use shared query normalization.");
 
+const healthApi = fs.readFileSync("app/api/health/route.ts", "utf8");
+for (const [needle, label] of [
+  ["process.env.VERCEL_ENV", "Vercel environment metadata"],
+  ["process.env.VERCEL_GIT_COMMIT_SHA", "Vercel commit metadata"],
+  ["commit.slice(0, 12)", "bounded commit identifier"],
+  ["deployment: deploymentInfo()", "health deployment object"],
+]) {
+  if (!healthApi.includes(needle)) errors.push("Health API missing " + label + ".");
+}
+
 const enquiry = fs.readFileSync("app/api/enquiry/route.ts", "utf8");
 const enquiryGuards = [
   ["same-origin guard", 'headers.get("origin")'],
