@@ -14,6 +14,7 @@ if (base.protocol !== "https:") {
 }
 
 const failures = [];
+const expectedCommit = (process.env.SAUNAWHISKS_EXPECTED_COMMIT || "").trim().toLowerCase();
 
 async function reportDns() {
   console.log("DNS:");
@@ -42,6 +43,7 @@ async function check(
   {
     redirect = "follow",
     expectJson = false,
+    verifyDeployment = false,
     contentTypeIncludes,
     requiredHeaders = [],
   } = {}
@@ -82,6 +84,21 @@ async function check(
       }
       const body = await response.json();
       if (body?.ok !== true) failures.push(`${url} health payload did not report ok=true`);
+
+      if (verifyDeployment) {
+        const deployment = body?.deployment || {};
+        const environment = typeof deployment.environment === "string" ? deployment.environment : "";
+        const commit = typeof deployment.commit === "string" ? deployment.commit.toLowerCase() : "";
+        console.log(`  deployment: env=${environment || "(unknown)"} commit=${commit || "(unknown)"}`);
+
+        if (expectedCommit) {
+          if (!commit) {
+            failures.push(`${url} did not expose a deployment commit for expected-commit verification`);
+          } else if (!expectedCommit.startsWith(commit) && !commit.startsWith(expectedCommit)) {
+            failures.push(`${url} deployment commit ${commit} does not match expected ${expectedCommit}`);
+          }
+        }
+      }
     }
   } catch (error) {
     console.log(`- ${url}: ERROR ${error.cause?.code || error.code || error.message}`);
@@ -101,7 +118,7 @@ await check(`${baseUrl}/`, {
     "referrer-policy",
   ],
 });
-await check(`${baseUrl}/api/health`, { expectJson: true });
+await check(`${baseUrl}/api/health`, { expectJson: true, verifyDeployment: true });
 await check(`${baseUrl}/robots.txt`, { contentTypeIncludes: "text/plain" });
 await check(`${baseUrl}/sitemap.xml`, { contentTypeIncludes: "xml" });
 await check(`${baseUrl}/feed.xml`, { contentTypeIncludes: "application/rss+xml" });
