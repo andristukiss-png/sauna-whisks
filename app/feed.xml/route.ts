@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { articles } from "@/lib/articles";
 import { publicText } from "@/lib/publicApi";
 
@@ -16,8 +17,8 @@ export function GET() {
       (article) => `
       <item>
         <title>${escapeXml(article.title)}</title>
-        <link>https://saunawhisks.com/journal/${article.slug}</link>
-        <guid isPermaLink="true">https://saunawhisks.com/journal/${article.slug}</guid>
+        <link>${site.origin}/journal/${article.slug}</link>
+        <guid isPermaLink="true">${site.origin}/journal/${article.slug}</guid>
         <description>${escapeXml(article.description)}</description>
       </item>`
     )
@@ -27,8 +28,8 @@ export function GET() {
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sauna Whisks Journal</title>
-    <link>https://saunawhisks.com/journal</link>
-    <atom:link href="https://saunawhisks.com/feed.xml" rel="self" type="application/rss+xml" />
+    <link>${site.origin}/journal</link>
+    <atom:link href=`${site.origin}/feed.xml` rel="self" type="application/rss+xml" />
     <description>Guides to sauna whisks, pirts, venik, vihta, materials, care and preparation.</description>
     <language>en</language>
     <generator>SaunaWhisks.com</generator>
