@@ -30,6 +30,14 @@ if (!dataPage.includes("publicDataEndpoints.map")) {
   errors.push("/data page is not rendered from the shared endpoint registry.");
 }
 
+const publicApiHelper = fs.readFileSync("lib/publicApi.ts", "utf8");
+if (!publicApiHelper.includes('export const PUBLIC_DATA_VERSION = "1"')) {
+  errors.push("Public data version constant missing.");
+}
+if (!docs.includes("X-SaunaWhisks-Data-Version")) {
+  errors.push("Public data docs missing compatibility-version header.");
+}
+
 if (!apiIndex.includes("publicDataEndpoints.map")) {
   errors.push("/api index is not rendered from the shared endpoint registry.");
 }
