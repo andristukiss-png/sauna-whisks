@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -24,9 +25,9 @@ export default function DiscoveryTrioPage() {
     "@type": "Product",
     name: "Sauna Whisk Discovery Trio",
     description: "Planned three-whisk bundle with birch, oak and eucalyptus.",
-    brand: { "@type": "Brand", name: "Sauna Whisks" },
+    brand: { "@type": "Brand", name: site.name },
     category: "Sauna whisk bundle",
-    url: "https://saunawhisks.com/shop/discovery-trio"
+    url: `${site.origin}/shop/discovery-trio`
   };
 
   return (
