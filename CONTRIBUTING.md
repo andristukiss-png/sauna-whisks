@@ -37,6 +37,10 @@ This covers validation, lint, TypeScript and the production Next.js build. CI ad
 - Dynamic App Router pages use async `params` / `searchParams` on Next.js 16.
 - Do not add legacy `middleware.ts`; Next.js 16 uses `proxy.ts` when a request proxy is actually needed.
 
+## Redirects
+
+Redirects must remain local, direct, and single-hop. Add legacy paths to `config/redirects.json`; do not use protocol-relative destinations or chain one registered redirect through another.
+
 ## New routes
 When adding a meaningful public route:
 - add metadata/canonical
