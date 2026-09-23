@@ -18,5 +18,8 @@ export function GET() {
     service: site.host,
     status: launchStatus.status,
     deployment: deploymentInfo(),
+    runtime: {
+      node: process.version,
+    },
   });
 }

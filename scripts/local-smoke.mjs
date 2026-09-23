@@ -383,6 +383,9 @@ if (home) {
 await expectJson("/api/health", (body, response) => {
   if (body.ok !== true) fail("/api/health did not report ok=true");
   if (body.status !== "pre-launch") fail("/api/health status is not pre-launch");
+  if (typeof body?.runtime?.node !== "string" || !body.runtime.node.startsWith("v22.")) {
+    fail("/api/health Node runtime is not Node 22: " + String(body?.runtime?.node || "(missing)"));
+  }
   if (!body.deployment || typeof body.deployment !== "object") {
     fail("/api/health deployment field is missing.");
   } else if (expectedCommit) {

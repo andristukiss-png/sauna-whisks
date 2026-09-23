@@ -49,6 +49,15 @@ for (const file of fs.readdirSync(workflowDir).filter((name) => /\.ya?ml$/.test(
   }
 }
 
+const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
+const productionSmoke = fs.readFileSync("scripts/production-smoke.mjs", "utf8");
+if (!localSmoke.includes('body.runtime.node.startsWith("v22.")')) {
+  errors.push("Local HTTP smoke must assert the Node 22 runtime.");
+}
+if (!productionSmoke.includes('nodeRuntime.startsWith("v22.")')) {
+  errors.push("Live production smoke must assert the Node 22 runtime.");
+}
+
 const workflow = fs.readFileSync(".github/workflows/build.yml", "utf8");
 if (!workflow.includes('node-version-file: ".nvmrc"')) {
   errors.push("CI must read its Node version from .nvmrc.");
