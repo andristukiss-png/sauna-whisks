@@ -24,6 +24,8 @@ Use the last known-good Git commit / Vercel deployment. Do not “fix forward”
 
 A domain or TLS incident is not automatically an application-release failure. Diagnose deployment, domain attachment, DNS, certificate state and HTTP routing separately before rolling back source code.
 
+Use `docs/RECOVERY.md` for application rollback, DNS/TLS recovery and provider/environment incidents.
+
 ## Verification commands
 
 Before treating a release as deployable:
