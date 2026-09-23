@@ -54,7 +54,7 @@ for (const [needle, label] of [
 const productionSmoke = fs.readFileSync("scripts/production-smoke.mjs", "utf8");
 for (const [needle, label] of [
   ['"x-saunawhisks-data-version", "1"', "live data-version header verification"],
-  ['forbiddenHeaders: ["x-powered-by"]', "live powered-by suppression check"],
+  ["unexpectedly exposes X-Powered-By", "live powered-by suppression check"],
 ]) {
   if (!productionSmoke.includes(needle)) {
     errors.push("Production smoke missing " + label + ".");
