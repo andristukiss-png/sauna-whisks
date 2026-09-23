@@ -36,6 +36,7 @@ const cspDirectives = [
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
+  "frame-src 'none'",
   "object-src 'none'",
   "connect-src 'self'",
   "upgrade-insecure-requests",
@@ -66,6 +67,14 @@ if (!expires || Number.isNaN(Date.parse(expires))) {
   errors.push("security.txt has no valid Expires timestamp.");
 } else if (Date.parse(expires) < Date.now() + 30 * 24 * 60 * 60 * 1000) {
   errors.push("security.txt Expires timestamp is less than 30 days away.");
+}
+
+const enquiryRoute = fs.readFileSync("app/api/enquiry/route.ts", "utf8");
+if (enquiryRoute.includes("const details = await response.text()")) {
+  errors.push("Enquiry provider failures must not retain the provider response body in logs.");
+}
+if (/console\.error\("Resend enquiry error"[\s\S]*details/.test(enquiryRoute)) {
+  errors.push("Enquiry provider error logs must not include response-body details.");
 }
 
 const publicApi = fs.readFileSync("lib/publicApi.ts", "utf8");
