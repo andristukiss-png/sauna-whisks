@@ -9,6 +9,8 @@ The website posts enquiry forms to /api/enquiry.
 
 If any direct-delivery variable is missing or invalid — RESEND_API_KEY, ENQUIRY_TO_EMAIL or ENQUIRY_FROM_EMAIL — the client falls back to opening the visitor's email app. The application does not use Resend's onboarding sender as a production fallback.
 
+Malformed field types are rejected with a 400 response before sanitization or provider logic. The public form sends all enquiry fields as strings.
+
 ## Vercel environment variables
 - RESEND_API_KEY
 - ENQUIRY_TO_EMAIL=info@SaunaWhisks.com
