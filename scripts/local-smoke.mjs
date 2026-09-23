@@ -66,7 +66,7 @@ await waitForServer();
 const home = await request("/");
 expectStatus(home, 200, "/");
 expectHeader(home, "content-type", "text/html", "/");
-for (const header of ["strict-transport-security", "x-content-type-options", "x-frame-options", "referrer-policy"]) {
+for (const header of ["content-security-policy", "strict-transport-security", "x-content-type-options", "x-frame-options", "referrer-policy"]) {
   if (home && !home.headers.get(header)) fail(`/ missing security header ${header}`);
 }
 
@@ -174,6 +174,16 @@ const foreignOrigin = await request("/api/enquiry", {
   body: JSON.stringify({ name: "Test User", email: "test@example.com", message: "A valid test enquiry." }),
 });
 expectStatus(foreignOrigin, 403, "/api/enquiry foreign origin");
+
+const crossSite = await request("/api/enquiry", {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+    "sec-fetch-site": "cross-site",
+  },
+  body: JSON.stringify({ name: "Test User", email: "test@example.com", message: "A valid test enquiry." }),
+});
+expectStatus(crossSite, 403, "/api/enquiry cross-site fetch metadata");
 
 const noProvider = await request("/api/enquiry", {
   method: "POST",
