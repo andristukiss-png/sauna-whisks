@@ -11,6 +11,7 @@
 - fallback email path works
 - sitemap/robots/feed/API endpoints respond
 - structured-data URLs stay on the canonical site origin
+- indexed pages have one H1/main landmark and complete social metadata
 - canonical apex host responds over HTTPS
 - `www` redirects to the canonical apex host
 - `/api/health` returns `ok: true`
