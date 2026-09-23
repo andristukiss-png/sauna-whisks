@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -33,7 +34,7 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
     "@type": "DefinedTerm",
     name: item.term,
     description: item.definition,
-    inDefinedTermSet: "https://saunawhisks.com/glossary"
+    inDefinedTermSet: `${site.origin}/glossary`
   };
 
   return (
