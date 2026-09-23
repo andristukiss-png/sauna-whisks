@@ -34,6 +34,18 @@ if (!pkg.scripts?.["validate:toolchain"]) {
   errors.push("package.json missing validate:toolchain script.");
 }
 
+const workflowDir = ".github/workflows";
+for (const file of fs.readdirSync(workflowDir).filter((name) => /\.ya?ml$/.test(name))) {
+  const workflowText = fs.readFileSync(workflowDir + "/" + file, "utf8");
+  for (const match of workflowText.matchAll(/uses:\s*([^\s@]+)@([^\s#]+)/g)) {
+    const [, action, ref] = match;
+    if (action.startsWith("./")) continue;
+    if (!/^[0-9a-f]{40}$/.test(ref)) {
+      errors.push("Workflow action must be pinned to a full commit SHA: " + file + " -> " + action + "@" + ref);
+    }
+  }
+}
+
 const workflow = fs.readFileSync(".github/workflows/build.yml", "utf8");
 if (!workflow.includes('node-version-file: ".nvmrc"')) {
   errors.push("CI must read its Node version from .nvmrc.");
