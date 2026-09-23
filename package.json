@@ -38,7 +38,8 @@
     "validate:manifest": "node scripts/check-manifest.mjs",
     "smoke:local": "node scripts/local-smoke.mjs",
     "audit:prod": "npm audit --omit=dev --audit-level=high",
-    "validate:next": "node scripts/check-next-boundaries.mjs"
+    "validate:next": "node scripts/check-next-boundaries.mjs",
+    "wait:production": "node scripts/wait-for-production-commit.mjs"
   },
   "dependencies": {
     "next": "^16.0.0",
