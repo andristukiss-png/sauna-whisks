@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
@@ -7,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://saunawhisks.com/sitemap.xml",
-    host: "https://saunawhisks.com",
+    sitemap: `${site.origin}/sitemap.xml`,
+    host: site.origin,
   };
 }
