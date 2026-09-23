@@ -177,6 +177,52 @@ await expectJson("/api/search?q=birch", (body, response) => {
   expectHeader(response, "cache-control", "no-store", "/api/search");
 });
 
+const apiIndexResponse = await request("/api");
+expectStatus(apiIndexResponse, 200, "/api");
+expectHeader(apiIndexResponse, "content-type", "application/json", "/api");
+if (apiIndexResponse?.ok) {
+  const index = await apiIndexResponse.json();
+  const endpoints = Array.isArray(index.endpoints) ? index.endpoints : [];
+
+  if (!endpoints.length) {
+    fail("/api index advertises no endpoints.");
+  } else {
+    const paths = endpoints
+      .map((item) => (item && typeof item.path === "string" ? item.path : ""))
+      .filter(Boolean);
+    const unique = [...new Set(paths)];
+    if (unique.length !== paths.length) fail("/api index contains duplicate endpoint paths.");
+
+    for (const path of unique) {
+      const response = await request(path);
+      expectStatus(response, 200, path);
+      if (!response?.ok) continue;
+
+      if (path.startsWith("/api/") || path === "/api") {
+        expectHeader(response, "x-robots-tag", "noindex", path);
+      }
+
+      if (path.endsWith(".csv")) {
+        expectHeader(response, "content-type", "text/csv", path);
+        expectHeader(response, "content-disposition", "filename=", path);
+      } else if (path === "/feed.xml") {
+        expectHeader(response, "content-type", "application/rss+xml", path);
+      } else if (path === "/sitemap.xml") {
+        expectHeader(response, "content-type", "xml", path);
+      } else if (
+        path === "/robots.txt" ||
+        path === "/llms.txt" ||
+        path === "/humans.txt" ||
+        path === "/.well-known/security.txt"
+      ) {
+        expectHeader(response, "content-type", "text/plain", path);
+      } else {
+        expectHeader(response, "content-type", "application/json", path);
+      }
+    }
+  }
+}
+
 for (const [path, type] of [
   ["/robots.txt", "text/plain"],
   ["/sitemap.xml", "xml"],
