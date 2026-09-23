@@ -83,4 +83,28 @@ if (failures.length) {
   process.exit(1);
 }
 
+const monitorFile = ".github/workflows/production-monitor.yml";
+if (!fs.existsSync(monitorFile)) {
+  console.error("Domain configuration validation failed:");
+  console.error("- production monitor workflow is missing");
+  process.exit(1);
+}
+
+const monitor = fs.readFileSync(monitorFile, "utf8");
+const monitorChecks = [
+  ["monitor runs production smoke script", monitor.includes("node scripts/production-smoke.mjs")],
+  ["monitor has scheduled cadence", monitor.includes('cron: "17 */6 * * *"')],
+  ["monitor supports manual dispatch", monitor.includes("workflow_dispatch:")],
+  ["monitor has a five-minute timeout", monitor.includes("timeout-minutes: 5")],
+  ["monitor uses read-only repository permission", monitor.includes("contents: read")],
+  ["monitor disables persisted checkout credentials", monitor.includes("persist-credentials: false")],
+];
+
+const monitorFailures = monitorChecks.filter(([, ok]) => !ok);
+if (monitorFailures.length) {
+  console.error("Domain configuration validation failed:");
+  for (const [label] of monitorFailures) console.error("- " + label);
+  process.exit(1);
+}
+
 console.log("Domain configuration validation passed.");

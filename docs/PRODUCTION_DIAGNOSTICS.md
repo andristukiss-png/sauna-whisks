@@ -76,3 +76,7 @@ npm run validate:domain
 ```
 
 That validation checks the Next.js redirect, metadata, robots and sitemap configuration. It does not prove that public DNS or TLS is healthy; use `npm run verify:production` for the live environment.
+
+## Automated production monitor
+
+GitHub Actions runs `node scripts/production-smoke.mjs` against the canonical live site every six hours and on manual dispatch. A failed monitor means the live DNS/HTTPS/HTTP path needs investigation even if the source branch itself is green.
