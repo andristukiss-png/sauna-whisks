@@ -117,7 +117,6 @@ for (const [needle, label] of [
   }
 }
 
-const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
 for (const [needle, label] of [
   ["must render exactly one H1", "runtime H1 count check"],
   ["must render exactly one main landmark", "runtime main-landmark count check"],
