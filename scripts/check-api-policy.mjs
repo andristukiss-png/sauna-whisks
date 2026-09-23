@@ -111,6 +111,9 @@ const enquiryGuards = [
   ["honeypot guard", "if (website)"],
   ["fast-submit bot guard", "Date.now() - startedAt < 1800"],
   ["outbound timeout", "AbortSignal.timeout(10_000)"],
+  ["validated sender configuration", "configuredEmail(process.env.ENQUIRY_FROM_EMAIL)"],
+  ["validated recipient configuration", "configuredEmail(process.env.ENQUIRY_TO_EMAIL)"],
+  ["complete mail configuration guard", "if (!apiKey || !from || !to)"],
   ["request ID response header", '"X-Request-ID"'],
   ["no-store response header", '"Cache-Control": "no-store, max-age=0"'],
 ];
