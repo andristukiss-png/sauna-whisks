@@ -64,3 +64,13 @@ CSV cells are quoted and values beginning with spreadsheet formula prefixes (`=`
 ## Crawler policy
 
 Public API routes are deliberately excluded from crawler indexing with both `robots.txt` (`Disallow: /api`) and API-level `X-Robots-Tag` headers. They remain directly accessible as read-only public data.
+
+## Compatibility version
+
+Shared public JSON, CSV, text and feed responses include:
+
+```
+X-SaunaWhisks-Data-Version: 1
+```
+
+The header is exposed through CORS so browser-based tooling can read it. Version changes are reserved for intentional compatibility changes to the public machine-data contract; ordinary content updates do not require a version bump. Sitemap and robots metadata routes are outside this shared response-helper contract.
