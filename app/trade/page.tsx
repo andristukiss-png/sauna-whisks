@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { tradeSegments } from "@/lib/tradeSegments";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Trade Supply",
   description: "Trade supply plans for public saunas, hotels, spas, retailers, builders, wellness clubs and distributors.",
-  alternates: { canonical: "/trade" }
-};
+  canonical: "/trade",
+});
 
 export default function TradePage() {
   return (
