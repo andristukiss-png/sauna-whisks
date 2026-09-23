@@ -52,6 +52,8 @@ SaunaWhisks.com exposes read-only pre-launch data for transparency and internal/
 
 The canonical endpoint registry lives in `lib/publicData.ts`. The `/data` page and `/api` index both render from that registry.
 
+The source page and both source APIs use `lib/sources.ts`, which deduplicates the citations from `lib/articles.ts` by URL.
+
 These endpoints do not imply commercial availability. Product catalog entries remain pre-launch until checkout is intentionally enabled. Public status fields derive from `lib/status.ts`; Discovery Trio catalog data derives from `lib/bundles.ts`.
 
 ## CSV safety
