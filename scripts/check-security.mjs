@@ -21,6 +21,13 @@ headers.forEach((header) => {
   if (!next.includes(header)) errors.push("Missing security header: " + header);
 });
 
+if (!next.includes('"Cross-Origin-Resource-Policy", value: "same-origin"')) {
+  errors.push("Default resource policy must remain same-origin.");
+}
+if (!next.includes('"Cross-Origin-Resource-Policy", value: "cross-origin"')) {
+  errors.push("Public machine routes need an explicit cross-origin override.");
+}
+
 
 const cspDirectives = [
   "default-src 'self'",
