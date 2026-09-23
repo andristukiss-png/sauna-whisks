@@ -199,12 +199,13 @@ async function checkSitemapPage(location) {
   } else {
     observedPageTitles.push({ path, title });
   }
-  const h1Count = (html.match(/<h1\b/gi) || []).length;
+  const renderedHtml = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+  const h1Count = (renderedHtml.match(/<h1\b/gi) || []).length;
   if (h1Count !== 1) {
     fail(path + " must render exactly one H1; found " + h1Count + ".");
   }
 
-  const mainCount = (html.match(/<main\b/gi) || []).length;
+  const mainCount = (renderedHtml.match(/<main\b/gi) || []).length;
   if (mainCount !== 1) {
     fail(path + " must render exactly one main landmark; found " + mainCount + ".");
   }
