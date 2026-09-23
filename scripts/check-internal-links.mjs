@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { discoverDynamicRoutePrefixes, discoverStaticPageRoutes } from "./route-utils.mjs";
 
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -12,28 +13,17 @@ const sourceFiles = ["app", "components", "lib"]
   .flatMap((dir) => walk(dir))
   .filter((file) => /\.(ts|tsx)$/.test(file));
 
-const staticRoutes = new Set([
-  "/", "/shop", "/shop/discovery-trio", "/traditions", "/journal", "/journal/topics",
-  "/glossary", "/standards", "/faq", "/about", "/wholesale", "/contact", "/usa",
-  "/compare", "/privacy", "/shipping", "/terms", "/returns", "/cookies", "/accessibility",
-  "/suppliers", "/partners", "/learn", "/beginners", "/materials", "/care", "/markets",
-  "/trade", "/search", "/operations", "/sources", "/guides", "/status", "/site-map",
-  "/legal", "/conditions", "/catalog", "/claims", "/data", "/finder", "/checklist",
-  "/quality", "/resources", "/help", "/templates", "/tools", "/tools/supplier-scorecard",
-  "/tools/landed-cost", "/tools/trade-demand", "/tools/launch-readiness", "/use-cases",
-  "/techniques", "/company", "/press", "/editorial-policy", "/corrections",
-  "/suppliers/requirements", "/suppliers/sample-evaluation", "/trade/trial"
-]);
+const staticRoutes = new Set(discoverStaticPageRoutes());
+const dynamicPrefixes = discoverDynamicRoutePrefixes();
 
-const dynamicPrefixes = [
-  "/shop/", "/journal/", "/markets/", "/trade/", "/operations/", "/glossary/",
-  "/materials/", "/traditions/", "/guides/", "/compare/", "/faq/topic/",
-  "/journal/topic/", "/conditions/", "/use-cases/", "/techniques/"
-];
-
-const allowedTechnical = [
-  "/api/", "/feed.xml", "/feed.json", "/llms.txt", "/humans.txt", "/sitemap.xml", "/robots.txt"
-];
+const publicDataSource = fs.readFileSync("lib/publicData.ts", "utf8");
+const allowedTechnical = new Set(
+  [...publicDataSource.matchAll(/path:\s*"([^"]+)"/g)].map((match) =>
+    (match[1].split("?")[0].replace(/\/$/, "") || "/")
+  )
+);
+allowedTechnical.add("/manifest.webmanifest");
+allowedTechnical.add("/api/enquiry");
 
 const errors = [];
 
@@ -49,7 +39,7 @@ for (const file of sourceFiles) {
     if (route.includes("$" + "{") || route.includes("+")) continue;
     if (staticRoutes.has(route)) continue;
     if (dynamicPrefixes.some((prefix) => route.startsWith(prefix))) continue;
-    if (allowedTechnical.some((prefix) => route.startsWith(prefix))) continue;
+    if (allowedTechnical.has(route)) continue;
     errors.push(file + " -> unknown internal route: " + route);
   }
 }
