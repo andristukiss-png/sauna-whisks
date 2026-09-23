@@ -9,7 +9,7 @@
 
 ## Runtime
 
-Use Node 22. Run `nvm use` (or use a tool that honors `.node-version`) before installing dependencies.
+Use Node 22. Run `nvm use` (or use a tool that honors `.node-version`), then install the committed dependency graph with `npm ci`. Do not delete or hand-edit `package-lock.json`.
 
 ## Required checks
 Run:
@@ -18,7 +18,7 @@ Run:
 npm run check
 ```
 
-This covers validation, lint, TypeScript and the production Next.js build.
+This covers validation, lint, TypeScript and the production Next.js build. CI additionally boots the production server and runs HTTP smoke tests.
 
 ## New routes
 When adding a meaningful public route:
