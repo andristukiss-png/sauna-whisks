@@ -115,7 +115,7 @@ export function EnquiryForm({
       <div className="enquiry-two">
         <label>
           <span>Name</span>
-          <input name="name" type="text" autoComplete="name" maxLength={120} required />
+          <input name="name" type="text" autoComplete="name" minLength={2} maxLength={120} required />
         </label>
         <label>
           <span>Email</span>
@@ -197,6 +197,7 @@ export function EnquiryForm({
             }
             role="status"
             aria-live="polite"
+            aria-atomic="true"
           >
             {statusMessage}
           </p>

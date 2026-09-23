@@ -90,7 +90,7 @@ export function SiteSearch({
         ) : null}
       </div>
 
-      <p id="site-search-count" className="search-count" role="status" aria-live="polite">
+      <p id="site-search-count" className="search-count" role="status" aria-live="polite" aria-atomic="true">
         {normalized || type !== "All"
           ? `${matches.length} result${matches.length === 1 ? "" : "s"}`
           : "Popular starting points"}
