@@ -39,8 +39,15 @@ if (!fs.existsSync(sourceRegistry)) {
   errors.push("Missing shared article source registry.");
 } else {
   const sourceRegistryText = fs.readFileSync(sourceRegistry, "utf8");
-  if (!sourceRegistryText.includes("articles.flatMap")) {
-    errors.push("Article source registry must derive from article citations.");
+  for (const [needle, label] of [
+    ['from "@/lib/articles"', "articles import"],
+    [".flatMap((article) => article.sources)", "article citation flattening"],
+    [".map((source) => [source.url, source])", "URL-keyed source mapping"],
+    ["new Map(", "URL deduplication"],
+  ]) {
+    if (!sourceRegistryText.includes(needle)) {
+      errors.push("Article source registry missing " + label + ".");
+    }
   }
 }
 
