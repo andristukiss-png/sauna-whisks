@@ -786,6 +786,30 @@ if (oversizedBody.error !== "Request too large.") {
   fail("/api/enquiry oversized-body validation returned unexpected error text.");
 }
 
+const encoder = new TextEncoder();
+const chunkedOversizedBody = new ReadableStream({
+  start(controller) {
+    controller.enqueue(encoder.encode('{"name":"Test User","email":"test@example.com","message":"'));
+    controller.enqueue(encoder.encode("x".repeat(21_000)));
+    controller.enqueue(encoder.encode('"}'));
+    controller.close();
+  },
+});
+const chunkedOversized = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: chunkedOversizedBody,
+  duplex: "half",
+});
+const chunkedOversizedResponse = await verifyEnquiryResponse(
+  chunkedOversized,
+  413,
+  "/api/enquiry chunked oversized body"
+);
+if (chunkedOversizedResponse.error !== "Request too large.") {
+  fail("/api/enquiry chunked oversized-body validation returned unexpected error text.");
+}
+
 const honeypot = await request("/api/enquiry", {
   method: "POST",
   headers: { "content-type": "application/json" },
