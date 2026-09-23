@@ -1,6 +1,12 @@
 import fs from "node:fs";
 
+const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
+
 const statusData = fs.readFileSync("lib/status.ts", "utf8");
+if (!statusData.includes('import site from "@/config/site.json"')) {
+  console.error("Launch status validation failed:\n- Shared launch status must import site config.");
+  process.exit(1);
+}
 const page = fs.readFileSync("app/status/page.tsx", "utf8");
 const api = fs.readFileSync("app/api/status/route.ts", "utf8");
 const prelaunch = fs.readFileSync("scripts/check-prelaunch.mjs", "utf8");
@@ -11,7 +17,7 @@ const required = [
   'status: "pre-launch"',
   "checkoutEnabled: false",
   "enquiriesOpen: true",
-  'contact: "info@SaunaWhisks.com"',
+  "contact: site.publicEmail",
   'area: "Payments"',
   'status: "Disabled"',
 ];
