@@ -85,6 +85,13 @@ if (!fs.existsSync(a11yFile)) {
   if (!css.includes(".skip-target")) errors.push("Skip-target styling missing.");
 }
 
+for (const file of files) {
+  const text = fs.readFileSync(file, "utf8");
+  if (/<summary[\s\S]*?<i>\+<\/i>[\s\S]*?<\/summary>/.test(text)) {
+    errors.push("Disclosure plus decoration must be aria-hidden: " + file);
+  }
+}
+
 const unique = [...new Set(errors)];
 if (unique.length) {
   console.error("UI validation failed:");
