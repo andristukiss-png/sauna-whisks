@@ -61,6 +61,79 @@ async function expectJson(path, assertions, options) {
   assertions(body, response);
 }
 
+function normalizedPath(value) {
+  const url = new URL(value, "https://saunawhisks.com");
+  return url.pathname.replace(/\/+$/, "") || "/";
+}
+
+function extractCanonical(html) {
+  const tags = html.match(/<link\b[^>]*>/gi) || [];
+  const tag = tags.find((item) => /\brel=["']canonical["']/i.test(item));
+  return tag?.match(/\bhref=["']([^"']+)["']/i)?.[1] || "";
+}
+
+function hasNoindex(html) {
+  const tags = html.match(/<meta\b[^>]*>/gi) || [];
+  return tags.some(
+    (tag) =>
+      /\bname=["']robots["']/i.test(tag) &&
+      /\bcontent=["'][^"']*noindex/i.test(tag)
+  );
+}
+
+async function checkSitemapPage(location) {
+  let canonicalUrl;
+  try {
+    canonicalUrl = new URL(location);
+  } catch {
+    fail("Sitemap contains invalid URL: " + location);
+    return;
+  }
+
+  if (canonicalUrl.origin !== "https://saunawhisks.com") {
+    fail("Sitemap contains non-canonical origin: " + location);
+    return;
+  }
+
+  const path = canonicalUrl.pathname + canonicalUrl.search;
+  const response = await request(path);
+  expectStatus(response, 200, path);
+  expectHeader(response, "content-type", "text/html", path);
+  if (!response?.ok) return;
+
+  const html = await response.text();
+
+  if (!/<title>[^<]+<\/title>/i.test(html)) {
+    fail(path + " is missing a non-empty title.");
+  }
+  if (!/<h1\b[^>]*>[\s\S]*?<\/h1>/i.test(html)) {
+    fail(path + " is missing an H1.");
+  }
+  if (hasNoindex(html)) {
+    fail(path + " is in the sitemap but renders noindex.");
+  }
+
+  const canonical = extractCanonical(html);
+  if (!canonical) {
+    fail(path + " is missing a canonical link.");
+  } else {
+    const canonicalResolved = new URL(canonical, "https://saunawhisks.com");
+    if (
+      canonicalResolved.origin !== canonicalUrl.origin ||
+      normalizedPath(canonicalResolved.href) !== normalizedPath(canonicalUrl.href)
+    ) {
+      fail(path + " canonical mismatch: " + canonicalResolved.href + " vs " + canonicalUrl.href);
+    }
+  }
+}
+
+async function crawlSitemapPages(locations) {
+  const batchSize = 8;
+  for (let index = 0; index < locations.length; index += batchSize) {
+    await Promise.all(locations.slice(index, index + batchSize).map(checkSitemapPage));
+  }
+}
+
 await waitForServer();
 
 const home = await request("/");
@@ -104,6 +177,52 @@ await expectJson("/api/search?q=birch", (body, response) => {
   expectHeader(response, "cache-control", "no-store", "/api/search");
 });
 
+const apiIndexResponse = await request("/api");
+expectStatus(apiIndexResponse, 200, "/api");
+expectHeader(apiIndexResponse, "content-type", "application/json", "/api");
+if (apiIndexResponse?.ok) {
+  const index = await apiIndexResponse.json();
+  const endpoints = Array.isArray(index.endpoints) ? index.endpoints : [];
+
+  if (!endpoints.length) {
+    fail("/api index advertises no endpoints.");
+  } else {
+    const paths = endpoints
+      .map((item) => (item && typeof item.path === "string" ? item.path : ""))
+      .filter(Boolean);
+    const unique = [...new Set(paths)];
+    if (unique.length !== paths.length) fail("/api index contains duplicate endpoint paths.");
+
+    for (const path of unique) {
+      const response = await request(path);
+      expectStatus(response, 200, path);
+      if (!response?.ok) continue;
+
+      if (path.startsWith("/api/") || path === "/api") {
+        expectHeader(response, "x-robots-tag", "noindex", path);
+      }
+
+      if (path.endsWith(".csv")) {
+        expectHeader(response, "content-type", "text/csv", path);
+        expectHeader(response, "content-disposition", "filename=", path);
+      } else if (path === "/feed.xml") {
+        expectHeader(response, "content-type", "application/rss+xml", path);
+      } else if (path === "/sitemap.xml") {
+        expectHeader(response, "content-type", "xml", path);
+      } else if (
+        path === "/robots.txt" ||
+        path === "/llms.txt" ||
+        path === "/humans.txt" ||
+        path === "/.well-known/security.txt"
+      ) {
+        expectHeader(response, "content-type", "text/plain", path);
+      } else {
+        expectHeader(response, "content-type", "application/json", path);
+      }
+    }
+  }
+}
+
 for (const [path, type] of [
   ["/robots.txt", "text/plain"],
   ["/sitemap.xml", "xml"],
@@ -127,6 +246,22 @@ if (sitemapResponse?.ok) {
     fail("Sitemap includes non-canonical US market route.");
   }
   if (!sitemap.includes("<loc>https://saunawhisks.com/usa</loc>")) fail("Sitemap missing canonical /usa.");
+
+  const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+  if (!locations.length) {
+    fail("Sitemap contains no page URLs.");
+  } else {
+    const unique = [...new Set(locations)];
+    if (unique.length !== locations.length) fail("Sitemap contains duplicate URLs.");
+    await crawlSitemapPages(unique);
+  }
+}
+
+const searchPage = await request("/search?q=birch");
+expectStatus(searchPage, 200, "/search?q=birch");
+if (searchPage?.ok) {
+  const html = await searchPage.text();
+  if (!hasNoindex(html)) fail("/search must render noindex.");
 }
 
 const rssResponse = await request("/feed.xml");
