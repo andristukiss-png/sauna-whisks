@@ -19,6 +19,9 @@ const headers = [
 ];
 
 const errors = [];
+if (!next.includes("poweredByHeader: false")) {
+  errors.push("Next.js X-Powered-By header must remain disabled.");
+}
 headers.forEach((header) => {
   if (!next.includes(header)) errors.push("Missing security header: " + header);
 });
