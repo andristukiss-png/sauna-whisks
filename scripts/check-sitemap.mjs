@@ -1,7 +1,41 @@
+import { discoverStaticPageRoutes } from "./route-utils.mjs";
 import fs from "node:fs";
 
 const sitemap = fs.readFileSync("app/sitemap.ts", "utf8");
 const errors = [];
+const staticPagesBlock = sitemap.match(/const staticPages = \[([\s\S]*?)\];/)?.[1] || "";
+const listedStaticRoutes = [...staticPagesBlock.matchAll(/"([^"]*)"/g)]
+  .map((match) => match[1] || "/")
+  .map((route) => route.replace(/\/$/, "") || "/");
+const listedStaticSet = new Set(listedStaticRoutes);
+const discoveredStaticRoutes = discoverStaticPageRoutes();
+const sitemapExcludedStatic = new Set(["/search"]);
+
+if (!staticPagesBlock) {
+  errors.push("Could not parse sitemap staticPages registry.");
+}
+if (listedStaticSet.size !== listedStaticRoutes.length) {
+  errors.push("Sitemap staticPages contains duplicate routes.");
+}
+
+for (const route of discoveredStaticRoutes) {
+  if (sitemapExcludedStatic.has(route)) {
+    if (listedStaticSet.has(route)) {
+      errors.push("Noindex static page must not appear in sitemap: " + route);
+    }
+    continue;
+  }
+  if (!listedStaticSet.has(route)) {
+    errors.push("Discovered static page is missing from sitemap: " + route);
+  }
+}
+
+for (const route of listedStaticSet) {
+  if (!discoveredStaticRoutes.includes(route)) {
+    errors.push("Sitemap static route has no page source: " + route);
+  }
+}
+
 
 const requiredStatic = [
   "/shop",
