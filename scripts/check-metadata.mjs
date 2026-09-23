@@ -105,6 +105,18 @@ for (const file of socialImages) {
   }
 }
 
+const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
+for (const [needle, label] of [
+  ["structuredUrlKeys", "structured-data URL-key registry"],
+  ["validateStructuredUrl", "structured-data URL validator"],
+  ["url.origin !== site.origin", "canonical structured-data origin check"],
+  ["walkStructuredData", "recursive structured-data traversal"],
+]) {
+  if (!localSmoke.includes(needle)) {
+    errors.push("Local smoke missing " + label + ".");
+  }
+}
+
 const searchPage = fs.readFileSync("app/search/page.tsx", "utf8");
 if (!/robots\s*:\s*\{\s*index\s*:\s*false\s*,\s*follow\s*:\s*true\s*\}/s.test(searchPage)) {
   errors.push("Search page must remain noindex, follow.");
