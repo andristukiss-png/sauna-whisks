@@ -150,6 +150,23 @@ if (enquiry.includes("Access-Control-Allow-Origin") || enquiry.includes("publicJ
   errors.push("Enquiry POST must not inherit wildcard public-data CORS.");
 }
 
+const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
+for (const [needle, label] of [
+  ["verifyEnquiryResponse", "shared enquiry response assertions"],
+  ["/api/enquiry GET", "GET method rejection test"],
+  ["/api/enquiry non-object JSON", "non-object JSON test"],
+  ["/api/enquiry invalid name", "invalid-name test"],
+  ["/api/enquiry invalid email", "invalid-email test"],
+  ["/api/enquiry short message", "short-message test"],
+  ["/api/enquiry long message", "long-message test"],
+  ["/api/enquiry oversized body", "oversized-body test"],
+  ["/api/enquiry honeypot", "honeypot test"],
+  ["/api/enquiry fast submit", "fast-submit test"],
+  ["/api/enquiry provider fallback", "provider-fallback test"],
+]) {
+  if (!localSmoke.includes(needle)) errors.push("Local smoke missing " + label + ".");
+}
+
 if (errors.length) {
   console.error("API policy validation failed:");
   errors.forEach((error) => console.error("- " + error));
