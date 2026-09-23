@@ -1,23 +1,30 @@
 import fs from "node:fs";
 
-const canonical = "https://saunawhisks.com";
+const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
+const canonical = site.origin;
 
 const files = {
   "next.config.ts": fs.readFileSync("next.config.ts", "utf8"),
   "app/layout.tsx": fs.readFileSync("app/layout.tsx", "utf8"),
   "app/robots.ts": fs.readFileSync("app/robots.ts", "utf8"),
   "app/sitemap.ts": fs.readFileSync("app/sitemap.ts", "utf8"),
+  "lib/metadata.ts": fs.readFileSync("lib/metadata.ts", "utf8"),
 };
 
 const checks = [
-  ["www host redirect is configured", files["next.config.ts"].includes('value: "www.saunawhisks.com"')],
-  ["www redirect targets canonical HTTPS host", files["next.config.ts"].includes(`destination: "${canonical}/:path*"`)],
+  ["site origin is HTTPS", canonical.startsWith("https://")],
+  ["site host matches origin", new URL(canonical).hostname === site.host],
+  ["www host is distinct", site.wwwHost === "www." + site.host],
+  ["public email belongs to site domain", site.publicEmail.toLowerCase().endsWith("@" + site.host)],
+  ["next config imports site config", files["next.config.ts"].includes('import site from "./config/site.json"')],
+  ["next config uses configured www host", files["next.config.ts"].includes("value: site.wwwHost")],
+  ["www redirect targets configured canonical origin", files["next.config.ts"].includes("destination: `${site.origin}/:path*`")],
   ["www redirect is permanent", files["next.config.ts"].includes("permanent: true")],
-  ["metadataBase uses canonical host", files["app/layout.tsx"].includes(`metadataBase: new URL("${canonical}")`)],
-  ["Open Graph URL uses canonical host", files["app/layout.tsx"].includes(`url: "${canonical}"`)],
-  ["robots sitemap uses canonical host", files["app/robots.ts"].includes(`sitemap: "${canonical}/sitemap.xml"`)],
-  ["robots host uses canonical host", files["app/robots.ts"].includes(`host: "${canonical}"`)],
-  ["sitemap base uses canonical host", files["app/sitemap.ts"].includes(`const base = "${canonical}"`)],
+  ["layout imports site config", files["app/layout.tsx"].includes('import site from "@/config/site.json"')],
+  ["metadataBase uses configured origin", files["app/layout.tsx"].includes("metadataBase: new URL(site.origin)")],
+  ["robots uses configured origin", files["app/robots.ts"].includes("sitemap: `${site.origin}/sitemap.xml`") && files["app/robots.ts"].includes("host: site.origin")],
+  ["sitemap uses configured origin", files["app/sitemap.ts"].includes("const base = site.origin")],
+  ["shared metadata uses configured site name", files["lib/metadata.ts"].includes("siteName: site.name")],
 ];
 
 const failures = checks.filter(([, ok]) => !ok);
