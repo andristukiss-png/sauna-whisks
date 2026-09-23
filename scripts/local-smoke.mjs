@@ -70,11 +70,18 @@ for (const header of ["content-security-policy", "strict-transport-security", "x
   if (home && !home.headers.get(header)) fail(`/ missing security header ${header}`);
 }
 
+if (home) {
+  expectHeader(home, "content-security-policy", "default-src 'self'", "/");
+  expectHeader(home, "content-security-policy", "frame-ancestors 'none'", "/");
+  expectHeader(home, "content-security-policy", "object-src 'none'", "/");
+}
+
 await expectJson("/api/health", (body, response) => {
   if (body.ok !== true) fail("/api/health did not report ok=true");
   if (body.status !== "pre-launch") fail("/api/health status is not pre-launch");
   expectHeader(response, "cache-control", "no-store", "/api/health");
   expectHeader(response, "access-control-allow-origin", "*", "/api/health");
+  expectHeader(response, "x-robots-tag", "noindex", "/api/health");
 });
 
 await expectJson("/api/status", (body, response) => {
@@ -203,6 +210,10 @@ if (noProvider) {
   if (!noProvider.headers.get("x-request-id")) fail("/api/enquiry missing X-Request-ID.");
   expectHeader(noProvider, "cache-control", "no-store", "/api/enquiry provider fallback");
   expectHeader(noProvider, "cross-origin-resource-policy", "same-origin", "/api/enquiry provider fallback");
+  if (noProvider.headers.get("access-control-allow-origin")) {
+    fail("/api/enquiry must not expose wildcard CORS.");
+  }
+  expectHeader(noProvider, "x-robots-tag", "noindex", "/api/enquiry provider fallback");
 }
 
 if (failures.length) {
