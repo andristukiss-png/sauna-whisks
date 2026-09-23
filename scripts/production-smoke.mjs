@@ -247,6 +247,7 @@ async function checkRegisteredRedirects() {
   }
 }
 
+await checkTlsCertificate(base.hostname);
 await reportDns();
 
 console.log("HTTP:");
@@ -264,7 +265,9 @@ await check(`${baseUrl}/robots.txt`, { contentTypeIncludes: "text/plain" });
 await check(`${baseUrl}/sitemap.xml`, { contentTypeIncludes: "xml" });
 await check(`${baseUrl}/feed.xml`, { contentTypeIncludes: "application/rss+xml" });
 await check(`${baseUrl}/feed.json`, { contentTypeIncludes: "application/json" });
-await check(`${baseUrl}/.well-known/security.txt`, { contentTypeIncludes: "text/plain" });
+await checkSecurityTxt();
+
+await checkRegisteredRedirects();
 
 if (checkCanonicalWww) {
   try {
