@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import Link from "next/link";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Sauna Whisk Traditions",
   description: "Learn how sauna whisks, venik, vihta and vasta fit into Baltic, Finnish and banya traditions.",
-  alternates: { canonical: "/traditions" }
-};
+  canonical: "/traditions",
+});
 
 export default function TraditionsPage() {
   return (
