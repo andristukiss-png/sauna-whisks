@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { comparisons } from "@/lib/comparisons";
 import { publicJson } from "@/lib/publicApi";
 
@@ -11,7 +12,7 @@ export function GET(){
       left:item.left.name,
       right:item.right.name,
       conclusion:item.conclusion,
-      url:`https://saunawhisks.com/compare/${item.slug}`
+      url:`${site.origin}/compare/${item.slug}`
     }))
   });
 }
