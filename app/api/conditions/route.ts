@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { productConditions } from "@/lib/productConditions";
 import { publicJson } from "@/lib/publicApi";
 
@@ -9,7 +10,7 @@ export function GET() {
       name: item.name,
       status: item.status,
       summary: item.summary,
-      url: `https://saunawhisks.com/conditions/${item.slug}`,
+      url: `${site.origin}/conditions/${item.slug}`,
     })),
   });
 }
