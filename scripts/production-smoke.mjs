@@ -102,6 +102,8 @@ async function check(
     verifyDeployment = false,
     contentTypeIncludes,
     requiredHeaders = [],
+    headerIncludes = [],
+    forbiddenHeaders = [],
   } = {}
 ) {
   try {
@@ -129,6 +131,19 @@ async function check(
     for (const header of requiredHeaders) {
       if (!response.headers.get(header)) {
         failures.push(`${url} missing required header: ${header}`);
+      }
+    }
+
+    for (const [header, expected] of headerIncludes) {
+      const value = response.headers.get(header) || "";
+      if (!value.toLowerCase().includes(expected.toLowerCase())) {
+        failures.push(`${url} header ${header} did not include ${expected}; got "${value}"`);
+      }
+    }
+
+    for (const header of forbiddenHeaders) {
+      if (response.headers.get(header)) {
+        failures.push(`${url} unexpectedly exposed forbidden header: ${header}`);
       }
     }
 
@@ -179,6 +194,16 @@ async function checkProductionRobots() {
     const type = response.headers.get("content-type") || "";
     if (!type.includes("text/plain")) {
       failures.push(`${url} did not return text/plain`);
+    }
+    for (const [header, expected] of [
+      ["x-saunawhisks-data-version", "1"],
+      ["access-control-allow-origin", "*"],
+      ["cross-origin-resource-policy", "cross-origin"],
+    ]) {
+      const value = response.headers.get(header) || "";
+      if (!value.toLowerCase().includes(expected.toLowerCase())) {
+        failures.push(`${url} header ${header} did not include ${expected}; got "${value}"`);
+      }
     }
 
     const body = await response.text();
@@ -293,15 +318,77 @@ await check(`${baseUrl}/`, {
     "x-frame-options",
     "referrer-policy",
   ],
+  forbiddenHeaders: ["x-powered-by"],
 });
-await check(`${baseUrl}/api/health`, { expectJson: true, verifyDeployment: true });
+await check(`${baseUrl}/api/health`, {
+  expectJson: true,
+  verifyDeployment: true,
+  headerIncludes: [
+    ["cache-control", "no-store"],
+    ["access-control-allow-origin", "*"],
+    ["cross-origin-resource-policy", "cross-origin"],
+    ["x-robots-tag", "noindex"],
+    ["x-saunawhisks-data-version", "1"],
+    ["access-control-expose-headers", "x-saunawhisks-data-version"],
+  ],
+});
 await checkProductionRobots();
 await check(`${baseUrl}/sitemap.xml`, { contentTypeIncludes: "xml" });
-await check(`${baseUrl}/feed.xml`, { contentTypeIncludes: "application/rss+xml" });
-await check(`${baseUrl}/feed.json`, { contentTypeIncludes: "application/json" });
+await check(`${baseUrl}/feed.xml`, {
+  contentTypeIncludes: "application/rss+xml",
+  headerIncludes: [
+    ["x-saunawhisks-data-version", "1"],
+    ["access-control-allow-origin", "*"],
+    ["cross-origin-resource-policy", "cross-origin"],
+  ],
+});
+await check(`${baseUrl}/feed.json`, {
+  contentTypeIncludes: "application/json",
+  headerIncludes: [
+    ["x-saunawhisks-data-version", "1"],
+    ["access-control-allow-origin", "*"],
+    ["cross-origin-resource-policy", "cross-origin"],
+  ],
+});
 await checkSecurityTxt();
 
 await checkRegisteredRedirects();
+
+async function checkWwwRedirect(pathWithQuery, expectedPath, expectedSearch = "") {
+  const source = new URL(pathWithQuery, wwwUrl);
+  try {
+    const response = await fetch(source, {
+      redirect: "manual",
+      headers: { "user-agent": "SaunaWhisks-production-smoke/1.0" },
+      signal: AbortSignal.timeout(10_000),
+    });
+    const location = response.headers.get("location");
+    console.log(`- ${source.href}: ${response.status}${location ? ` -> ${location}` : ""}`);
+
+    if (![301, 302, 307, 308].includes(response.status)) {
+      failures.push(`${source.href} did not redirect`);
+      return;
+    }
+    if (!location) {
+      failures.push(`${source.href} redirect is missing a Location header`);
+      return;
+    }
+
+    try {
+      const target = new URL(location, source);
+      if (target.origin !== site.origin) {
+        failures.push(`${source.href} redirected to unexpected origin ${target.origin}`);
+      }
+      if (target.pathname !== expectedPath || target.search !== expectedSearch || target.hash) {
+        failures.push(`${source.href} did not preserve the expected path/query: ${target.href}`);
+      }
+    } catch {
+      failures.push(`${source.href} returned an invalid redirect Location: ${location}`);
+    }
+  } catch (error) {
+    failures.push(`${source.href} redirect check failed: ${error.cause?.code || error.code || error.message}`);
+  }
+}
 
 if (checkCanonicalWww) {
   try {
@@ -333,6 +420,8 @@ if (checkCanonicalWww) {
     console.log(`- ${wwwUrl}: ERROR ${error.cause?.code || error.code || error.message}`);
     failures.push(`${wwwUrl} could not be fetched`);
   }
+
+  await checkWwwRedirect("/api/health?redirect_probe=1", "/api/health", "?redirect_probe=1");
 } else {
   console.log("- canonical www redirect check skipped for alternate base URL");
 }
