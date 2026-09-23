@@ -103,6 +103,19 @@ for (const file of renderFiles) {
   }
 }
 
+const productionSmoke = fs.readFileSync("scripts/production-smoke.mjs", "utf8");
+for (const [needle, label] of [
+  ["checkTlsCertificate", "live TLS certificate check"],
+  ["daysRemaining < 7", "TLS expiry threshold"],
+  ["checkSecurityTxt", "live security.txt check"],
+  ["daysRemaining < 30", "security.txt expiry threshold"],
+  ["Expected commit must be 7-40 hexadecimal characters.", "expected-commit input validation"],
+]) {
+  if (!productionSmoke.includes(needle)) {
+    errors.push("Production smoke missing " + label + ".");
+  }
+}
+
 if (errors.length) {
   console.error("Security validation failed:");
   errors.forEach((error) => console.error("- " + error));

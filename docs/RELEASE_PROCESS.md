@@ -47,4 +47,5 @@ A release is considered technically green only when:
 - `next build` passes
 - Vercel reports the deployment Ready
 - the production smoke check passes for the canonical host and `www` redirect
+- live TLS/security.txt/redirect checks pass
 - scheduled live production monitor remains enabled

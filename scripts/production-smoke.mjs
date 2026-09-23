@@ -1,7 +1,9 @@
 import fs from "node:fs";
 import dns from "node:dns/promises";
+import tls from "node:tls";
 
 const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
+const redirects = JSON.parse(fs.readFileSync("config/redirects.json", "utf8"));
 const canonicalProductionHost = site.host;
 const baseUrl = (process.env.SAUNAWHISKS_BASE_URL || `https://${canonicalProductionHost}`).replace(/\/$/, "");
 const base = new URL(baseUrl);
@@ -15,6 +17,60 @@ if (base.protocol !== "https:") {
 
 const failures = [];
 const expectedCommit = (process.env.SAUNAWHISKS_EXPECTED_COMMIT || "").trim().toLowerCase();
+if (expectedCommit && !/^[0-9a-f]{7,40}$/.test(expectedCommit)) {
+  console.error("Expected commit must be 7-40 hexadecimal characters.");
+  process.exit(1);
+}
+
+async function checkTlsCertificate(host) {
+  console.log("TLS:");
+  await new Promise((resolve) => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      resolve();
+    };
+
+    const socket = tls.connect(
+      {
+        host,
+        port: 443,
+        servername: host,
+        rejectUnauthorized: true,
+      },
+      () => {
+        const certificate = socket.getPeerCertificate();
+        const validTo = Date.parse(certificate.valid_to || "");
+        const protocol = socket.getProtocol() || "(unknown)";
+        console.log(`- ${host}: protocol=${protocol} valid_to=${certificate.valid_to || "(unknown)"}`);
+
+        if (!certificate.valid_to || Number.isNaN(validTo)) {
+          failures.push(`${host} TLS certificate has no valid expiry date`);
+        } else {
+          const daysRemaining = (validTo - Date.now()) / 86_400_000;
+          if (daysRemaining < 7) {
+            failures.push(`${host} TLS certificate expires in less than 7 days`);
+          }
+        }
+
+        socket.end();
+        finish();
+      }
+    );
+
+    socket.setTimeout(10_000, () => {
+      socket.destroy(new Error("TLS connection timed out"));
+    });
+
+    socket.on("error", (error) => {
+      failures.push(`${host} TLS check failed: ${error.code || error.message}`);
+      finish();
+    });
+
+    socket.on("close", finish);
+  });
+}
 
 async function reportDns() {
   console.log("DNS:");
@@ -106,6 +162,92 @@ async function check(
   }
 }
 
+async function checkSecurityTxt() {
+  const url = `${baseUrl}/.well-known/security.txt`;
+  try {
+    const response = await fetch(url, {
+      headers: { "user-agent": "SaunaWhisks-production-smoke/1.0" },
+      signal: AbortSignal.timeout(10_000),
+    });
+    console.log(`- ${url}: ${response.status}`);
+
+    if (!response.ok) {
+      failures.push(`${url} returned ${response.status}`);
+      return;
+    }
+
+    const type = response.headers.get("content-type") || "";
+    if (!type.includes("text/plain")) {
+      failures.push(`${url} did not return text/plain`);
+    }
+
+    const body = await response.text();
+    if (!body.includes(`Contact: mailto:${site.publicEmail}`)) {
+      failures.push("security.txt contact does not match site config");
+    }
+    if (!body.includes(`Canonical: ${site.origin}/.well-known/security.txt`)) {
+      failures.push("security.txt canonical URL does not match site config");
+    }
+
+    const expiresValue = body.match(/^Expires:\s*(.+)$/m)?.[1]?.trim() || "";
+    const expiresAt = Date.parse(expiresValue);
+    if (!expiresValue || Number.isNaN(expiresAt)) {
+      failures.push("security.txt has no valid Expires timestamp");
+    } else {
+      const daysRemaining = (expiresAt - Date.now()) / 86_400_000;
+      console.log(`  security.txt expires in ${daysRemaining.toFixed(1)} days`);
+      if (daysRemaining < 30) {
+        failures.push("security.txt expires in less than 30 days");
+      }
+    }
+  } catch (error) {
+    failures.push(`${url} could not be verified: ${error.cause?.code || error.code || error.message}`);
+  }
+}
+
+async function checkRegisteredRedirects() {
+  console.log("Redirects:");
+  for (const { source, destination } of redirects) {
+    const sourceUrl = `${baseUrl}${source}`;
+    try {
+      const response = await fetch(sourceUrl, {
+        redirect: "manual",
+        headers: { "user-agent": "SaunaWhisks-production-smoke/1.0" },
+        signal: AbortSignal.timeout(10_000),
+      });
+      const location = response.headers.get("location") || "";
+      console.log(`- ${source}: ${response.status}${location ? ` -> ${location}` : ""}`);
+
+      if (![301, 307, 308].includes(response.status)) {
+        failures.push(`${source} did not return a permanent-style redirect`);
+        continue;
+      }
+
+      const resolved = new URL(location, baseUrl);
+      if (resolved.pathname !== destination) {
+        failures.push(`${source} redirected to ${resolved.pathname}, expected ${destination}`);
+        continue;
+      }
+      if (resolved.origin !== base.origin) {
+        failures.push(`${source} redirected off the tested origin to ${resolved.origin}`);
+        continue;
+      }
+
+      const target = await fetch(`${baseUrl}${destination}`, {
+        redirect: "follow",
+        headers: { "user-agent": "SaunaWhisks-production-smoke/1.0" },
+        signal: AbortSignal.timeout(10_000),
+      });
+      if (!target.ok) {
+        failures.push(`${destination} redirect target returned ${target.status}`);
+      }
+    } catch (error) {
+      failures.push(`${source} redirect check failed: ${error.cause?.code || error.code || error.message}`);
+    }
+  }
+}
+
+await checkTlsCertificate(base.hostname);
 await reportDns();
 
 console.log("HTTP:");
@@ -123,7 +265,9 @@ await check(`${baseUrl}/robots.txt`, { contentTypeIncludes: "text/plain" });
 await check(`${baseUrl}/sitemap.xml`, { contentTypeIncludes: "xml" });
 await check(`${baseUrl}/feed.xml`, { contentTypeIncludes: "application/rss+xml" });
 await check(`${baseUrl}/feed.json`, { contentTypeIncludes: "application/json" });
-await check(`${baseUrl}/.well-known/security.txt`, { contentTypeIncludes: "text/plain" });
+await checkSecurityTxt();
+
+await checkRegisteredRedirects();
 
 if (checkCanonicalWww) {
   try {
