@@ -95,6 +95,8 @@ const monitorChecks = [
   ["monitor runs production smoke script", monitor.includes("node scripts/production-smoke.mjs")],
   ["monitor has scheduled cadence", monitor.includes('cron: "17 */6 * * *"')],
   ["monitor supports manual dispatch", monitor.includes("workflow_dispatch:")],
+  ["monitor accepts optional expected commit", monitor.includes("expected_commit:")],
+  ["monitor passes expected commit to smoke script", monitor.includes("SAUNAWHISKS_EXPECTED_COMMIT")],
   ["monitor has a five-minute timeout", monitor.includes("timeout-minutes: 5")],
   ["monitor uses read-only repository permission", monitor.includes("contents: read")],
   ["monitor disables persisted checkout credentials", monitor.includes("persist-credentials: false")],
