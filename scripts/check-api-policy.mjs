@@ -129,6 +129,8 @@ const enquiryGuards = [
   ["fetch metadata guard", 'headers.get("sec-fetch-site")'],
   ["cross-site request rejection", 'fetchSite === "cross-site"'],
   ["JSON content-type guard", 'headers.get("content-type")'],
+  ["exact JSON media-type parsing", 'contentType.split(";")[0]?.trim().toLowerCase()'],
+  ["exact JSON media-type rejection", 'mediaType !== "application/json"'],
   ["runtime string field registry", "STRING_FIELDS"],
   ["runtime field-type rejection", "hasInvalidFieldTypes(body)"],
   ["field-type error response", 'error: "Invalid field type."'],
