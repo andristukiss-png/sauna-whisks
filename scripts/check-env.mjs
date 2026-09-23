@@ -1,5 +1,7 @@
 import fs from "node:fs";
 
+const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
+
 const file = ".env.example";
 if (!fs.existsSync(file)) {
   console.error("Environment validation failed: .env.example missing.");
@@ -16,8 +18,9 @@ if (missing.length) {
   process.exit(1);
 }
 
-if (!text.includes("info@SaunaWhisks.com")) {
-  console.error("Environment validation failed: primary enquiry email missing.");
+const toLine = text.match(/^ENQUIRY_TO_EMAIL=(.*)$/m)?.[1]?.trim() || "";
+if (toLine !== site.publicEmail) {
+  console.error("Environment validation failed: ENQUIRY_TO_EMAIL must match config/site.json.");
   process.exit(1);
 }
 
