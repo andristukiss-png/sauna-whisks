@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import type { MetadataRoute } from "next";
 import { saunaWhisks } from "@/lib/products";
 import { articles } from "@/lib/articles";
@@ -16,7 +17,7 @@ import { useCases } from "@/lib/useCases";
 import { techniques } from "@/lib/techniques";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://saunawhisks.com";
+  const base = site.origin;
   const staticPages = [
     "",
     "/shop",
