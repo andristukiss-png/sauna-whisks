@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 export type LaunchStatusItem = {
   area: string;
   status: "In development" | "Open" | "Researching" | "Disabled";
@@ -9,7 +10,7 @@ export const launchStatus = {
   checkoutEnabled: false,
   enquiriesOpen: true,
   sourceOfTruth: "GitHub main",
-  contact: "info@SaunaWhisks.com",
+  contact: site.publicEmail,
   items: [
     {
       area: "Brand & website",
