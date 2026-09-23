@@ -38,3 +38,4 @@
 - every sitemap URL renders 200 with title, H1, canonical and no accidental noindex
 - Vercel deployment green
 - production smoke check green
+- scheduled Production monitor workflow present and healthy
