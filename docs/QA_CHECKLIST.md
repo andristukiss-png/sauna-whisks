@@ -29,6 +29,7 @@
 - keyboard focus visible
 - mobile overflow checked
 - no placeholder links
+- rendered internal links resolve directly with 2xx (no hidden redirect dependency)
 - forms have labels
 - search result counts are announced to assistive technology
 - error/empty states usable
