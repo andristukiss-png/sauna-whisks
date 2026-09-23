@@ -188,6 +188,9 @@ async function checkProductionRobots() {
     if (!body.includes(`Sitemap: ${site.origin}/sitemap.xml`)) {
       failures.push("production robots.txt does not advertise the canonical sitemap");
     }
+    if (!/^Disallow:\s*\/api$/m.test(body)) {
+      failures.push("production robots.txt does not disallow the API prefix");
+    }
   } catch (error) {
     failures.push(`${url} could not be verified: ${error.cause?.code || error.code || error.message}`);
   }
