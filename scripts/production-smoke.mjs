@@ -1,6 +1,8 @@
+import fs from "node:fs";
 import dns from "node:dns/promises";
 
-const canonicalProductionHost = "saunawhisks.com";
+const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
+const canonicalProductionHost = site.host;
 const baseUrl = (process.env.SAUNAWHISKS_BASE_URL || `https://${canonicalProductionHost}`).replace(/\/$/, "");
 const base = new URL(baseUrl);
 const checkCanonicalWww = base.hostname === canonicalProductionHost;
