@@ -19,12 +19,12 @@ SAUNAWHISKS_EXPECTED_COMMIT=<git-sha> npm run verify:production
 The health endpoint exposes only safe deployment identity fields when Vercel provides them: environment and a 12-character commit prefix. It does not expose secrets or environment-variable values.
 
 The command reports:
-- TLS certificate protocol and expiry; less than 7 days remaining is a failure
+- TLS certificate protocol and expiry; production must negotiate TLS 1.2 or TLS 1.3, and less than 7 days remaining is a failure
 - public A resolution for `saunawhisks.com`
 - public CNAME resolution for `www.saunawhisks.com` when exposed by DNS
-- homepage HTTP status and security headers
+- homepage HTTP status, canonical/Open Graph identity, production indexability, CSP/HSTS policy and security headers
 - `/api/health` status, deployment environment and commit prefix when available
-- `/robots.txt`, `/sitemap.xml`, RSS and JSON feeds
+- `/robots.txt`, `/sitemap.xml`, RSS and JSON feeds; versioned public machine routes are checked for their compatibility/CORS headers
 - security.txt contact/canonical values and expiry; less than 30 days remaining is a failure
 - every legacy redirect from `config/redirects.json` plus its destination
 - the `www` redirect target and path/query preservation
