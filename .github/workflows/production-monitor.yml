@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "17 */6 * * *"
   workflow_dispatch:
+    inputs:
+      expected_commit:
+        description: "Optional expected Git commit SHA (7-40 hex characters)"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -29,4 +34,6 @@ jobs:
           node-version-file: ".nvmrc"
 
       - name: Verify live production
+        env:
+          SAUNAWHISKS_EXPECTED_COMMIT: ${{ github.event.inputs.expected_commit || '' }}
         run: node scripts/production-smoke.mjs
