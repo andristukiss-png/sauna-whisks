@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { discoveryTrio, getDiscoveryTrioProducts } from "@/lib/bundles";
 
 export const metadata = pageMetadata({
   title: "Sauna Whisk Discovery Trio",
@@ -13,21 +14,17 @@ export const metadata = pageMetadata({
   canonical: "/shop/discovery-trio",
 });
 
-const items = [
-  ["Baltic Birch", "Soft, aromatic, traditional"],
-  ["Baltic Oak", "Firm, broad-leafed, substantial"],
-  ["Eucalyptus", "Aromatic, cooling, vivid"]
-];
+const items = getDiscoveryTrioProducts().map((product) => [product.name, product.character] as const);
 
 export default function DiscoveryTrioPage() {
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: "Sauna Whisk Discovery Trio",
+    name: `Sauna Whisk ${discoveryTrio.name}`,
     description: "Planned three-whisk bundle with birch, oak and eucalyptus.",
     brand: { "@type": "Brand", name: site.name },
     category: "Sauna whisk bundle",
-    url: `${site.origin}/shop/discovery-trio`
+    url: `${site.origin}/shop/${discoveryTrio.slug}`
   };
 
   return (
@@ -60,9 +57,9 @@ export default function DiscoveryTrioPage() {
           </p>
 
           <div className="detail-meta">
-            <div><span>Includes</span><b>3 sauna whisks</b></div>
-            <div><span>Planned launch price</span><b>US$69</b></div>
-            <div><span>Status</span><b>Pre-launch</b></div>
+            <div><span>Includes</span><b>{discoveryTrio.productSlugs.length} sauna whisks</b></div>
+            <div><span>Planned launch price</span><b>{discoveryTrio.plannedPrice}</b></div>
+            <div><span>Status</span><b>{discoveryTrio.status}</b></div>
           </div>
 
           <a className="button button-dark" href="#trio-enquiry">Ask about the Discovery Trio</a>
