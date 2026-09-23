@@ -92,6 +92,18 @@ for (const file of files) {
   }
 }
 
+const loading = fs.readFileSync("app/loading.tsx", "utf8");
+if (loading.includes("<main")) {
+  errors.push("Global loading fallback must not create a second main landmark.");
+}
+for (const [needle, label] of [
+  ['role="status"', "loading status role"],
+  ['aria-live="polite"', "loading polite announcement"],
+  ['aria-atomic="true"', "loading atomic announcement"],
+]) {
+  if (!loading.includes(needle)) errors.push("Loading fallback missing " + label + ".");
+}
+
 const journalSearch = fs.readFileSync("components/JournalSearch.tsx", "utf8");
 for (const [needle, label] of [
   ['aria-controls="journal-search-results"', "journal search controls relationship"],
