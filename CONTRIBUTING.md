@@ -18,7 +18,14 @@ Run:
 npm run check
 ```
 
-This covers validation, lint, TypeScript and the production Next.js build. CI additionally boots the production server and runs HTTP smoke tests.
+This covers validation, lint, TypeScript and the production Next.js build. CI additionally audits production dependencies, runs CodeQL, boots the production server and runs HTTP smoke tests.
+
+## Next.js boundaries
+
+- Keep Client Components synchronous at the component boundary.
+- Do not import Node.js or `next/headers` APIs into `"use client"` modules.
+- Dynamic App Router pages use async `params` / `searchParams` on Next.js 16.
+- Do not add legacy `middleware.ts`; Next.js 16 uses `proxy.ts` when a request proxy is actually needed.
 
 ## New routes
 When adding a meaningful public route:
