@@ -90,9 +90,12 @@ if (!searchApi.includes("normalizeSearchQuery")) errors.push("Search API does no
 const enquiry = fs.readFileSync("app/api/enquiry/route.ts", "utf8");
 const enquiryGuards = [
   ["same-origin guard", 'headers.get("origin")'],
+  ["fetch metadata guard", 'headers.get("sec-fetch-site")'],
+  ["cross-site request rejection", 'fetchSite === "cross-site"'],
   ["JSON content-type guard", 'headers.get("content-type")'],
   ["declared body-size guard", 'headers.get("content-length")'],
   ["actual body-size guard", "TextEncoder"],
+  ["same-origin page context filter", 'submittedPageUrl.startsWith(requestUrl.origin + "/")'],
   ["honeypot guard", "if (website)"],
   ["fast-submit bot guard", "Date.now() - startedAt < 1800"],
   ["outbound timeout", "AbortSignal.timeout(10_000)"],
