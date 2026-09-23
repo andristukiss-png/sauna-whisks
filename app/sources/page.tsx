@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
-import { articles } from "@/lib/articles";
+import { articleSources } from "@/lib/sources";
 
 export const metadata = pageMetadata({
   title: "Sources",
@@ -12,12 +12,6 @@ export const metadata = pageMetadata({
 });
 
 export default function SourcesPage() {
-  const unique = Array.from(
-    new Map(
-      articles.flatMap((article) => article.sources).map((source) => [source.url, source])
-    ).values()
-  );
-
   return (
     <main>
       <Header />
@@ -37,7 +31,7 @@ export default function SourcesPage() {
         <Link href="/claims">Product claims standard →</Link>
       </section>
       <section className="source-list">
-        {unique.map((source, index) => (
+        {articleSources.map((source, index) => (
           <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <h2>{source.label}</h2>
