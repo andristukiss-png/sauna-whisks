@@ -109,18 +109,15 @@ The form posts to `/api/enquiry` and includes:
 - contextual enquiry fields
 - mailto fallback if transactional delivery is not configured
 
-Required Vercel variable for direct email delivery:
+Direct email delivery requires all three Vercel variables:
 
 ```
 RESEND_API_KEY=...
-```
-
-Optional:
-
-```
 ENQUIRY_TO_EMAIL=info@SaunaWhisks.com
 ENQUIRY_FROM_EMAIL=Sauna Whisks <website@SaunaWhisks.com>
 ```
+
+If any value is missing or invalid, the enquiry form stays on the mailto fallback instead of attempting partial transactional-email configuration.
 
 ## Development
 

@@ -21,4 +21,15 @@ if (!text.includes("info@SaunaWhisks.com")) {
   process.exit(1);
 }
 
+if (text.includes("onboarding@resend.dev")) {
+  console.error("Environment validation failed: onboarding sender must not be the documented production default.");
+  process.exit(1);
+}
+
+const fromLine = text.match(/^ENQUIRY_FROM_EMAIL=(.*)$/m)?.[1]?.trim() || "";
+if (fromLine) {
+  console.error("Environment validation failed: ENQUIRY_FROM_EMAIL should stay blank in the template until the sending domain is verified.");
+  process.exit(1);
+}
+
 console.log("Environment template validation passed.");

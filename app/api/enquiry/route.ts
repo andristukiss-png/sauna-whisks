@@ -20,6 +20,13 @@ function validEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+function configuredEmail(value: string | undefined) {
+  const cleaned = (value || "").replace(/[\r\n\u0000]+/g, " ").trim();
+  const angle = cleaned.match(/<([^<>]+)>$/);
+  const address = (angle?.[1] || cleaned).trim();
+  return validEmail(address) ? cleaned : "";
+}
+
 function cleanOptional(value: string | undefined, max = 200) {
   return (value || "").replace(/[\r\n\u0000]+/g, " ").trim().slice(0, max);
 }
@@ -118,11 +125,11 @@ export async function POST(request: Request) {
       );
     }
 
-    const apiKey = process.env.RESEND_API_KEY;
-    const from = process.env.ENQUIRY_FROM_EMAIL || "Sauna Whisks <onboarding@resend.dev>";
-    const to = process.env.ENQUIRY_TO_EMAIL || "info@SaunaWhisks.com";
+    const apiKey = (process.env.RESEND_API_KEY || "").trim();
+    const from = configuredEmail(process.env.ENQUIRY_FROM_EMAIL);
+    const to = configuredEmail(process.env.ENQUIRY_TO_EMAIL);
 
-    if (!apiKey) {
+    if (!apiKey || !from || !to) {
       return reply(
         { error: "Email delivery is not configured yet.", fallback: "mailto" },
         503
