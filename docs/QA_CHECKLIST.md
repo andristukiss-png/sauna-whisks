@@ -40,3 +40,4 @@
 - indexed page titles are unique
 - Vercel deployment green
 - production smoke check green
+- scheduled Production monitor workflow present and healthy
