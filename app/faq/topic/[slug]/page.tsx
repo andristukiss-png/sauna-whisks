@@ -54,7 +54,7 @@ export default async function FAQTopicPage({ params }: { params: Promise<{ slug:
       <section className="faq-list">
         {topic.items.map(([question, answer], index) => (
           <details key={question}>
-            <summary><span>{String(index + 1).padStart(2, "0")}</span><b>{question}</b><i>+</i></summary>
+            <summary><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><b>{question}</b><i aria-hidden="true">+</i></summary>
             <p>{answer}</p>
           </details>
         ))}
