@@ -117,6 +117,17 @@ for (const [needle, label] of [
   }
 }
 
+const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
+for (const [needle, label] of [
+  ["must render exactly one H1", "runtime H1 count check"],
+  ["must render exactly one main landmark", "runtime main-landmark count check"],
+  ['propertyMetaContent(html, "og:url")', "runtime Open Graph URL check"],
+  ['metaContent(html, "twitter:title")', "runtime Twitter title check"],
+  ['metaContent(html, "twitter:description")', "runtime Twitter description check"],
+]) {
+  if (!localSmoke.includes(needle)) errors.push("Local smoke missing " + label + ".");
+}
+
 const searchPage = fs.readFileSync("app/search/page.tsx", "utf8");
 if (!/robots\s*:\s*\{\s*index\s*:\s*false\s*,\s*follow\s*:\s*true\s*\}/s.test(searchPage)) {
   errors.push("Search page must remain noindex, follow.");
