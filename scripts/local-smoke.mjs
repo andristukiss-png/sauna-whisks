@@ -55,6 +55,88 @@ function expectHeader(response, name, includes, path) {
   }
 }
 
+function validatePublicJsonUrls(value, path) {
+  if (typeof value === "string") {
+    if (!/^(?:https?:)?\/\//i.test(value)) return;
+    try {
+      const url = new URL(value, site.origin);
+      if (url.hostname === site.host || url.hostname === site.wwwHost) {
+        if (url.origin !== site.origin) {
+          fail(path + " public JSON contains a non-canonical site URL: " + value);
+        }
+      }
+    } catch {
+      fail(path + " public JSON contains an invalid URL-like value: " + value);
+    }
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    for (const item of value) validatePublicJsonUrls(item, path);
+    return;
+  }
+
+  if (!value || typeof value !== "object") return;
+  for (const item of Object.values(value)) validatePublicJsonUrls(item, path);
+}
+
+async function validatePublicEndpointBody(response, path) {
+  const copy = response.clone();
+
+  if (path.endsWith(".csv")) {
+    const body = await copy.text();
+    if (!body.trim()) fail(path + " returned an empty CSV body.");
+    if (!body.includes(",")) fail(path + " CSV body does not contain a header delimiter.");
+    if (body.includes("\u0000")) fail(path + " CSV body contains a NUL byte.");
+    return;
+  }
+
+  if (path === "/feed.xml") {
+    const body = await copy.text();
+    if (!body.includes("<rss") || !body.includes("<channel>")) {
+      fail(path + " is missing RSS/channel structure.");
+    }
+    if (!body.includes(`href="${site.origin}/feed.xml"`)) {
+      fail(path + " self URL does not match the canonical origin.");
+    }
+    if (body.includes("\u0000")) fail(path + " contains a NUL byte.");
+    return;
+  }
+
+  if (
+    path === "/llms.txt" ||
+    path === "/humans.txt" ||
+    path === "/.well-known/security.txt"
+  ) {
+    const body = await copy.text();
+    if (!body.trim()) fail(path + " returned an empty text body.");
+    if (body.includes("\u0000")) fail(path + " contains a NUL byte.");
+    return;
+  }
+
+  if (path === "/sitemap.xml" || path === "/robots.txt") return;
+
+  try {
+    const body = await copy.json();
+    if (body === null || (typeof body !== "object" && !Array.isArray(body))) {
+      fail(path + " JSON body must be an object or array.");
+      return;
+    }
+    validatePublicJsonUrls(body, path);
+
+    if (path === "/feed.json") {
+      if (body.version !== "https://jsonfeed.org/version/1.1") {
+        fail("/feed.json has an unexpected JSON Feed version.");
+      }
+      if (body.feed_url !== `${site.origin}/feed.json`) {
+        fail("/feed.json feed_url does not match the canonical origin.");
+      }
+    }
+  } catch {
+    fail(path + " did not contain valid JSON.");
+  }
+}
+
 async function expectJson(path, assertions, options) {
   const response = await request(path, options);
   if (!response) return;
@@ -379,6 +461,8 @@ if (apiIndexResponse?.ok) {
         expectHeader(response, "x-saunawhisks-data-version", "1", path);
         expectHeader(response, "access-control-expose-headers", "x-saunawhisks-data-version", path);
       }
+
+      await validatePublicEndpointBody(response, path);
 
       if (path.endsWith(".csv")) {
         expectHeader(response, "content-type", "text/csv", path);
