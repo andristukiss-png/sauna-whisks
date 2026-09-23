@@ -11,6 +11,8 @@ If any direct-delivery variable is missing or invalid — RESEND_API_KEY, ENQUIR
 
 Malformed field types are rejected with a 400 response before sanitization or provider logic. The public form sends all enquiry fields as strings.
 
+Provider failure logs retain only the request ID and HTTP status. Do not log the provider response body or enquiry content.
+
 ## Vercel environment variables
 - RESEND_API_KEY
 - ENQUIRY_TO_EMAIL=info@SaunaWhisks.com
