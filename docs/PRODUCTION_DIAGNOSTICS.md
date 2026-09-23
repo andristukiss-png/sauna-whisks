@@ -27,7 +27,7 @@ The command reports:
 - `/robots.txt`, `/sitemap.xml`, RSS and JSON feeds
 - security.txt contact/canonical values and expiry; less than 30 days remaining is a failure
 - every legacy redirect from `config/redirects.json` plus its destination
-- the `www` redirect target
+- the `www` redirect target and path/query preservation
 
 Use a different host only when intentionally testing a preview or alternate production hostname. Alternate-host runs skip the canonical `www` DNS/redirect checks:
 
@@ -56,6 +56,7 @@ SAUNAWHISKS_BASE_URL=https://example.com npm run verify:production
    - A certificate cannot finish provisioning until the relevant hostname validates correctly.
 
 5. **HTTP routing**
+   - The monitor verifies that `www` redirects to the exact canonical origin and preserves non-root path/query values.
    - `https://saunawhisks.com/` should return a successful response.
    - `https://www.saunawhisks.com/` should redirect to the exact canonical apex origin and preserve the root path.
    - `/api/health` should return JSON with `ok: true`.
