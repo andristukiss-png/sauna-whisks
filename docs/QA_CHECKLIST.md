@@ -40,4 +40,7 @@
 - indexed page titles are unique
 - Vercel deployment green
 - production smoke check green
+- TLS certificate has at least 7 days remaining
+- security.txt has at least 30 days remaining
+- every registered legacy redirect works and its target returns 200
 - scheduled production monitor workflow present and validated
