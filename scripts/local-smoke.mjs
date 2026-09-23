@@ -344,6 +344,17 @@ if (securityResponse?.ok) {
   const body = await securityResponse.text();
   if (!body.includes(`Contact: mailto:${site.publicEmail}`)) fail("security.txt missing contact.");
   if (!body.includes(`Canonical: ${site.origin}/.well-known/security.txt`)) fail("security.txt missing canonical.");
+
+  const expiresValue = body.match(/^Expires:\s*(.+)$/m)?.[1]?.trim() || "";
+  const expiresAt = Date.parse(expiresValue);
+  if (!expiresValue || Number.isNaN(expiresAt)) {
+    fail("security.txt has no valid Expires timestamp.");
+  } else {
+    const daysRemaining = (expiresAt - Date.now()) / 86_400_000;
+    if (daysRemaining < 30) {
+      fail("security.txt expires in less than 30 days.");
+    }
+  }
 }
 
 for (const path of [
