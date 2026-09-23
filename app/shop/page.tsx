@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -21,7 +22,7 @@ export default function ShopPage() {
       "@type": "ListItem",
       position: index + 1,
       name: whisk.name,
-      url: `https://saunawhisks.com/shop/${whisk.slug}`
+      url: `${site.origin}/shop/${whisk.slug}`
     }))
   };
 
