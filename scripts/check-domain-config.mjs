@@ -27,6 +27,53 @@ const checks = [
   ["shared metadata uses configured site name", files["lib/metadata.ts"].includes("siteName: site.name")],
 ];
 
+const machineFiles = [
+  "next.config.ts",
+  "app/layout.tsx",
+  "app/robots.ts",
+  "app/sitemap.ts",
+  "app/feed.xml/route.ts",
+  "app/feed.json/route.ts",
+  "app/llms.txt/route.ts",
+  "app/humans.txt/route.ts",
+  "app/.well-known/security.txt/route.ts",
+  "components/Breadcrumbs.tsx",
+  "lib/metadata.ts",
+  "lib/status.ts",
+  "app/api/health/route.ts",
+  "app/api/company/route.ts",
+  "app/api/articles/route.ts",
+  "app/api/catalog/route.ts",
+  "app/api/comparisons/route.ts",
+  "app/api/conditions/route.ts",
+  "app/api/editorial/route.ts",
+  "app/api/faq/route.ts",
+  "app/api/glossary/route.ts",
+  "app/api/guides/route.ts",
+  "app/api/markets/route.ts",
+  "app/api/materials/route.ts",
+  "app/api/operations/route.ts",
+  "app/api/techniques/route.ts",
+  "app/api/tools/route.ts",
+  "app/api/trade/route.ts",
+  "app/api/traditions/route.ts",
+  "app/api/use-cases/route.ts",
+];
+
+for (const file of machineFiles) {
+  const text = fs.readFileSync(file, "utf8");
+  if (file !== "config/site.json" && text.includes(site.origin)) {
+    checks.push(["machine file hard-codes canonical origin: " + file, false]);
+  }
+  if (
+    file !== "config/site.json" &&
+    !file.endsWith("check-domain-config.mjs") &&
+    text.includes(site.publicEmail)
+  ) {
+    checks.push(["machine file hard-codes public email: " + file, false]);
+  }
+}
+
 const failures = checks.filter(([, ok]) => !ok);
 
 if (failures.length) {
