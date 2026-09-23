@@ -10,7 +10,7 @@ From a machine with public internet access:
 npm run verify:production
 ```
 
-To prove that the hostname is serving a specific deployment, pass the expected Git commit SHA:
+To prove that the hostname is serving a specific deployment, pass an expected 7–40 character hexadecimal Git commit SHA:
 
 ```bash
 SAUNAWHISKS_EXPECTED_COMMIT=<git-sha> npm run verify:production
@@ -19,12 +19,14 @@ SAUNAWHISKS_EXPECTED_COMMIT=<git-sha> npm run verify:production
 The health endpoint exposes only safe deployment identity fields when Vercel provides them: environment and a 12-character commit prefix. It does not expose secrets or environment-variable values.
 
 The command reports:
+- TLS certificate protocol and expiry; less than 7 days remaining is a failure
 - public A resolution for `saunawhisks.com`
 - public CNAME resolution for `www.saunawhisks.com` when exposed by DNS
-- homepage HTTP status
+- homepage HTTP status and security headers
 - `/api/health` status, deployment environment and commit prefix when available
-- `/robots.txt`
-- `/sitemap.xml`
+- `/robots.txt`, `/sitemap.xml`, RSS and JSON feeds
+- security.txt contact/canonical values and expiry; less than 30 days remaining is a failure
+- every legacy redirect from `config/redirects.json` plus its destination
 - the `www` redirect target
 
 Use a different host only when intentionally testing a preview or alternate production hostname. Alternate-host runs skip the canonical `www` DNS/redirect checks:
