@@ -435,6 +435,113 @@ const malformed = await request("/api/enquiry", {
 });
 await verifyEnquiryResponse(malformed, 400, "/api/enquiry malformed JSON");
 
+const nonObject = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify([]),
+});
+const nonObjectBody = await verifyEnquiryResponse(nonObject, 400, "/api/enquiry non-object JSON");
+if (nonObjectBody.error !== "Invalid request.") {
+  fail("/api/enquiry non-object JSON returned unexpected error text.");
+}
+
+const invalidName = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    name: "A",
+    email: "test@example.com",
+    message: "A valid test enquiry.",
+  }),
+});
+const invalidNameBody = await verifyEnquiryResponse(invalidName, 400, "/api/enquiry invalid name");
+if (invalidNameBody.error !== "Please enter your name.") {
+  fail("/api/enquiry invalid-name validation returned unexpected error text.");
+}
+
+const invalidEmail = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    name: "Test User",
+    email: "not-an-email",
+    message: "A valid test enquiry.",
+  }),
+});
+const invalidEmailBody = await verifyEnquiryResponse(invalidEmail, 400, "/api/enquiry invalid email");
+if (invalidEmailBody.error !== "Please enter a valid email address.") {
+  fail("/api/enquiry invalid-email validation returned unexpected error text.");
+}
+
+const shortMessage = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    name: "Test User",
+    email: "test@example.com",
+    message: "short",
+  }),
+});
+const shortMessageBody = await verifyEnquiryResponse(shortMessage, 400, "/api/enquiry short message");
+if (!String(shortMessageBody.error || "").includes("10 and 5000")) {
+  fail("/api/enquiry short-message validation returned unexpected error text.");
+}
+
+const longMessage = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    name: "Test User",
+    email: "test@example.com",
+    message: "x".repeat(5001),
+  }),
+});
+await verifyEnquiryResponse(longMessage, 400, "/api/enquiry long message");
+
+const oversized = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    name: "Test User",
+    email: "test@example.com",
+    message: "x".repeat(21_000),
+  }),
+});
+const oversizedBody = await verifyEnquiryResponse(oversized, 413, "/api/enquiry oversized body");
+if (oversizedBody.error !== "Request too large.") {
+  fail("/api/enquiry oversized-body validation returned unexpected error text.");
+}
+
+const honeypot = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    name: "Bot User",
+    email: "bot@example.com",
+    message: "A bot-shaped test enquiry.",
+    website: "https://spam.example",
+  }),
+});
+const honeypotBody = await verifyEnquiryResponse(honeypot, 200, "/api/enquiry honeypot");
+if (honeypotBody.ok !== true) {
+  fail("/api/enquiry honeypot did not return the expected silent success.");
+}
+
+const fastSubmit = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    name: "Fast User",
+    email: "fast@example.com",
+    message: "A fast-submit test enquiry.",
+    startedAt: String(Date.now()),
+  }),
+});
+const fastSubmitBody = await verifyEnquiryResponse(fastSubmit, 200, "/api/enquiry fast submit");
+if (fastSubmitBody.ok !== true) {
+  fail("/api/enquiry fast-submit guard did not return the expected silent success.");
+}
+
 const foreignOrigin = await request("/api/enquiry", {
   method: "POST",
   headers: {
