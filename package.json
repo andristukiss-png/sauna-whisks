@@ -36,7 +36,8 @@
     "validate:duplicates": "node scripts/check-duplicates.mjs",
     "validate:feeds": "node scripts/check-feeds.mjs",
     "validate:manifest": "node scripts/check-manifest.mjs",
-    "smoke:local": "node scripts/local-smoke.mjs"
+    "smoke:local": "node scripts/local-smoke.mjs",
+    "audit:prod": "npm audit --omit=dev --audit-level=high"
   },
   "dependencies": {
     "next": "^16.0.0",
