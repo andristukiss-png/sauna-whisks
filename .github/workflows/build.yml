@@ -31,13 +31,15 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Emit generated lockfile
-        run: |
-          npm install --package-lock-only --ignore-scripts --no-audit --no-fund
-          echo "LOCKFILE_GZIP_BASE64_BEGIN"
-          gzip -c package-lock.json | base64 -w 0
-          echo
-          echo "LOCKFILE_GZIP_BASE64_END"
+      - name: Generate lockfile
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+
+      - name: Upload generated lockfile
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-package-lock
+          path: package-lock.json
+          if-no-files-found: error
 
       - name: Validate content
         run: npm run validate
