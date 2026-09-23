@@ -1,4 +1,5 @@
 import site from "./config/site.json";
+import legacyRedirects from "./config/redirects.json";
 import { publicCrossOriginPaths } from "./lib/publicData";
 import type { NextConfig } from "next";
 
@@ -61,16 +62,7 @@ const nextConfig: NextConfig = {
         destination: `${site.origin}/:path*`,
         permanent: true,
       },
-      { source: "/markets/united-states", destination: "/usa", permanent: true },
-      { source: "/shop/latvian-oak", destination: "/shop/baltic-oak", permanent: true },
-      { source: "/sauna-broom", destination: "/journal/sauna-whisk-vs-sauna-broom", permanent: true },
-      { source: "/sauna-brooms", destination: "/journal/sauna-whisk-vs-sauna-broom", permanent: true },
-      { source: "/venik", destination: "/journal/venik-vihta-vasta", permanent: true },
-      { source: "/vihta", destination: "/journal/venik-vihta-vasta", permanent: true },
-      { source: "/vasta", destination: "/journal/venik-vihta-vasta", permanent: true },
-      { source: "/how-to-use-sauna-whisk", destination: "/journal/how-to-use-a-sauna-whisk", permanent: true },
-      { source: "/dried-sauna-whisk", destination: "/journal/how-to-prepare-dried-sauna-whisk", permanent: true },
-      { source: "/wholesale-sauna-whisks", destination: "/wholesale", permanent: true },
+      ...legacyRedirects.map(({ source, destination }) => ({ source, destination, permanent: true })),
     ];
   },
 };
