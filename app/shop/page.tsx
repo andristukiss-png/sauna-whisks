@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 import { saunaWhisks } from "@/lib/products";
+import { discoveryTrio } from "@/lib/bundles";
 
 export const metadata = pageMetadata({
   title: "Shop Sauna Whisks",
@@ -80,9 +81,9 @@ export default function ShopPage() {
           </p>
         </div>
         <div className="shop-bundle-price">
-          <strong>US$69</strong>
+          <strong>{discoveryTrio.plannedPrice}</strong>
           <span>planned launch price</span>
-          <Link href="/shop/discovery-trio" className="button button-dark">View Discovery Trio</Link>
+          <Link href={`/shop/${discoveryTrio.slug}`} className="button button-dark">View Discovery Trio</Link>
         </div>
       </section>
 
