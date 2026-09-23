@@ -34,6 +34,27 @@ if (!apiIndex.includes("publicDataEndpoints.map")) {
   errors.push("/api index is not rendered from the shared endpoint registry.");
 }
 
+const sourceRegistry = "lib/sources.ts";
+if (!fs.existsSync(sourceRegistry)) {
+  errors.push("Missing shared article source registry.");
+} else {
+  const sourceRegistryText = fs.readFileSync(sourceRegistry, "utf8");
+  if (!sourceRegistryText.includes("articles.flatMap")) {
+    errors.push("Article source registry must derive from article citations.");
+  }
+}
+
+for (const file of [
+  "app/sources/page.tsx",
+  "app/api/sources/route.ts",
+  "app/api/sources.csv/route.ts",
+]) {
+  const text = fs.readFileSync(file, "utf8");
+  if (!text.includes('from "@/lib/sources"')) {
+    errors.push("Source surface is not using the shared article source registry: " + file);
+  }
+}
+
 const required = [
   "/api",
   "/api/health",
