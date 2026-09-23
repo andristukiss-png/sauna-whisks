@@ -195,17 +195,6 @@ async function checkProductionRobots() {
     if (!type.includes("text/plain")) {
       failures.push(`${url} did not return text/plain`);
     }
-    for (const [header, expected] of [
-      ["x-saunawhisks-data-version", "1"],
-      ["access-control-allow-origin", "*"],
-      ["cross-origin-resource-policy", "cross-origin"],
-    ]) {
-      const value = response.headers.get(header) || "";
-      if (!value.toLowerCase().includes(expected.toLowerCase())) {
-        failures.push(`${url} header ${header} did not include ${expected}; got "${value}"`);
-      }
-    }
-
     const body = await response.text();
     if (/^Disallow:\s*\/$/m.test(body)) {
       failures.push("production robots.txt disallows the entire site");
@@ -238,6 +227,17 @@ async function checkSecurityTxt() {
     const type = response.headers.get("content-type") || "";
     if (!type.includes("text/plain")) {
       failures.push(`${url} did not return text/plain`);
+    }
+
+    for (const [header, expected] of [
+      ["x-saunawhisks-data-version", "1"],
+      ["access-control-allow-origin", "*"],
+      ["cross-origin-resource-policy", "cross-origin"],
+    ]) {
+      const value = response.headers.get(header) || "";
+      if (!value.toLowerCase().includes(expected.toLowerCase())) {
+        failures.push(`${url} header ${header} did not include ${expected}; got "${value}"`);
+      }
     }
 
     const body = await response.text();
