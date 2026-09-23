@@ -63,6 +63,17 @@ if (!nextConfig.includes("...legacyRedirects.map(({ source, destination })")) {
   errors.push("Next config must generate permanent redirects from the shared registry.");
 }
 
+const productionSmoke = fs.readFileSync("scripts/production-smoke.mjs", "utf8");
+for (const [needle, label] of [
+  ["checkWwwRedirect", "www path/query redirect helper"],
+  ['"/api/health?redirect_probe=1"', "www path/query preservation probe"],
+  ['"/api/health", "?redirect_probe=1"', "www expected path/query assertion"],
+]) {
+  if (!productionSmoke.includes(needle)) {
+    errors.push("Production smoke missing " + label + ".");
+  }
+}
+
 for (const smokeFile of ["scripts/local-smoke.mjs", "scripts/production-smoke.mjs"]) {
   const smoke = fs.readFileSync(smokeFile, "utf8");
   if (!smoke.includes('config/redirects.json')) {
