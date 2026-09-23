@@ -1,18 +1,20 @@
 import { NextResponse } from "next/server";
 
-type EnquiryPayload = {
-  name?: string;
-  email?: string;
-  message?: string;
-  subject?: string;
-  website?: string;
-  topic?: string;
-  business?: string;
-  country?: string;
-  quantity?: string;
-  pageUrl?: string;
-  startedAt?: string;
-};
+type EnquiryPayload = Record<string, unknown>;
+
+const STRING_FIELDS = [
+  "name",
+  "email",
+  "message",
+  "subject",
+  "website",
+  "topic",
+  "business",
+  "country",
+  "quantity",
+  "pageUrl",
+  "startedAt",
+] as const;
 
 const MAX_BODY_BYTES = 20_000;
 
@@ -27,8 +29,21 @@ function configuredEmail(value: string | undefined) {
   return validEmail(address) ? cleaned : "";
 }
 
-function cleanOptional(value: string | undefined, max = 200) {
-  return (value || "").replace(/[\r\n\u0000]+/g, " ").trim().slice(0, max);
+function cleanOptional(value: unknown, max = 200) {
+  return (typeof value === "string" ? value : "")
+    .replace(/[\r\n\u0000]+/g, " ")
+    .trim()
+    .slice(0, max);
+}
+
+function hasInvalidFieldTypes(body: EnquiryPayload) {
+  return STRING_FIELDS.some(
+    (field) =>
+      Object.prototype.hasOwnProperty.call(body, field) &&
+      body[field] !== undefined &&
+      body[field] !== null &&
+      typeof body[field] !== "string"
+  );
 }
 
 export async function POST(request: Request) {
@@ -85,14 +100,22 @@ export async function POST(request: Request) {
         return reply({ error: "Invalid request." }, 400);
       }
       body = parsed as EnquiryPayload;
+      if (hasInvalidFieldTypes(body)) {
+        return reply({ error: "Invalid field type." }, 400);
+      }
     } catch {
       return reply({ error: "Invalid JSON." }, 400);
     }
 
     const name = cleanOptional(body.name, 120);
     const email = cleanOptional(body.email, 200);
-    const message = (body.message || "").replace(/\u0000/g, "").trim();
-    const subject = cleanOptional(body.subject || "SaunaWhisks.com enquiry", 160);
+    const message = (typeof body.message === "string" ? body.message : "")
+      .replace(/\u0000/g, "")
+      .trim();
+    const subject = cleanOptional(
+      typeof body.subject === "string" && body.subject ? body.subject : "SaunaWhisks.com enquiry",
+      160
+    );
     const website = cleanOptional(body.website, 200);
     const topic = cleanOptional(body.topic, 120);
     const business = cleanOptional(body.business, 200);
@@ -100,7 +123,7 @@ export async function POST(request: Request) {
     const quantity = cleanOptional(body.quantity, 120);
     const submittedPageUrl = cleanOptional(body.pageUrl, 500);
     const pageUrl = submittedPageUrl.startsWith(requestUrl.origin + "/") ? submittedPageUrl : "";
-    const startedAt = Number(body.startedAt || "0");
+    const startedAt = Number(typeof body.startedAt === "string" ? body.startedAt : "0");
 
     if (website) {
       return reply({ ok: true });
