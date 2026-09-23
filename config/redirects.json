@@ -1,0 +1,12 @@
+[
+  { "source": "/markets/united-states", "destination": "/usa" },
+  { "source": "/shop/latvian-oak", "destination": "/shop/baltic-oak" },
+  { "source": "/sauna-broom", "destination": "/journal/sauna-whisk-vs-sauna-broom" },
+  { "source": "/sauna-brooms", "destination": "/journal/sauna-whisk-vs-sauna-broom" },
+  { "source": "/venik", "destination": "/journal/venik-vihta-vasta" },
+  { "source": "/vihta", "destination": "/journal/venik-vihta-vasta" },
+  { "source": "/vasta", "destination": "/journal/venik-vihta-vasta" },
+  { "source": "/how-to-use-sauna-whisk", "destination": "/journal/how-to-use-a-sauna-whisk" },
+  { "source": "/dried-sauna-whisk", "destination": "/journal/how-to-prepare-dried-sauna-whisk" },
+  { "source": "/wholesale-sauna-whisks", "destination": "/wholesale" }
+]
