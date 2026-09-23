@@ -11,6 +11,10 @@
 
 Use Node 22. Run `nvm use` (or use a tool that honors `.node-version`), then install the committed dependency graph with `npm ci`. Do not delete or hand-edit `package-lock.json`.
 
+## Workflow supply chain
+
+All external GitHub Actions in `.github/workflows` must be pinned to full commit SHAs. Keep the human-readable major version comment next to the pin, and let Dependabot propose updates. Checkout steps must use `persist-credentials: false` unless a workflow explicitly needs to push.
+
 ## Required checks
 Run:
 
