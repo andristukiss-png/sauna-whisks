@@ -1,10 +1,12 @@
 import site from "@/config/site.json";
 import { saunaWhisks } from "@/lib/products";
+import { discoveryTrio, getDiscoveryTrioNames } from "@/lib/bundles";
+import { launchStatus } from "@/lib/status";
 import { publicJson } from "@/lib/publicApi";
 
 export function GET() {
   return publicJson({
-    status: "pre-launch",
+    status: launchStatus.status,
     currency: "USD",
     products: saunaWhisks.map((whisk) => ({
       slug: whisk.slug,
@@ -22,12 +24,13 @@ export function GET() {
       url: `${site.origin}/shop/${whisk.slug}`,
     })),
     bundle: {
-      slug: "discovery-trio",
-      name: "Discovery Trio",
-      includes: ["Baltic Birch", "Baltic Oak", "Eucalyptus"],
-      plannedPrice: "$69",
-      availableForPurchase: false,
-      url: `${site.origin}/shop/discovery-trio`,
+      slug: discoveryTrio.slug,
+      name: discoveryTrio.name,
+      includes: getDiscoveryTrioNames(),
+      plannedPrice: discoveryTrio.plannedPrice,
+      status: discoveryTrio.status,
+      availableForPurchase: discoveryTrio.availableForPurchase,
+      url: `${site.origin}/shop/${discoveryTrio.slug}`,
     },
   });
 }
