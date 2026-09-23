@@ -124,6 +124,11 @@ for (const [needle, label] of [
   ["Expected commit must be 7-40 hexadecimal characters.", "expected-commit input validation"],
   ["checkProductionRobots", "live production robots indexing check"],
   ["production robots.txt disallows the entire site", "production robots disallow-all failure"],
+  ['["TLSv1.2", "TLSv1.3"].includes(protocol)', "live minimum TLS version enforcement"],
+  ["async function checkHomepageDocument", "live homepage security verification"],
+  ["CSP missing critical directive", "live CSP directive assertions"],
+  ["HSTS policy is weaker than expected", "live HSTS policy assertion"],
+  ["production HTML unexpectedly has robots noindex", "live production HTML indexability assertion"],
 ]) {
   if (!productionSmoke.includes(needle)) {
     errors.push("Production smoke missing " + label + ".");
