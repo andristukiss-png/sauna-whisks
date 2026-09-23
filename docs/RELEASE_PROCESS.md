@@ -26,6 +26,10 @@ A domain or TLS incident is not automatically an application-release failure. Di
 
 Use `docs/RECOVERY.md` for application rollback, DNS/TLS recovery and provider/environment incidents.
 
+## Continuous production verification
+
+The scheduled production monitor checks the live canonical domain every six hours, including DNS/TLS, core machine endpoints, registered redirects, security.txt, and deployment identity. By default the expected deployment is the current `main` commit.
+
 ## Verification commands
 
 Before treating a release as deployable:

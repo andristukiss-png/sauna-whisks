@@ -120,6 +120,34 @@ if (!fs.existsSync(codeqlFile)) {
   }
 }
 
+const monitorFile = ".github/workflows/production-monitor.yml";
+if (!fs.existsSync(monitorFile)) {
+  errors.push("Missing production monitor workflow.");
+} else {
+  const monitor = fs.readFileSync(monitorFile, "utf8");
+  if (!monitor.includes('ref: main')) {
+    errors.push("Production monitor must check out current main.");
+  }
+  if (!monitor.includes("persist-credentials: false")) {
+    errors.push("Production monitor checkout must disable persisted credentials.");
+  }
+  if (!monitor.includes('EXPECTED_COMMIT="$(git rev-parse HEAD)"')) {
+    errors.push("Production monitor must default expected commit to checked-out main.");
+  }
+  if (!monitor.includes('SAUNAWHISKS_EXPECTED_COMMIT="$EXPECTED_COMMIT"')) {
+    errors.push("Production monitor must verify the live deployment commit.");
+  }
+  if (!monitor.includes('cron: "17 */6 * * *"')) {
+    errors.push("Production monitor scheduled cadence is missing.");
+  }
+  if (!monitor.includes("timeout-minutes: 5")) {
+    errors.push("Production monitor must keep a bounded timeout.");
+  }
+  if (!monitor.includes("contents: read")) {
+    errors.push("Production monitor must remain read-only.");
+  }
+}
+
 const dependabot = fs.readFileSync(".github/dependabot.yml", "utf8");
 if (!dependabot.includes('package-ecosystem: "npm"')) {
   errors.push("Dependabot npm updates missing.");

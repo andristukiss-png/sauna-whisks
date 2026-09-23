@@ -57,7 +57,7 @@ Use this when the application is healthy but an integration fails.
 
 - Confirm Vercel reports production Ready.
 - Run `npm run verify:production` with the expected commit when known.
-- Confirm the scheduled production monitor is healthy.
+- Confirm the scheduled production monitor is healthy. Scheduled runs check out current `main` and fail if production reports a different deployment commit.
 - Record the root cause, recovery action and prevention change.
 - Add or strengthen a validation/smoke check when the incident exposed a testable gap.
 
