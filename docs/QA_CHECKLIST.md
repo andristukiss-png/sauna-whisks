@@ -10,6 +10,7 @@
 - enquiry error and bot branches pass the production-mode HTTP contract suite
 - fallback email path works
 - sitemap/robots/feed/API endpoints respond
+- structured-data URLs stay on the canonical site origin
 - canonical apex host responds over HTTPS
 - `www` redirects to the canonical apex host
 - `/api/health` returns `ok: true`
