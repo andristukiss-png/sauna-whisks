@@ -32,7 +32,7 @@
 
 For a domain outage, diagnose in this order:
 
-1. GitHub commit and Vercel production deployment.
+1. GitHub commit and Vercel production deployment. When possible, compare the expected commit with `/api/health` using `SAUNAWHISKS_EXPECTED_COMMIT=<git-sha> npm run verify:production`.
 2. Vercel project domain attachment.
 3. Public authoritative DNS.
 4. TLS/certificate state.
