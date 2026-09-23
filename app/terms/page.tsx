@@ -1,12 +1,13 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Terms",
   description: "Pre-launch website terms for SaunaWhisks.com.",
-  alternates: { canonical: "/terms" }
-};
+  canonical: "/terms",
+});
 
 export default function TermsPage() {
   return (
