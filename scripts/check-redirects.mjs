@@ -36,6 +36,16 @@ if (!nextConfig.includes("...legacyRedirects.map(({ source, destination })")) {
   errors.push("Next config must generate permanent redirects from the shared registry.");
 }
 
+for (const smokeFile of ["scripts/local-smoke.mjs", "scripts/production-smoke.mjs"]) {
+  const smoke = fs.readFileSync(smokeFile, "utf8");
+  if (!smoke.includes('config/redirects.json')) {
+    errors.push(smokeFile + " must load the shared redirect registry.");
+  }
+  if (!smoke.includes("for (const { source, destination } of redirects)")) {
+    errors.push(smokeFile + " must execute every registered redirect.");
+  }
+}
+
 if (errors.length) {
   console.error("Redirect validation failed:");
   errors.forEach((item) => console.error("- " + item));
