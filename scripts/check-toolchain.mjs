@@ -26,6 +26,15 @@ const workflow = fs.readFileSync(".github/workflows/build.yml", "utf8");
 if (!workflow.includes('node-version-file: ".nvmrc"')) {
   errors.push("CI must read its Node version from .nvmrc.");
 }
+if (!workflow.includes("npm run smoke:local")) {
+  errors.push("CI must smoke-test the built production server.");
+}
+if (!workflow.includes("npm start > /tmp/sauna-whisks-next.log")) {
+  errors.push("CI must start the production server before smoke testing.");
+}
+if (!workflow.includes("if: always()")) {
+  errors.push("CI must clean up the production server even after failures.");
+}
 
 const dependabot = fs.readFileSync(".github/dependabot.yml", "utf8");
 if (!dependabot.includes('package-ecosystem: "npm"')) {

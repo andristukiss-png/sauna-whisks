@@ -42,3 +42,22 @@ jobs:
 
       - name: Build Next.js
         run: npm run build
+
+      - name: Start production server
+        run: |
+          npm start > /tmp/sauna-whisks-next.log 2>&1 &
+          echo $! > /tmp/sauna-whisks-next.pid
+
+      - name: Smoke production server
+        run: npm run smoke:local
+
+      - name: Show production server log on failure
+        if: failure()
+        run: cat /tmp/sauna-whisks-next.log || true
+
+      - name: Stop production server
+        if: always()
+        run: |
+          if [ -f /tmp/sauna-whisks-next.pid ]; then
+            kill "$(cat /tmp/sauna-whisks-next.pid)" || true
+          fi
