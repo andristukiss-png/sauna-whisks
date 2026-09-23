@@ -6,6 +6,7 @@ const baseUrl = (process.env.LOCAL_SMOKE_BASE_URL || "http://127.0.0.1:3000").re
 const failures = [];
 const expectedCommit = (process.env.LOCAL_SMOKE_EXPECTED_COMMIT || "").trim().toLowerCase();
 const observedPageTitles = [];
+const observedInternalLinks = new Set();
 const attempts = 40;
 const pauseMs = 500;
 
@@ -253,6 +254,54 @@ function validateJsonLd(html, path) {
   }
 }
 
+function collectInternalLinks(html, sourcePath) {
+  const anchors = html.match(/<a\b[^>]*>/gi) || [];
+
+  for (const tag of anchors) {
+    const rawHref = tag.match(/\bhref=["']([^"']+)["']/i)?.[1] || "";
+    if (!rawHref || rawHref.startsWith("#")) continue;
+    if (/^(?:mailto:|tel:|javascript:)/i.test(rawHref)) continue;
+
+    const href = rawHref.replace(/&amp;/g, "&");
+    let url;
+    try {
+      url = new URL(href, site.origin);
+    } catch {
+      fail(sourcePath + " contains an invalid link href: " + rawHref);
+      continue;
+    }
+
+    if (url.origin !== site.origin) continue;
+
+    const target = url.pathname + url.search;
+    observedInternalLinks.add(target || "/");
+  }
+}
+
+async function verifyRenderedInternalLinks() {
+  const links = [...observedInternalLinks].sort();
+  const batchSize = 12;
+
+  for (let index = 0; index < links.length; index += batchSize) {
+    await Promise.all(
+      links.slice(index, index + batchSize).map(async (target) => {
+        const response = await request(target);
+        if (!response) return;
+
+        if (response.status < 200 || response.status >= 300) {
+          const location = response.headers.get("location") || "";
+          fail(
+            target +
+              " internal link must resolve directly with 2xx; got " +
+              response.status +
+              (location ? " -> " + location : "")
+          );
+        }
+      })
+    );
+  }
+}
+
 async function checkSitemapPage(location) {
   let canonicalUrl;
   try {
@@ -274,6 +323,7 @@ async function checkSitemapPage(location) {
   if (!response?.ok) return;
 
   const html = await response.text();
+  collectInternalLinks(html, path);
 
   const title = html.match(/<title>([^<]+)<\/title>/i)?.[1]?.trim() || "";
   if (!title) {
@@ -530,6 +580,7 @@ if (sitemapResponse?.ok) {
     const unique = [...new Set(locations)];
     if (unique.length !== locations.length) fail("Sitemap contains duplicate URLs.");
     await crawlSitemapPages(unique);
+    await verifyRenderedInternalLinks();
   }
 }
 

@@ -1,3 +1,4 @@
+import { discoverDynamicPageFiles, discoverStaticPageRoutes } from "./route-utils.mjs";
 import fs from "node:fs";
 
 const dataFiles = [
@@ -64,42 +65,30 @@ for (const route of expectedApiRoutes) {
   if (!fs.existsSync(route)) errors.push(`Missing API route: ${route}`);
 }
 
-const expectedStaticToolPages = [
-  "app/tools/page.tsx",
-  "app/tools/supplier-scorecard/page.tsx",
-  "app/tools/landed-cost/page.tsx",
-  "app/tools/trade-demand/page.tsx",
-  "app/tools/launch-readiness/page.tsx",
-];
-
-for (const route of expectedStaticToolPages) {
-  if (!fs.existsSync(route)) errors.push(`Missing tool page: ${route}`);
+const discoveredStaticRoutes = new Set(discoverStaticPageRoutes());
+for (const route of [
+  "/",
+  "/shop",
+  "/journal",
+  "/contact",
+  "/status",
+  "/tools",
+  "/tools/supplier-scorecard",
+  "/tools/landed-cost",
+  "/tools/trade-demand",
+  "/tools/launch-readiness",
+]) {
+  if (!discoveredStaticRoutes.has(route)) {
+    errors.push(`Missing critical static page route: ${route}`);
+  }
 }
 
-const expectedDynamicRoutes = [
-  "app/journal/[slug]/page.tsx",
-  "app/shop/[slug]/page.tsx",
-  "app/markets/[slug]/page.tsx",
-  "app/trade/[slug]/page.tsx",
-  "app/operations/[slug]/page.tsx",
-  "app/glossary/[slug]/page.tsx",
-  "app/materials/[slug]/page.tsx",
-  "app/traditions/[slug]/page.tsx",
-  "app/guides/[slug]/page.tsx",
-  "app/compare/[slug]/page.tsx",
-  "app/faq/topic/[slug]/page.tsx",
-  "app/journal/topic/[slug]/page.tsx",
-  "app/conditions/[slug]/page.tsx",
-  "app/use-cases/[slug]/page.tsx",
-  "app/techniques/[slug]/page.tsx",
-];
+const discoveredDynamicRoutes = discoverDynamicPageFiles();
+if (!discoveredDynamicRoutes.length) {
+  errors.push("No dynamic page routes were discovered.");
+}
 
-for (const route of expectedDynamicRoutes) {
-  if (!fs.existsSync(route)) {
-    errors.push(`Missing dynamic route: ${route}`);
-    continue;
-  }
-
+for (const route of discoveredDynamicRoutes) {
   const source = fs.readFileSync(route, "utf8");
   if (!source.includes("generateStaticParams")) {
     errors.push(`Dynamic route missing generateStaticParams: ${route}`);
