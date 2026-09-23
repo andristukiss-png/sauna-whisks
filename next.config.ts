@@ -29,6 +29,41 @@ const securityHeaders = [
   { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
 ];
 
+const publicCrossOriginSources = [
+  "/api",
+  "/api/articles",
+  "/api/catalog",
+  "/api/catalog.csv",
+  "/api/company",
+  "/api/comparisons",
+  "/api/conditions",
+  "/api/editorial",
+  "/api/faq",
+  "/api/glossary",
+  "/api/guides",
+  "/api/health",
+  "/api/markets",
+  "/api/materials",
+  "/api/operations",
+  "/api/product-data-template.csv",
+  "/api/search",
+  "/api/sources",
+  "/api/sources.csv",
+  "/api/status",
+  "/api/supplier-sample-template.csv",
+  "/api/techniques",
+  "/api/tools",
+  "/api/trade",
+  "/api/trade-trial-template.csv",
+  "/api/traditions",
+  "/api/use-cases",
+  "/feed.json",
+  "/feed.xml",
+  "/humans.txt",
+  "/llms.txt",
+  "/.well-known/security.txt",
+] as const;
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   async headers() {
@@ -43,6 +78,12 @@ const nextConfig: NextConfig = {
           { key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" },
         ],
       },
+      ...publicCrossOriginSources.map((source) => ({
+        source,
+        headers: [
+          { key: "Cross-Origin-Resource-Policy", value: "cross-origin" },
+        ],
+      })),
     ];
   },
   async redirects() {
