@@ -58,7 +58,7 @@ export default function FAQPage() {
       <section className="faq-list">
         {faqs.map(([question, answer], index) => (
           <details key={question}>
-            <summary><span>0{index + 1}</span><b>{question}</b><i>+</i></summary>
+            <summary><span aria-hidden="true">0{index + 1}</span><b>{question}</b><i aria-hidden="true">+</i></summary>
             <p>{answer}</p>
           </details>
         ))}
