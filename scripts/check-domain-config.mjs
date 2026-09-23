@@ -38,6 +38,7 @@ const machineFiles = [
   "app/humans.txt/route.ts",
   "app/.well-known/security.txt/route.ts",
   "components/Breadcrumbs.tsx",
+  "components/EnquiryForm.tsx",
   "lib/metadata.ts",
   "lib/status.ts",
   "app/api/health/route.ts",
