@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { traditionDetails } from "@/lib/traditionDetails";
 import { publicJson } from "@/lib/publicApi";
 
@@ -10,7 +11,7 @@ export function GET(){
       region:item.region,
       summary:item.summary,
       terminology:item.terminology,
-      url:`https://saunawhisks.com/traditions/${item.slug}`
+      url:`${site.origin}/traditions/${item.slug}`
     }))
   });
 }

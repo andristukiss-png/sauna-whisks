@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { tradeSegments } from "@/lib/tradeSegments";
 import { publicJson } from "@/lib/publicApi";
 
@@ -8,7 +9,7 @@ export function GET() {
       slug: segment.slug,
       name: segment.name,
       summary: segment.summary,
-      url: `https://saunawhisks.com/trade/${segment.slug}`,
+      url: `${site.origin}/trade/${segment.slug}`,
     })),
   });
 }

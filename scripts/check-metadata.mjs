@@ -46,8 +46,11 @@ const metadataHelper = fs.readFileSync("lib/metadata.ts", "utf8");
 for (const field of ["alternates:", "openGraph:", "twitter:"]) {
   if (!metadataHelper.includes(field)) errors.push("Shared pageMetadata helper missing " + field);
 }
-if (!metadataHelper.includes("siteName: \"Sauna Whisks\"")) {
-  errors.push("Shared pageMetadata helper missing site name.");
+if (!metadataHelper.includes('import site from "@/config/site.json"')) {
+  errors.push("Shared pageMetadata helper must import site config.");
+}
+if (!metadataHelper.includes("siteName: site.name")) {
+  errors.push("Shared pageMetadata helper must use configured site name.");
 }
 
 const layout = fs.readFileSync("app/layout.tsx", "utf8");

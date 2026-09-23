@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import Link from "next/link";
 
 export function Breadcrumbs({
@@ -12,7 +13,7 @@ export function Breadcrumbs({
       "@type": "ListItem",
       position: index + 1,
       name: item.label,
-      ...(item.href ? { item: new URL(item.href, "https://saunawhisks.com").toString() } : {})
+      ...(item.href ? { item: new URL(item.href, site.origin).toString() } : {})
     }))
   };
 

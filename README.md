@@ -91,6 +91,8 @@ Next.js site for **SaunaWhisks.com** — a Latvia-based specialist brand and kno
 
 See `docs/PUBLIC_DATA.md` for the API/CSV surface.
 
+Canonical site identity (`origin`, hostnames, public contact and country code) lives in `config/site.json`. Machine-readable output and runtime domain configuration derive from that file.
+
 ## Enquiries
 
 Public contact:

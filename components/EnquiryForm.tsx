@@ -1,5 +1,6 @@
 "use client";
 
+import site from "@/config/site.json";
 import Link from "next/link";
 import { FormEvent, useEffect, useId, useRef, useState } from "react";
 
@@ -27,7 +28,7 @@ export function EnquiryForm({
   }, []);
   const [status, setStatus] = useState<Status>("idle");
   const [statusMessage, setStatusMessage] = useState(
-    "Your enquiry will be sent to info@SaunaWhisks.com."
+    `Your enquiry will be sent to ${site.publicEmail}.`
   );
 
   function openMailFallback(fields: Record<string, string>) {
@@ -45,7 +46,7 @@ export function EnquiryForm({
     ].filter(Boolean);
 
     window.location.href =
-      "mailto:info@SaunaWhisks.com?subject=" +
+      `mailto:${site.publicEmail}?subject=` +
       encodeURIComponent(subject) +
       "&body=" +
       encodeURIComponent(lines.join("\n"));

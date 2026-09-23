@@ -68,14 +68,18 @@ for (const file of publicTextRoutes) {
 }
 
 const nextConfig = fs.readFileSync("next.config.ts", "utf8");
-if (!nextConfig.includes("const publicCrossOriginSources = [")) {
-  errors.push("Next config missing explicit public cross-origin route list.");
+if (!nextConfig.includes('import { publicCrossOriginPaths } from "./lib/publicData"')) {
+  errors.push("Next config must derive public cross-origin routes from the shared endpoint registry.");
 }
 if (!nextConfig.includes('value: "cross-origin"')) {
   errors.push("Next config missing cross-origin resource-policy override for public data.");
 }
-if (nextConfig.match(/publicCrossOriginSources[\s\S]*\/api\/enquiry/)) {
-  errors.push("Enquiry endpoint must not be included in public cross-origin routes.");
+const publicData = fs.readFileSync("lib/publicData.ts", "utf8");
+if (!publicData.includes("export const publicCrossOriginPaths")) {
+  errors.push("Public data registry must export derived cross-origin paths.");
+}
+if (publicData.includes('"/api/enquiry"')) {
+  errors.push("Enquiry endpoint must not be part of the public data registry.");
 }
 
 const helper = fs.readFileSync("lib/publicApi.ts", "utf8");

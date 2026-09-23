@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { useCases } from "@/lib/useCases";
 import { publicJson } from "@/lib/publicApi";
 
@@ -9,7 +10,7 @@ export function GET(){
       name:item.name,
       summary:item.summary,
       recommendation:item.recommendation,
-      url:`https://saunawhisks.com/use-cases/${item.slug}`
+      url:`${site.origin}/use-cases/${item.slug}`
     }))
   });
 }

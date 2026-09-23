@@ -1,9 +1,10 @@
+import site from "@/config/site.json";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./a11y.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://saunawhisks.com"),
+  metadataBase: new URL(site.origin),
   title: {
     default: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
     template: "%s | Sauna Whisks",
@@ -15,13 +16,13 @@ export const metadata: Metadata = {
   publisher: "Sauna Whisks",
   category: "Sauna and wellness",
   openGraph: {
-    siteName: "Sauna Whisks",
+    siteName: site.name,
     type: "website",
   },
   alternates: {
     canonical: "/",
     types: {
-      "application/rss+xml": "https://saunawhisks.com/feed.xml"
+      "application/rss+xml": `${site.origin}/feed.xml`
     }
   },
   twitter: {
@@ -33,12 +34,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Sauna Whisks",
-    url: "https://saunawhisks.com",
+    name: site.name,
+    url: site.origin,
     description: "Sauna whisks and sauna tradition knowledge from Latvia.",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://saunawhisks.com/search?q={search_term_string}",
+      target: `${site.origin}/search?q={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   };
@@ -46,12 +47,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Sauna Whisks",
-    url: "https://saunawhisks.com",
-    email: "info@SaunaWhisks.com",
+    name: site.name,
+    url: site.origin,
+    email: site.publicEmail,
     address: {
       "@type": "PostalAddress",
-      addressCountry: "LV"
+      addressCountry: site.countryCode
     }
   };
 

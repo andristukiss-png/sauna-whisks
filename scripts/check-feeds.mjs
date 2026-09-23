@@ -1,5 +1,6 @@
 import fs from "node:fs";
 
+const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
 const rss = fs.readFileSync("app/feed.xml/route.ts", "utf8");
 const jsonFeed = fs.readFileSync("app/feed.json/route.ts", "utf8");
 const layout = fs.readFileSync("app/layout.tsx", "utf8");
@@ -8,7 +9,7 @@ const errors = [];
 const rssRequirements = [
   ['xmlns:atom="http://www.w3.org/2005/Atom"', "RSS Atom namespace"],
   ['rel="self"', "RSS self link"],
-  ['https://saunawhisks.com/feed.xml', "RSS canonical feed URL"],
+  ['${site.origin}/feed.xml', "RSS configured feed URL"],
   ['<language>en</language>', "RSS language"],
   ['<generator>SaunaWhisks.com</generator>', "RSS generator"],
   ['guid isPermaLink="true"', "RSS permalink GUIDs"],
@@ -23,8 +24,8 @@ for (const [needle, label] of rssRequirements) {
 
 const jsonRequirements = [
   ['version: "https://jsonfeed.org/version/1.1"', "JSON Feed version"],
-  ['home_page_url: "https://saunawhisks.com/journal"', "JSON Feed home page"],
-  ['feed_url: "https://saunawhisks.com/feed.json"', "JSON Feed canonical URL"],
+  ['home_page_url: `${site.origin}/journal`', "JSON Feed configured home page"],
+  ['feed_url: `${site.origin}/feed.json`', "JSON Feed configured canonical URL"],
   ['language: "en"', "JSON Feed language"],
   ["publicJson", "shared public JSON response helper"],
 ];
@@ -33,8 +34,14 @@ for (const [needle, label] of jsonRequirements) {
   if (!jsonFeed.includes(needle)) errors.push("Missing " + label + ".");
 }
 
-if (!layout.includes('"application/rss+xml": "https://saunawhisks.com/feed.xml"')) {
-  errors.push("Root metadata does not advertise the RSS feed.");
+if (!layout.includes('"application/rss+xml": `${site.origin}/feed.xml`')) {
+  errors.push("Root metadata does not advertise the configured RSS feed.");
+}
+
+for (const [file, text] of [["RSS", rss], ["JSON Feed", jsonFeed], ["layout", layout]]) {
+  if (text.includes(site.origin)) {
+    errors.push(file + " still hard-codes the canonical origin instead of site config.");
+  }
 }
 
 if (/new Date\(|Date\.now\(/.test(rss + "\n" + jsonFeed)) {

@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { saunaWhisks } from "@/lib/products";
 import { publicJson } from "@/lib/publicApi";
 
@@ -18,7 +19,7 @@ export function GET() {
       plannedCondition: whisk.plannedCondition,
       verification: whisk.verification,
       availableForPurchase: whisk.availableForPurchase,
-      url: `https://saunawhisks.com/shop/${whisk.slug}`,
+      url: `${site.origin}/shop/${whisk.slug}`,
     })),
     bundle: {
       slug: "discovery-trio",
@@ -26,7 +27,7 @@ export function GET() {
       includes: ["Baltic Birch", "Baltic Oak", "Eucalyptus"],
       plannedPrice: "$69",
       availableForPurchase: false,
-      url: "https://saunawhisks.com/shop/discovery-trio",
+      url: `${site.origin}/shop/discovery-trio`,
     },
   });
 }

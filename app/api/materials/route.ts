@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { materialKnowledge } from "@/lib/materialKnowledge";
 import { publicJson } from "@/lib/publicApi";
 
@@ -11,7 +12,7 @@ export function GET() {
       status: item.status,
       feel: item.feel,
       aroma: item.aroma,
-      url: `https://saunawhisks.com/materials/${item.slug}`,
+      url: `${site.origin}/materials/${item.slug}`,
     })),
   });
 }

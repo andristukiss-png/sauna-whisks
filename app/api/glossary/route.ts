@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { glossaryTerms } from "@/lib/glossaryTerms";
 import { publicJson } from "@/lib/publicApi";
 
@@ -8,7 +9,7 @@ export function GET() {
       slug: item.slug,
       term: item.term,
       definition: item.definition,
-      url: `https://saunawhisks.com/glossary/${item.slug}`,
+      url: `${site.origin}/glossary/${item.slug}`,
     })),
   });
 }

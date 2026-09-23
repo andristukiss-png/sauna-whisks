@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { getMarketPath, markets } from "@/lib/markets";
 import { publicJson } from "@/lib/publicApi";
 
@@ -9,7 +10,7 @@ export function GET() {
       name: market.name,
       status: market.status,
       summary: market.summary,
-      url: `https://saunawhisks.com${getMarketPath(market)}`,
+      url: `${site.origin}${getMarketPath(market)}`,
     })),
   });
 }

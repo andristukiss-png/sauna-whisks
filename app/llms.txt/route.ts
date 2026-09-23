@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { publicText } from "@/lib/publicApi";
 
 export function GET() {
@@ -7,21 +8,21 @@ export function GET() {
     "> Latvia-based specialist sauna-whisk brand and educational resource.",
     "",
     "## Core sections",
-    "- https://saunawhisks.com/shop — pre-launch sauna whisk collection",
-    "- https://saunawhisks.com/learn — learning hub",
-    "- https://saunawhisks.com/journal — source-backed guides",
-    "- https://saunawhisks.com/traditions — Latvian pirts, Finnish vihta/vasta and banya context",
-    "- https://saunawhisks.com/standards — sourcing and product standards",
-    "- https://saunawhisks.com/operations — provenance, testing and compliance process",
-    "- https://saunawhisks.com/markets — planned market status",
-    "- https://saunawhisks.com/trade — B2B programs",
-    "- https://saunawhisks.com/sources — external sources referenced by the knowledge library",
+    `- ${site.origin}/shop — pre-launch sauna whisk collection`,
+    `- ${site.origin}/learn — learning hub`,
+    `- ${site.origin}/journal — source-backed guides`,
+    `- ${site.origin}/traditions — Latvian pirts, Finnish vihta/vasta and banya context`,
+    `- ${site.origin}/standards — sourcing and product standards`,
+    `- ${site.origin}/operations — provenance, testing and compliance process`,
+    `- ${site.origin}/markets — planned market status`,
+    `- ${site.origin}/trade — B2B programs`,
+    `- ${site.origin}/sources — external sources referenced by the knowledge library`,
     "",
     "## Important status",
     "- The site is pre-launch and does not currently accept payment.",
     "- Product prices are planned, not final.",
     "- Final product origin, species, harvest and supplier details are published only when verified.",
-    "- Public contact: info@SaunaWhisks.com",
+    `- Public contact: ${site.publicEmail}`,
   ].join("\n");
 
   return publicText(body, { maxAge: 3600 });

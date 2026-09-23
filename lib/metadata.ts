@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import type { Metadata } from "next";
 
 export function pageMetadata({
@@ -19,7 +20,7 @@ export function pageMetadata({
       title,
       description,
       url: canonical,
-      siteName: "Sauna Whisks",
+      siteName: site.name,
       type: "website",
     },
     twitter: {
