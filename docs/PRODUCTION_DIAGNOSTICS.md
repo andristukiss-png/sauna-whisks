@@ -10,11 +10,19 @@ From a machine with public internet access:
 npm run verify:production
 ```
 
+To prove that the hostname is serving a specific deployment, pass the expected Git commit SHA:
+
+```bash
+SAUNAWHISKS_EXPECTED_COMMIT=<git-sha> npm run verify:production
+```
+
+The health endpoint exposes only safe deployment identity fields when Vercel provides them: environment and a 12-character commit prefix. It does not expose secrets or environment-variable values.
+
 The command reports:
 - public A resolution for `saunawhisks.com`
 - public CNAME resolution for `www.saunawhisks.com` when exposed by DNS
 - homepage HTTP status
-- `/api/health` status and payload
+- `/api/health` status, deployment environment and commit prefix when available
 - `/robots.txt`
 - `/sitemap.xml`
 - the `www` redirect target
