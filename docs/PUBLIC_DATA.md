@@ -57,3 +57,8 @@ These endpoints do not imply commercial availability. Product catalog entries re
 ## CSV safety
 
 CSV cells are quoted and values beginning with spreadsheet formula prefixes (`=`, `+`, `-`, `@`) are neutralized before export. Keep new CSV endpoints on the shared `encodeCsv` / `publicCsv` helpers.
+
+
+## Crawler policy
+
+Public API routes are deliberately excluded from crawler indexing with both `robots.txt` (`Disallow: /api`) and API-level `X-Robots-Tag` headers. They remain directly accessible as read-only public data.
