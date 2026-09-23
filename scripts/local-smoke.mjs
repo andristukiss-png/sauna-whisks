@@ -234,9 +234,21 @@ await expectJson("/api/status", (body, response) => {
 
 await expectJson("/api/catalog", (body, response) => {
   if (body.status !== "pre-launch") fail("/api/catalog status is not pre-launch");
+  if (!body.bundle || body.bundle.status !== "Pre-launch") fail("/api/catalog bundle status is not Pre-launch");
+  if (body.bundle?.availableForPurchase !== false) fail("/api/catalog bundle must remain unavailable");
+  if (!String(body.bundle?.plannedPrice || "").startsWith("US$")) fail("/api/catalog bundle price must use explicit USD labeling");
+  if (!Array.isArray(body.bundle?.includes) || body.bundle.includes.length !== 3) fail("/api/catalog bundle must include three products");
   expectHeader(response, "cache-control", "s-maxage=", "/api/catalog");
   expectHeader(response, "access-control-allow-origin", "*", "/api/catalog");
   expectHeader(response, "cross-origin-resource-policy", "cross-origin", "/api/catalog");
+});
+
+await expectJson("/api/company", (body) => {
+  if (body.status !== "pre-launch") fail("/api/company status is not pre-launch");
+  if (body.checkoutEnabled !== false) fail("/api/company checkoutEnabled must remain false");
+  if (!Array.isArray(body.plannedCoreProducts) || body.plannedCoreProducts.length !== 4) {
+    fail("/api/company plannedCoreProducts must include three core whisks and the Discovery Trio");
+  }
 });
 
 await expectJson("/api/search?q=birch", (body, response) => {
