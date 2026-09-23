@@ -35,5 +35,6 @@
 - typecheck green
 - next build green
 - local production HTTP smoke green
+- every sitemap URL renders 200 with title, H1, canonical and no accidental noindex
 - Vercel deployment green
 - production smoke check green
