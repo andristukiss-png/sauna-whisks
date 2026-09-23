@@ -41,6 +41,12 @@ if (!workflow.includes('node-version-file: ".nvmrc"')) {
 if (!workflow.includes("npm ci --no-audit --no-fund")) {
   errors.push("CI must use npm ci with the committed lockfile.");
 }
+if (!pkg.scripts?.["audit:prod"]) {
+  errors.push("package.json missing audit:prod script.");
+}
+if (!workflow.includes("npm run audit:prod")) {
+  errors.push("CI must audit production dependencies.");
+}
 if (workflow.includes("npm install --no-audit --no-fund")) {
   errors.push("CI must not use floating npm install.");
 }
