@@ -1,3 +1,6 @@
+import fs from "node:fs";
+
+const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
 const baseUrl = (process.env.LOCAL_SMOKE_BASE_URL || "http://127.0.0.1:3000").replace(/\/$/, "");
 const failures = [];
 const observedPageTitles = [];
@@ -63,7 +66,7 @@ async function expectJson(path, assertions, options) {
 }
 
 function normalizedPath(value) {
-  const url = new URL(value, "https://saunawhisks.com");
+  const url = new URL(value, site.origin);
   return url.pathname.replace(/\/+$/, "") || "/";
 }
 
@@ -117,7 +120,7 @@ async function checkSitemapPage(location) {
     return;
   }
 
-  if (canonicalUrl.origin !== "https://saunawhisks.com") {
+  if (canonicalUrl.origin !== site.origin) {
     fail("Sitemap contains non-canonical origin: " + location);
     return;
   }
@@ -157,7 +160,7 @@ async function checkSitemapPage(location) {
   if (!canonical) {
     fail(path + " is missing a canonical link.");
   } else {
-    const canonicalResolved = new URL(canonical, "https://saunawhisks.com");
+    const canonicalResolved = new URL(canonical, site.origin);
     if (
       canonicalResolved.origin !== canonicalUrl.origin ||
       normalizedPath(canonicalResolved.href) !== normalizedPath(canonicalUrl.href)
@@ -291,11 +294,11 @@ for (const [path, type] of [
 const sitemapResponse = await request("/sitemap.xml");
 if (sitemapResponse?.ok) {
   const sitemap = await sitemapResponse.text();
-  if (sitemap.includes("<loc>https://saunawhisks.com/search</loc>")) fail("Sitemap includes noindex /search.");
-  if (sitemap.includes("<loc>https://saunawhisks.com/markets/united-states</loc>")) {
+  if (sitemap.includes(`<loc>${site.origin}/search</loc>`)) fail("Sitemap includes noindex /search.");
+  if (sitemap.includes(`<loc>${site.origin}/markets/united-states</loc>`)) {
     fail("Sitemap includes non-canonical US market route.");
   }
-  if (!sitemap.includes("<loc>https://saunawhisks.com/usa</loc>")) fail("Sitemap missing canonical /usa.");
+  if (!sitemap.includes(`<loc>${site.origin}/usa</loc>`)) fail("Sitemap missing canonical /usa.");
 
   const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
   if (!locations.length) {
@@ -324,8 +327,8 @@ if (rssResponse?.ok) {
 const securityResponse = await request("/.well-known/security.txt");
 if (securityResponse?.ok) {
   const body = await securityResponse.text();
-  if (!body.includes("Contact: mailto:info@SaunaWhisks.com")) fail("security.txt missing contact.");
-  if (!body.includes("Canonical: https://saunawhisks.com/.well-known/security.txt")) fail("security.txt missing canonical.");
+  if (!body.includes(`Contact: mailto:${site.publicEmail}`)) fail("security.txt missing contact.");
+  if (!body.includes(`Canonical: ${site.origin}/.well-known/security.txt`)) fail("security.txt missing canonical.");
 }
 
 for (const path of [
