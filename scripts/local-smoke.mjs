@@ -93,6 +93,57 @@ function metaContent(html, name) {
   return tag?.match(/\bcontent=["']([^"']*)["']/i)?.[1]?.trim() || "";
 }
 
+const structuredUrlKeys = new Set([
+  "url",
+  "mainEntityOfPage",
+  "item",
+  "inDefinedTermSet",
+  "target",
+]);
+
+function validateStructuredUrl(value, key, path) {
+  if (typeof value !== "string" || !structuredUrlKeys.has(key)) return;
+
+  if (value.startsWith("/")) {
+    fail(path + " JSON-LD " + key + " must use an absolute URL: " + value);
+    return;
+  }
+
+  if (!/^https?:\/\//i.test(value)) return;
+
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    fail(path + " JSON-LD " + key + " contains an invalid URL: " + value);
+    return;
+  }
+
+  if (url.hostname === site.host || url.hostname === site.wwwHost) {
+    if (url.origin !== site.origin) {
+      fail(path + " JSON-LD " + key + " uses a non-canonical site origin: " + value);
+    }
+  }
+}
+
+function walkStructuredData(value, path, key = "") {
+  if (typeof value === "string") {
+    validateStructuredUrl(value, key, path);
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    for (const item of value) walkStructuredData(item, path, key);
+    return;
+  }
+
+  if (!value || typeof value !== "object") return;
+
+  for (const [nextKey, nextValue] of Object.entries(value)) {
+    walkStructuredData(nextValue, path, nextKey);
+  }
+}
+
 function validateJsonLd(html, path) {
   const scripts = html.match(/<script\b[^>]*>[\s\S]*?<\/script>/gi) || [];
   const jsonLd = scripts.filter((script) =>
@@ -106,7 +157,8 @@ function validateJsonLd(html, path) {
       .trim();
 
     try {
-      JSON.parse(body);
+      const parsed = JSON.parse(body);
+      walkStructuredData(parsed, path);
     } catch {
       fail(path + " contains invalid JSON-LD.");
     }
