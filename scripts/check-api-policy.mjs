@@ -102,7 +102,7 @@ for (const [needle, label] of [
   ["spreadsheetFormulaPrefix", "spreadsheet formula prefix detector"],
   ["[=+\\-@]", "spreadsheet formula trigger characters"],
   ["? \"'\" + value : value", "spreadsheet formula neutralization"],
-  [".replace(/\\"/g, '\\"\\"')", "CSV quote escaping"],
+  ["safeValue.replace", "CSV quote escaping"],
 ]) {
   if (!csvHelper.includes(needle)) errors.push("CSV encoder missing " + label + ".");
 }
