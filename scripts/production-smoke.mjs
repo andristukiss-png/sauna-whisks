@@ -22,6 +22,56 @@ if (expectedCommit && !/^[0-9a-f]{7,40}$/.test(expectedCommit)) {
   process.exit(1);
 }
 
+async function checkTlsCertificate(host) {
+  console.log("TLS:");
+  await new Promise((resolve) => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      resolve();
+    };
+
+    const socket = tls.connect(
+      {
+        host,
+        port: 443,
+        servername: host,
+        rejectUnauthorized: true,
+      },
+      () => {
+        const certificate = socket.getPeerCertificate();
+        const validTo = Date.parse(certificate.valid_to || "");
+        const protocol = socket.getProtocol() || "(unknown)";
+        console.log(`- ${host}: protocol=${protocol} valid_to=${certificate.valid_to || "(unknown)"}`);
+
+        if (!certificate.valid_to || Number.isNaN(validTo)) {
+          failures.push(`${host} TLS certificate has no valid expiry date`);
+        } else {
+          const daysRemaining = (validTo - Date.now()) / 86_400_000;
+          if (daysRemaining < 7) {
+            failures.push(`${host} TLS certificate expires in less than 7 days`);
+          }
+        }
+
+        socket.end();
+        finish();
+      }
+    );
+
+    socket.setTimeout(10_000, () => {
+      socket.destroy(new Error("TLS connection timed out"));
+    });
+
+    socket.on("error", (error) => {
+      failures.push(`${host} TLS check failed: ${error.code || error.message}`);
+      finish();
+    });
+
+    socket.on("close", finish);
+  });
+}
+
 async function reportDns() {
   console.log("DNS:");
   try {
