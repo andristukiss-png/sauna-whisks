@@ -88,6 +88,7 @@ await expectJson("/api/catalog", (body, response) => {
   if (body.status !== "pre-launch") fail("/api/catalog status is not pre-launch");
   expectHeader(response, "cache-control", "s-maxage=", "/api/catalog");
   expectHeader(response, "access-control-allow-origin", "*", "/api/catalog");
+  expectHeader(response, "cross-origin-resource-policy", "cross-origin", "/api/catalog");
 });
 
 await expectJson("/api/search?q=birch", (body, response) => {
@@ -201,6 +202,7 @@ if (noProvider) {
   if (body.fallback !== "mailto") fail("/api/enquiry missing mailto fallback when provider is unavailable.");
   if (!noProvider.headers.get("x-request-id")) fail("/api/enquiry missing X-Request-ID.");
   expectHeader(noProvider, "cache-control", "no-store", "/api/enquiry provider fallback");
+  expectHeader(noProvider, "cross-origin-resource-policy", "same-origin", "/api/enquiry provider fallback");
 }
 
 if (failures.length) {
