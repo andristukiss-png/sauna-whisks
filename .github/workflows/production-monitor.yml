@@ -23,9 +23,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Checkout
+      - name: Checkout current main
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          ref: main
           persist-credentials: false
 
       - name: Setup Node
@@ -35,5 +36,11 @@ jobs:
 
       - name: Verify live production
         env:
-          SAUNAWHISKS_EXPECTED_COMMIT: ${{ github.event.inputs.expected_commit || '' }}
-        run: node scripts/production-smoke.mjs
+          REQUESTED_EXPECTED_COMMIT: ${{ github.event.inputs.expected_commit || '' }}
+        run: |
+          EXPECTED_COMMIT="$REQUESTED_EXPECTED_COMMIT"
+          if [ -z "$EXPECTED_COMMIT" ]; then
+            EXPECTED_COMMIT="$(git rev-parse HEAD)"
+          fi
+          echo "Expecting production commit: $EXPECTED_COMMIT"
+          SAUNAWHISKS_EXPECTED_COMMIT="$EXPECTED_COMMIT" node scripts/production-smoke.mjs
