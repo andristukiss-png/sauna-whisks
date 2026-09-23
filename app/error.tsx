@@ -1,5 +1,7 @@
 "use client";
 
+import site from "@/config/site.json";
+
 import Link from "next/link";
 
 export default function ErrorPage({
@@ -12,7 +14,7 @@ export default function ErrorPage({
     <main className="route-error" role="alert" aria-live="assertive">
       <p className="section-kicker">ERROR</p>
       <h1>This page hit a knot.</h1>
-      <p>Try again, return home, or email info@SaunaWhisks.com if the problem continues.</p>
+      <p>Try again, return home, or email {site.publicEmail} if the problem continues.</p>
       <div>
         <button type="button" className="button button-dark" onClick={() => reset()}>Try again</button>
         <Link className="text-link" href="/">Return home →</Link>
