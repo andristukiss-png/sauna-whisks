@@ -66,8 +66,14 @@ await waitForServer();
 const home = await request("/");
 expectStatus(home, 200, "/");
 expectHeader(home, "content-type", "text/html", "/");
-for (const header of ["strict-transport-security", "x-content-type-options", "x-frame-options", "referrer-policy"]) {
+for (const header of ["content-security-policy", "strict-transport-security", "x-content-type-options", "x-frame-options", "referrer-policy"]) {
   if (home && !home.headers.get(header)) fail(`/ missing security header ${header}`);
+}
+
+if (home) {
+  expectHeader(home, "content-security-policy", "default-src 'self'", "/");
+  expectHeader(home, "content-security-policy", "frame-ancestors 'none'", "/");
+  expectHeader(home, "content-security-policy", "object-src 'none'", "/");
 }
 
 await expectJson("/api/health", (body, response) => {
@@ -75,6 +81,7 @@ await expectJson("/api/health", (body, response) => {
   if (body.status !== "pre-launch") fail("/api/health status is not pre-launch");
   expectHeader(response, "cache-control", "no-store", "/api/health");
   expectHeader(response, "access-control-allow-origin", "*", "/api/health");
+  expectHeader(response, "x-robots-tag", "noindex", "/api/health");
 });
 
 await expectJson("/api/status", (body, response) => {
@@ -88,6 +95,7 @@ await expectJson("/api/catalog", (body, response) => {
   if (body.status !== "pre-launch") fail("/api/catalog status is not pre-launch");
   expectHeader(response, "cache-control", "s-maxage=", "/api/catalog");
   expectHeader(response, "access-control-allow-origin", "*", "/api/catalog");
+  expectHeader(response, "cross-origin-resource-policy", "cross-origin", "/api/catalog");
 });
 
 await expectJson("/api/search?q=birch", (body, response) => {
@@ -175,6 +183,16 @@ const foreignOrigin = await request("/api/enquiry", {
 });
 expectStatus(foreignOrigin, 403, "/api/enquiry foreign origin");
 
+const crossSite = await request("/api/enquiry", {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+    "sec-fetch-site": "cross-site",
+  },
+  body: JSON.stringify({ name: "Test User", email: "test@example.com", message: "A valid test enquiry." }),
+});
+expectStatus(crossSite, 403, "/api/enquiry cross-site fetch metadata");
+
 const noProvider = await request("/api/enquiry", {
   method: "POST",
   headers: { "content-type": "application/json" },
@@ -191,6 +209,11 @@ if (noProvider) {
   if (body.fallback !== "mailto") fail("/api/enquiry missing mailto fallback when provider is unavailable.");
   if (!noProvider.headers.get("x-request-id")) fail("/api/enquiry missing X-Request-ID.");
   expectHeader(noProvider, "cache-control", "no-store", "/api/enquiry provider fallback");
+  expectHeader(noProvider, "cross-origin-resource-policy", "same-origin", "/api/enquiry provider fallback");
+  if (noProvider.headers.get("access-control-allow-origin")) {
+    fail("/api/enquiry must not expose wildcard CORS.");
+  }
+  expectHeader(noProvider, "x-robots-tag", "noindex", "/api/enquiry provider fallback");
 }
 
 if (failures.length) {

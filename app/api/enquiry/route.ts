@@ -45,9 +45,14 @@ export async function POST(request: Request) {
   try {
     const requestUrl = new URL(request.url);
     const origin = request.headers.get("origin");
+    const fetchSite = request.headers.get("sec-fetch-site");
 
     if (origin && origin !== requestUrl.origin) {
       return reply({ error: "Unsupported origin." }, 403);
+    }
+
+    if (fetchSite === "cross-site") {
+      return reply({ error: "Unsupported request context." }, 403);
     }
 
     const contentType = request.headers.get("content-type") || "";
@@ -86,7 +91,8 @@ export async function POST(request: Request) {
     const business = cleanOptional(body.business, 200);
     const country = cleanOptional(body.country, 120);
     const quantity = cleanOptional(body.quantity, 120);
-    const pageUrl = cleanOptional(body.pageUrl, 500);
+    const submittedPageUrl = cleanOptional(body.pageUrl, 500);
+    const pageUrl = submittedPageUrl.startsWith(requestUrl.origin + "/") ? submittedPageUrl : "";
     const startedAt = Number(body.startedAt || "0");
 
     if (website) {

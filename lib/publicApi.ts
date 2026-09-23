@@ -1,5 +1,6 @@
 const publicAccessHeaders = {
   "Access-Control-Allow-Origin": "*",
+  "Cross-Origin-Resource-Policy": "cross-origin",
 } as const;
 
 function publicCacheControl(maxAge: number) {

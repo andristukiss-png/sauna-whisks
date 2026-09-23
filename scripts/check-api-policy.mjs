@@ -67,9 +67,21 @@ for (const file of publicTextRoutes) {
   if (!text.includes("publicText")) errors.push("Public text/feed route missing shared response helper: " + file);
 }
 
+const nextConfig = fs.readFileSync("next.config.ts", "utf8");
+if (!nextConfig.includes("const publicCrossOriginSources = [")) {
+  errors.push("Next config missing explicit public cross-origin route list.");
+}
+if (!nextConfig.includes('value: "cross-origin"')) {
+  errors.push("Next config missing cross-origin resource-policy override for public data.");
+}
+if (nextConfig.match(/publicCrossOriginSources[\s\S]*\/api\/enquiry/)) {
+  errors.push("Enquiry endpoint must not be included in public cross-origin routes.");
+}
+
 const helper = fs.readFileSync("lib/publicApi.ts", "utf8");
 const helperRequirements = [
   ['"Access-Control-Allow-Origin": "*"', "read-only CORS header"],
+  ['"Cross-Origin-Resource-Policy": "cross-origin"', "public-data cross-origin resource policy"],
   ["max-age=0, s-maxage=", "CDN cache policy for public JSON"],
   ["publicCacheControl(maxAge)", "shared CDN cache policy for public text"],
   ['"Cache-Control": "no-store, max-age=0"', "no-store cache policy"],
@@ -90,9 +102,12 @@ if (!searchApi.includes("normalizeSearchQuery")) errors.push("Search API does no
 const enquiry = fs.readFileSync("app/api/enquiry/route.ts", "utf8");
 const enquiryGuards = [
   ["same-origin guard", 'headers.get("origin")'],
+  ["fetch metadata guard", 'headers.get("sec-fetch-site")'],
+  ["cross-site request rejection", 'fetchSite === "cross-site"'],
   ["JSON content-type guard", 'headers.get("content-type")'],
   ["declared body-size guard", 'headers.get("content-length")'],
   ["actual body-size guard", "TextEncoder"],
+  ["same-origin page context filter", 'submittedPageUrl.startsWith(requestUrl.origin + "/")'],
   ["honeypot guard", "if (website)"],
   ["fast-submit bot guard", "Date.now() - startedAt < 1800"],
   ["outbound timeout", "AbortSignal.timeout(10_000)"],

@@ -4,6 +4,7 @@ const next = fs.readFileSync("next.config.ts", "utf8");
 const security = fs.readFileSync("app/.well-known/security.txt/route.ts", "utf8");
 
 const headers = [
+  "Content-Security-Policy",
   "X-Content-Type-Options",
   "X-Frame-Options",
   "Referrer-Policy",
@@ -19,6 +20,31 @@ const errors = [];
 headers.forEach((header) => {
   if (!next.includes(header)) errors.push("Missing security header: " + header);
 });
+
+if (!next.includes('"Cross-Origin-Resource-Policy", value: "same-origin"')) {
+  errors.push("Default resource policy must remain same-origin.");
+}
+if (!next.includes('"Cross-Origin-Resource-Policy", value: "cross-origin"')) {
+  errors.push("Public machine routes need an explicit cross-origin override.");
+}
+
+
+const cspDirectives = [
+  "default-src 'self'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "object-src 'none'",
+  "connect-src 'self'",
+  "upgrade-insecure-requests",
+];
+
+for (const directive of cspDirectives) {
+  if (!next.includes(directive)) errors.push("Content Security Policy missing directive: " + directive);
+}
+if (!next.includes("script-src 'self' 'unsafe-inline'")) {
+  errors.push("CSP must explicitly allow the Next.js inline bootstrap scripts.");
+}
 
 const requiredSecurityTxt = [
   "Contact: mailto:info@SaunaWhisks.com",
