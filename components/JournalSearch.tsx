@@ -34,10 +34,18 @@ export function JournalSearch({ items }: { items: JournalItem[] }) {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Try birch, storage, venik..."
+          aria-controls="journal-search-results"
+          aria-describedby="journal-search-count"
         />
       </label>
 
-      <div className="journal-list">
+      <p id="journal-search-count" className="search-count" role="status" aria-live="polite">
+        {query.trim()
+          ? `${filtered.length} guide${filtered.length === 1 ? "" : "s"}`
+          : `${filtered.length} guides in the library`}
+      </p>
+
+      <div className="journal-list" id="journal-search-results">
         {filtered.map((article, index) => (
           <Link prefetch={false} href={"/journal/" + article.slug} className="journal-row" key={article.slug}>
             <span className="journal-index">{String(index + 1).padStart(2, "0")}</span>
