@@ -138,7 +138,10 @@ const enquiryGuards = [
   ["runtime field-type rejection", "hasInvalidFieldTypes(body)"],
   ["field-type error response", 'error: "Invalid field type."'],
   ["declared body-size guard", 'headers.get("content-length")'],
-  ["actual body-size guard", "TextEncoder"],
+  ["bounded streaming body reader", "readTextBodyWithLimit(request, MAX_BODY_BYTES)"],
+  ["stream reader", "request.body.getReader()"],
+  ["stream byte accounting", "totalBytes += value.byteLength"],
+  ["oversize stream error", "RequestTooLargeError"],
   ["same-origin page context filter", 'submittedPageUrl.startsWith(requestUrl.origin + "/")'],
   ["honeypot guard", "if (website)"],
   ["fast-submit bot guard", "Date.now() - startedAt < 1800"],
@@ -160,6 +163,9 @@ if (enquiry.includes("Access-Control-Allow-Origin") || enquiry.includes("publicJ
 if (enquiry.includes("const details = await response.text()")) {
   errors.push("Enquiry provider failures must not log provider response bodies.");
 }
+if (enquiry.includes("await request.text()")) {
+  errors.push("Enquiry request bodies must be size-limited while streaming, not buffered with request.text().");
+}
 
 const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
 for (const [needle, label] of [
@@ -171,6 +177,8 @@ for (const [needle, label] of [
   ["/api/enquiry short message", "short-message test"],
   ["/api/enquiry long message", "long-message test"],
   ["/api/enquiry oversized body", "oversized-body test"],
+  ["/api/enquiry chunked oversized body", "chunked oversized-body test"],
+  ['duplex: "half"', "streaming request transport test"],
   ["/api/enquiry honeypot", "honeypot test"],
   ["/api/enquiry fast submit", "fast-submit test"],
   ["/api/enquiry provider fallback", "provider-fallback test"],

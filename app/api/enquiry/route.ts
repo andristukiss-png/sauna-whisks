@@ -18,6 +18,40 @@ const STRING_FIELDS = [
 
 const MAX_BODY_BYTES = 20_000;
 
+class RequestTooLargeError extends Error {}
+
+async function readTextBodyWithLimit(request: Request, maxBytes: number) {
+  if (!request.body) return "";
+
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder();
+  let totalBytes = 0;
+  let text = "";
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (!value) continue;
+
+      totalBytes += value.byteLength;
+      if (totalBytes > maxBytes) {
+        try {
+          await reader.cancel("Request body exceeds the configured limit.");
+        } catch {}
+        throw new RequestTooLargeError("Request body too large");
+      }
+
+      text += decoder.decode(value, { stream: true });
+    }
+
+    text += decoder.decode();
+    return text;
+  } finally {
+    reader.releaseLock();
+  }
+}
+
 function validEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
@@ -89,9 +123,14 @@ export async function POST(request: Request) {
       return reply({ error: "Request too large." }, 413);
     }
 
-    const rawBody = await request.text();
-    if (new TextEncoder().encode(rawBody).byteLength > MAX_BODY_BYTES) {
-      return reply({ error: "Request too large." }, 413);
+    let rawBody = "";
+    try {
+      rawBody = await readTextBodyWithLimit(request, MAX_BODY_BYTES);
+    } catch (error) {
+      if (error instanceof RequestTooLargeError) {
+        return reply({ error: "Request too large." }, 413);
+      }
+      throw error;
     }
 
     let body: EnquiryPayload;
