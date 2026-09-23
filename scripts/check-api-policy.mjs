@@ -45,6 +45,41 @@ const publicTextRoutes = [
 ];
 
 const errors = [];
+function walk(dir) {
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const absolute = dir + "/" + entry.name;
+    return entry.isDirectory() ? walk(absolute) : [absolute];
+  });
+}
+
+const apiRouteFiles = walk("app/api").filter((file) => file.endsWith("/route.ts"));
+const allowedMutationMethods = new Map([
+  ["app/api/enquiry/route.ts", new Set(["POST"])],
+]);
+let enquiryPostFound = false;
+
+for (const file of apiRouteFiles) {
+  const source = fs.readFileSync(file, "utf8");
+  const methods = [
+    ...source.matchAll(/export\s+(?:async\s+)?function\s+(POST|PUT|PATCH|DELETE)\b/g),
+  ].map((match) => match[1]);
+
+  for (const method of methods) {
+    const allowed = allowedMutationMethods.get(file);
+    if (!allowed?.has(method)) {
+      errors.push("Unexpected mutating API handler: " + file + " -> " + method);
+    }
+    if (file === "app/api/enquiry/route.ts" && method === "POST") {
+      enquiryPostFound = true;
+    }
+  }
+}
+
+if (!enquiryPostFound) {
+  errors.push("Enquiry API must remain the explicitly reviewed POST endpoint.");
+}
+
 
 for (const file of cached) {
   const text = fs.readFileSync(file, "utf8");
@@ -170,6 +205,16 @@ if (enquiry.includes("await request.text()")) {
 
 const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
 for (const [needle, label] of [
+  ["noStorePublicPaths", "public cache-policy path registry"],
+  ['expectHeader(response, "cache-control", "no-store"', "runtime no-store verification"],
+  ['expectHeader(response, "cache-control", "s-maxage="', "runtime CDN-cache verification"],
+]) {
+  if (!localSmoke.includes(needle)) {
+    errors.push("Local smoke missing " + label + ".");
+  }
+}
+
+for (const [needle, label] of [
   ["verifyEnquiryResponse", "shared enquiry response assertions"],
   ["/api/enquiry GET", "GET method rejection test"],
   ["/api/enquiry non-object JSON", "non-object JSON test"],
@@ -183,6 +228,7 @@ for (const [needle, label] of [
   ["/api/enquiry honeypot", "honeypot test"],
   ["/api/enquiry fast submit", "fast-submit test"],
   ["/api/enquiry provider fallback", "provider-fallback test"],
+  ["/api/status POST", "read-only API mutation rejection test"],
 ]) {
   if (!localSmoke.includes(needle)) errors.push("Local smoke missing " + label + ".");
 }
