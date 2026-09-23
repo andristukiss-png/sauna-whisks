@@ -14,7 +14,7 @@ export default function ErrorPage({
     <main className="route-error" role="alert" aria-live="assertive">
       <p className="section-kicker">ERROR</p>
       <h1>This page hit a knot.</h1>
-      <p>Try again, return home, or email {site.publicEmail} if the problem continues.</p>
+      <p>Try again, return home, or email <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a> if the problem continues.</p>
       <div>
         <button type="button" className="button button-dark" onClick={() => reset()}>Try again</button>
         <Link className="text-link" href="/">Return home →</Link>
