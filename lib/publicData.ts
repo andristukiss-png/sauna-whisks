@@ -46,3 +46,12 @@ export const publicDataEndpoints: PublicDataEndpoint[] = [
   { path: "/sitemap.xml", label: "XML sitemap", group: "Machine" },
   { path: "/robots.txt", label: "Crawler policy", group: "Machine" },
 ];
+
+
+export const publicCrossOriginPaths = [
+  ...new Set(
+    publicDataEndpoints
+      .map(({ path }) => path.split("?")[0])
+      .filter((path) => !["/sitemap.xml", "/robots.txt"].includes(path))
+  ),
+];
