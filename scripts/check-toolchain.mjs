@@ -34,6 +34,18 @@ if (!pkg.scripts?.["validate:toolchain"]) {
   errors.push("package.json missing validate:toolchain script.");
 }
 
+const workflowDir = ".github/workflows";
+for (const file of fs.readdirSync(workflowDir).filter((name) => /\.ya?ml$/.test(name))) {
+  const workflowText = fs.readFileSync(workflowDir + "/" + file, "utf8");
+  for (const match of workflowText.matchAll(/uses:\s*([^\s@]+)@([^\s#]+)/g)) {
+    const [, action, ref] = match;
+    if (action.startsWith("./")) continue;
+    if (!/^[0-9a-f]{40}$/.test(ref)) {
+      errors.push("Workflow action must be pinned to a full commit SHA: " + file + " -> " + action + "@" + ref);
+    }
+  }
+}
+
 const workflow = fs.readFileSync(".github/workflows/build.yml", "utf8");
 if (!workflow.includes('node-version-file: ".nvmrc"')) {
   errors.push("CI must read its Node version from .nvmrc.");
@@ -60,16 +72,39 @@ if (!workflow.includes("if: always()")) {
   errors.push("CI must clean up the production server even after failures.");
 }
 
+function pinnedActionSha(text, action) {
+  return text.match(new RegExp(action + "@([0-9a-f]{40})"))?.[1] || "";
+}
+
+for (const [action, label] of [
+  ["actions/checkout", "checkout"],
+  ["actions/setup-node", "setup-node"],
+]) {
+  if (!pinnedActionSha(workflow, action)) {
+    errors.push("Build workflow " + label + " action must be pinned to a full commit SHA.");
+  }
+}
+if (!workflow.includes("persist-credentials: false")) {
+  errors.push("Build workflow checkout must disable persisted credentials.");
+}
+
 const codeqlFile = ".github/workflows/codeql.yml";
 if (!fs.existsSync(codeqlFile)) {
   errors.push("Missing CodeQL workflow.");
 } else {
   const codeql = fs.readFileSync(codeqlFile, "utf8");
-  if (!codeql.includes("github/codeql-action/init@v4")) {
-    errors.push("CodeQL init action must use v4.");
+  const initSha = pinnedActionSha(codeql, "github/codeql-action/init");
+  const analyzeSha = pinnedActionSha(codeql, "github/codeql-action/analyze");
+  const checkoutSha = pinnedActionSha(codeql, "actions/checkout");
+
+  if (!initSha) errors.push("CodeQL init action must be pinned to a full commit SHA.");
+  if (!analyzeSha) errors.push("CodeQL analyze action must be pinned to a full commit SHA.");
+  if (initSha && analyzeSha && initSha !== analyzeSha) {
+    errors.push("CodeQL init/analyze actions must use the same pinned commit.");
   }
-  if (!codeql.includes("github/codeql-action/analyze@v4")) {
-    errors.push("CodeQL analyze action must use v4.");
+  if (!checkoutSha) errors.push("CodeQL checkout action must be pinned to a full commit SHA.");
+  if (!codeql.includes("persist-credentials: false")) {
+    errors.push("CodeQL checkout must disable persisted credentials.");
   }
   if (!codeql.includes("javascript-typescript")) {
     errors.push("CodeQL must analyze JavaScript/TypeScript.");
