@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const item = getComparison(slug);
   if (!item) return {};
   return pageMetadata({
-    title: item.title,
+    title: `${item.title} comparison`,
     description: item.description,
     canonical: `/compare/${item.slug}`,
   });

@@ -1,5 +1,6 @@
 const baseUrl = (process.env.LOCAL_SMOKE_BASE_URL || "http://127.0.0.1:3000").replace(/\/$/, "");
 const failures = [];
+const observedPageTitles = [];
 const attempts = 40;
 const pauseMs = 500;
 
@@ -81,6 +82,32 @@ function hasNoindex(html) {
   );
 }
 
+function metaContent(html, name) {
+  const tags = html.match(/<meta\b[^>]*>/gi) || [];
+  const tag = tags.find((item) => new RegExp("\\bname=[\"']" + name + "[\"']", "i").test(item));
+  return tag?.match(/\bcontent=["']([^"']*)["']/i)?.[1]?.trim() || "";
+}
+
+function validateJsonLd(html, path) {
+  const scripts = html.match(/<script\b[^>]*>[\s\S]*?<\/script>/gi) || [];
+  const jsonLd = scripts.filter((script) =>
+    /\btype=["']application\/ld\+json["']/i.test(script)
+  );
+
+  for (const script of jsonLd) {
+    const body = script
+      .replace(/^<script\b[^>]*>/i, "")
+      .replace(/<\/script>$/i, "")
+      .trim();
+
+    try {
+      JSON.parse(body);
+    } catch {
+      fail(path + " contains invalid JSON-LD.");
+    }
+  }
+}
+
 async function checkSitemapPage(location) {
   let canonicalUrl;
   try {
@@ -103,15 +130,28 @@ async function checkSitemapPage(location) {
 
   const html = await response.text();
 
-  if (!/<title>[^<]+<\/title>/i.test(html)) {
+  const title = html.match(/<title>([^<]+)<\/title>/i)?.[1]?.trim() || "";
+  if (!title) {
     fail(path + " is missing a non-empty title.");
+  } else {
+    observedPageTitles.push({ path, title });
   }
   if (!/<h1\b[^>]*>[\s\S]*?<\/h1>/i.test(html)) {
     fail(path + " is missing an H1.");
   }
+  if (!/<html\b[^>]*\blang=["']en["']/i.test(html)) {
+    fail(path + ' is missing <html lang="en">.');
+  }
+  if (!metaContent(html, "description")) {
+    fail(path + " is missing a non-empty meta description.");
+  }
+  if (!/href=["']#main-content["']/i.test(html) || !/id=["']main-content["']/i.test(html)) {
+    fail(path + " is missing working skip-navigation markup.");
+  }
   if (hasNoindex(html)) {
     fail(path + " is in the sitemap but renders noindex.");
   }
+  validateJsonLd(html, path);
 
   const canonical = extractCanonical(html);
   if (!canonical) {
@@ -131,6 +171,16 @@ async function crawlSitemapPages(locations) {
   const batchSize = 8;
   for (let index = 0; index < locations.length; index += batchSize) {
     await Promise.all(locations.slice(index, index + batchSize).map(checkSitemapPage));
+  }
+
+  const titleOwners = new Map();
+  for (const item of observedPageTitles) {
+    const owner = titleOwners.get(item.title);
+    if (owner && owner !== item.path) {
+      fail("Duplicate page title: " + item.title + " -> " + owner + " and " + item.path);
+    } else {
+      titleOwners.set(item.title, item.path);
+    }
   }
 }
 
