@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Trade Trial Plan",
   description: "A low-risk evaluation plan for venues and retailers testing sauna whisks before recurring supply.",
-  alternates: { canonical: "/trade/trial" }
-};
+  canonical: "/trade/trial",
+});
 
 const steps = [
   ["Choose a mixed case", "Include at least two materials so preference becomes visible."],
