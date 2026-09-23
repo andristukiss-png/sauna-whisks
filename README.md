@@ -128,7 +128,7 @@ Use Node 22. The repository pins the version in `.nvmrc` and `.node-version`.
 
 ```bash
 nvm use
-npm install
+npm ci
 npm run dev
 ```
 
@@ -152,7 +152,7 @@ npm run verify:production
 
 See `docs/PRODUCTION_DIAGNOSTICS.md` for the domain/TLS incident playbook.
 
-The CI pipeline runs validation, lint, TypeScript and the production Next.js build.
+The CI pipeline uses the committed npm lockfile, runs validation, lint, TypeScript and the production Next.js build, then boots the built server and runs HTTP smoke tests.
 
 ## Commercial launch gates
 
