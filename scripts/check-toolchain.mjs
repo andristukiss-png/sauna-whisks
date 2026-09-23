@@ -60,6 +60,25 @@ if (!workflow.includes("if: always()")) {
   errors.push("CI must clean up the production server even after failures.");
 }
 
+const codeqlFile = ".github/workflows/codeql.yml";
+if (!fs.existsSync(codeqlFile)) {
+  errors.push("Missing CodeQL workflow.");
+} else {
+  const codeql = fs.readFileSync(codeqlFile, "utf8");
+  if (!codeql.includes("github/codeql-action/init@v4")) {
+    errors.push("CodeQL init action must use v4.");
+  }
+  if (!codeql.includes("github/codeql-action/analyze@v4")) {
+    errors.push("CodeQL analyze action must use v4.");
+  }
+  if (!codeql.includes("javascript-typescript")) {
+    errors.push("CodeQL must analyze JavaScript/TypeScript.");
+  }
+  if (!codeql.includes("security-events: write")) {
+    errors.push("CodeQL workflow needs security-events write permission.");
+  }
+}
+
 const dependabot = fs.readFileSync(".github/dependabot.yml", "utf8");
 if (!dependabot.includes('package-ecosystem: "npm"')) {
   errors.push("Dependabot npm updates missing.");
