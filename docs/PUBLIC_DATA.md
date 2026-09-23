@@ -57,3 +57,14 @@ These endpoints do not imply commercial availability. Product catalog entries re
 ## CSV safety
 
 CSV cells are quoted and values beginning with spreadsheet formula prefixes (`=`, `+`, `-`, `@`) are neutralized before export. Keep new CSV endpoints on the shared `encodeCsv` / `publicCsv` helpers.
+
+
+## Compatibility version
+
+Shared public JSON, CSV, text and feed responses include:
+
+```
+X-SaunaWhisks-Data-Version: 1
+```
+
+The header is exposed through CORS so browser-based tooling can read it. Version changes are reserved for intentional compatibility changes to the public machine-data contract; ordinary content updates do not require a version bump. Sitemap and robots metadata routes are outside this shared response-helper contract.
