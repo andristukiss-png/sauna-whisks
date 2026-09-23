@@ -47,3 +47,7 @@ A release is considered technically green only when:
 - `next build` passes
 - Vercel reports the deployment Ready
 - the production smoke check passes for the canonical host and `www` redirect
+
+## Ongoing production health
+
+The scheduled `Production monitor` workflow checks the canonical domain every six hours. It complements release CI: release CI proves the built application, while the monitor proves the live DNS, TLS, redirects and critical public endpoints continue to work after deployment.
