@@ -1,9 +1,9 @@
 export default function Loading() {
   return (
-    <main className="loading-screen" aria-live="polite" aria-busy="true">
+    <div className="loading-screen" role="status" aria-live="polite" aria-atomic="true" aria-busy="true">
       <p>SAUNA WHISKS</p>
       <div className="loading-line" aria-hidden="true" />
       <span>Loading…</span>
-    </main>
+    </div>
   );
 }
