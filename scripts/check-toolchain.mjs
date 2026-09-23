@@ -33,6 +33,9 @@ if (pkg.engines?.node !== ">=22 <23") {
 if (!pkg.scripts?.["validate:toolchain"]) {
   errors.push("package.json missing validate:toolchain script.");
 }
+if (pkg.scripts?.["wait:production"] !== "node scripts/wait-for-production-commit.mjs") {
+  errors.push("package.json missing the production convergence command.");
+}
 
 const workflowDir = ".github/workflows";
 for (const file of fs.readdirSync(workflowDir).filter((name) => /\.ya?ml$/.test(name))) {
@@ -70,6 +73,12 @@ if (!workflow.includes('VERCEL_GIT_COMMIT_SHA="$GITHUB_SHA"')) {
 }
 if (!workflow.includes('LOCAL_SMOKE_EXPECTED_COMMIT="$GITHUB_SHA"')) {
   errors.push("CI must verify the health endpoint against the running commit.");
+}
+if (!workflow.includes('SAUNAWHISKS_DEPLOY_WAIT_MS="5000"')) {
+  errors.push("CI must exercise the deployment convergence helper with a bounded test timeout.");
+}
+if (!workflow.includes("npm run wait:production")) {
+  errors.push("CI must execute the deployment convergence helper.");
 }
 if (!workflow.includes("npm start > /tmp/sauna-whisks-next.log")) {
   errors.push("CI must start the production server before smoke testing.");
@@ -137,6 +146,15 @@ if (!fs.existsSync(monitorFile)) {
   if (!monitor.includes('SAUNAWHISKS_EXPECTED_COMMIT="$EXPECTED_COMMIT"')) {
     errors.push("Production monitor must verify the live deployment commit.");
   }
+  if (!monitor.includes("node scripts/wait-for-production-commit.mjs")) {
+    errors.push("Production monitor must allow bounded deployment convergence before full verification.");
+  }
+  if (
+    monitor.indexOf("node scripts/wait-for-production-commit.mjs") >
+    monitor.indexOf("node scripts/production-smoke.mjs")
+  ) {
+    errors.push("Production monitor must wait for deployment convergence before full verification.");
+  }
   if (!monitor.includes('cron: "17 */6 * * *"')) {
     errors.push("Production monitor scheduled cadence is missing.");
   }
@@ -145,6 +163,20 @@ if (!fs.existsSync(monitorFile)) {
   }
   if (!monitor.includes("contents: read")) {
     errors.push("Production monitor must remain read-only.");
+  }
+}
+
+const deploymentWait = fs.readFileSync("scripts/wait-for-production-commit.mjs", "utf8");
+for (const [needle, label] of [
+  ['SAUNAWHISKS_DEPLOY_WAIT_MS || "120000"', "default two-minute convergence timeout"],
+  ['SAUNAWHISKS_DEPLOY_POLL_MS || "10000"', "default convergence polling interval"],
+  ["timeoutMs > 240000", "maximum convergence timeout"],
+  ["pollMs < 1000", "minimum convergence polling interval"],
+  ["AbortSignal.timeout(5000)", "bounded health-request timeout"],
+  ["process.exit(1)", "failure exit path"],
+]) {
+  if (!deploymentWait.includes(needle)) {
+    errors.push("Deployment convergence helper missing " + label + ".");
   }
 }
 

@@ -43,4 +43,5 @@ jobs:
             EXPECTED_COMMIT="$(git rev-parse HEAD)"
           fi
           echo "Expecting production commit: $EXPECTED_COMMIT"
+          SAUNAWHISKS_EXPECTED_COMMIT="$EXPECTED_COMMIT" node scripts/wait-for-production-commit.mjs
           SAUNAWHISKS_EXPECTED_COMMIT="$EXPECTED_COMMIT" node scripts/production-smoke.mjs

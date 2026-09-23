@@ -53,6 +53,13 @@ jobs:
           VERCEL_ENV=development VERCEL_GIT_COMMIT_SHA="$GITHUB_SHA" npm start > /tmp/sauna-whisks-next.log 2>&1 &
           echo $! > /tmp/sauna-whisks-next.pid
 
+      - name: Verify deployment identity convergence helper
+        run: |
+          SAUNAWHISKS_BASE_URL="http://127.0.0.1:3000" \
+          SAUNAWHISKS_EXPECTED_COMMIT="$GITHUB_SHA" \
+          SAUNAWHISKS_DEPLOY_WAIT_MS="5000" \
+          npm run wait:production
+
       - name: Smoke production server
         run: LOCAL_SMOKE_EXPECTED_COMMIT="$GITHUB_SHA" npm run smoke:local
 

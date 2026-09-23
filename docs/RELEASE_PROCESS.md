@@ -28,7 +28,7 @@ Use `docs/RECOVERY.md` for application rollback, DNS/TLS recovery and provider/e
 
 ## Continuous production verification
 
-The scheduled production monitor checks the live canonical domain every six hours, including DNS/TLS, core machine endpoints, registered redirects, security.txt, and deployment identity. By default the expected deployment is the current `main` commit.
+The scheduled production monitor checks the live canonical domain every six hours, including DNS/TLS, core machine endpoints, registered redirects, security.txt, and deployment identity. By default the expected deployment is the current `main` commit. It gives Vercel a bounded two-minute convergence window before treating a commit mismatch as drift.
 
 ## Verification commands
 
