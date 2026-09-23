@@ -1,5 +1,6 @@
 import site from "@/config/site.json";
 import { noStoreJson } from "@/lib/publicApi";
+import { launchStatus } from "@/lib/status";
 
 function deploymentInfo() {
   const environment = (process.env.VERCEL_ENV || "").trim();
@@ -15,7 +16,7 @@ export function GET() {
   return noStoreJson({
     ok: true,
     service: site.host,
-    status: "pre-launch",
+    status: launchStatus.status,
     deployment: deploymentInfo(),
   });
 }

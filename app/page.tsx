@@ -5,6 +5,7 @@ import Link from "next/link";
 import { LeafMark } from "@/components/LeafMark";
 import { SiteFooter } from "@/components/SiteFooter";
 import { saunaWhisks } from "@/lib/products";
+import { discoveryTrio } from "@/lib/bundles";
 
 export const metadata: Metadata = {
   openGraph: {
@@ -92,10 +93,10 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <Link href="/shop/discovery-trio" className="bundle-callout bundle-link">
+        <Link href={`/shop/${discoveryTrio.slug}`} className="bundle-callout bundle-link">
           <div><span>01 / DISCOVERY</span><h3>Three forests.<br />One ritual.</h3></div>
           <p>Birch + oak + eucalyptus. Designed as the natural first order for anyone learning the differences between sauna whisks.</p>
-          <strong>US$69 <small>planned launch price · view bundle →</small></strong>
+          <strong>{discoveryTrio.plannedPrice} <small>planned launch price · view bundle →</small></strong>
         </Link>
       </section>
 

@@ -35,6 +35,34 @@ for (const [index, block] of blocks.entries()) {
   }
 }
 
+const bundle = fs.readFileSync("lib/bundles.ts", "utf8");
+for (const [needle, label] of [
+  ['slug: "discovery-trio"', "Discovery Trio slug"],
+  ['plannedPrice: "US$69"', "Discovery Trio planned price"],
+  ['status: "Pre-launch"', "Discovery Trio pre-launch status"],
+  ["availableForPurchase: false", "Discovery Trio purchase gate"],
+  ['"baltic-birch"', "Discovery Trio birch reference"],
+  ['"baltic-oak"', "Discovery Trio oak reference"],
+  ['"eucalyptus"', "Discovery Trio eucalyptus reference"],
+]) {
+  if (!bundle.includes(needle)) errors.push("Bundle catalog missing " + label + ".");
+}
+
+for (const file of [
+  "app/page.tsx",
+  "app/shop/page.tsx",
+  "app/shop/discovery-trio/page.tsx",
+  "app/api/catalog/route.ts",
+]) {
+  const text = fs.readFileSync(file, "utf8");
+  if (!text.includes("@/lib/bundles")) {
+    errors.push(file + " must use shared Discovery Trio data.");
+  }
+}
+if (fs.readFileSync("app/api/catalog/route.ts", "utf8").includes('plannedPrice: "$69"')) {
+  errors.push("Catalog API reintroduced a conflicting Discovery Trio price.");
+}
+
 if (!source.includes('slug: "baltic-oak"')) errors.push("Baltic Oak product is missing.");
 if (source.includes("Latvian Oak")) errors.push("Unverified Latvian Oak naming reintroduced.");
 

@@ -28,6 +28,21 @@ if (!page.includes("launchStatus.items.map")) {
   errors.push("Status page is not rendered from shared launch status data.");
 }
 
+for (const file of [
+  "app/api/health/route.ts",
+  "app/api/catalog/route.ts",
+  "app/api/route.ts",
+  "app/api/company/route.ts",
+]) {
+  const text = fs.readFileSync(file, "utf8");
+  if (!text.includes('import { launchStatus } from "@/lib/status"')) {
+    errors.push(file + " must import shared launch status.");
+  }
+  if (!text.includes("launchStatus.status")) {
+    errors.push(file + " must use shared launch status value.");
+  }
+}
+
 if (!api.includes("noStoreJson(launchStatus)")) {
   errors.push("Status API is not served from shared launch status data.");
 }

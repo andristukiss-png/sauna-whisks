@@ -31,3 +31,11 @@ Every commercial SKU should eventually contain:
 - Customer-facing source/provenance notes
 
 Unknown fields should remain unknown, not filled with marketing assumptions.
+
+## Current pre-launch source files
+
+- Core whisk records: `lib/products.ts`
+- Discovery Trio bundle record: `lib/bundles.ts`
+- Shared launch state and checkout gate: `lib/status.ts`
+
+Customer-facing pages and public APIs should consume those shared records rather than copying planned prices, bundle membership or launch state.
