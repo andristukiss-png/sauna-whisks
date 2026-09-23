@@ -191,8 +191,7 @@ export async function POST(request: Request) {
     });
 
     if (!response.ok) {
-      const details = await response.text();
-      console.error("Resend enquiry error", { requestId, status: response.status, details });
+      console.error("Resend enquiry error", { requestId, status: response.status });
       return reply(
         { error: "We could not send your enquiry right now.", fallback: "mailto" },
         502
