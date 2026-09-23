@@ -142,6 +142,11 @@ for (const [needle, label] of [
   if (!localSmoke.includes(needle)) errors.push("Local smoke missing " + label + ".");
 }
 
+const robotsPolicy = fs.readFileSync("app/robots.ts", "utf8");
+if (!robotsPolicy.includes('disallow: ["/api"]')) {
+  errors.push("Production robots policy must disallow the API prefix.");
+}
+
 const searchPage = fs.readFileSync("app/search/page.tsx", "utf8");
 if (!/robots\s*:\s*\{\s*index\s*:\s*false\s*,\s*follow\s*:\s*true\s*\}/s.test(searchPage)) {
   errors.push("Search page must remain noindex, follow.");
