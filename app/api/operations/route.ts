@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { operationGuides } from "@/lib/operations";
 import { publicJson } from "@/lib/publicApi";
 
@@ -8,7 +9,7 @@ export function GET() {
       slug: guide.slug,
       title: guide.title,
       description: guide.description,
-      url: `https://saunawhisks.com/operations/${guide.slug}`,
+      url: `${site.origin}/operations/${guide.slug}`,
     })),
   });
 }
