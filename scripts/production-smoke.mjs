@@ -1,7 +1,9 @@
 import fs from "node:fs";
 import dns from "node:dns/promises";
+import tls from "node:tls";
 
 const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
+const redirects = JSON.parse(fs.readFileSync("config/redirects.json", "utf8"));
 const canonicalProductionHost = site.host;
 const baseUrl = (process.env.SAUNAWHISKS_BASE_URL || `https://${canonicalProductionHost}`).replace(/\/$/, "");
 const base = new URL(baseUrl);
@@ -15,6 +17,10 @@ if (base.protocol !== "https:") {
 
 const failures = [];
 const expectedCommit = (process.env.SAUNAWHISKS_EXPECTED_COMMIT || "").trim().toLowerCase();
+if (expectedCommit && !/^[0-9a-f]{7,40}$/.test(expectedCommit)) {
+  console.error("Expected commit must be 7-40 hexadecimal characters.");
+  process.exit(1);
+}
 
 async function reportDns() {
   console.log("DNS:");
