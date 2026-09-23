@@ -7,6 +7,7 @@
 - product links resolve
 - dynamic content pages resolve
 - enquiry form validates
+- enquiry error and bot branches pass the production-mode HTTP contract suite
 - fallback email path works
 - sitemap/robots/feed/API endpoints respond
 - canonical apex host responds over HTTPS
