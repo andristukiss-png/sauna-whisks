@@ -3,6 +3,8 @@ import legacyRedirects from "./config/redirects.json";
 import { publicCrossOriginPaths } from "./lib/publicData";
 import type { NextConfig } from "next";
 
+const isPreviewDeployment = process.env.VERCEL_ENV === "preview";
+
 const contentSecurityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -38,7 +40,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/:path*",
-        headers: securityHeaders,
+        headers: [
+          ...securityHeaders,
+          ...(isPreviewDeployment
+            ? [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }]
+            : []),
+        ],
       },
       {
         source: "/api/:path*",

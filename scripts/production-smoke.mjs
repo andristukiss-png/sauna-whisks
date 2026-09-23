@@ -162,6 +162,37 @@ async function check(
   }
 }
 
+async function checkProductionRobots() {
+  const url = `${baseUrl}/robots.txt`;
+  try {
+    const response = await fetch(url, {
+      headers: { "user-agent": "SaunaWhisks-production-smoke/1.0" },
+      signal: AbortSignal.timeout(10_000),
+    });
+    console.log(`- ${url}: ${response.status}`);
+
+    if (!response.ok) {
+      failures.push(`${url} returned ${response.status}`);
+      return;
+    }
+
+    const type = response.headers.get("content-type") || "";
+    if (!type.includes("text/plain")) {
+      failures.push(`${url} did not return text/plain`);
+    }
+
+    const body = await response.text();
+    if (/^Disallow:\s*\/$/m.test(body)) {
+      failures.push("production robots.txt disallows the entire site");
+    }
+    if (!body.includes(`Sitemap: ${site.origin}/sitemap.xml`)) {
+      failures.push("production robots.txt does not advertise the canonical sitemap");
+    }
+  } catch (error) {
+    failures.push(`${url} could not be verified: ${error.cause?.code || error.code || error.message}`);
+  }
+}
+
 async function checkSecurityTxt() {
   const url = `${baseUrl}/.well-known/security.txt`;
   try {
@@ -261,7 +292,7 @@ await check(`${baseUrl}/`, {
   ],
 });
 await check(`${baseUrl}/api/health`, { expectJson: true, verifyDeployment: true });
-await check(`${baseUrl}/robots.txt`, { contentTypeIncludes: "text/plain" });
+await checkProductionRobots();
 await check(`${baseUrl}/sitemap.xml`, { contentTypeIncludes: "xml" });
 await check(`${baseUrl}/feed.xml`, { contentTypeIncludes: "application/rss+xml" });
 await check(`${baseUrl}/feed.json`, { contentTypeIncludes: "application/json" });

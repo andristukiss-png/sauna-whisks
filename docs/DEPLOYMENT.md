@@ -42,6 +42,10 @@ The external DNS provider controls the public records. Do not guess or permanent
 
 See `docs/PRODUCTION_DIAGNOSTICS.md`.
 
+## Preview indexing policy
+
+Vercel preview deployments are intentionally non-indexable. Preview builds emit a global `X-Robots-Tag: noindex, nofollow, noarchive` and a disallow-all `robots.txt`. Production must not emit the global noindex header and must advertise the canonical sitemap.
+
 ## Verification after deploy
 
 Run:
