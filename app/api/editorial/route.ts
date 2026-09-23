@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { editorialReviewDate, sourceHierarchy } from "@/lib/editorial";
 import { publicJson } from "@/lib/publicApi";
 
@@ -6,10 +7,10 @@ export function GET(){
     lastEditorialReview:editorialReviewDate,
     sourceHierarchy:sourceHierarchy.map(([category,description])=>({category,description})),
     policies:{
-      editorial:"https://saunawhisks.com/editorial-policy",
-      corrections:"https://saunawhisks.com/corrections",
-      claims:"https://saunawhisks.com/claims",
-      sources:"https://saunawhisks.com/sources"
+      editorial:`${site.origin}/editorial-policy`,
+      corrections:`${site.origin}/corrections`,
+      claims:`${site.origin}/claims`,
+      sources:`${site.origin}/sources`
     }
   });
 }
