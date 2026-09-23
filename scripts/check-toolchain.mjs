@@ -14,6 +14,18 @@ for (const file of [".nvmrc", ".node-version"]) {
   }
 }
 
+if (!fs.existsSync("package-lock.json")) {
+  errors.push("Missing package-lock.json for reproducible installs.");
+} else {
+  const lock = JSON.parse(fs.readFileSync("package-lock.json", "utf8"));
+  if (lock.lockfileVersion !== 3) {
+    errors.push("package-lock.json must use lockfileVersion 3.");
+  }
+  if (lock.name !== "sauna-whisks") {
+    errors.push("package-lock.json package name does not match the project.");
+  }
+}
+
 const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
 if (pkg.engines?.node !== ">=22 <23") {
   errors.push("package.json engines.node must stay on Node 22.");
@@ -25,6 +37,12 @@ if (!pkg.scripts?.["validate:toolchain"]) {
 const workflow = fs.readFileSync(".github/workflows/build.yml", "utf8");
 if (!workflow.includes('node-version-file: ".nvmrc"')) {
   errors.push("CI must read its Node version from .nvmrc.");
+}
+if (!workflow.includes("npm ci --no-audit --no-fund")) {
+  errors.push("CI must use npm ci with the committed lockfile.");
+}
+if (workflow.includes("npm install --no-audit --no-fund")) {
+  errors.push("CI must not use floating npm install.");
 }
 if (!workflow.includes("npm run smoke:local")) {
   errors.push("CI must smoke-test the built production server.");
