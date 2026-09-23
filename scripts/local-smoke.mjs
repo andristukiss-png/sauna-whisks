@@ -1,6 +1,7 @@
 import fs from "node:fs";
 
 const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
+const redirects = JSON.parse(fs.readFileSync("config/redirects.json", "utf8"));
 const baseUrl = (process.env.LOCAL_SMOKE_BASE_URL || "http://127.0.0.1:3000").replace(/\/$/, "");
 const failures = [];
 const expectedCommit = (process.env.LOCAL_SMOKE_EXPECTED_COMMIT || "").trim().toLowerCase();
@@ -359,11 +360,24 @@ for (const path of [
   }
 }
 
-const legacyUs = await request("/markets/united-states");
-if (legacyUs) {
-  if (![301, 307, 308].includes(legacyUs.status)) fail(`Legacy US route did not redirect; got ${legacyUs.status}`);
-  const location = legacyUs.headers.get("location") || "";
-  if (!location.endsWith("/usa")) fail(`Legacy US route redirected to unexpected location: ${location}`);
+for (const { source, destination } of redirects) {
+  const response = await request(source);
+  if (!response) continue;
+
+  if (![301, 307, 308].includes(response.status)) {
+    fail(`${source} did not redirect; got ${response.status}`);
+    continue;
+  }
+
+  const location = response.headers.get("location") || "";
+  const resolved = new URL(location, baseUrl);
+  if (resolved.pathname !== destination) {
+    fail(`${source} redirected to unexpected location: ${location}`);
+    continue;
+  }
+
+  const target = await request(destination);
+  expectStatus(target, 200, destination);
 }
 
 const wrongType = await request("/api/enquiry", {
