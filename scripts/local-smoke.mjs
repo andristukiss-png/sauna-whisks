@@ -545,6 +545,39 @@ const wrongType = await request("/api/enquiry", {
 });
 await verifyEnquiryResponse(wrongType, 415, "/api/enquiry wrong content type");
 
+const jsonPatchType = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json-patch+json" },
+  body: JSON.stringify({
+    name: "Test User",
+    email: "test@example.com",
+    message: "A valid test enquiry.",
+  }),
+});
+await verifyEnquiryResponse(
+  jsonPatchType,
+  415,
+  "/api/enquiry JSON patch media type"
+);
+
+const jsonWithCharset = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json; charset=utf-8" },
+  body: JSON.stringify({
+    name: "A",
+    email: "test@example.com",
+    message: "A valid test enquiry.",
+  }),
+});
+const jsonWithCharsetBody = await verifyEnquiryResponse(
+  jsonWithCharset,
+  400,
+  "/api/enquiry JSON charset media type"
+);
+if (jsonWithCharsetBody.error !== "Please enter your name.") {
+  fail("/api/enquiry JSON charset media type was not parsed as normal JSON.");
+}
+
 const malformed = await request("/api/enquiry", {
   method: "POST",
   headers: { "content-type": "application/json" },
