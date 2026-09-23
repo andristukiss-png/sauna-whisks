@@ -1,6 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
+
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const absolute = path.join(dir, entry.name);
@@ -40,6 +42,21 @@ for (const file of pages) {
       errors.push("Static page missing canonical metadata: " + file);
     }
   }
+}
+
+for (const file of pages) {
+  const text = fs.readFileSync(file, "utf8");
+  if (text.includes("dangerouslySetInnerHTML") && text.includes(site.origin)) {
+    errors.push("JSON-LD page hard-codes canonical origin instead of site config: " + file);
+  }
+}
+
+const homePageSource = fs.readFileSync("app/page.tsx", "utf8");
+if (!homePageSource.includes('import site from "@/config/site.json"')) {
+  errors.push("Homepage metadata must import site config.");
+}
+if (!homePageSource.includes("url: site.origin") || !homePageSource.includes("siteName: site.name")) {
+  errors.push("Homepage social metadata must use configured site identity.");
 }
 
 const metadataHelper = fs.readFileSync("lib/metadata.ts", "utf8");

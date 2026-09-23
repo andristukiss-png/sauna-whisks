@@ -1,14 +1,16 @@
+import site from "@/config/site.json";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { techniques } from "@/lib/techniques";
 
-export const metadata={
-  title:"Sauna Whisk Techniques",
-  description:"Practical sauna-whisk technique guides for fanning, brushing, pressing, rhythmic use and cleanup.",
-  alternates:{canonical:"/techniques"}
-};
+export const metadata = pageMetadata({
+  title: "Sauna Whisk Techniques",
+  description: "Practical sauna-whisk technique guides for fanning, brushing, pressing, rhythmic use and cleanup.",
+  canonical: "/techniques",
+});
 
 export default function TechniquesPage(){
   const schema={
@@ -18,7 +20,7 @@ export default function TechniquesPage(){
     hasPart:techniques.map((item)=>({
       "@type":"HowTo",
       name:item.name,
-      url:"https://saunawhisks.com/techniques/"+item.slug
+      url:site.origin+"/techniques/"+item.slug
     }))
   };
 

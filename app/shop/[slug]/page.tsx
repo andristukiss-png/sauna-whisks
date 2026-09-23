@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -39,9 +40,9 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
     material: whisk.material,
     brand: {
       "@type": "Brand",
-      name: "Sauna Whisks"
+      name: site.name
     },
-    url: `https://saunawhisks.com/shop/${whisk.slug}`,
+    url: `${site.origin}/shop/${whisk.slug}`,
     additionalProperty: [
       { "@type": "PropertyValue", name: "Status", value: whisk.status },
       { "@type": "PropertyValue", name: "Planned condition", value: whisk.plannedCondition },
@@ -151,7 +152,7 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
         <p className="section-kicker">PRODUCT FAQ</p>
         {faqItems.map(([question, answer]) => (
           <details key={question}>
-            <summary>{question}<i>+</i></summary>
+            <summary>{question}<i aria-hidden="true">+</i></summary>
             <p>{answer}</p>
           </details>
         ))}

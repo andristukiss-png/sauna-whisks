@@ -61,7 +61,7 @@ export default function WholesalePage() {
         <p className="section-kicker">TRADE FAQ</p>
         {wholesaleFaq.map(([question, answer]) => (
           <details key={question}>
-            <summary>{question}<i>+</i></summary>
+            <summary>{question}<i aria-hidden="true">+</i></summary>
             <p>{answer}</p>
           </details>
         ))}

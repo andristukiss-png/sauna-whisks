@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -35,15 +36,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     "@type": "Article",
     headline: article.title,
     description: article.description,
-    mainEntityOfPage: `https://saunawhisks.com/journal/${article.slug}`,
+    mainEntityOfPage: `${site.origin}/journal/${article.slug}`,
     author: {
       "@type": "Organization",
-      name: "Sauna Whisks"
+      name: site.name
     },
     publisher: {
       "@type": "Organization",
-      name: "Sauna Whisks",
-      url: "https://saunawhisks.com"
+      name: site.name,
+      url: site.origin
     },
     citation: article.sources.map((source) => source.url),
     dateModified: editorialReviewDate
