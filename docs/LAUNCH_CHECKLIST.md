@@ -37,6 +37,7 @@ Checkout stays disabled until the critical gates below are complete.
 - [ ] Production build passes CI
 - [ ] Production domain/TLS smoke check passes
 - [ ] Enquiry email provider configured
+- [ ] Durable enquiry rate limiting configured before direct transactional email is enabled
 - [ ] SaunaWhisks.com sender domain verified
 - [ ] Checkout/payment provider configured
 - [ ] Analytics/privacy configuration reviewed
