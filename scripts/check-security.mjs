@@ -1,5 +1,7 @@
 import fs from "node:fs";
 
+const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
+
 const next = fs.readFileSync("next.config.ts", "utf8");
 const security = fs.readFileSync("app/.well-known/security.txt/route.ts", "utf8");
 
@@ -47,13 +49,16 @@ if (!next.includes("script-src 'self' 'unsafe-inline'")) {
 }
 
 const requiredSecurityTxt = [
-  "Contact: mailto:info@SaunaWhisks.com",
-  "Canonical: https://saunawhisks.com/.well-known/security.txt",
+  "`Contact: mailto:${site.publicEmail}`",
+  "`Canonical: ${site.origin}/.well-known/security.txt`",
   "Preferred-Languages: en",
   "Expires:"
 ];
 for (const value of requiredSecurityTxt) {
   if (!security.includes(value)) errors.push("security.txt missing: " + value);
+}
+if (security.includes(site.origin) || security.includes(site.publicEmail)) {
+  errors.push("security.txt source must use shared site config rather than hard-coded identity values.");
 }
 
 const expires = security.match(/Expires:\s*([^"\\n]+)/)?.[1]?.trim();
