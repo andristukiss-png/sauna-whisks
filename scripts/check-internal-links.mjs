@@ -26,6 +26,17 @@ allowedTechnical.add("/manifest.webmanifest");
 allowedTechnical.add("/api/enquiry");
 
 const errors = [];
+const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
+for (const [needle, label] of [
+  ["collectInternalLinks", "rendered internal-link collection"],
+  ["verifyRenderedInternalLinks", "rendered internal-link verification"],
+  ["internal link must resolve directly with 2xx", "direct-success link policy"],
+]) {
+  if (!localSmoke.includes(needle)) {
+    errors.push("Local smoke missing " + label + ".");
+  }
+}
+
 
 for (const file of sourceFiles) {
   const text = fs.readFileSync(file, "utf8");
