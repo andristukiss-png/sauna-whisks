@@ -38,6 +38,29 @@ if (!docs.includes("X-SaunaWhisks-Data-Version")) {
   errors.push("Public data docs missing compatibility-version header.");
 }
 
+const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
+for (const [needle, label] of [
+  ["validatePublicEndpointBody", "runtime public response body validation"],
+  ["validatePublicJsonUrls", "runtime public JSON URL validation"],
+  ['body.includes("<rss")', "runtime RSS structure validation"],
+  ['body.includes(",")', "runtime CSV delimiter validation"],
+  ['body.version !== "https://jsonfeed.org/version/1.1"', "runtime JSON Feed version validation"],
+]) {
+  if (!localSmoke.includes(needle)) {
+    errors.push("Public data smoke coverage missing " + label + ".");
+  }
+}
+
+const productionSmoke = fs.readFileSync("scripts/production-smoke.mjs", "utf8");
+for (const [needle, label] of [
+  ['"x-saunawhisks-data-version", "1"', "live data-version header verification"],
+  ['forbiddenHeaders: ["x-powered-by"]', "live powered-by suppression check"],
+]) {
+  if (!productionSmoke.includes(needle)) {
+    errors.push("Production smoke missing " + label + ".");
+  }
+}
+
 if (!apiIndex.includes("publicDataEndpoints.map")) {
   errors.push("/api index is not rendered from the shared endpoint registry.");
 }
