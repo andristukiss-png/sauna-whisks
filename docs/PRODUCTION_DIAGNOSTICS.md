@@ -57,7 +57,7 @@ SAUNAWHISKS_BASE_URL=https://example.com npm run verify:production
 
 5. **HTTP routing**
    - `https://saunawhisks.com/` should return a successful response.
-   - `https://www.saunawhisks.com/` should redirect to the canonical apex host.
+   - `https://www.saunawhisks.com/` should redirect to the exact canonical apex origin and preserve the root path.
    - `/api/health` should return JSON with `ok: true`.
 
 ## Mail DNS safety
