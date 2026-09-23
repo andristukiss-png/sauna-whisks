@@ -85,6 +85,9 @@ if (publicData.includes('"/api/enquiry"')) {
 const helper = fs.readFileSync("lib/publicApi.ts", "utf8");
 const helperRequirements = [
   ['"Access-Control-Allow-Origin": "*"', "read-only CORS header"],
+  ['export const PUBLIC_DATA_VERSION = "1"', "public data version constant"],
+  ['"X-SaunaWhisks-Data-Version": PUBLIC_DATA_VERSION', "public data version header"],
+  ['"Access-Control-Expose-Headers": "X-SaunaWhisks-Data-Version"', "public data version CORS exposure"],
   ['"Cross-Origin-Resource-Policy": "cross-origin"', "public-data cross-origin resource policy"],
   ["max-age=0, s-maxage=", "CDN cache policy for public JSON"],
   ["publicCacheControl(maxAge)", "shared CDN cache policy for public text"],

@@ -1,6 +1,10 @@
+export const PUBLIC_DATA_VERSION = "1";
+
 const publicAccessHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Cross-Origin-Resource-Policy": "cross-origin",
+  "X-SaunaWhisks-Data-Version": PUBLIC_DATA_VERSION,
+  "Access-Control-Expose-Headers": "X-SaunaWhisks-Data-Version",
 } as const;
 
 function publicCacheControl(maxAge: number) {

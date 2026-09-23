@@ -34,6 +34,11 @@ if (source.includes("Latvian Oak") || source.includes("/shop/latvian-oak")) {
   errors.push("Unverified Latvian Oak naming/URL reintroduced. Use Baltic Oak; old URL exists only as redirect.");
 }
 
+const launchChecklist = fs.readFileSync(path.join(root, "docs/LAUNCH_CHECKLIST.md"), "utf8");
+if (!launchChecklist.includes("Durable enquiry rate limiting")) {
+  errors.push("Launch checklist must require durable enquiry rate limiting before direct email launch.");
+}
+
 if (errors.length) {
   console.error("Pre-launch guard failed:");
   for (const error of errors) console.error(`- ${error}`);
