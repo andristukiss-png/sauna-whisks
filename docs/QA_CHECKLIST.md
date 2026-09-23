@@ -26,6 +26,7 @@
 - mobile overflow checked
 - no placeholder links
 - forms have labels
+- search result counts are announced to assistive technology
 - error/empty states usable
 
 ## Technical

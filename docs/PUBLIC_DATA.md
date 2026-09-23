@@ -53,3 +53,7 @@ SaunaWhisks.com exposes read-only pre-launch data for transparency and internal/
 The canonical endpoint registry lives in `lib/publicData.ts`. The `/data` page and `/api` index both render from that registry.
 
 These endpoints do not imply commercial availability. Product catalog entries remain pre-launch until checkout is intentionally enabled.
+
+## CSV safety
+
+CSV cells are quoted and values beginning with spreadsheet formula prefixes (`=`, `+`, `-`, `@`) are neutralized before export. Keep new CSV endpoints on the shared `encodeCsv` / `publicCsv` helpers.
