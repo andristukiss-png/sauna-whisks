@@ -67,6 +67,17 @@ for (const file of publicTextRoutes) {
   if (!text.includes("publicText")) errors.push("Public text/feed route missing shared response helper: " + file);
 }
 
+const nextConfig = fs.readFileSync("next.config.ts", "utf8");
+if (!nextConfig.includes("const publicCrossOriginSources = [")) {
+  errors.push("Next config missing explicit public cross-origin route list.");
+}
+if (!nextConfig.includes('value: "cross-origin"')) {
+  errors.push("Next config missing cross-origin resource-policy override for public data.");
+}
+if (nextConfig.match(/publicCrossOriginSources[\s\S]*\/api\/enquiry/)) {
+  errors.push("Enquiry endpoint must not be included in public cross-origin routes.");
+}
+
 const helper = fs.readFileSync("lib/publicApi.ts", "utf8");
 const helperRequirements = [
   ['"Access-Control-Allow-Origin": "*"', "read-only CORS header"],
