@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { techniques } from "@/lib/techniques";
 import { publicJson } from "@/lib/publicApi";
 
@@ -9,7 +10,7 @@ export function GET(){
       name:item.name,
       summary:item.summary,
       caution:item.caution,
-      url:`https://saunawhisks.com/techniques/${item.slug}`
+      url:`${site.origin}/techniques/${item.slug}`
     }))
   });
 }
