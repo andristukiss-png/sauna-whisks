@@ -205,6 +205,7 @@ if (home) {
 await expectJson("/api/health", (body, response) => {
   if (body.ok !== true) fail("/api/health did not report ok=true");
   if (body.status !== "pre-launch") fail("/api/health status is not pre-launch");
+  if (!body.deployment || typeof body.deployment !== "object") fail("/api/health deployment field is missing.");
   expectHeader(response, "cache-control", "no-store", "/api/health");
   expectHeader(response, "access-control-allow-origin", "*", "/api/health");
   expectHeader(response, "x-robots-tag", "noindex", "/api/health");
@@ -338,6 +339,11 @@ for (const path of [
 ]) {
   const response = await request(path);
   expectStatus(response, 404, path);
+  if (response) {
+    expectHeader(response, "content-type", "text/html", path);
+    const html = await response.text();
+    if (!hasNoindex(html)) fail(path + " 404 response must render noindex.");
+  }
 }
 
 const legacyUs = await request("/markets/united-states");
