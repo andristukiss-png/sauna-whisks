@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -17,7 +18,7 @@ export default function GlossaryPage() {
     "@context": "https://schema.org",
     "@type": "DefinedTermSet",
     name: "Sauna Whisk Glossary",
-    url: "https://saunawhisks.com/glossary",
+    url: `${site.origin}/glossary`,
     hasDefinedTerm: glossaryTerms.map(({ term, definition }) => ({
       "@type": "DefinedTerm",
       name: term,
