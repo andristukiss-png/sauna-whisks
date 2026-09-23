@@ -159,6 +159,10 @@ async function check(
       }
       const body = await response.json();
       if (body?.ok !== true) failures.push(`${url} health payload did not report ok=true`);
+      const nodeRuntime = typeof body?.runtime?.node === "string" ? body.runtime.node : "";
+      if (!nodeRuntime.startsWith("v22.")) {
+        failures.push(`${url} is not running the pinned Node 22 runtime: ${nodeRuntime || "(missing)"}`);
+      }
 
       if (verifyDeployment) {
         const deployment = body?.deployment || {};
