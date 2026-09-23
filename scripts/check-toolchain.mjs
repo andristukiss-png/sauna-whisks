@@ -65,6 +65,12 @@ if (workflow.includes("npm install --no-audit --no-fund")) {
 if (!workflow.includes("npm run smoke:local")) {
   errors.push("CI must smoke-test the built production server.");
 }
+if (!workflow.includes('VERCEL_GIT_COMMIT_SHA="$GITHUB_SHA"')) {
+  errors.push("CI must inject the commit SHA into the production smoke server.");
+}
+if (!workflow.includes('LOCAL_SMOKE_EXPECTED_COMMIT="$GITHUB_SHA"')) {
+  errors.push("CI must verify the health endpoint against the running commit.");
+}
 if (!workflow.includes("npm start > /tmp/sauna-whisks-next.log")) {
   errors.push("CI must start the production server before smoke testing.");
 }
