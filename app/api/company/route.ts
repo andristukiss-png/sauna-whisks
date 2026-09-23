@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { publicJson } from "@/lib/publicApi";
 
 export function GET(){
@@ -11,10 +12,10 @@ export function GET(){
     focus:["sauna whisks","materials","care","traditions","trade supply","producer documentation"],
     plannedCoreProducts:["Baltic Birch","Baltic Oak","Eucalyptus","Discovery Trio"],
     urls:{
-      about:"https://saunawhisks.com/about",
-      status:"https://saunawhisks.com/status",
-      press:"https://saunawhisks.com/press",
-      editorialPolicy:"https://saunawhisks.com/editorial-policy"
+      about:`${site.origin}/about`,
+      status:`${site.origin}/status`,
+      press:`${site.origin}/press`,
+      editorialPolicy:`${site.origin}/editorial-policy`
     }
   });
 }
