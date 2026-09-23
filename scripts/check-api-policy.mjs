@@ -97,6 +97,16 @@ for (const [needle, label] of helperRequirements) {
   if (!helper.includes(needle)) errors.push("Public response helper missing " + label + ".");
 }
 
+const csvHelper = fs.readFileSync("lib/csv.ts", "utf8");
+for (const [needle, label] of [
+  ["spreadsheetFormulaPrefix", "spreadsheet formula prefix detector"],
+  ["[=+\\-@]", "spreadsheet formula trigger characters"],
+  ["? \"'\" + value : value", "spreadsheet formula neutralization"],
+  [".replace(/\\"/g, '\\"\\"')", "CSV quote escaping"],
+]) {
+  if (!csvHelper.includes(needle)) errors.push("CSV encoder missing " + label + ".");
+}
+
 const searchApi = fs.readFileSync("app/api/search/route.ts", "utf8");
 if (!searchApi.includes("MAX_SEARCH_QUERY_LENGTH")) errors.push("Search API query length is not bounded.");
 if (!searchApi.includes("isSiteSearchFilter")) errors.push("Search API does not use shared filter validation.");
