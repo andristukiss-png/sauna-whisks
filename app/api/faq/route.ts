@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import { faqTopics } from "@/lib/faqTopics";
 import { publicJson } from "@/lib/publicApi";
 
@@ -9,7 +10,7 @@ export function GET(){
       title:topic.title,
       description:topic.description,
       questions:topic.items.map(([question,answer])=>({question,answer})),
-      url:`https://saunawhisks.com/faq/topic/${topic.slug}`
+      url:`${site.origin}/faq/topic/${topic.slug}`
     }))
   });
 }
