@@ -1,3 +1,4 @@
+import site from "@/config/site.json";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import Link from "next/link";
@@ -9,8 +10,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
     description: "Traditional sauna whisks and the living sauna traditions behind them.",
-    url: "https://saunawhisks.com",
-    siteName: "Sauna Whisks",
+    url: site.origin,
+    siteName: site.name,
     type: "website",
   },
   twitter: {
