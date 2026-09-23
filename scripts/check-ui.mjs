@@ -92,6 +92,27 @@ for (const file of files) {
   }
 }
 
+const journalSearch = fs.readFileSync("components/JournalSearch.tsx", "utf8");
+for (const [needle, label] of [
+  ['aria-controls="journal-search-results"', "journal search controls relationship"],
+  ['aria-describedby="journal-search-count"', "journal search count description"],
+  ['id="journal-search-count"', "journal search count id"],
+  ['role="status"', "journal search live status"],
+  ['aria-live="polite"', "journal search polite live region"],
+  ['id="journal-search-results"', "journal search result container id"],
+]) {
+  if (!journalSearch.includes(needle)) errors.push("Journal search missing " + label + ".");
+}
+
+const siteSearch = fs.readFileSync("components/SiteSearch.tsx", "utf8");
+for (const [needle, label] of [
+  ['aria-describedby="site-search-count"', "site search count description"],
+  ['id="site-search-count"', "site search count id"],
+  ['aria-controls="site-search-results"', "site search controls relationship"],
+]) {
+  if (!siteSearch.includes(needle)) errors.push("Site search missing " + label + ".");
+}
+
 const unique = [...new Set(errors)];
 if (unique.length) {
   console.error("UI validation failed:");
