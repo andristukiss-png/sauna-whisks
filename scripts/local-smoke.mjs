@@ -251,6 +251,10 @@ for (const header of ["content-security-policy", "strict-transport-security", "x
 }
 
 if (home) {
+  const robotsHeader = home.headers.get("x-robots-tag") || "";
+  if (/noindex/i.test(robotsHeader)) {
+    fail("/ unexpectedly emits a noindex header in production-mode smoke.");
+  }
   expectHeader(home, "content-security-policy", "default-src 'self'", "/");
   expectHeader(home, "content-security-policy", "frame-ancestors 'none'", "/");
   expectHeader(home, "content-security-policy", "object-src 'none'", "/");
@@ -368,6 +372,17 @@ for (const [path, type] of [
   const response = await request(path);
   expectStatus(response, 200, path);
   expectHeader(response, "content-type", type, path);
+}
+
+const productionRobots = await request("/robots.txt");
+if (productionRobots?.ok) {
+  const body = await productionRobots.text();
+  if (/^Disallow:\s*\/$/m.test(body)) {
+    fail("Production-mode robots.txt disallows the entire site.");
+  }
+  if (!body.includes(`Sitemap: ${site.origin}/sitemap.xml`)) {
+    fail("Production-mode robots.txt is missing the canonical sitemap.");
+  }
 }
 
 const sitemapResponse = await request("/sitemap.xml");
