@@ -75,6 +75,17 @@ for (const file of machineFiles) {
   }
 }
 
+const productionSmoke = fs.readFileSync("scripts/production-smoke.mjs", "utf8");
+for (const [needle, label] of [
+  ["new URL(location, wwwUrl)", "parsed www redirect target"],
+  ["target.origin !== site.origin", "exact www redirect origin check"],
+  ['target.pathname !== "/"', "www root-path preservation check"],
+]) {
+  if (!productionSmoke.includes(needle)) {
+    checks.push(["production smoke missing " + label, false]);
+  }
+}
+
 const failures = checks.filter(([, ok]) => !ok);
 
 if (failures.length) {
