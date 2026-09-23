@@ -32,7 +32,7 @@ Before treating a release as deployable:
 npm run check
 ```
 
-CI then starts the built production server with `npm start` and runs `npm run smoke:local` against real HTTP responses before the branch is considered green.
+CI then starts the built production server with `npm start` and runs `npm run smoke:local` against real HTTP responses before the branch is considered green. The smoke suite crawls every URL advertised in `sitemap.xml` and verifies runtime status, title, H1, canonical metadata and indexability.
 
 After the production deployment is Ready:
 
