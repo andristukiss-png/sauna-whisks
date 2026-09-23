@@ -1,14 +1,16 @@
+import site from "@/config/site.json";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useCases } from "@/lib/useCases";
 
-export const metadata = {
-  title:"Sauna Whisk Use Cases",
-  description:"Choose sauna whisks by how and where they will actually be used.",
-  alternates:{canonical:"/use-cases"}
-};
+export const metadata = pageMetadata({
+  title: "Sauna Whisk Use Cases",
+  description: "Choose sauna whisks by how and where they will actually be used.",
+  canonical: "/use-cases",
+});
 
 export default function UseCasesPage(){
   const schema={
@@ -18,7 +20,7 @@ export default function UseCasesPage(){
     hasPart:useCases.map((item)=>({
       "@type":"WebPage",
       name:item.name,
-      url:"https://saunawhisks.com/use-cases/"+item.slug
+      url:site.origin+"/use-cases/"+item.slug
     }))
   };
 
