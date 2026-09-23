@@ -36,5 +36,7 @@
 - next build green
 - local production HTTP smoke green
 - every sitemap URL renders 200 with title, H1, canonical and no accidental noindex
+- indexed pages expose lang, meta description, skip navigation and parseable JSON-LD
+- indexed page titles are unique
 - Vercel deployment green
 - production smoke check green
