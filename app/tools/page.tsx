@@ -1,9 +1,14 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata={title:"Sauna Whisks Tools",description:"Pre-launch product, supplier, trade and commercial planning tools.",alternates:{canonical:"/tools"}};
+export const metadata = pageMetadata({
+  title: "Sauna Whisks Tools",
+  description: "Pre-launch product, supplier, trade and commercial planning tools.",
+  canonical: "/tools",
+});
 
 const tools=[
   ["/tools/supplier-scorecard","Supplier scorecard","Compare producer candidates using the same evidence categories."],
