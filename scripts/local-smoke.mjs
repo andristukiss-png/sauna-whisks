@@ -426,14 +426,14 @@ const wrongType = await request("/api/enquiry", {
   headers: { "content-type": "text/plain" },
   body: "not-json",
 });
-expectStatus(wrongType, 415, "/api/enquiry wrong content type");
+await verifyEnquiryResponse(wrongType, 415, "/api/enquiry wrong content type");
 
 const malformed = await request("/api/enquiry", {
   method: "POST",
   headers: { "content-type": "application/json" },
   body: "{",
 });
-expectStatus(malformed, 400, "/api/enquiry malformed JSON");
+await verifyEnquiryResponse(malformed, 400, "/api/enquiry malformed JSON");
 
 const foreignOrigin = await request("/api/enquiry", {
   method: "POST",
@@ -443,7 +443,7 @@ const foreignOrigin = await request("/api/enquiry", {
   },
   body: JSON.stringify({ name: "Test User", email: "test@example.com", message: "A valid test enquiry." }),
 });
-expectStatus(foreignOrigin, 403, "/api/enquiry foreign origin");
+await verifyEnquiryResponse(foreignOrigin, 403, "/api/enquiry foreign origin");
 
 const crossSite = await request("/api/enquiry", {
   method: "POST",
@@ -453,7 +453,7 @@ const crossSite = await request("/api/enquiry", {
   },
   body: JSON.stringify({ name: "Test User", email: "test@example.com", message: "A valid test enquiry." }),
 });
-expectStatus(crossSite, 403, "/api/enquiry cross-site fetch metadata");
+await verifyEnquiryResponse(crossSite, 403, "/api/enquiry cross-site fetch metadata");
 
 const noProvider = await request("/api/enquiry", {
   method: "POST",
@@ -465,17 +465,13 @@ const noProvider = await request("/api/enquiry", {
     startedAt: String(Date.now() - 5000),
   }),
 });
-expectStatus(noProvider, 503, "/api/enquiry provider fallback");
-if (noProvider) {
-  const body = await noProvider.json();
-  if (body.fallback !== "mailto") fail("/api/enquiry missing mailto fallback when provider is unavailable.");
-  if (!noProvider.headers.get("x-request-id")) fail("/api/enquiry missing X-Request-ID.");
-  expectHeader(noProvider, "cache-control", "no-store", "/api/enquiry provider fallback");
-  expectHeader(noProvider, "cross-origin-resource-policy", "same-origin", "/api/enquiry provider fallback");
-  if (noProvider.headers.get("access-control-allow-origin")) {
-    fail("/api/enquiry must not expose wildcard CORS.");
-  }
-  expectHeader(noProvider, "x-robots-tag", "noindex", "/api/enquiry provider fallback");
+const noProviderBody = await verifyEnquiryResponse(
+  noProvider,
+  503,
+  "/api/enquiry provider fallback"
+);
+if (noProviderBody.fallback !== "mailto") {
+  fail("/api/enquiry missing mailto fallback when provider is unavailable.");
 }
 
 if (failures.length) {
