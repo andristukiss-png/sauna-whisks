@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { MAX_SEARCH_QUERY_LENGTH } from "@/lib/search";
 
 type JournalItem = {
   slug: string;
@@ -32,6 +33,7 @@ export function JournalSearch({ items }: { items: JournalItem[] }) {
         <input
           type="search"
           value={query}
+          maxLength={MAX_SEARCH_QUERY_LENGTH}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Try birch, storage, venik..."
           aria-controls="journal-search-results"
@@ -39,7 +41,7 @@ export function JournalSearch({ items }: { items: JournalItem[] }) {
         />
       </label>
 
-      <p id="journal-search-count" className="search-count" role="status" aria-live="polite">
+      <p id="journal-search-count" className="search-count" role="status" aria-live="polite" aria-atomic="true">
         {query.trim()
           ? `${filtered.length} guide${filtered.length === 1 ? "" : "s"}`
           : `${filtered.length} guides in the library`}
