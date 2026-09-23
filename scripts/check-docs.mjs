@@ -17,6 +17,7 @@ const required = [
   "docs/CONTENT_GUIDE.md",
   "docs/CLAIMS_POLICY.md",
   "docs/RELEASE_PROCESS.md",
+  "docs/RECOVERY.md",
   "docs/INCIDENT_RESPONSE.md",
   "docs/SUPPLIER_ONBOARDING.md",
   "docs/TRADE_TRIAL.md",
