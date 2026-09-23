@@ -1,7 +1,5 @@
 import fs from "node:fs";
 
-const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
-
 const statusData = fs.readFileSync("lib/status.ts", "utf8");
 if (!statusData.includes('import site from "@/config/site.json"')) {
   console.error("Launch status validation failed:\n- Shared launch status must import site config.");
