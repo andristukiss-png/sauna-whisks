@@ -162,6 +162,91 @@ async function check(
   }
 }
 
+async function checkSecurityTxt() {
+  const url = `${baseUrl}/.well-known/security.txt`;
+  try {
+    const response = await fetch(url, {
+      headers: { "user-agent": "SaunaWhisks-production-smoke/1.0" },
+      signal: AbortSignal.timeout(10_000),
+    });
+    console.log(`- ${url}: ${response.status}`);
+
+    if (!response.ok) {
+      failures.push(`${url} returned ${response.status}`);
+      return;
+    }
+
+    const type = response.headers.get("content-type") || "";
+    if (!type.includes("text/plain")) {
+      failures.push(`${url} did not return text/plain`);
+    }
+
+    const body = await response.text();
+    if (!body.includes(`Contact: mailto:${site.publicEmail}`)) {
+      failures.push("security.txt contact does not match site config");
+    }
+    if (!body.includes(`Canonical: ${site.origin}/.well-known/security.txt`)) {
+      failures.push("security.txt canonical URL does not match site config");
+    }
+
+    const expiresValue = body.match(/^Expires:\s*(.+)$/m)?.[1]?.trim() || "";
+    const expiresAt = Date.parse(expiresValue);
+    if (!expiresValue || Number.isNaN(expiresAt)) {
+      failures.push("security.txt has no valid Expires timestamp");
+    } else {
+      const daysRemaining = (expiresAt - Date.now()) / 86_400_000;
+      console.log(`  security.txt expires in ${daysRemaining.toFixed(1)} days`);
+      if (daysRemaining < 30) {
+        failures.push("security.txt expires in less than 30 days");
+      }
+    }
+  } catch (error) {
+    failures.push(`${url} could not be verified: ${error.cause?.code || error.code || error.message}`);
+  }
+}
+
+async function checkRegisteredRedirects() {
+  console.log("Redirects:");
+  for (const { source, destination } of redirects) {
+    const sourceUrl = `${baseUrl}${source}`;
+    try {
+      const response = await fetch(sourceUrl, {
+        redirect: "manual",
+        headers: { "user-agent": "SaunaWhisks-production-smoke/1.0" },
+        signal: AbortSignal.timeout(10_000),
+      });
+      const location = response.headers.get("location") || "";
+      console.log(`- ${source}: ${response.status}${location ? ` -> ${location}` : ""}`);
+
+      if (![301, 307, 308].includes(response.status)) {
+        failures.push(`${source} did not return a permanent-style redirect`);
+        continue;
+      }
+
+      const resolved = new URL(location, baseUrl);
+      if (resolved.pathname !== destination) {
+        failures.push(`${source} redirected to ${resolved.pathname}, expected ${destination}`);
+        continue;
+      }
+      if (resolved.origin !== base.origin) {
+        failures.push(`${source} redirected off the tested origin to ${resolved.origin}`);
+        continue;
+      }
+
+      const target = await fetch(`${baseUrl}${destination}`, {
+        redirect: "follow",
+        headers: { "user-agent": "SaunaWhisks-production-smoke/1.0" },
+        signal: AbortSignal.timeout(10_000),
+      });
+      if (!target.ok) {
+        failures.push(`${destination} redirect target returned ${target.status}`);
+      }
+    } catch (error) {
+      failures.push(`${source} redirect check failed: ${error.cause?.code || error.code || error.message}`);
+    }
+  }
+}
+
 await reportDns();
 
 console.log("HTTP:");
