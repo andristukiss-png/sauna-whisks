@@ -122,6 +122,7 @@ for (const [needle, label] of [
   ["process.env.VERCEL_GIT_COMMIT_SHA", "Vercel commit metadata"],
   ["commit.slice(0, 12)", "bounded commit identifier"],
   ["deployment: deploymentInfo()", "health deployment object"],
+  ["node: process.version", "health Node runtime metadata"],
 ]) {
   if (!healthApi.includes(needle)) errors.push("Health API missing " + label + ".");
 }
