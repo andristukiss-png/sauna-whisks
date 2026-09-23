@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Wholesale Sauna Whisks",
   description: "Trade supply for sauna clubs, bathhouses, hotels, spas, retailers and sauna builders.",
-  alternates: { canonical: "/wholesale" }
-};
+  canonical: "/wholesale",
+});
 
 const wholesaleFaq = [
   ["Do you have a trade price list?", "Not yet. Trade pricing will be finalized after the first supplier and landed-cost models are confirmed."],

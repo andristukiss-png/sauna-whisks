@@ -1,12 +1,13 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Templates & Downloads",
   description: "Public SaunaWhisks.com supplier, product-data and trade-trial templates.",
-  alternates: { canonical: "/templates" }
-};
+  canonical: "/templates",
+});
 
 const downloads = [
   ["/api/product-data-template.csv", "Product data template", "Fields for origin, condition, dimensions, preparation, cost and compliance."],

@@ -1,14 +1,15 @@
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { QualityChecklist } from "@/components/QualityChecklist";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Supplier Sample Evaluation",
   description: "A practical sample-evaluation workflow for sauna whisk supplier candidates.",
-  alternates: { canonical: "/suppliers/sample-evaluation" }
-};
+  canonical: "/suppliers/sample-evaluation",
+});
 
 export default function SupplierSampleEvaluationPage() {
   return (

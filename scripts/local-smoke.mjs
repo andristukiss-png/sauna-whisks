@@ -144,6 +144,12 @@ function walkStructuredData(value, path, key = "") {
   }
 }
 
+function propertyMetaContent(html, property) {
+  const tags = html.match(/<meta\b[^>]*>/gi) || [];
+  const tag = tags.find((item) => new RegExp("\\bproperty=[\"']" + property + "[\"']", "i").test(item));
+  return tag?.match(/\bcontent=["']([^"']*)["']/i)?.[1]?.trim() || "";
+}
+
 function validateJsonLd(html, path) {
   const scripts = html.match(/<script\b[^>]*>[\s\S]*?<\/script>/gi) || [];
   const jsonLd = scripts.filter((script) =>
@@ -193,8 +199,15 @@ async function checkSitemapPage(location) {
   } else {
     observedPageTitles.push({ path, title });
   }
-  if (!/<h1\b[^>]*>[\s\S]*?<\/h1>/i.test(html)) {
-    fail(path + " is missing an H1.");
+  const renderedHtml = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+  const h1Count = (renderedHtml.match(/<h1\b/gi) || []).length;
+  if (h1Count !== 1) {
+    fail(path + " must render exactly one H1; found " + h1Count + ".");
+  }
+
+  const mainCount = (renderedHtml.match(/<main\b/gi) || []).length;
+  if (mainCount !== 1) {
+    fail(path + " must render exactly one main landmark; found " + mainCount + ".");
   }
   if (!/<html\b[^>]*\blang=["']en["']/i.test(html)) {
     fail(path + ' is missing <html lang="en">.');
@@ -222,6 +235,31 @@ async function checkSitemapPage(location) {
       fail(path + " canonical mismatch: " + canonicalResolved.href + " vs " + canonicalUrl.href);
     }
   }
+
+  const ogTitle = propertyMetaContent(html, "og:title");
+  const ogDescription = propertyMetaContent(html, "og:description");
+  const ogUrl = propertyMetaContent(html, "og:url");
+  if (!ogTitle) fail(path + " is missing og:title.");
+  if (!ogDescription) fail(path + " is missing og:description.");
+  if (!ogUrl) {
+    fail(path + " is missing og:url.");
+  } else {
+    try {
+      const resolved = new URL(ogUrl, site.origin);
+      if (
+        resolved.origin !== canonicalUrl.origin ||
+        normalizedPath(resolved.href) !== normalizedPath(canonicalUrl.href)
+      ) {
+        fail(path + " og:url mismatch: " + resolved.href + " vs " + canonicalUrl.href);
+      }
+    } catch {
+      fail(path + " has invalid og:url: " + ogUrl);
+    }
+  }
+
+  if (!metaContent(html, "twitter:title")) fail(path + " is missing twitter:title.");
+  if (!metaContent(html, "twitter:description")) fail(path + " is missing twitter:description.");
+  if (!metaContent(html, "twitter:card")) fail(path + " is missing twitter:card.");
 }
 
 async function crawlSitemapPages(locations) {
