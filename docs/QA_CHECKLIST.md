@@ -12,6 +12,7 @@
 - sitemap/robots/feed/API endpoints respond
 - structured-data URLs stay on the canonical site origin
 - canonical apex host responds over HTTPS
+- previews are noindex while production remains indexable
 - `www` redirects to the canonical apex host
 - `/api/health` returns `ok: true`
 
