@@ -45,6 +45,10 @@ async function checkTlsCertificate(host) {
         const protocol = socket.getProtocol() || "(unknown)";
         console.log(`- ${host}: protocol=${protocol} valid_to=${certificate.valid_to || "(unknown)"}`);
 
+        if (!["TLSv1.2", "TLSv1.3"].includes(protocol)) {
+          failures.push(`${host} negotiated unsupported TLS protocol ${protocol}`);
+        }
+
         if (!certificate.valid_to || Number.isNaN(validTo)) {
           failures.push(`${host} TLS certificate has no valid expiry date`);
         } else {
@@ -177,6 +181,124 @@ async function check(
   }
 }
 
+function htmlLinkHref(html, rel) {
+  const tags = html.match(/<link\b[^>]*>/gi) || [];
+  const tag = tags.find((item) =>
+    new RegExp("\\brel=[\\\"']" + rel + "[\\\"']", "i").test(item)
+  );
+  return tag?.match(/\bhref=["']([^"']+)["']/i)?.[1] || "";
+}
+
+function htmlPropertyContent(html, property) {
+  const tags = html.match(/<meta\b[^>]*>/gi) || [];
+  const tag = tags.find((item) =>
+    new RegExp("\\bproperty=[\\\"']" + property + "[\\\"']", "i").test(item)
+  );
+  return tag?.match(/\bcontent=["']([^"']+)["']/i)?.[1] || "";
+}
+
+function htmlRobotsContent(html) {
+  const tags = html.match(/<meta\b[^>]*>/gi) || [];
+  const tag = tags.find((item) => /\bname=["']robots["']/i.test(item));
+  return tag?.match(/\bcontent=["']([^"']+)["']/i)?.[1] || "";
+}
+
+async function checkHomepageDocument() {
+  const url = `${baseUrl}/`;
+  try {
+    const response = await fetch(url, {
+      headers: { "user-agent": "SaunaWhisks-production-smoke/1.0" },
+      signal: AbortSignal.timeout(10_000),
+    });
+    console.log(`- ${url}: ${response.status}`);
+
+    if (!response.ok) {
+      failures.push(`${url} returned ${response.status}`);
+      return;
+    }
+
+    const type = response.headers.get("content-type") || "";
+    if (!type.includes("text/html")) {
+      failures.push(`${url} did not return text/html`);
+    }
+
+    for (const header of [
+      "strict-transport-security",
+      "content-security-policy",
+      "x-content-type-options",
+      "x-frame-options",
+      "referrer-policy",
+      "permissions-policy",
+    ]) {
+      if (!response.headers.get(header)) {
+        failures.push(`${url} missing required header: ${header}`);
+      }
+    }
+
+    const csp = response.headers.get("content-security-policy") || "";
+    for (const directive of [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "frame-ancestors 'none'",
+      "object-src 'none'",
+    ]) {
+      if (!csp.includes(directive)) {
+        failures.push(`${url} CSP missing critical directive: ${directive}`);
+      }
+    }
+
+    const hsts = response.headers.get("strict-transport-security") || "";
+    if (!/max-age=31536000/i.test(hsts) || !/includeSubDomains/i.test(hsts)) {
+      failures.push(`${url} HSTS policy is weaker than expected: ${hsts}`);
+    }
+
+    if (response.headers.get("x-powered-by")) {
+      failures.push(`${url} unexpectedly exposes X-Powered-By`);
+    }
+
+    const robotsHeader = response.headers.get("x-robots-tag") || "";
+    if (/noindex/i.test(robotsHeader)) {
+      failures.push(`${url} production response unexpectedly has X-Robots-Tag noindex`);
+    }
+
+    const html = await response.text();
+    const robotsMeta = htmlRobotsContent(html);
+    if (/noindex/i.test(robotsMeta)) {
+      failures.push(`${url} production HTML unexpectedly has robots noindex`);
+    }
+
+    const canonical = htmlLinkHref(html, "canonical");
+    if (!canonical) {
+      failures.push(`${url} is missing a canonical link`);
+    } else {
+      try {
+        const resolved = new URL(canonical, site.origin);
+        if (resolved.href !== site.origin + "/") {
+          failures.push(`${url} canonical is not the exact site root: ${resolved.href}`);
+        }
+      } catch {
+        failures.push(`${url} has an invalid canonical URL: ${canonical}`);
+      }
+    }
+
+    const ogUrl = htmlPropertyContent(html, "og:url");
+    if (!ogUrl) {
+      failures.push(`${url} is missing og:url`);
+    } else {
+      try {
+        const resolved = new URL(ogUrl, site.origin);
+        if (resolved.href !== site.origin + "/") {
+          failures.push(`${url} og:url is not the exact site root: ${resolved.href}`);
+        }
+      } catch {
+        failures.push(`${url} has an invalid og:url: ${ogUrl}`);
+      }
+    }
+  } catch (error) {
+    failures.push(`${url} homepage verification failed: ${error.cause?.code || error.code || error.message}`);
+  }
+}
+
 async function checkProductionRobots() {
   const url = `${baseUrl}/robots.txt`;
   try {
@@ -195,17 +317,6 @@ async function checkProductionRobots() {
     if (!type.includes("text/plain")) {
       failures.push(`${url} did not return text/plain`);
     }
-    for (const [header, expected] of [
-      ["x-saunawhisks-data-version", "1"],
-      ["access-control-allow-origin", "*"],
-      ["cross-origin-resource-policy", "cross-origin"],
-    ]) {
-      const value = response.headers.get(header) || "";
-      if (!value.toLowerCase().includes(expected.toLowerCase())) {
-        failures.push(`${url} header ${header} did not include ${expected}; got "${value}"`);
-      }
-    }
-
     const body = await response.text();
     if (/^Disallow:\s*\/$/m.test(body)) {
       failures.push("production robots.txt disallows the entire site");
@@ -238,6 +349,17 @@ async function checkSecurityTxt() {
     const type = response.headers.get("content-type") || "";
     if (!type.includes("text/plain")) {
       failures.push(`${url} did not return text/plain`);
+    }
+
+    for (const [header, expected] of [
+      ["x-saunawhisks-data-version", "1"],
+      ["access-control-allow-origin", "*"],
+      ["cross-origin-resource-policy", "cross-origin"],
+    ]) {
+      const value = response.headers.get(header) || "";
+      if (!value.toLowerCase().includes(expected.toLowerCase())) {
+        failures.push(`${url} header ${header} did not include ${expected}; got "${value}"`);
+      }
     }
 
     const body = await response.text();
@@ -310,16 +432,7 @@ await checkTlsCertificate(base.hostname);
 await reportDns();
 
 console.log("HTTP:");
-await check(`${baseUrl}/`, {
-  contentTypeIncludes: "text/html",
-  requiredHeaders: [
-    "strict-transport-security",
-    "x-content-type-options",
-    "x-frame-options",
-    "referrer-policy",
-  ],
-  forbiddenHeaders: ["x-powered-by"],
-});
+await checkHomepageDocument();
 await check(`${baseUrl}/api/health`, {
   expectJson: true,
   verifyDeployment: true,

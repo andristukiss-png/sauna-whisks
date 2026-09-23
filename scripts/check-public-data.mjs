@@ -54,10 +54,30 @@ for (const [needle, label] of [
 const productionSmoke = fs.readFileSync("scripts/production-smoke.mjs", "utf8");
 for (const [needle, label] of [
   ['"x-saunawhisks-data-version", "1"', "live data-version header verification"],
-  ['forbiddenHeaders: ["x-powered-by"]', "live powered-by suppression check"],
+  ["unexpectedly exposes X-Powered-By", "live powered-by suppression check"],
 ]) {
   if (!productionSmoke.includes(needle)) {
     errors.push("Production smoke missing " + label + ".");
+  }
+}
+
+const robotsCheckStart = productionSmoke.indexOf("async function checkProductionRobots()");
+const securityCheckStart = productionSmoke.indexOf("async function checkSecurityTxt()");
+const redirectCheckStart = productionSmoke.indexOf("async function checkRegisteredRedirects()");
+if (robotsCheckStart < 0 || securityCheckStart < 0 || redirectCheckStart < 0) {
+  errors.push("Production smoke public machine-route check boundaries are missing.");
+} else {
+  const robotsCheck = productionSmoke.slice(robotsCheckStart, securityCheckStart);
+  const securityCheck = productionSmoke.slice(securityCheckStart, redirectCheckStart);
+
+  if (robotsCheck.includes("x-saunawhisks-data-version")) {
+    errors.push("robots.txt must stay outside the public-data compatibility header contract.");
+  }
+  if (!securityCheck.includes("x-saunawhisks-data-version")) {
+    errors.push("security.txt live check must verify the public-data compatibility header.");
+  }
+  if (!securityCheck.includes("access-control-allow-origin")) {
+    errors.push("security.txt live check must verify public CORS.");
   }
 }
 
