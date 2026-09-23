@@ -375,6 +375,10 @@ if (apiIndexResponse?.ok) {
       if (path.startsWith("/api/") || path === "/api") {
         expectHeader(response, "x-robots-tag", "noindex", path);
       }
+      if (!["/sitemap.xml", "/robots.txt"].includes(path)) {
+        expectHeader(response, "x-saunawhisks-data-version", "1", path);
+        expectHeader(response, "access-control-expose-headers", "x-saunawhisks-data-version", path);
+      }
 
       if (path.endsWith(".csv")) {
         expectHeader(response, "content-type", "text/csv", path);
