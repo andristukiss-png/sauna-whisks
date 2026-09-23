@@ -56,6 +56,7 @@ export function SiteSearch({
           }}
           placeholder="Try birch, venik, USA, storage..."
           aria-controls="site-search-results"
+          aria-describedby="site-search-count"
         />
       </label>
 
@@ -89,7 +90,7 @@ export function SiteSearch({
         ) : null}
       </div>
 
-      <p className="search-count" role="status" aria-live="polite">
+      <p id="site-search-count" className="search-count" role="status" aria-live="polite">
         {normalized || type !== "All"
           ? `${matches.length} result${matches.length === 1 ? "" : "s"}`
           : "Popular starting points"}
