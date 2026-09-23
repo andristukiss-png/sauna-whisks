@@ -13,7 +13,10 @@
 - [ ] Mobile layout considered
 - [ ] Accessibility considered
 - [ ] Relevant internal links/sitemap/search index updated
+- [ ] npm ci
 - [ ] npm run validate
+- [ ] npm run audit:prod
 - [ ] npm run lint
 - [ ] npm run typecheck
 - [ ] npm run build
+- [ ] Production HTTP smoke behavior considered

@@ -15,3 +15,7 @@ Do not include credentials or private customer information in a public GitHub is
 The public security contact is also available at:
 
 `/.well-known/security.txt`
+
+## Automated checks
+
+The repository runs production dependency auditing, CodeQL analysis, security/header validation, and production-mode HTTP smoke tests in CI. Security-sensitive changes should remain behind these gates before merge.
