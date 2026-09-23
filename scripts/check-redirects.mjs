@@ -13,11 +13,19 @@ for (const item of redirects) {
   const source = item?.source;
   const destination = item?.destination;
 
-  if (typeof source !== "string" || !source.startsWith("/")) {
+  if (
+    typeof source !== "string" ||
+    !source.startsWith("/") ||
+    source.startsWith("//")
+  ) {
     errors.push("Redirect source must be a local absolute path: " + String(source));
     continue;
   }
-  if (typeof destination !== "string" || !destination.startsWith("/")) {
+  if (
+    typeof destination !== "string" ||
+    !destination.startsWith("/") ||
+    destination.startsWith("//")
+  ) {
     errors.push("Redirect destination must be a local absolute path: " + String(destination));
   }
   if (source === destination) {
@@ -27,6 +35,25 @@ for (const item of redirects) {
     errors.push("Duplicate redirect source: " + source);
   }
   seen.add(source);
+}
+
+const destinations = new Map(
+  redirects
+    .filter((item) => typeof item?.source === "string" && typeof item?.destination === "string")
+    .map((item) => [item.source, item.destination])
+);
+
+for (const [source, destination] of destinations) {
+  if (destinations.has(destination)) {
+    errors.push(
+      "Redirect chains are not allowed: " +
+        source +
+        " -> " +
+        destination +
+        " -> " +
+        destinations.get(destination)
+    );
+  }
 }
 
 if (!nextConfig.includes('import legacyRedirects from "./config/redirects.json"')) {
