@@ -38,6 +38,7 @@ This covers validation, lint, TypeScript and the production Next.js build. CI ad
 ## New routes
 When adding a meaningful public route:
 - add metadata/canonical
+- derive canonical JSON-LD URLs and site identity from `config/site.json`
 - add sitemap coverage
 - add search-index coverage if useful
 - add internal links from an appropriate hub
