@@ -81,4 +81,6 @@ That validation checks the Next.js redirect, metadata, robots and sitemap config
 
 ## Automated production monitor
 
-GitHub Actions runs `node scripts/production-smoke.mjs` against the canonical live site every six hours and on manual dispatch. A failed monitor means the live DNS/HTTPS/HTTP path needs investigation even if the source branch itself is green.
+GitHub Actions runs `node scripts/production-smoke.mjs` against the canonical live site every six hours and on manual dispatch. Manual runs accept an optional expected commit SHA so an operator can verify exactly which deployment is serving the hostname. A failed monitor means the live DNS/HTTPS/HTTP path needs investigation even if the source branch itself is green.
+
+For recovery procedures, see `docs/RECOVERY.md`.

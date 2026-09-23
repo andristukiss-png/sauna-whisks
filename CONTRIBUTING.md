@@ -19,6 +19,8 @@ Use Node 22. Run `nvm use` (or use a tool that honors `.node-version`), then ins
 
 All external GitHub Actions in `.github/workflows` must be pinned to full commit SHAs. Keep the human-readable major version comment next to the pin, and let Dependabot propose updates. Checkout steps must use `persist-credentials: false` unless a workflow explicitly needs to push.
 
+Dependabot intentionally does not open npm semver-major updates. Major framework, runtime, lint or type-system upgrades require a dedicated migration branch with release notes reviewed and the full Build/CodeQL/Vercel gates passing.
+
 ## Required checks
 Run:
 

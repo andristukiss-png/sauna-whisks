@@ -127,6 +127,12 @@ if (!dependabot.includes('package-ecosystem: "npm"')) {
 if (!dependabot.includes('package-ecosystem: "github-actions"')) {
   errors.push("Dependabot GitHub Actions updates missing.");
 }
+if (!dependabot.includes('dependency-name: "*"')) {
+  errors.push("Dependabot npm major-update ignore policy missing.");
+}
+if (!dependabot.includes('"version-update:semver-major"')) {
+  errors.push("Dependabot must defer automatic npm semver-major updates.");
+}
 
 if (errors.length) {
   console.error("Toolchain validation failed:");
