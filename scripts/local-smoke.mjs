@@ -391,6 +391,36 @@ for (const { source, destination } of redirects) {
   expectStatus(target, 200, destination);
 }
 
+async function verifyEnquiryResponse(response, expectedStatus, label) {
+  expectStatus(response, expectedStatus, label);
+  if (!response) return {};
+
+  expectHeader(response, "content-type", "application/json", label);
+  expectHeader(response, "cache-control", "no-store", label);
+  expectHeader(response, "cross-origin-resource-policy", "same-origin", label);
+  expectHeader(response, "x-robots-tag", "noindex", label);
+
+  const requestId = response.headers.get("x-request-id") || "";
+  if (!requestId) fail(label + " missing X-Request-ID.");
+  if (response.headers.get("access-control-allow-origin")) {
+    fail(label + " must not expose wildcard CORS.");
+  }
+
+  try {
+    const body = await response.json();
+    if (requestId && body.requestId !== requestId) {
+      fail(label + " response requestId does not match X-Request-ID.");
+    }
+    return body;
+  } catch {
+    fail(label + " did not return valid JSON.");
+    return {};
+  }
+}
+
+const enquiryGet = await request("/api/enquiry");
+expectStatus(enquiryGet, 405, "/api/enquiry GET");
+
 const wrongType = await request("/api/enquiry", {
   method: "POST",
   headers: { "content-type": "text/plain" },
