@@ -1,5 +1,8 @@
+const spreadsheetFormulaPrefix = /^[\t\r\n ]*[=+\-@]/;
+
 export function csvCell(value: string) {
-  return '"' + value.replace(/"/g, '""') + '"';
+  const safeValue = spreadsheetFormulaPrefix.test(value) ? "'" + value : value;
+  return '"' + safeValue.replace(/"/g, '""') + '"';
 }
 
 export function encodeCsv(rows: string[][]) {
