@@ -29,7 +29,7 @@ export function GET() {
   <channel>
     <title>Sauna Whisks Journal</title>
     <link>${site.origin}/journal</link>
-    <atom:link href=`${site.origin}/feed.xml` rel="self" type="application/rss+xml" />
+    <atom:link href="${site.origin}/feed.xml" rel="self" type="application/rss+xml" />
     <description>Guides to sauna whisks, pirts, venik, vihta, materials, care and preparation.</description>
     <language>en</language>
     <generator>SaunaWhisks.com</generator>
