@@ -69,7 +69,8 @@ export const faqTopics: FAQTopic[] = [
       ["What does verified origin mean?", "It means the harvest or production location is supported by supplier or batch information rather than inferred from the seller's address."],
       ["Why test leaf retention?", "A dry product photo cannot show how well leaves stay attached after correct preparation and normal use."],
       ["Do natural whisks have to be identical?", "No. Natural variation is expected, but dimensions, construction and prepared performance should still fall within a useful commercial range."],
-      ["Why publish unknown fields?", "Leaving a field pending is more trustworthy than filling it with an unsupported heritage or origin claim."]
+      ["Why publish unknown fields?", "Leaving a field pending is more trustworthy than filling it with an unsupported heritage or origin claim."],
+      ["Are your products made in Latvia?", "The brand is Latvia-based. Final product pages will state the verified harvest and production origin of each individual whisk."]
     ]
   },
   {
@@ -95,6 +96,25 @@ export const faqTopics: FAQTopic[] = [
     ]
   }
 ];
+
+const featuredFAQQuestions = [
+  "What is a sauna whisk?",
+  "Is a venik the same thing?",
+  "Vihta or vasta?",
+  "Birch or oak?",
+  "Can I reuse a whisk?",
+  "Why are leaves falling off?",
+  "Will you ship to the US?",
+  "Are your products made in Latvia?",
+];
+
+const allFAQItems = faqTopics.flatMap((topic) => topic.items);
+
+export const featuredFaqs = featuredFAQQuestions.map((question) => {
+  const item = allFAQItems.find(([candidate]) => candidate === question);
+  if (!item) throw new Error(`Missing featured FAQ: ${question}`);
+  return item;
+});
 
 export function getFAQTopic(slug: string) {
   return faqTopics.find((topic) => topic.slug === slug);

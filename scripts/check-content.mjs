@@ -9,6 +9,7 @@ const requiredFiles = [
   "app/page.tsx",
   "app/shop/page.tsx",
   "app/journal/page.tsx",
+  "app/faq/page.tsx",
   "app/contact/page.tsx",
   "app/privacy/page.tsx",
   "app/terms/page.tsx",
@@ -57,6 +58,14 @@ const contactUsesConfiguredEmail =
 
 if (!contactUsesConfiguredEmail) {
   errors.push("Contact page must render the configured public email from config/site.json.");
+}
+
+const faqPage = fs.readFileSync(path.join(root, "app/faq/page.tsx"), "utf8");
+if (!faqPage.includes('import { faqTopics, featuredFaqs } from "@/lib/faqTopics"')) {
+  errors.push("FAQ homepage must import shared topic and featured FAQ data.");
+}
+if (faqPage.includes("const faqs = [")) {
+  errors.push("FAQ homepage must not maintain a second local FAQ answer set.");
 }
 
 
