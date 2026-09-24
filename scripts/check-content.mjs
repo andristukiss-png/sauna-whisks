@@ -10,6 +10,7 @@ const requiredFiles = [
   "app/shop/page.tsx",
   "app/journal/page.tsx",
   "app/faq/page.tsx",
+  "app/usa/page.tsx",
   "app/contact/page.tsx",
   "app/privacy/page.tsx",
   "app/terms/page.tsx",
@@ -66,6 +67,19 @@ if (!faqPage.includes('import { faqTopics, featuredFaqs } from "@/lib/faqTopics"
 }
 if (faqPage.includes("const faqs = [")) {
   errors.push("FAQ homepage must not maintain a second local FAQ answer set.");
+}
+
+const usaPage = fs.readFileSync(path.join(root, "app/usa/page.tsx"), "utf8");
+for (const [needle, label] of [
+  ['import { getMarket } from "@/lib/markets"', "shared market import"],
+  ['getMarket("united-states")', "United States market lookup"],
+  ["usMarket.status", "shared US market status"],
+  ["usMarket.headline", "shared US market headline"],
+  ["usMarket.summary", "shared US market summary"],
+  ["usMarket.logistics", "shared US market logistics"],
+  ["subject={usMarket.enquiryTopic}", "shared US enquiry topic"],
+]) {
+  if (!usaPage.includes(needle)) errors.push("USA page missing " + label + ".");
 }
 
 
