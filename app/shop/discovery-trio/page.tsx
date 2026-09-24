@@ -55,6 +55,7 @@ export default function DiscoveryTrioPage() {
             <div><span>Includes</span><b>{discoveryTrio.productSlugs.length} sauna whisks</b></div>
             <div><span>Planned launch price</span><b>{discoveryTrio.plannedPrice}</b></div>
             <div><span>Status</span><b>{discoveryTrio.status}</b></div>
+            <div><span>Purchasable</span><b>{discoveryTrio.availableForPurchase ? "Yes" : "No — pre-launch"}</b></div>
           </div>
 
           <a className="button button-dark" href="#trio-enquiry">Ask about the Discovery Trio</a>
