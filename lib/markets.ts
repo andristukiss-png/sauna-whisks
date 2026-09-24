@@ -14,7 +14,7 @@ export const markets: Market[] = [
     slug: "united-states",
     name: "United States",
     status: "Researching",
-    headline: "Baltic sauna whisks for the US market.",
+    headline: "Sauna whisks for the US market.",
     summary: "A priority launch market built around dried whisks, clear preparation guidance, bundles and trade supply.",
     priorities: ["Dried birch, oak and eucalyptus", "Discovery Trio", "Public sauna and retailer trade", "Product-by-product import clearance"],
     logistics: "Each plant-product SKU will be checked for admissibility and documentation before US sales open.",
