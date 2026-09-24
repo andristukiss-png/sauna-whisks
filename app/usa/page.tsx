@@ -69,7 +69,7 @@ export default function USAPage() {
         </div>
       </section>
 
-      <section className="trade-contact" id="usa-enquiry">
+      <section className="trade-contact" id="usa-enquiry" tabIndex={-1}>
         <p className="section-kicker">US ENQUIRIES</p>
         <h2>Tell us what you are looking for.</h2>
         <p>

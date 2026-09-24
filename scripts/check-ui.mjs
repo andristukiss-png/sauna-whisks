@@ -124,6 +124,19 @@ for (const [needle, label] of [
   if (!loading.includes(needle)) errors.push("Loading fallback missing " + label + ".");
 }
 
+const fragmentTargetChecks = [
+  ["app/usa/page.tsx", 'id="usa-enquiry" tabIndex={-1}', "USA enquiry fragment target"],
+  ["app/shop/discovery-trio/page.tsx", 'id="trio-enquiry" tabIndex={-1}', "Discovery Trio enquiry fragment target"],
+  ["app/shop/[slug]/page.tsx", 'id="product-enquiry" tabIndex={-1}', "product enquiry fragment target"],
+  ["app/journal/[slug]/page.tsx", 'id="article-top" tabIndex={-1}', "article top fragment target"],
+  ["app/journal/[slug]/page.tsx", 'id={"section-" + index} key={section.heading} tabIndex={-1}', "article contents fragment targets"],
+];
+
+for (const [file, needle, label] of fragmentTargetChecks) {
+  const source = fs.readFileSync(file, "utf8");
+  if (!source.includes(needle)) errors.push(label + " must be programmatically focusable.");
+}
+
 const articleTools = fs.readFileSync("components/ArticleTools.tsx", "utf8");
 for (const [needle, label] of [
   ['role="status"', "article tools status role"],

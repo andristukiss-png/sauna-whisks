@@ -60,7 +60,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         { label: "Journal", href: "/journal" },
         { label: article.title }
       ]} />
-      <article className="article-page" id="article-top">
+      <article className="article-page" id="article-top" tabIndex={-1}>
         <header className="article-header">
           <p className="section-kicker">{article.eyebrow}</p>
           <h1>{article.title}</h1>
@@ -83,7 +83,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
           <div className="article-content">
             {article.sections.map((section, index) => (
-              <section id={"section-" + index} key={section.heading}>
+              <section id={"section-" + index} key={section.heading} tabIndex={-1}>
                 <span>0{index + 1}</span>
                 <h2>{section.heading}</h2>
                 {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
