@@ -1,3 +1,4 @@
+import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
@@ -28,10 +29,7 @@ export default function GlossaryPage() {
 
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
-      />
+      <StructuredData data={schema} />
       <Header />
       <section className="page-hero">
         <p className="section-kicker">GLOSSARY</p>

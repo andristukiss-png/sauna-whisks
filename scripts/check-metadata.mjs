@@ -35,18 +35,14 @@ for (const file of pages) {
     if (!text.includes("pageMetadata(")) {
       errors.push("Dynamic page must use shared pageMetadata helper: " + file);
     }
-  } else if (hasStaticMetadata) {
-    const usesSharedMetadata = text.includes("pageMetadata(");
-    const hasInlineCanonical = text.includes("alternates:");
-    if (!usesSharedMetadata && !hasInlineCanonical) {
-      errors.push("Static page missing canonical metadata: " + file);
-    }
+  } else if (hasStaticMetadata && !text.includes("pageMetadata(")) {
+    errors.push("Static page must use shared pageMetadata helper: " + file);
   }
 }
 
 for (const file of pages) {
   const text = fs.readFileSync(file, "utf8");
-  if (text.includes("dangerouslySetInnerHTML") && text.includes(site.origin)) {
+  if (text.includes("<StructuredData") && text.includes(site.origin)) {
     errors.push("JSON-LD page hard-codes canonical origin instead of site config: " + file);
   }
 }

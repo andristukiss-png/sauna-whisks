@@ -1,3 +1,4 @@
+import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
@@ -68,14 +69,8 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
 
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema).replace(/</g, "\\u003c") }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
-      />
+      <StructuredData data={productSchema} />
+      <StructuredData data={faqSchema} />
       <Header />
       <Breadcrumbs items={[
         { label: "Home", href: "/" },

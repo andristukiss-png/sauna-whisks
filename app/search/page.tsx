@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -5,12 +6,12 @@ import { SiteSearch } from "@/components/SiteSearch";
 import { siteSearchItems } from "@/lib/siteSearch";
 import { isSiteSearchFilter } from "@/lib/search";
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: "Search",
   description: "Search SaunaWhisks.com products, guides, markets and trade information.",
-  alternates: { canonical: "/search" },
-  robots: { index: false, follow: true }
-};
+  canonical: "/search",
+  robots: { index: false, follow: true },
+});
 
 export default async function SearchPage({
   searchParams,

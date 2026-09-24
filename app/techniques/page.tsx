@@ -1,3 +1,4 @@
+import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
@@ -25,7 +26,7 @@ export default function TechniquesPage(){
   };
 
   return <main>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,"\\u003c")}}/>
+    <StructuredData data={schema} />
     <Header/>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Techniques"}]}/>
     <section className="page-hero">

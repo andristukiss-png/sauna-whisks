@@ -100,18 +100,27 @@ const renderFiles = ["app", "components"]
   .flatMap((dir) => walk(dir))
   .filter((file) => /\.(ts|tsx)$/.test(file));
 
+const structuredDataFile = "components/StructuredData.tsx";
+if (!fs.existsSync(structuredDataFile)) {
+  errors.push("Missing shared StructuredData component.");
+} else {
+  const structuredData = fs.readFileSync(structuredDataFile, "utf8");
+  if (!structuredData.includes('type="application/ld+json"')) {
+    errors.push("StructuredData must render application/ld+json.");
+  }
+  if (!structuredData.includes("JSON.stringify(data)")) {
+    errors.push("StructuredData must serialize data with JSON.stringify.");
+  }
+  if (!structuredData.includes('.replace(/</g')) {
+    errors.push("StructuredData must escape < characters before injection.");
+  }
+}
+
 for (const file of renderFiles) {
   const text = fs.readFileSync(file, "utf8");
   if (!text.includes("dangerouslySetInnerHTML")) continue;
-
-  if (!text.includes('type="application/ld+json"')) {
-    errors.push("dangerouslySetInnerHTML used outside JSON-LD: " + file);
-  }
-  if (!text.includes("JSON.stringify(")) {
-    errors.push("JSON-LD must serialize structured data with JSON.stringify: " + file);
-  }
-  if (!text.includes('.replace(/</g')) {
-    errors.push("JSON-LD must escape < characters before injection: " + file);
+  if (file !== structuredDataFile) {
+    errors.push("Direct dangerouslySetInnerHTML is not allowed outside StructuredData: " + file);
   }
 }
 
