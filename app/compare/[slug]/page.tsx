@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { comparisons, getComparison } from "@/lib/comparisons";
 
@@ -29,8 +27,7 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
   if (!item) notFound();
 
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Compare", href: "/compare" },
@@ -56,8 +53,6 @@ export default async function ComparisonPage({ params }: { params: Promise<{ slu
         <h2>{item.conclusion}</h2>
         <div>{item.related.map((link) => <Link href={link.href} key={link.href}>{link.label} →</Link>)}</div>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
