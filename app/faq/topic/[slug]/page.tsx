@@ -1,3 +1,4 @@
+import { StructuredData } from "@/components/StructuredData";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
@@ -39,7 +40,7 @@ export default async function FAQTopicPage({ params }: { params: Promise<{ slug:
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
+      <StructuredData data={schema} />
       <Header />
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
