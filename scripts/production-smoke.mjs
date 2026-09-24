@@ -460,7 +460,7 @@ await check(`${baseUrl}/feed.xml`, {
   ],
 });
 await check(`${baseUrl}/feed.json`, {
-  contentTypeIncludes: "application/json",
+  contentTypeIncludes: "application/feed+json",
   headerIncludes: [
     ["x-saunawhisks-data-version", "1"],
     ["access-control-allow-origin", "*"],
