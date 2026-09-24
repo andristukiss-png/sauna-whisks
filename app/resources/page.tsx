@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata = pageMetadata({
@@ -27,8 +25,7 @@ const sections = [
 
 export default function ResourcesPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Resources" }]} />
       <section className="page-hero">
         <p className="section-kicker">RESOURCES</p>
@@ -46,8 +43,6 @@ export default function ResourcesPage() {
           </Link>
         ))}
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
