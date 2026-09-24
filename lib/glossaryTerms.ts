@@ -61,14 +61,14 @@ export const glossaryTerms: GlossaryTerm[] = [
     term: "Birch",
     definition: "The classic reference material for many Northern European sauna-whisk traditions.",
     context: "Birch is generally soft and aromatic, making it a useful first material for comparing other whisk types.",
-    related: [{ label: "Baltic Birch", href: "/shop/baltic-birch" }, { label: "Birch vs oak", href: "/journal/birch-vs-oak-sauna-whisk" }]
+    related: [{ label: "Birch Sauna Whisk", href: "/shop/baltic-birch" }, { label: "Birch vs oak", href: "/journal/birch-vs-oak-sauna-whisk" }]
   },
   {
     slug: "oak",
     term: "Oak",
     definition: "A broad-leafed whisk material that generally creates a denser, firmer tool than birch.",
     context: "Oak is commonly associated with banya use and is also found across Baltic sauna-whisk assortments.",
-    related: [{ label: "Baltic Oak", href: "/shop/baltic-oak" }, { label: "Compare materials", href: "/compare" }]
+    related: [{ label: "Oak Sauna Whisk", href: "/shop/baltic-oak" }, { label: "Compare materials", href: "/compare" }]
   },
   {
     slug: "eucalyptus",
