@@ -91,6 +91,8 @@ Next.js site for **SaunaWhisks.com** — a Latvia-based specialist brand and kno
 
 See `docs/PUBLIC_DATA.md` for the API/CSV surface.
 
+Commercial/category strategy for the US market lives in `docs/STRATEGY.md`. It defines the terminology hierarchy, canonical-domain policy, product naming, education-led acquisition, assortment expansion and subscription research direction.
+
 Canonical site identity (`origin`, hostnames, public contact and country code) lives in `config/site.json`. Machine-readable output and runtime domain configuration derive from that file. Legacy redirects live in `config/redirects.json` and are exercised by both local and live smoke tests.
 
 ## Enquiries
