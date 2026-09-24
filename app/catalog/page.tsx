@@ -36,7 +36,7 @@ export default function CatalogPage() {
               <div><dt>Planned condition</dt><dd>{whisk.plannedCondition}</dd></div>
               <div><dt>Verification</dt><dd>{whisk.verification}</dd></div>
               <div><dt>Planned price</dt><dd>{whisk.plannedPrice}</dd></div>
-              <div><dt>Purchasable</dt><dd>No — pre-launch</dd></div>
+              <div><dt>Purchasable</dt><dd>{whisk.availableForPurchase ? "Yes" : "No — pre-launch"}</dd></div>
             </dl>
           </article>
         ))}

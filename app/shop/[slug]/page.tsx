@@ -49,8 +49,12 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
     ]
   };
 
+  const availabilityAnswer = whisk.availableForPurchase
+    ? "Yes. This product is currently available for purchase."
+    : "Not yet. SaunaWhisks.com is pre-launch and is not accepting payment for this product.";
+
   const faqItems = [
-    ["Is this product available now?", "Not yet. SaunaWhisks.com is pre-launch and is not accepting payment for this product."],
+    ["Is this product available now?", availabilityAnswer],
     ["Will the final origin be published?", "Yes. Final origin, condition and producer information will be published when verified for the commercial SKU."],
     ["How should I prepare it?", "Use the product-specific instructions supplied at launch. General preparation guidance is available in the sauna library."]
   ];
@@ -93,6 +97,7 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
             <div><span>Origin</span><b>{whisk.origin}</b></div>
             <div><span>Verification</span><b>{whisk.verification}</b></div>
             <div><span>Planned launch price</span><b>{whisk.plannedPrice}</b></div>
+            <div><span>Purchasable</span><b>{whisk.availableForPurchase ? "Yes" : "No — pre-launch"}</b></div>
           </div>
           <a className="button button-dark" href="#product-enquiry">Ask about this whisk</a>
           <p className="fineprint">Final origin, harvest and producer information will be published only after verification.</p>
