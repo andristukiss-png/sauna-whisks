@@ -1,3 +1,4 @@
+import { StructuredData } from "@/components/StructuredData";
 import { pageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -37,10 +38,7 @@ export default function FAQPage() {
     <main>
       <Header />
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "FAQ" }]} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
-      />
+      <StructuredData data={schema} />
       <section className="page-hero">
         <p className="section-kicker">FAQ</p>
         <h1>Start with the questions.</h1>
