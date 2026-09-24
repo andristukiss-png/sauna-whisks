@@ -66,6 +66,15 @@ jobs:
       - name: Verify tracked files unchanged
         run: git diff --exit-code -- .
 
+      - name: Verify no unexpected untracked files
+        run: |
+          untracked="$(git ls-files --others --exclude-standard)"
+          if [ -n "$untracked" ]; then
+            echo "Unexpected untracked files left by CI checks:"
+            printf '%s\n' "$untracked"
+            exit 1
+          fi
+
       - name: Show production server log on failure
         if: failure()
         run: cat /tmp/sauna-whisks-next.log || true
