@@ -1,6 +1,7 @@
 import { pageMetadata } from "@/lib/metadata";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EnquiryForm } from "@/components/EnquiryForm";
+import { getMarket } from "@/lib/markets";
 
 export const metadata = pageMetadata({
   title: "Shipping & Availability",
@@ -8,13 +9,19 @@ export const metadata = pageMetadata({
   canonical: "/shipping",
 });
 
-const markets = [
-  ["European Union", "Planned", "Initial fulfilment and VAT/shipping setup is being prepared."],
-  ["United Kingdom", "Planned", "Shipping and plant-product requirements will be confirmed before orders open."],
-  ["United States", "Researching", "Each SKU will be checked for admissibility and documentation before sale."],
-  ["Canada", "Researching", "Product-specific import and shipping requirements are still being validated."],
-  ["Australia", "Later phase", "Plant biosecurity makes imported foliage a separate operational project."]
-];
+function requireMarket(slug: string) {
+  const market = getMarket(slug);
+  if (!market) throw new Error(`Shipping market configuration is missing: ${slug}`);
+  return market;
+}
+
+const shippingMarkets = [
+  "european-union",
+  "united-kingdom",
+  "united-states",
+  "canada",
+  "australia",
+].map(requireMarket);
 
 export default function ShippingPage() {
   return (
@@ -31,12 +38,12 @@ export default function ShippingPage() {
       </section>
 
       <section className="shipping-status">
-        {markets.map(([market, status, copy], index) => (
-          <div className="shipping-row" key={market}>
+        {shippingMarkets.map((market, index) => (
+          <div className="shipping-row" key={market.slug}>
             <span>0{index + 1}</span>
-            <h2>{market}</h2>
-            <b>{status}</b>
-            <p>{copy}</p>
+            <h2>{market.name}</h2>
+            <b>{market.status}</b>
+            <p>{market.logistics}</p>
           </div>
         ))}
       </section>
