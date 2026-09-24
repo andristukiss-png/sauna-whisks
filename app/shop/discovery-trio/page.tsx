@@ -79,7 +79,7 @@ export default function DiscoveryTrioPage() {
         <Link href="/compare" className="text-link">Compare all materials →</Link>
       </section>
 
-      <section className="product-enquiry" id="trio-enquiry">
+      <section className="product-enquiry" id="trio-enquiry" tabIndex={-1}>
         <p className="section-kicker">BUNDLE ENQUIRY</p>
         <h2>Interested in the first release?</h2>
         <p>Ask about launch timing, shipping plans or trade quantities.</p>
