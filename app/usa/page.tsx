@@ -8,7 +8,7 @@ if (!usMarket) throw new Error("United States market configuration is missing.")
 
 export const metadata = pageMetadata({
   title: "Sauna Whisks USA — Planned US Launch",
-  description: `${usMarket.summary} ${usMarket.logistics}`,
+  description: `${usMarket.summary} US orders are not open yet.`,
   canonical: "/usa",
 });
 
@@ -57,7 +57,7 @@ export default function USAPage() {
         <div>
           <p>
             APHIS directs importers to its Agricultural Commodity Import Requirements database because rules depend on the exact plant product and origin.
-            {usMarket.logistics}
+            {" "}{usMarket.logistics}
           </p>
           <a
             className="text-link"
