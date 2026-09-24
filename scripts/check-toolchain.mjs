@@ -33,6 +33,12 @@ if (pkg.engines?.node !== ">=22 <23") {
 if (!pkg.scripts?.["validate:toolchain"]) {
   errors.push("package.json missing validate:toolchain script.");
 }
+if (pkg.scripts?.["validate:hygiene"] !== "node scripts/check-repo-hygiene.mjs") {
+  errors.push("package.json missing repository hygiene validation.");
+}
+if (!fs.existsSync(".npmrc") || !fs.readFileSync(".npmrc", "utf8").includes("engine-strict=true")) {
+  errors.push(".npmrc must enforce engine-strict=true.");
+}
 if (pkg.scripts?.["wait:production"] !== "node scripts/wait-for-production-commit.mjs") {
   errors.push("package.json missing the production convergence command.");
 }
