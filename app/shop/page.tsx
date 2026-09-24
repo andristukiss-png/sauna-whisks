@@ -2,9 +2,7 @@ import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 import { saunaWhisks } from "@/lib/products";
 import { discoveryTrio } from "@/lib/bundles";
@@ -29,9 +27,8 @@ export default function ShopPage() {
   };
 
   return (
-    <main>
+    <>
       <StructuredData data={itemListSchema} />
-      <Header />
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop" }]} />
       <section className="page-hero">
         <p className="section-kicker">THE COLLECTION</p>
@@ -97,8 +94,6 @@ export default function ShopPage() {
           <Link href="/contact" className="text-link">Ask a question →</Link>
         </div>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
