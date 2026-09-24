@@ -10,6 +10,7 @@ const required = [
   "docs/PRODUCT_DATA.md",
   "docs/BRAND_VOICE.md",
   "docs/STRATEGY.md",
+  "docs/US_MARKET_RESEARCH.md",
   "docs/SEO_MAP.md",
   "docs/EMAIL_SETUP.md",
   "docs/DEPLOYMENT.md",
