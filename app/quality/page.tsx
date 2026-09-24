@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata = pageMetadata({
@@ -23,8 +21,7 @@ const links = [
 
 export default function QualityPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Quality" }]} />
       <section className="page-hero">
         <p className="section-kicker">QUALITY</p>
@@ -44,8 +41,6 @@ export default function QualityPage() {
           </Link>
         ))}
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
