@@ -9,6 +9,7 @@ const required = [
   ['scope: "/"', "manifest scope"],
   ['lang: "en"', "manifest language"],
   ['display: "standalone"', "manifest display mode"],
+  ['description: "Sauna whisk knowledge, terminology, care and traditions from a Latvia-based specialist brand."', "manifest positioning description"],
   ['background_color: "#f1eee5"', "manifest background color"],
   ['theme_color: "#203629"', "manifest theme color"],
   ['src: "/icon.svg"', "manifest icon"],
