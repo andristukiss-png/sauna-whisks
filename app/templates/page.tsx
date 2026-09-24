@@ -1,6 +1,4 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata = pageMetadata({
@@ -19,8 +17,7 @@ const downloads = [
 
 export default function TemplatesPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Templates" }]} />
       <section className="page-hero">
         <p className="section-kicker">TEMPLATES</p>
@@ -38,7 +35,6 @@ export default function TemplatesPage() {
           </a>
         ))}
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

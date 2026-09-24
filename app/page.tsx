@@ -1,9 +1,7 @@
 import site from "@/config/site.json";
 import type { Metadata } from "next";
-import { Header } from "@/components/Header";
 import Link from "next/link";
 import { LeafMark } from "@/components/LeafMark";
-import { SiteFooter } from "@/components/SiteFooter";
 import { saunaWhisks } from "@/lib/products";
 import { discoveryTrio } from "@/lib/bundles";
 
@@ -33,9 +31,7 @@ const rituals = [
 
 export default function Home() {
   return (
-    <main>
-      <Header />
-
+    <>
       <section className="hero">
         <div className="hero-copy">
           <p className="eyebrow">FROM LATVIA · ROOTED IN BALTIC SAUNA CULTURE</p>
@@ -146,8 +142,6 @@ export default function Home() {
         <p>Trade packs and recurring supply for public saunas, bathhouses, hotels, wellness clubs, retailers and sauna builders.</p>
         <Link href="/wholesale" className="button button-light">Discuss trade supply</Link>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

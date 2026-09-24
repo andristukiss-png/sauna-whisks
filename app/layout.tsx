@@ -1,3 +1,5 @@
+import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import type { Metadata } from "next";
@@ -62,7 +64,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <StructuredData data={websiteSchema} />
         <StructuredData data={organizationSchema} />
-        {children}
+        <Header />
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
+        <SiteFooter />
       </body>
     </html>
   );

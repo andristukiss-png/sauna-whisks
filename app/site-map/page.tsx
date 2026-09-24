@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { saunaWhisks } from "@/lib/products";
 import { articles } from "@/lib/articles";
 import { getMarketPath, markets } from "@/lib/markets";
@@ -52,8 +50,7 @@ const staticGroups = [
 
 export default function SiteMapPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Site map" }]} />
       <section className="page-hero compact-hero">
         <p className="section-kicker">SITE MAP</p>
@@ -102,8 +99,6 @@ export default function SiteMapPage() {
           {articles.map((article) => <Link prefetch={false} href={"/journal/" + article.slug} key={article.slug}>{article.title} →</Link>)}
         </div>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

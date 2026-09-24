@@ -2,8 +2,6 @@ import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -29,9 +27,8 @@ export default function DiscoveryTrioPage() {
   };
 
   return (
-    <main>
+    <>
       <StructuredData data={productSchema} />
-      <Header />
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Shop", href: "/shop" },
@@ -92,8 +89,6 @@ export default function DiscoveryTrioPage() {
           messagePlaceholder="Tell us what you would like to know about the Discovery Trio..."
         />
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

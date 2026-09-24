@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 
 export const metadata = pageMetadata({
@@ -13,8 +11,7 @@ export const metadata = pageMetadata({
 
 export default function AboutPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "About" }]} />
       <section className="about-page">
         <div className="about-page-art"><LeafMark /><span>57° N · LATVIA</span></div>
@@ -42,7 +39,6 @@ export default function AboutPage() {
         <Link href="/editorial-policy">Editorial policy →</Link>
         <Link href="/status">Launch status →</Link>
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

@@ -1,6 +1,4 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata = pageMetadata({
@@ -10,8 +8,7 @@ export const metadata = pageMetadata({
 });
 
 export default function CorrectionsPage(){
-  return <main>
-    <Header/>
+  return <>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Corrections"}]}/>
     <article className="legal-page">
       <p className="section-kicker">CORRECTIONS</p>
@@ -21,6 +18,5 @@ export default function CorrectionsPage(){
       <section><h2>Commercial product data</h2><p>Supplier, origin, harvest and condition information can change during pre-launch verification. Corrections should be reflected in the catalog and product page together.</p></section>
       <section><h2>Contact</h2><p><a href="mailto:info@SaunaWhisks.com?subject=Website%20correction">info@SaunaWhisks.com</a></p></section>
     </article>
-    <SiteFooter/>
-  </main>;
+  </>;
 }

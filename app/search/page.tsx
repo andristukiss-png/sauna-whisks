@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { SiteSearch } from "@/components/SiteSearch";
 import { siteSearchItems } from "@/lib/siteSearch";
 import { isSiteSearchFilter } from "@/lib/search";
@@ -22,8 +20,7 @@ export default async function SearchPage({
   const initialType = isSiteSearchFilter(type) ? type : "All";
 
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Search" }]} />
       <section className="page-hero compact-hero">
         <p className="section-kicker">SEARCH</p>
@@ -31,7 +28,6 @@ export default async function SearchPage({
         <p>Search products, materials, preparation guides, traditions, launch markets and trade information.</p>
       </section>
       <SiteSearch items={siteSearchItems} initialQuery={q} initialType={initialType} />
-      <SiteFooter />
-    </main>
+    </>
   );
 }

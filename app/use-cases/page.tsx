@@ -2,8 +2,6 @@ import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useCases } from "@/lib/useCases";
 
@@ -25,9 +23,8 @@ export default function UseCasesPage(){
     }))
   };
 
-  return <main>
+  return <>
     <StructuredData data={schema} />
-    <Header/>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Use cases"}]}/>
     <section className="page-hero">
       <p className="section-kicker">USE CASES</p>
@@ -42,6 +39,5 @@ export default function UseCasesPage(){
         <b>Open use case →</b>
       </Link>)}
     </section>
-    <SiteFooter/>
-  </main>;
+  </>;
 }

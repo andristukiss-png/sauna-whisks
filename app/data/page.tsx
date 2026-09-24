@@ -1,6 +1,4 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { publicDataEndpoints } from "@/lib/publicData";
 
@@ -12,8 +10,7 @@ export const metadata = pageMetadata({
 
 export default function DataPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Public data" }]} />
       <section className="page-hero">
         <p className="section-kicker">PUBLIC DATA</p>
@@ -29,7 +26,6 @@ export default function DataPage() {
           </a>
         ))}
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

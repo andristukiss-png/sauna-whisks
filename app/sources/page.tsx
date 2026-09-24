@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { articleSources } from "@/lib/sources";
 
 export const metadata = pageMetadata({
@@ -13,8 +11,7 @@ export const metadata = pageMetadata({
 
 export default function SourcesPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Sources" }]} />
       <section className="page-hero">
         <p className="section-kicker">SOURCES</p>
@@ -40,8 +37,6 @@ export default function SourcesPage() {
           </a>
         ))}
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

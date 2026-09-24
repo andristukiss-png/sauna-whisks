@@ -2,8 +2,6 @@ import { StructuredData } from "@/components/StructuredData";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getTechnique, techniques } from "@/lib/techniques";
 
@@ -42,9 +40,8 @@ export default async function TechniquePage({params}:{params:Promise<{slug:strin
     }))
   };
 
-  return <main>
+  return <>
     <StructuredData data={schema} />
-    <Header/>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Techniques",href:"/techniques"},{label:item.name}]}/>
     <section className="page-hero">
       <p className="section-kicker">TECHNIQUE</p>
@@ -63,6 +60,5 @@ export default async function TechniquePage({params}:{params:Promise<{slug:strin
       <h2>{item.caution}</h2>
       <div className="condition-related">{item.related.map((link)=><Link href={link.href} key={link.href}>{link.label} →</Link>)}</div>
     </section>
-    <SiteFooter/>
-  </main>;
+  </>;
 }

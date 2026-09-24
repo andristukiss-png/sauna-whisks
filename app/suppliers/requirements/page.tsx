@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata = pageMetadata({
@@ -23,8 +21,7 @@ const requirements = [
 
 export default function SupplierRequirementsPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Suppliers", href: "/suppliers" },
@@ -55,8 +52,6 @@ export default function SupplierRequirementsPage() {
           <a href="/api/product-data-template.csv">Download product-data CSV →</a>
         </div>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

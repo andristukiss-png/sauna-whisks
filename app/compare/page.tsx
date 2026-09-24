@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { comparisons } from "@/lib/comparisons";
 
 export const metadata = pageMetadata({
@@ -21,8 +19,7 @@ const rows = [
 
 export default function ComparePage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Compare" }]} />
       <section className="page-hero">
         <p className="section-kicker">COMPARE MATERIALS</p>
@@ -91,7 +88,6 @@ export default function ComparePage() {
           ))}
         </div>
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

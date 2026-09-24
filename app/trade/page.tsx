@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { tradeSegments } from "@/lib/tradeSegments";
 
 export const metadata = pageMetadata({
@@ -13,8 +11,7 @@ export const metadata = pageMetadata({
 
 export default function TradePage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Trade" }]} />
       <section className="page-hero dark-page">
         <p className="section-kicker light">TRADE</p>
@@ -42,7 +39,6 @@ export default function TradePage() {
         <Link href="/wholesale">Wholesale enquiry →</Link>
         <Link href="/tools/trade-demand">Demand estimator →</Link>
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

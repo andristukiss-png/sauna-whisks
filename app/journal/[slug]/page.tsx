@@ -3,8 +3,6 @@ import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { articles, getArticle } from "@/lib/articles";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ArticleTools } from "@/components/ArticleTools";
@@ -55,9 +53,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const related = [...sameTopic, ...articles.filter((candidate) => candidate.slug !== article.slug && candidate.eyebrow !== article.eyebrow)].slice(0, 3);
 
   return (
-    <main>
+    <>
       <StructuredData data={articleSchema} />
-      <Header />
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Journal", href: "/journal" },
@@ -124,7 +121,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </section>
 
       </article>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

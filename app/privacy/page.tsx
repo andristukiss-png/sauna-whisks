@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = pageMetadata({
   title: "Privacy",
@@ -11,8 +9,7 @@ export const metadata = pageMetadata({
 
 export default function PrivacyPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Privacy" }]} />
       <article className="legal-page">
         <p className="section-kicker">PRIVACY</p>
@@ -55,7 +52,6 @@ export default function PrivacyPage() {
           cookie information and any required statutory wording will be completed before checkout opens.
         </p>
       </article>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

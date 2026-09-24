@@ -1,8 +1,6 @@
 import { StructuredData } from "@/components/StructuredData";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { faqTopics, getFAQTopic } from "@/lib/faqTopics";
 
@@ -39,9 +37,8 @@ export default async function FAQTopicPage({ params }: { params: Promise<{ slug:
   };
 
   return (
-    <main>
+    <>
       <StructuredData data={schema} />
-      <Header />
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "FAQ", href: "/faq" },
@@ -60,7 +57,6 @@ export default async function FAQTopicPage({ params }: { params: Promise<{ slug:
           </details>
         ))}
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

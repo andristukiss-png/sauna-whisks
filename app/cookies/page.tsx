@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = pageMetadata({
   title: "Cookies",
@@ -11,8 +9,7 @@ export const metadata = pageMetadata({
 
 export default function CookiesPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Cookies" }]} />
       <article className="legal-page">
         <p className="section-kicker">COOKIES</p>
@@ -40,7 +37,6 @@ export default function CookiesPage() {
           </p>
         </section>
       </article>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

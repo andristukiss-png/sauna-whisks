@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getUseCase, useCases } from "@/lib/useCases";
 
@@ -28,8 +26,7 @@ export default async function UseCasePage({params}:{params:Promise<{slug:string}
   const item=getUseCase(slug);
   if(!item) notFound();
 
-  return <main>
-    <Header/>
+  return <>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Use cases",href:"/use-cases"},{label:item.name}]}/>
     <section className="page-hero">
       <p className="section-kicker">USE CASE</p>
@@ -49,6 +46,5 @@ export default async function UseCasePage({params}:{params:Promise<{slug:string}
         </div>
       </div>
     </section>
-    <SiteFooter/>
-  </main>;
+  </>;
 }

@@ -3,8 +3,6 @@ import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getGlossaryTerm, glossaryTerms } from "@/lib/glossaryTerms";
 
@@ -39,9 +37,8 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
   };
 
   return (
-    <main>
+    <>
       <StructuredData data={schema} />
-      <Header />
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Glossary", href: "/glossary" },
@@ -61,7 +58,6 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
           {item.related.map((related) => <Link href={related.href} key={related.href}>{related.label} →</Link>)}
         </div>
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const metadata = pageMetadata({
@@ -12,8 +10,7 @@ export const metadata = pageMetadata({
 
 export default function USAPage() {
   return (
-    <main>
-      <Header />
+    <>
       <section className="page-hero usa-hero">
         <p className="section-kicker">UNITED STATES / LAUNCH PLANNING</p>
         <h1>Baltic sauna whisks for the US.</h1>
@@ -85,8 +82,6 @@ export default function USAPage() {
           messagePlaceholder="Tell us what you are interested in and where in the US you are based..."
         />
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

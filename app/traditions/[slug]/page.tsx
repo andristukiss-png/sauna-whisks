@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getTraditionDetail, traditionDetails } from "@/lib/traditionDetails";
 
@@ -29,8 +27,7 @@ export default async function TraditionDetailPage({ params }: { params: Promise<
   if (!item) notFound();
 
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Traditions", href: "/traditions" },
@@ -65,8 +62,6 @@ export default async function TraditionDetailPage({ params }: { params: Promise<
           {item.related.map((related) => <Link href={related.href} key={related.href}>{related.label} →</Link>)}
         </div>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

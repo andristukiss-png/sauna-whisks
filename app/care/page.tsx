@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = pageMetadata({
   title: "Sauna Whisk Care",
@@ -19,8 +17,7 @@ const guides = [
 
 export default function CarePage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Care" }]} />
       <section className="page-hero">
         <p className="section-kicker">CARE</p>
@@ -40,8 +37,6 @@ export default function CarePage() {
           </Link>
         ))}
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

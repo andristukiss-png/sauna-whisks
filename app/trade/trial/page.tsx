@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata = pageMetadata({
@@ -20,8 +18,7 @@ const steps = [
 
 export default function TradeTrialPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Trade", href: "/trade" },
@@ -51,8 +48,6 @@ export default function TradeTrialPage() {
           <Link href="/wholesale">Start a wholesale enquiry →</Link>
         </div>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

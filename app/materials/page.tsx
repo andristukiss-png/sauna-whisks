@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = pageMetadata({
   title: "Sauna Whisk Materials",
@@ -23,8 +21,7 @@ const materials = [
 
 export default function MaterialsPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Materials" }]} />
       <section className="page-hero">
         <p className="section-kicker">MATERIALS</p>
@@ -53,8 +50,6 @@ export default function MaterialsPage() {
         </p>
         <Link className="text-link" href="/compare">Compare birch, oak and eucalyptus →</Link>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

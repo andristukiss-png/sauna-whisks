@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getMaterialKnowledge, materialKnowledge } from "@/lib/materialKnowledge";
 
@@ -29,8 +27,7 @@ export default async function MaterialPage({ params }: { params: Promise<{ slug:
   if (!item) notFound();
 
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Materials", href: "/materials" },
@@ -56,8 +53,6 @@ export default async function MaterialPage({ params }: { params: Promise<{ slug:
         ))}
         {item.relatedProduct ? <Link className="button button-dark" href={item.relatedProduct}>View planned product</Link> : <Link className="text-link" href="/contact">Ask about future availability →</Link>}
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

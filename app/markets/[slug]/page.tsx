@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { getMarket, getMarketPath, markets } from "@/lib/markets";
@@ -30,8 +28,7 @@ export default async function MarketPage({ params }: { params: Promise<{ slug: s
   if (!market) notFound();
 
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Markets", href: "/markets" },
@@ -75,8 +72,6 @@ export default async function MarketPage({ params }: { params: Promise<{ slug: s
           businessFields
         />
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

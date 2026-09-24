@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = pageMetadata({
   title: "Returns & Refunds",
@@ -11,8 +9,7 @@ export const metadata = pageMetadata({
 
 export default function ReturnsPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Returns" }]} />
       <article className="legal-page">
         <p className="section-kicker">RETURNS & REFUNDS</p>
@@ -48,7 +45,6 @@ export default function ReturnsPage() {
           </p>
         </section>
       </article>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

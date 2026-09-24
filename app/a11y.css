@@ -19,14 +19,7 @@
   transform: translateY(0);
 }
 
-.skip-target {
-  display: block;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-.skip-target:focus {
+#main-content:focus {
   outline: none;
 }
 

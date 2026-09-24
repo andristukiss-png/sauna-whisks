@@ -1,8 +1,6 @@
 import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import Link from "next/link";
 import { glossaryTerms } from "@/lib/glossaryTerms";
 
@@ -28,9 +26,8 @@ export default function GlossaryPage() {
   };
 
   return (
-    <main>
+    <>
       <StructuredData data={schema} />
-      <Header />
       <section className="page-hero">
         <p className="section-kicker">GLOSSARY</p>
         <h1>The language of whisking.</h1>
@@ -47,7 +44,6 @@ export default function GlossaryPage() {
           </Link>
         ))}
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

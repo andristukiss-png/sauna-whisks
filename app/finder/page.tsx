@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { WhiskFinder } from "@/components/WhiskFinder";
 
 export const metadata = pageMetadata({
@@ -12,8 +10,7 @@ export const metadata = pageMetadata({
 
 export default function FinderPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Whisk finder" }]} />
       <section className="page-hero compact-hero">
         <p className="section-kicker">WHISK FINDER</p>
@@ -21,7 +18,6 @@ export default function FinderPage() {
         <p>This is a simple product-navigation tool, not a medical or therapeutic recommendation.</p>
       </section>
       <WhiskFinder />
-      <SiteFooter />
-    </main>
+    </>
   );
 }

@@ -46,7 +46,6 @@ export function Header() {
           </nav>
         </details>
       </header>
-      <span id="main-content" className="skip-target" tabIndex={-1}>Main content</span>
     </>
   );
 }

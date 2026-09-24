@@ -341,6 +341,15 @@ async function checkSitemapPage(location) {
   if (mainCount !== 1) {
     fail(path + " must render exactly one main landmark; found " + mainCount + ".");
   }
+  if (!/<main\b[^>]*\bid=["']main-content["'][^>]*>/i.test(renderedHtml)) {
+    fail(path + " main landmark must own the main-content skip target.");
+  }
+  const headerIndex = renderedHtml.search(/<header\b/i);
+  const mainIndex = renderedHtml.search(/<main\b/i);
+  const footerIndex = renderedHtml.search(/<footer\b/i);
+  if (!(headerIndex >= 0 && headerIndex < mainIndex && mainIndex < footerIndex)) {
+    fail(path + " must render header, main and footer as sibling landmarks in that order.");
+  }
   if (path === "/compare") {
     if (!/<table\b/i.test(renderedHtml)) fail("/compare must render a semantic table.");
     if (!/<th\b[^>]*scope=["']col["']/i.test(renderedHtml)) fail("/compare is missing scoped column headers.");

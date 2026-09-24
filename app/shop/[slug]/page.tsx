@@ -3,8 +3,6 @@ import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { LeafMark } from "@/components/LeafMark";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -68,10 +66,9 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
   };
 
   return (
-    <main>
+    <>
       <StructuredData data={productSchema} />
       <StructuredData data={faqSchema} />
-      <Header />
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Shop", href: "/shop" },
@@ -166,7 +163,6 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
           messagePlaceholder="Tell us what you would like to know about this whisk..."
         />
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

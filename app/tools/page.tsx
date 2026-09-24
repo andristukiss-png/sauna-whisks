@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata = pageMetadata({
@@ -20,11 +18,9 @@ const tools=[
 ];
 
 export default function ToolsPage(){
-  return <main>
-    <Header/>
+  return <>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Tools"}]}/>
     <section className="page-hero"><p className="section-kicker">TOOLS</p><h1>Turn assumptions into fields.</h1><p>Simple pre-launch tools for product selection, supplier evaluation, venue planning and commercial readiness.</p></section>
     <section className="hub-grid">{tools.map(([href,title,copy],index)=><Link prefetch={false} href={href} key={href}><span>{String(index+1).padStart(2,"0")}</span><h2>{title}</h2><p>{copy}</p><b>Open tool →</b></Link>)}</section>
-    <SiteFooter/>
-  </main>;
+  </>;
 }

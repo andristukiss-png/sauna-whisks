@@ -1,6 +1,4 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata = pageMetadata({
@@ -11,8 +9,7 @@ export const metadata = pageMetadata({
 
 export default function ClaimsPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Product claims" }]} />
       <section className="page-hero">
         <p className="section-kicker">CLAIMS STANDARD</p>
@@ -45,8 +42,6 @@ export default function ClaimsPage() {
           <p>No invented ancient-healing language used as a substitute for verifiable product information.</p>
         </article>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }

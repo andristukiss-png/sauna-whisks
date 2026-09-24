@@ -1,8 +1,6 @@
 import { StructuredData } from "@/components/StructuredData";
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import Link from "next/link";
 import { faqTopics } from "@/lib/faqTopics";
 
@@ -35,8 +33,7 @@ export default function FAQPage() {
   };
 
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "FAQ" }]} />
       <StructuredData data={schema} />
       <section className="page-hero">
@@ -61,7 +58,6 @@ export default function FAQPage() {
           </details>
         ))}
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

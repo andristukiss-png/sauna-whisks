@@ -1,9 +1,7 @@
 import { StructuredData } from "@/components/StructuredData";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const metadata = pageMetadata({
@@ -31,9 +29,8 @@ export default function WholesalePage() {
   };
 
   return (
-    <main>
+    <>
       <StructuredData data={faqSchema} />
-      <Header />
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Wholesale" }]} />
       <section className="page-hero dark-page">
         <p className="section-kicker light">TRADE / WHOLESALE</p>
@@ -80,7 +77,6 @@ export default function WholesalePage() {
           messagePlaceholder="Tell us about your business and what products you are interested in..."
         />
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }

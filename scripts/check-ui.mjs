@@ -62,16 +62,36 @@ for (const file of files) {
 
 const header = fs.readFileSync("components/Header.tsx", "utf8");
 if (!header.includes('href="#main-content"')) errors.push("Skip link missing main-content target.");
-if (!header.includes('id="main-content"')) errors.push("Post-header skip target missing.");
-if (!header.includes("tabIndex={-1}")) errors.push("Skip target is not programmatically focusable.");
-if (header.includes('id="main-content"') && header.includes('aria-hidden="true"')) {
-  errors.push("Focusable skip target must not be hidden from assistive technology.");
-}
+if (header.includes('id="main-content"')) errors.push("Header must not own the main-content target.");
 if (!header.includes('aria-label="Mobile navigation"')) errors.push("Mobile navigation landmark label missing.");
 
 const layout = fs.readFileSync("app/layout.tsx", "utf8");
-if (layout.includes('id="main-content"')) {
-  errors.push("Root layout must not place skip target before site navigation.");
+for (const [needle, label] of [
+  ['<Header />', "global header"],
+  ['<main id="main-content" tabIndex={-1}>', "focusable primary main landmark"],
+  ['<SiteFooter />', "global footer"],
+]) {
+  if (!layout.includes(needle)) errors.push("Root layout missing " + label + ".");
+}
+const layoutHeaderIndex = layout.indexOf("<Header />");
+const layoutMainIndex = layout.indexOf('<main id="main-content" tabIndex={-1}>');
+const layoutFooterIndex = layout.indexOf("<SiteFooter />");
+if (!(layoutHeaderIndex >= 0 && layoutHeaderIndex < layoutMainIndex && layoutMainIndex < layoutFooterIndex)) {
+  errors.push("Root layout landmarks must be ordered header -> main -> footer.");
+}
+
+const routePages = walk("app").filter((file) => file.endsWith("page.tsx"));
+for (const file of routePages) {
+  const source = fs.readFileSync(file, "utf8");
+  if (/<Header\s*\/>/.test(source)) errors.push("Route page must not render global Header: " + file);
+  if (/<SiteFooter\s*\/>/.test(source)) errors.push("Route page must not render global SiteFooter: " + file);
+  if (/<main\b/.test(source)) errors.push("Route page must not create a second main landmark: " + file);
+}
+for (const file of ["app/not-found.tsx", "app/error.tsx"]) {
+  const source = fs.readFileSync(file, "utf8");
+  if (/<Header\s*\/>/.test(source)) errors.push("Boundary must not render global Header: " + file);
+  if (/<SiteFooter\s*\/>/.test(source)) errors.push("Boundary must not render global SiteFooter: " + file);
+  if (/<main\b/.test(source)) errors.push("Boundary must not create a second main landmark: " + file);
 }
 
 const a11yFile = "app/a11y.css";
@@ -82,7 +102,7 @@ if (!fs.existsSync(a11yFile)) {
   if (!css.includes(":focus-visible")) errors.push("Global focus-visible treatment missing.");
   if (!css.includes("prefers-reduced-motion")) errors.push("Reduced-motion treatment missing.");
   if (!css.includes(".skip-link:focus")) errors.push("Skip-link focus treatment missing.");
-  if (!css.includes(".skip-target")) errors.push("Skip-target styling missing.");
+  if (!css.includes("#main-content:focus")) errors.push("Main skip-target focus treatment missing.");
 }
 
 for (const file of files) {

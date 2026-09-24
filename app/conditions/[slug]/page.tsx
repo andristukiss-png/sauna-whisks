@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getProductCondition, productConditions } from "@/lib/productConditions";
 
@@ -29,8 +27,7 @@ export default async function ConditionPage({ params }: { params: Promise<{ slug
   if (!item) notFound();
 
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Conditions", href: "/conditions" },
@@ -60,7 +57,6 @@ export default async function ConditionPage({ params }: { params: Promise<{ slug
           {item.related.map((link) => <Link href={link.href} key={link.href}>{link.label} →</Link>)}
         </div>
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }
