@@ -85,7 +85,7 @@ export const siteSearchItems: SiteSearchItem[] = [
     description: article.description,
     href: `/journal/${article.slug}`,
     type: "Guide" as const,
-    keywords: [article.eyebrow]
+    keywords: [article.eyebrow, ...article.sections.map((section) => section.heading)]
   })),
   ...markets.map((market) => ({
     title: market.name,
