@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = pageMetadata({
   title: "Sourcing & Product Standards",
@@ -23,8 +21,7 @@ const standards = [
 
 export default function StandardsPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Standards" }]} />
       <section className="page-hero">
         <p className="section-kicker">OUR STANDARD</p>
@@ -58,7 +55,6 @@ export default function StandardsPage() {
           This standard will evolve as suppliers, import requirements and product testing become more concrete. We would rather leave a field blank than create heritage or harvest claims we cannot support.
         </p>
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }
