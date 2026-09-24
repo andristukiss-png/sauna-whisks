@@ -1,6 +1,4 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { sourceHierarchy } from "@/lib/editorial";
 
@@ -11,8 +9,7 @@ export const metadata = pageMetadata({
 });
 
 export default function EditorialPolicyPage(){
-  return <main>
-    <Header/>
+  return <>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Editorial policy"}]}/>
     <section className="page-hero">
       <p className="section-kicker">EDITORIAL POLICY</p>
@@ -31,6 +28,5 @@ export default function EditorialPolicyPage(){
       <h2>Source-backed fact, commercial plan and opinion should not be blended.</h2>
       <p>Pre-launch pricing, assortment and market plans are labeled as plans. Product origin and supplier details are published only when verified. Unsupported health claims are excluded.</p>
     </section>
-    <SiteFooter/>
-  </main>;
+  </>;
 }
