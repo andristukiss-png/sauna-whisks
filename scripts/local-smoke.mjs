@@ -500,6 +500,13 @@ await expectJson("/api/search?q=birch", (body, response) => {
   expectHeader(response, "cache-control", "no-store", "/api/search");
 });
 
+await expectJson("/api/search?q=venik", (body) => {
+  if (!Array.isArray(body.results) || body.results.length === 0) fail("/api/search returned no venik results");
+  if (body.results[0]?.href !== "/glossary/venik") {
+    fail("/api/search must rank the exact Venik glossary entry first");
+  }
+});
+
 const apiIndexResponse = await request("/api");
 expectStatus(apiIndexResponse, 200, "/api");
 expectHeader(apiIndexResponse, "content-type", "application/json", "/api");
