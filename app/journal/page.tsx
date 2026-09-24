@@ -25,8 +25,13 @@ export default function JournalPage() {
       <div className="journal-topic-link">
         <Link className="text-link" href="/journal/topics">Browse by topic →</Link>
       </div>
-      <JournalSearch items={articles.map(({ slug, title, eyebrow, description, readTime }) => ({
-        slug, title, eyebrow, description, readTime
+      <JournalSearch items={articles.map(({ slug, title, eyebrow, description, readTime, sections }) => ({
+        slug,
+        title,
+        eyebrow,
+        description,
+        readTime,
+        headings: sections.map((section) => section.heading),
       }))} />
     </>
   );

@@ -10,6 +10,7 @@ type JournalItem = {
   eyebrow: string;
   description: string;
   readTime: string;
+  headings: string[];
 };
 
 export function JournalSearch({ items }: { items: JournalItem[] }) {
@@ -22,7 +23,7 @@ export function JournalSearch({ items }: { items: JournalItem[] }) {
 
     const tokens = normalized.split(" ");
     return items.filter((item) => {
-      const haystack = [item.title, item.eyebrow, item.description]
+      const haystack = [item.title, item.eyebrow, item.description, ...item.headings]
         .join(" ")
         .normalize("NFKC")
         .toLowerCase();

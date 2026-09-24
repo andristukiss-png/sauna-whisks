@@ -196,8 +196,14 @@ for (const [needle, label] of [
   ["normalizeSearchQuery(query)", "shared query normalization"],
   ['normalized.split(" ")', "multi-token query matching"],
   ["tokens.every((token) => haystack.includes(token))", "all-token journal matching"],
+  ["...item.headings", "journal section-heading search coverage"],
 ]) {
   if (!journalSearch.includes(needle)) errors.push("Journal search missing " + label + ".");
+}
+
+const journalPage = fs.readFileSync("app/journal/page.tsx", "utf8");
+if (!journalPage.includes("headings: sections.map((section) => section.heading)")) {
+  errors.push("Journal page must pass article section headings into journal search.");
 }
 
 const siteSearch = fs.readFileSync("components/SiteSearch.tsx", "utf8");
