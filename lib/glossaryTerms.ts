@@ -15,6 +15,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     related: [{ label: "What is a sauna whisk?", href: "/journal/what-is-a-sauna-whisk" }, { label: "Shop", href: "/shop" }]
   },
   {
+    slug: "sauna-broom",
+    term: "Sauna broom",
+    definition: "A secondary English term used for the same broad product category as a sauna whisk.",
+    context: "The term appears in English-language listings and searches. SaunaWhisks.com uses sauna whisk as the primary category name while treating sauna broom as a useful search synonym.",
+    related: [{ label: "Sauna whisk definition", href: "/glossary/sauna-whisk" }, { label: "Whisk vs sauna broom", href: "/journal/sauna-whisk-vs-sauna-broom" }]
+  },
+  {
     slug: "pirts",
     term: "Pirts",
     definition: "The Latvian bathhouse tradition and practice involving heat, steam, water, touch and extensive use of plants.",
