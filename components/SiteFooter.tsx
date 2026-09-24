@@ -2,6 +2,8 @@ import Link from "next/link";
 import { LeafMark } from "./LeafMark";
 
 export function SiteFooter() {
+  const currentYear = new Date().getUTCFullYear();
+
   return (
     <footer>
       <div className="footer-brand">
@@ -84,7 +86,7 @@ export function SiteFooter() {
 
       <div className="footer-note">
         <span>Traditional sauna culture, presented with modern standards.</span>
-        <small>© 2026 SaunaWhisks.com</small>
+        <small>© {currentYear} SaunaWhisks.com</small>
       </div>
     </footer>
   );
