@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EnquiryForm } from "@/components/EnquiryForm";
+import site from "@/config/site.json";
 
 export const metadata = pageMetadata({
   title: "Wholesale Sauna Whisks",
@@ -68,7 +69,7 @@ export default function WholesalePage() {
         <h2>Tell us what you operate.</h2>
         <p>
           Include your business type, country and approximate monthly requirement.
-          We will reply from info@SaunaWhisks.com.
+          We will reply from {site.publicEmail}.
         </p>
         <EnquiryForm
           subject="SaunaWhisks.com wholesale enquiry"
