@@ -9,6 +9,7 @@ const required = [
   "docs/SUPPLIER_SCORECARD.md",
   "docs/PRODUCT_DATA.md",
   "docs/BRAND_VOICE.md",
+  "docs/STRATEGY.md",
   "docs/SEO_MAP.md",
   "docs/EMAIL_SETUP.md",
   "docs/DEPLOYMENT.md",
