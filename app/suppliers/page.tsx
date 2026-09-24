@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const metadata = pageMetadata({
@@ -13,8 +11,7 @@ export const metadata = pageMetadata({
 
 export default function SuppliersPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Suppliers" }]} />
       <section className="page-hero">
         <p className="section-kicker">SUPPLIERS / PRODUCERS</p>
@@ -52,8 +49,6 @@ export default function SuppliersPage() {
           messagePlaceholder="Describe your products, production season, MOQ and export experience..."
         />
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
