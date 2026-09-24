@@ -164,6 +164,20 @@ for (const [file, context, label] of contextualStatusChecks) {
   if (!source.includes(context)) errors.push(label + " missing contextual status text.");
 }
 
+const landedCostCalculator = fs.readFileSync("components/LandedCostCalculator.tsx", "utf8");
+for (const [needle, label] of [
+  ["function finiteResult", "finite result helper"],
+  ["Number.isFinite(value) ? value : null", "finite computed-result guard"],
+  ['calc.margin === null ? "—"', "non-finite margin fallback"],
+  ["calc.hasInvalidResult", "invalid computed-result state"],
+  ["Enter smaller finite values", "non-finite calculator guidance"],
+  ['aria-atomic="true"', "atomic calculator status"],
+]) {
+  if (!landedCostCalculator.includes(needle)) {
+    errors.push("Landed cost calculator missing " + label + ".");
+  }
+}
+
 const tradeDemandEstimator = fs.readFileSync("components/TradeDemandEstimator.tsx", "utf8");
 for (const [needle, label] of [
   ["Number.isFinite(parsed)", "finite input guard"],
