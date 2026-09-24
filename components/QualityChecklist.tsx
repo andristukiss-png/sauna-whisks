@@ -20,7 +20,10 @@ export function QualityChecklist() {
   return (
     <div className="quality-tool">
       <div className="quality-score">
-        <span role="status" aria-live="polite">{count}/{items.length}</span>
+        <span role="status" aria-live="polite" aria-atomic="true">
+          <span aria-hidden="true">{count}/{items.length}</span>
+          <span className="sr-only">{count} of {items.length} checks complete</span>
+        </span>
         <p>checks complete</p>
         <button type="button" onClick={() => setChecked(items.map(() => false))}>Reset</button>
       </div>
