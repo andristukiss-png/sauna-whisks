@@ -4,6 +4,21 @@ const nextConfig = fs.readFileSync("next.config.ts", "utf8");
 const redirects = JSON.parse(fs.readFileSync("config/redirects.json", "utf8"));
 const errors = [];
 
+const requiredStrategyRedirects = new Map([
+  ["/birch-sauna-whisk", "/shop/baltic-birch"],
+  ["/oak-sauna-whisk", "/shop/baltic-oak"],
+  ["/eucalyptus-sauna-whisk", "/shop/eucalyptus"],
+  ["/sauna-whisk-sets", "/shop/discovery-trio"],
+  ["/what-is-a-sauna-whisk", "/journal/what-is-a-sauna-whisk"],
+  ["/how-to-use-a-sauna-whisk", "/journal/how-to-use-a-sauna-whisk"],
+  ["/how-to-soak-a-sauna-whisk", "/journal/how-to-prepare-dried-sauna-whisk"],
+  ["/sauna-whisk-vs-sauna-broom", "/journal/sauna-whisk-vs-sauna-broom"],
+  ["/venik-guide", "/journal/venik-vihta-vasta"],
+  ["/vihta-vs-vasta", "/journal/venik-vihta-vasta"],
+  ["/birch-vs-oak-sauna-whisk", "/journal/birch-vs-oak-sauna-whisk"],
+]);
+
+
 if (!Array.isArray(redirects) || redirects.length === 0) {
   errors.push("Redirect registry must be a non-empty array.");
 }
@@ -35,6 +50,13 @@ for (const item of redirects) {
     errors.push("Duplicate redirect source: " + source);
   }
   seen.add(source);
+}
+
+for (const [source, destination] of requiredStrategyRedirects) {
+  const configured = redirects.find((item) => item?.source === source)?.destination;
+  if (configured !== destination) {
+    errors.push("Missing or incorrect strategy redirect: " + source + " -> " + destination);
+  }
 }
 
 const destinations = new Map(
