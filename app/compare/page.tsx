@@ -33,16 +33,28 @@ export default function ComparePage() {
       </section>
 
       <section className="compare-wrap">
-        <div className="compare-table">
-          <div className="compare-head"><span></span><b>Birch</b><b>Oak</b><b>Eucalyptus</b></div>
-          {rows.map(([label, birch, oak, eucalyptus]) => (
-            <div className="compare-row" key={label}>
-              <span>{label}</span>
-              <p>{birch}</p>
-              <p>{oak}</p>
-              <p>{eucalyptus}</p>
-            </div>
-          ))}
+        <div className="compare-table-scroll">
+          <table className="compare-table">
+            <caption className="visually-hidden">Sauna whisk material comparison</caption>
+            <thead>
+              <tr>
+                <th scope="col"><span className="visually-hidden">Attribute</span></th>
+                <th scope="col">Birch</th>
+                <th scope="col">Oak</th>
+                <th scope="col">Eucalyptus</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(([label, birch, oak, eucalyptus]) => (
+                <tr key={label}>
+                  <th scope="row">{label}</th>
+                  <td>{birch}</td>
+                  <td>{oak}</td>
+                  <td>{eucalyptus}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <div className="compare-summary">
