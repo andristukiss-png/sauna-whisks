@@ -22,7 +22,8 @@ Latvian origin is already marketed explicitly by a US sauna specialist for birch
 | The Sauna Place | Herb whisks / Rento whisks in accessories collection | US$14.90–20 in visible examples | Mixed own-brand / Rento assortment | Whisks sit inside a much broader sauna-accessories business |
 | FinnStyle | Rento Sauna Dried Birch Whisk | US$28.00 | Dried birch; listed as made in Finland; in stock when checked | Higher-priced branded benchmark using “Sauna Dried Birch Whisk” |
 | FinnStyle | Rento Sauna Dried Eucalyptus Whisk | US$26.00 | Dried eucalyptus; listed as made in Finland; in stock when checked | Supports eucalyptus as a standalone commercial whisk |
-| SUPER VENIK | Cherry / Rowan / Viburnum / Raspberry / Plum Sauna Whisks | US$20.00 each in examples checked | Natural branch products; individual product pages describe hand assembly | Specialist competitor uses broad botanical assortment and “Sauna Whisk” product names |
+| FinnStyle | ØNSKE Birch Sauna Whisk | US$17.95 sale / US$29.95 list | Dried birch; listed as made in Europe; in stock when checked | Shows promotional discounting can materially distort a single observed retail price |
+| SUPER VENIK | Cherry / Rowan / Viburnum Sauna Whisks | US$20.00 each in examples checked | Natural branch products; individual product pages describe hand assembly | Specialist competitor uses broad botanical assortment and “Sauna Whisk” product names |
 | Harvia US | Sauna whisk birch | No current retail price used | Product page exists but lifecycle is marked Discontinued | Useful terminology evidence, not a current price benchmark |
 
 ### Sources
@@ -33,6 +34,7 @@ Latvian origin is already marketed explicitly by a US sauna specialist for birch
 - The Sauna Place — Signs, Whisks & Misc. Sauna Accessories: https://www.saunaplace.com/collections/signs-whisks-misc-sauna-accessories
 - FinnStyle — Rento Sauna Dried Birch Whisk: https://finnstyle.com/products/rento-birch-sauna-whisk
 - FinnStyle — Rento Sauna Dried Eucalyptus Whisk: https://finnstyle.com/products/rento-eucalyptus-scent-sauna-whisk
+- FinnStyle — ØNSKE Birch Sauna Whisk: https://finnstyle.com/products/onske-birch-sauna-whisk
 - FinnStyle — Rento collection: https://finnstyle.com/collections/rentosauna
 - SUPER VENIK — homepage: https://www.supervenik.com/
 - SUPER VENIK — wholesale: https://www.supervenik.com/wholesale
@@ -43,20 +45,27 @@ Latvian origin is already marketed explicitly by a US sauna specialist for birch
 
 Etsy currently exposes a broad, inconsistent naming and price environment.
 
-The Sauna Whisk marketplace page showed **150+ items** in the snapshot. Visible examples mixed terms such as **whisk**, **broom**, **venik**, **vihta** and **vasta**, sometimes all inside one marketplace title.
+Marketplace result counts vary by query, locale and time. In this snapshot, Etsy exposed **226+ items** for “sauna birch” and **114+ items** for “sauna birch broom”. Visible listings mixed terms such as **whisk**, **broom** and **venik**, often in the same title.
 
 Visible examples included:
 
-- oak whisk/broom/venik at US$13.50 sale price
-- a two-pack birch sauna broom at US$33.44
-- an aromatic banya venik / vihta / vasta / sauna whisk starting at US$12
-- a birch/linden/oak mixed-title listing at US$20
-- an oak sauna whisk at US$60 sale price
-- larger multipacks at materially higher order values
+- a two-pack birch sauna broom at about US$34
+- a single birch sauna whisk at US$35
+- a single oak whisk/broom/venik at US$15
+- a set of 12 birch whisks at US$139 (about US$11.58 each)
+- a set of 10 birch whisks at US$134.94 (about US$13.49 each)
+- a set of 25 birch whisks at US$293.94 (about US$11.76 each)
+- a 12-piece mixed 6 oak + 6 birch set at US$139 (about US$11.58 each)
+- a 10-piece birch/oak/eucalyptus set at US$201.59+
 
-Source:
-- Etsy — Sauna Whisk marketplace: https://www.etsy.com/market/sauna_whisk
-- Example multi-synonym listing: https://www.etsy.com/listing/4303660003/super-aromatic-banya-venik
+These are listing examples, not a representative statistical sample. Sale pricing, shipping inclusion, quality, harvest year, seller location and pack configuration differ substantially.
+
+Sources:
+- Etsy — Sauna Birch marketplace: https://www.etsy.com/market/sauna_birch
+- Etsy — Sauna Birch Broom marketplace: https://www.etsy.com/market/sauna_birch_broom
+- Etsy — Venik Sauna marketplace: https://www.etsy.com/market/venik_sauna
+- Etsy — 6 oak + 6 birch example: https://www.etsy.com/listing/1760660686/6-oak-6-birch-brooms-whisks-venik
+- Etsy — 10 birch/oak/eucalyptus example: https://www.etsy.com/listing/923170436/set-of-10-sauna-whisk-brooms-birch-oak
 
 ### Interpretation
 
@@ -140,7 +149,9 @@ Observed specialist single-whisk examples in this snapshot:
 - lower specialist anchor: **US$14.90**
 - common specialty example: **US$20**
 - branded Rento examples: **US$26–28**
-- marketplace: materially wider, with selected visible examples from **US$12 to US$60** before considering packs/bundles
+- promotional specialist example: **US$17.95 sale / US$29.95 list**, illustrating why sale prices should be separated from regular-price benchmarks
+- marketplace singles in the examples checked: roughly **US$15–35**
+- marketplace bulk examples in the samples checked: roughly **US$11–14 per whisk** for selected 10–25 unit packs, before normalizing shipping, quality and product condition
 
 Current SaunaWhisks.com planned single prices (US$24 / US$28 / US$29) sit near the upper half of the observed specialist range.
 
