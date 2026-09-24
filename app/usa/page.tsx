@@ -3,8 +3,9 @@ import Link from "next/link";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { getMarket } from "@/lib/markets";
 
-const usMarket = getMarket("united-states");
-if (!usMarket) throw new Error("United States market configuration is missing.");
+const usMarketConfig = getMarket("united-states");
+if (!usMarketConfig) throw new Error("United States market configuration is missing.");
+const usMarket = usMarketConfig;
 
 export const metadata = pageMetadata({
   title: "Sauna Whisks USA — Planned US Launch",
