@@ -52,6 +52,9 @@ const sharedRequirements = [
 for (const requirement of sharedRequirements) {
   if (!searchHelper.includes(requirement)) errors.push("Search helper missing: " + requirement);
 }
+for (const needle of ["titleTokenMatches", "keywordTokenMatches", "descriptionTokenMatches"]) {
+  if (!searchHelper.includes(needle)) errors.push("Search helper missing token-aware ranking signal: " + needle);
+}
 if (!searchApi.includes("filterSiteSearchItems")) errors.push("Search API bypasses shared search helper.");
 if (!searchUi.includes("filterSiteSearchItems")) errors.push("Search UI bypasses shared search helper.");
 if (!text.includes("...article.sections.map((section) => section.heading)")) errors.push("Article section headings are missing from site-search keywords.");

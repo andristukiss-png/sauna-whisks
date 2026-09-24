@@ -34,7 +34,15 @@ function searchScore(item: SiteSearchItem, query: string) {
   if (keywords.some((keyword) => keyword.startsWith(query))) return 40;
   if (description.includes(query)) return 30;
   if (keywords.some((keyword) => keyword.includes(query))) return 20;
-  return 10;
+
+  const tokens = query.split(" ");
+  const titleTokenMatches = tokens.filter((token) => title.includes(token)).length;
+  const keywordTokenMatches = tokens.filter((token) =>
+    keywords.some((keyword) => keyword.includes(token))
+  ).length;
+  const descriptionTokenMatches = tokens.filter((token) => description.includes(token)).length;
+
+  return 10 + titleTokenMatches * 8 + keywordTokenMatches * 5 + descriptionTokenMatches * 2;
 }
 
 export function filterSiteSearchItems(
