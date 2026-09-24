@@ -1,11 +1,8 @@
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export default function NotFound() {
   return (
-    <main>
-      <Header />
+    <>
       <section className="not-found">
         <p className="section-kicker">404 / LOST IN THE FOREST</p>
         <h1>This branch does not exist.</h1>
@@ -17,7 +14,6 @@ export default function NotFound() {
           <Link className="text-link" href="/help">Open help →</Link>
         </div>
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }
