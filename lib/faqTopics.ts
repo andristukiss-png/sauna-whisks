@@ -1,3 +1,5 @@
+import { launchStatus } from "@/lib/status";
+
 export type FAQTopic = {
   slug: string;
   title: string;
@@ -44,7 +46,9 @@ export const faqTopics: FAQTopic[] = [
     title: "Shipping & availability",
     description: "Questions about launch timing, countries and plant-product logistics.",
     items: [
-      ["Are orders open?", "No. SaunaWhisks.com is still pre-launch and does not currently accept payment."],
+      ["Are orders open?", launchStatus.checkoutEnabled
+        ? "Yes. Checkout is currently enabled for available products and markets."
+        : `No. SaunaWhisks.com is still ${launchStatus.status} and does not currently accept payment.`],
       ["Will you ship to the US?", "The US is a priority market, but every commercial plant-product SKU must be checked before sales open."],
       ["Why not ship everywhere immediately?", "Plant-product rules, shipping cost, tax and fulfilment differ by country and product condition."],
       ["Can I ask about my country?", "Yes. Use the shipping enquiry form and tell us your country and product interest."]
