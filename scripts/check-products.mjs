@@ -33,6 +33,13 @@ for (const [index, block] of blocks.entries()) {
   if (!block.includes("availableForPurchase: false")) {
     errors.push("Product block " + (index + 1) + " must remain unavailable before launch.");
   }
+  const name = block.match(/name:\s*"([^"]+)"/)?.[1] || "";
+  if (!name.endsWith("Sauna Whisk")) {
+    errors.push("Product block " + (index + 1) + " must use Sauna Whisk in the customer-facing product name.");
+  }
+  if (/\b(?:Latvian|Baltic)\b/.test(name) && /(origin pending|origin to be confirmed)/i.test(block)) {
+    errors.push("Product block " + (index + 1) + " must not put an unverified geographic origin in the product name.");
+  }
 }
 
 const bundle = fs.readFileSync("lib/bundles.ts", "utf8");
@@ -63,7 +70,7 @@ if (fs.readFileSync("app/api/catalog/route.ts", "utf8").includes('plannedPrice: 
   errors.push("Catalog API reintroduced a conflicting Discovery Trio price.");
 }
 
-if (!source.includes('slug: "baltic-oak"')) errors.push("Baltic Oak product is missing.");
+if (!source.includes('slug: "baltic-oak"')) errors.push("Stable oak product slug is missing.");
 if (source.includes("Latvian Oak")) errors.push("Unverified Latvian Oak naming reintroduced.");
 
 if (errors.length) {
