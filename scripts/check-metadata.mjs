@@ -77,11 +77,19 @@ if (/twitter:\s*\{[\s\S]*?title:/s.test(layout)) {
 const homePage = fs.readFileSync("app/page.tsx", "utf8");
 if (!homePage.includes("openGraph:")) errors.push("Homepage-specific Open Graph metadata missing.");
 if (!homePage.includes("twitter:")) errors.push("Homepage-specific Twitter metadata missing.");
+const rootDefaultTitle = layout.match(/default:\s*"([^"]+)"/)?.[1];
+const homeOpenGraphTitle = homePage.match(/openGraph:\s*\{[\s\S]*?title:\s*"([^"]+)"/)?.[1];
+const homeTwitterTitle = homePage.match(/twitter:\s*\{[\s\S]*?title:\s*"([^"]+)"/)?.[1];
+if (!rootDefaultTitle || rootDefaultTitle !== homeOpenGraphTitle || rootDefaultTitle !== homeTwitterTitle) {
+  errors.push("Homepage HTML, Open Graph and Twitter titles must stay aligned.");
+}
 
 const socialImages = [
   "app/opengraph-image.tsx",
   "app/twitter-image.tsx",
 ];
+
+const expectedSocialAlt = "Sauna Whisks — Sauna ritual knowledge from Latvia";
 
 for (const file of socialImages) {
   if (!fs.existsSync(file)) {
@@ -90,6 +98,9 @@ for (const file of socialImages) {
   }
   const source = fs.readFileSync(file, "utf8");
   if (!source.includes("export const alt =")) errors.push("Social image missing alt text: " + file);
+  if (!source.includes(`export const alt = "${expectedSocialAlt}"`)) {
+    errors.push("Social image alt must match homepage positioning: " + file);
+  }
   if (!source.includes("width: 1200") || !source.includes("height: 630")) {
     errors.push("Social image must remain 1200x630: " + file);
   }
