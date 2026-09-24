@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { articleTopics, getArticleTopic, getTopicArticles } from "@/lib/articleTopics";
 
@@ -30,8 +28,7 @@ export default async function JournalTopicPage({ params }: { params: Promise<{ s
   const topicArticles = getTopicArticles(slug);
 
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Journal", href: "/journal" },
@@ -56,7 +53,6 @@ export default async function JournalTopicPage({ params }: { params: Promise<{ s
           </Link>
         ) : null)}
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }
