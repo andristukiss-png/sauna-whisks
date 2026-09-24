@@ -77,6 +77,12 @@ if (/twitter:\s*\{[\s\S]*?title:/s.test(layout)) {
 const homePage = fs.readFileSync("app/page.tsx", "utf8");
 if (!homePage.includes("openGraph:")) errors.push("Homepage-specific Open Graph metadata missing.");
 if (!homePage.includes("twitter:")) errors.push("Homepage-specific Twitter metadata missing.");
+const rootDefaultTitle = layout.match(/default:\s*"([^"]+)"/)?.[1];
+const homeOpenGraphTitle = homePage.match(/openGraph:\s*\{[\s\S]*?title:\s*"([^"]+)"/)?.[1];
+const homeTwitterTitle = homePage.match(/twitter:\s*\{[\s\S]*?title:\s*"([^"]+)"/)?.[1];
+if (!rootDefaultTitle || rootDefaultTitle !== homeOpenGraphTitle || rootDefaultTitle !== homeTwitterTitle) {
+  errors.push("Homepage HTML, Open Graph and Twitter titles must stay aligned.");
+}
 
 const socialImages = [
   "app/opengraph-image.tsx",
