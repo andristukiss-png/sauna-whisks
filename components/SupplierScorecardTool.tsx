@@ -25,7 +25,10 @@ export function SupplierScorecardTool(){
 
   return <div className="scorecard-tool">
     <aside className="scorecard-summary">
-      <span role="status" aria-live="polite">{total}/{max}</span>
+      <span role="status" aria-live="polite" aria-atomic="true">
+        <span aria-hidden="true">{total}/{max}</span>
+        <span className="sr-only">Supplier score {total} of {max}; {complete} of {criteria.length} criteria scored</span>
+      </span>
       <p>{complete}/{criteria.length} criteria scored</p>
       <small>Internal comparison tool only. A score does not replace evidence.</small>
       <button type="button" onClick={()=>setScores(criteria.map(()=>0))}>Reset</button>
