@@ -1,3 +1,4 @@
+import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
@@ -29,10 +30,7 @@ export default function ShopPage() {
 
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema).replace(/</g, "\\u003c") }}
-      />
+      <StructuredData data={itemListSchema} />
       <Header />
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop" }]} />
       <section className="page-hero">
