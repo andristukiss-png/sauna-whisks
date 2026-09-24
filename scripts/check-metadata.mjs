@@ -89,6 +89,8 @@ const socialImages = [
   "app/twitter-image.tsx",
 ];
 
+const expectedSocialAlt = "Sauna Whisks — Sauna ritual knowledge from Latvia";
+
 for (const file of socialImages) {
   if (!fs.existsSync(file)) {
     errors.push("Missing social image route: " + file);
@@ -96,6 +98,9 @@ for (const file of socialImages) {
   }
   const source = fs.readFileSync(file, "utf8");
   if (!source.includes("export const alt =")) errors.push("Social image missing alt text: " + file);
+  if (!source.includes(`export const alt = "${expectedSocialAlt}"`)) {
+    errors.push("Social image alt must match homepage positioning: " + file);
+  }
   if (!source.includes("width: 1200") || !source.includes("height: 630")) {
     errors.push("Social image must remain 1200x630: " + file);
   }
