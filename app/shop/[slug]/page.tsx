@@ -150,7 +150,7 @@ export default async function WhiskPage({ params }: { params: Promise<{ slug: st
         ))}
       </section>
 
-      <section className="product-enquiry" id="product-enquiry">
+      <section className="product-enquiry" id="product-enquiry" tabIndex={-1}>
         <p className="section-kicker">PRODUCT ENQUIRY</p>
         <h2>Ask about {whisk.name}.</h2>
         <p>
