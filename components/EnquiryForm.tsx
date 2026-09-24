@@ -68,7 +68,7 @@ export function EnquiryForm({
       country: String(form.get("country") || "").trim(),
       quantity: String(form.get("quantity") || "").trim(),
       pageUrl: window.location.href,
-      startedAt: String(startedAt.current),
+      elapsedMs: String(startedAt.current ? Math.max(0, Date.now() - startedAt.current) : 0),
     };
 
     setStatus("sending");
