@@ -20,20 +20,20 @@ export function WhiskFinder() {
     }
     if (feel === "firm") {
       return {
-        name: "Baltic Oak",
+        name: "Oak Sauna Whisk",
         copy: "Oak is the clearest choice when you want a broader, denser and firmer whisk.",
         href: "/shop/baltic-oak",
       };
     }
     if (feel === "aroma") {
       return {
-        name: "Eucalyptus",
+        name: "Eucalyptus Sauna Whisk",
         copy: "Eucalyptus is the aroma-led choice in the planned core assortment.",
         href: "/shop/eucalyptus",
       };
     }
     return {
-      name: "Baltic Birch",
+      name: "Birch Sauna Whisk",
       copy: experience === "new"
         ? "Birch is the classic first reference point: softer, leafy and easy to understand."
         : "Birch remains the traditional benchmark when you prefer a softer whisk.",
