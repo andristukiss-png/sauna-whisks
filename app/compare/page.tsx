@@ -35,10 +35,10 @@ export default function ComparePage() {
       <section className="compare-wrap">
         <div className="compare-table-scroll">
           <table className="compare-table">
-            <caption className="visually-hidden">Sauna whisk material comparison</caption>
+            <caption className="sr-only">Sauna whisk material comparison</caption>
             <thead>
               <tr>
-                <th scope="col"><span className="visually-hidden">Attribute</span></th>
+                <th scope="col"><span className="sr-only">Attribute</span></th>
                 <th scope="col">Birch</th>
                 <th scope="col">Oak</th>
                 <th scope="col">Eucalyptus</th>
