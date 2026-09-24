@@ -47,6 +47,12 @@ Redirects must remain local, direct, and single-hop. Add legacy paths to `config
 - Render JSON-LD only through `components/StructuredData.tsx`; do not add direct `dangerouslySetInnerHTML` elsewhere.
 - Build canonical URLs from `config/site.json`, not repeated host strings.
 
+## Machine-readable routes
+
+- Route-handler surfaces outside `app/api` (feeds, `llms.txt`, `humans.txt`, `security.txt`) are discovered automatically and must be listed in `lib/publicData.ts`.
+- JSON machine routes use `publicJson`; text/XML machine routes use `publicText`.
+- Next special routes `sitemap.xml` and `robots.txt` remain explicit registry entries and are validated separately.
+
 ## API routes
 
 - Public GET routes under `app/api` are discovered automatically. Add every public route to `lib/publicData.ts`; CI rejects unregistered API surfaces.
