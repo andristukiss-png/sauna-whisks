@@ -90,6 +90,7 @@ for (const [needle, label] of [
   ["market.name", "shared market name"],
   ["market.status", "shared market status"],
   ["market.logistics", "shared market logistics"],
+  ["getMarketPath(market)", "canonical market-page links"],
 ]) {
   if (!shippingPage.includes(needle)) errors.push("Shipping page missing " + label + ".");
 }
