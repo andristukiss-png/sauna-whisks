@@ -20,7 +20,7 @@ export const saunaWhisks: SaunaWhisk[] = [
     name: "Birch Sauna Whisk",
     latin: "Betula",
     material: "Birch",
-    origin: "Baltic region — final supplier/harvest origin pending",
+    origin: "Origin to be verified",
     character: "Soft, aromatic, traditional",
     description:
       "The classic sauna whisk. Birch leaves create a soft, fragrant ritual and are often the easiest starting point for people new to whisking.",
@@ -41,7 +41,7 @@ export const saunaWhisks: SaunaWhisk[] = [
     name: "Oak Sauna Whisk",
     latin: "Quercus",
     material: "Oak",
-    origin: "Baltic region — final supplier/harvest origin pending",
+    origin: "Origin to be verified",
     character: "Firm, broad-leafed, enduring",
     description:
       "Oak offers a fuller, denser feel than birch. Its broad leaves move heat effectively and suit sauna users who prefer a stronger ritual.",
@@ -62,7 +62,7 @@ export const saunaWhisks: SaunaWhisk[] = [
     name: "Eucalyptus Sauna Whisk",
     latin: "Eucalyptus",
     material: "Eucalyptus",
-    origin: "Producer and harvest origin to be confirmed",
+    origin: "Origin to be verified",
     character: "Aromatic, cooling, vivid",
     description:
       "A highly aromatic whisk for sauna users who want a strong botanical scent and a more contemporary ritual experience.",
