@@ -2,16 +2,24 @@
 
 import { useMemo, useState } from "react";
 
+function finiteNonNegative(value: string) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? Math.max(0, parsed) : null;
+}
+
 export function TradeDemandEstimator(){
   const [sessions,setSessions]=useState("20");
   const [whisksPerSession,setWhisksPerSession]=useState("2");
   const [usesPerWhisk,setUsesPerWhisk]=useState("1");
 
   const monthly=useMemo(()=>{
-    const s=Math.max(0,Number(sessions)||0);
-    const w=Math.max(0,Number(whisksPerSession)||0);
-    const u=Math.max(1,Number(usesPerWhisk)||1);
-    return Math.ceil((s*w*4.33)/u);
+    const s=finiteNonNegative(sessions);
+    const w=finiteNonNegative(whisksPerSession);
+    const uses=finiteNonNegative(usesPerWhisk);
+    if (s === null || w === null || uses === null) return null;
+
+    const estimate=(s*w*4.33)/Math.max(1,uses);
+    return Number.isFinite(estimate) ? Math.ceil(estimate) : null;
   },[sessions,whisksPerSession,usesPerWhisk]);
 
   return <div className="demand-estimator">
@@ -23,8 +31,12 @@ export function TradeDemandEstimator(){
     <div className="demand-result">
       <span>WORKING MONTHLY REQUIREMENT</span>
       <b role="status" aria-live="polite" aria-atomic="true">
-        <span aria-hidden="true">{monthly}</span>
-        <span className="sr-only">Estimated monthly requirement: {monthly} whisks per month</span>
+        <span aria-hidden="true">{monthly ?? "—"}</span>
+        <span className="sr-only">
+          {monthly === null
+            ? "Enter finite numeric values to calculate a monthly requirement."
+            : `Estimated monthly requirement: ${monthly} whisks per month`}
+        </span>
       </b>
       <p>whisks / month</p>
       <small>Uses 4.33 weeks/month. Real consumption depends on material, venue practice and whether reuse is appropriate.</small>
