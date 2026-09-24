@@ -1,5 +1,6 @@
 import { discoverDynamicPageFiles, discoverStaticPageRoutes } from "./route-utils.mjs";
 import { discoverApiRoutes } from "./api-route-utils.mjs";
+import { discoverMachineRoutes } from "./machine-route-utils.mjs";
 import fs from "node:fs";
 
 const dataFiles = [
@@ -47,6 +48,18 @@ if (duplicateApiPaths.length) {
 for (const { file, path: routePath } of discoveredApiRoutes) {
   if (routePath.includes("[") || routePath.includes("]")) {
     errors.push("Dynamic API routes are not part of the current public-data contract: " + file);
+  }
+}
+
+const discoveredMachineRoutes = discoverMachineRoutes();
+const machinePaths = discoveredMachineRoutes.map(({ path }) => path);
+const duplicateMachinePaths = machinePaths.filter((route, index) => machinePaths.indexOf(route) !== index);
+if (duplicateMachinePaths.length) {
+  errors.push("Duplicate discovered machine path(s): " + [...new Set(duplicateMachinePaths)].join(", "));
+}
+for (const { file, path: routePath } of discoveredMachineRoutes) {
+  if (routePath.includes("[") || routePath.includes("]")) {
+    errors.push("Dynamic machine routes are not part of the current public-data contract: " + file);
   }
 }
 

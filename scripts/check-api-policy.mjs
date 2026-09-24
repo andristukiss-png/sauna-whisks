@@ -1,12 +1,6 @@
 import fs from "node:fs";
 import { discoverApiRoutes } from "./api-route-utils.mjs";
-
-const publicTextRoutes = [
-  "app/feed.xml/route.ts",
-  "app/llms.txt/route.ts",
-  "app/humans.txt/route.ts",
-  "app/.well-known/security.txt/route.ts"
-];
+import { discoverMachineRoutes } from "./machine-route-utils.mjs";
 
 const errors = [];
 
@@ -40,14 +34,19 @@ for (const { file, path } of discoverApiRoutes()) {
   }
 }
 
-const jsonFeed = fs.readFileSync("app/feed.json/route.ts", "utf8");
-if (!jsonFeed.includes("publicJson")) {
-  errors.push("JSON Feed missing shared public JSON response helper.");
-}
-
-for (const file of publicTextRoutes) {
+for (const { file, path } of discoverMachineRoutes()) {
   const text = fs.readFileSync(file, "utf8");
-  if (!text.includes("publicText")) errors.push("Public text/feed route missing shared response helper: " + file);
+  if (!/export\s+(?:async\s+)?function\s+GET\b/.test(text)) {
+    errors.push("Machine route must export GET: " + file);
+  }
+
+  if (path.endsWith(".json")) {
+    if (!text.includes("publicJson")) {
+      errors.push("JSON machine route missing shared public JSON response helper: " + file);
+    }
+  } else if (!text.includes("publicText")) {
+    errors.push("Public text/feed route missing shared response helper: " + file);
+  }
 }
 
 const nextConfig = fs.readFileSync("next.config.ts", "utf8");
