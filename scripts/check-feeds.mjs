@@ -28,7 +28,9 @@ const jsonRequirements = [
   ['feed_url: `${site.origin}/feed.json`', "JSON Feed configured canonical URL"],
   ['language: "en"', "JSON Feed language"],
   ["content_text: article.description", "JSON Feed required item content"],
-  ["publicJson", "shared public JSON response helper"],
+  ["publicText", "shared public text response helper"],
+  ["JSON.stringify(feed)", "JSON Feed serialization"],
+  ['contentType: "application/feed+json; charset=utf-8"', "JSON Feed media type"],
 ];
 
 for (const [needle, label] of jsonRequirements) {
@@ -37,6 +39,9 @@ for (const [needle, label] of jsonRequirements) {
 
 if (!layout.includes('"application/rss+xml": `${site.origin}/feed.xml`')) {
   errors.push("Root metadata does not advertise the configured RSS feed.");
+}
+if (!layout.includes('"application/feed+json": `${site.origin}/feed.json`')) {
+  errors.push("Root metadata does not advertise the configured JSON Feed.");
 }
 
 for (const [file, text] of [["RSS", rss], ["JSON Feed", jsonFeed], ["layout", layout]]) {
