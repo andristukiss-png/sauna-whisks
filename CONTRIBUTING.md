@@ -18,7 +18,7 @@ Use `config/site.json` as the source of truth for the canonical origin, hostname
 
 ## Runtime
 
-Use Node 22. Run `nvm use` (or use a tool that honors `.node-version`), then install the committed dependency graph with `npm ci`. Do not delete or hand-edit `package-lock.json`.
+Use Node 22. Run `nvm use` (or use a tool that honors `.node-version`), then install the committed dependency graph with `npm ci`. Do not delete or hand-edit `package-lock.json`. The root lockfile dependency sets, version and Node engine must stay synchronized with `package.json`.
 
 ## Workflow supply chain
 
