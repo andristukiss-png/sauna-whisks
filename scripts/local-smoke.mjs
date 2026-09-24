@@ -341,6 +341,11 @@ async function checkSitemapPage(location) {
   if (mainCount !== 1) {
     fail(path + " must render exactly one main landmark; found " + mainCount + ".");
   }
+  if (path === "/compare") {
+    if (!/<table\b/i.test(renderedHtml)) fail("/compare must render a semantic table.");
+    if (!/<th\b[^>]*scope=["']col["']/i.test(renderedHtml)) fail("/compare is missing scoped column headers.");
+    if (!/<th\b[^>]*scope=["']row["']/i.test(renderedHtml)) fail("/compare is missing scoped row headers.");
+  }
   if (!/<html\b[^>]*\blang=["']en["']/i.test(html)) {
     fail(path + ' is missing <html lang="en">.');
   }
