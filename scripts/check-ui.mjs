@@ -94,6 +94,27 @@ for (const file of ["app/not-found.tsx", "app/error.tsx"]) {
   if (/<main\b/.test(source)) errors.push("Boundary must not create a second main landmark: " + file);
 }
 
+for (const [file, className, label] of [
+  ["app/error.tsx", "route-error-message", "route error"],
+  ["app/global-error.tsx", "fatal-error-message", "global error"],
+]) {
+  const source = fs.readFileSync(file, "utf8");
+  const statusPattern = new RegExp(
+    '<div className="' + className + '" role="alert"[\\s\\S]*?<\\/div>'
+  );
+  const alertBlock = source.match(statusPattern)?.[0] || "";
+  if (!alertBlock.includes('aria-live="assertive"') || !alertBlock.includes('aria-atomic="true"')) {
+    errors.push(label + " message must be an atomic assertive alert.");
+  }
+  if (alertBlock.includes("<button") || alertBlock.includes("<a ") || alertBlock.includes("<Link")) {
+    errors.push(label + " alert must not contain interactive controls.");
+  }
+}
+
+const errorCss = fs.readFileSync("app/globals.css", "utf8");
+if (!errorCss.includes(".route-error{")) errors.push("Route error layout styling missing.");
+if (!errorCss.includes(".route-error-actions{")) errors.push("Route error action layout styling missing.");
+
 const a11yFile = "app/a11y.css";
 if (!fs.existsSync(a11yFile)) {
   errors.push("Accessibility stylesheet missing.");
