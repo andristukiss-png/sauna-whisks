@@ -33,7 +33,7 @@ export default function SourcesPage() {
             <span>{String(index + 1).padStart(2, "0")}</span>
             <h2>{source.label}</h2>
             <p>{source.url}</p>
-            <b>Open source ↗</b>
+            <b>Open source ↗<span className="sr-only"> (opens in a new tab)</span></b>
           </a>
         ))}
       </section>

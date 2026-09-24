@@ -28,10 +28,13 @@ for (const file of files) {
     }
   }
 
-  const externalTargets = [...text.matchAll(/<a\b([^>]*target=["']_blank["'][^>]*)>/g)];
+  const externalTargets = [...text.matchAll(/<a\b([^>]*target=["']_blank["'][^>]*)>[\s\S]*?<\/a>/g)];
   for (const link of externalTargets) {
     if (!/\brel=["'][^"']*(noreferrer|noopener)/.test(link[1])) {
       errors.push("target=_blank link missing safe rel: " + file);
+    }
+    if (!/className=["']sr-only["'][^>]*>\s*\(opens in a new tab\)\s*<\/span>/.test(link[0])) {
+      errors.push("target=_blank link must announce new-tab behavior: " + file);
     }
   }
 

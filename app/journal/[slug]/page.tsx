@@ -94,7 +94,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <p className="section-kicker">SOURCES & FURTHER READING</p>
               {article.sources.map((source) => (
                 <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>
-                  {source.label} ↗
+                  {source.label} ↗<span className="sr-only"> (opens in a new tab)</span>
                 </a>
               ))}
             </section>

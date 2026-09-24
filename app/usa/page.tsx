@@ -64,7 +64,7 @@ export default function USAPage() {
             target="_blank"
             rel="noreferrer"
           >
-            USDA APHIS import guidance ↗
+            USDA APHIS import guidance ↗<span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
       </section>
