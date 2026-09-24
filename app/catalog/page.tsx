@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { saunaWhisks } from "@/lib/products";
 
@@ -13,8 +11,7 @@ export const metadata = pageMetadata({
 
 export default function CatalogPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Catalog" }]} />
       <section className="page-hero">
         <p className="section-kicker">PRODUCT DATA</p>
@@ -51,8 +48,6 @@ export default function CatalogPage() {
         <p>For integrations and internal tooling, use the public pre-launch catalog endpoint.</p>
         <a className="text-link" href="/api/catalog">Open /api/catalog →</a>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
