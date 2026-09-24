@@ -83,6 +83,7 @@ if (!fs.existsSync(a11yFile)) {
   if (!css.includes("prefers-reduced-motion")) errors.push("Reduced-motion treatment missing.");
   if (!css.includes(".skip-link:focus")) errors.push("Skip-link focus treatment missing.");
   if (!css.includes(".skip-target")) errors.push("Skip-target styling missing.");
+  if (!css.includes(".visually-hidden")) errors.push("Visually hidden utility missing.");
 }
 
 for (const file of files) {
@@ -134,6 +135,18 @@ for (const [needle, label] of [
   ['aria-atomic="true"', "enquiry status atomic announcement"],
 ]) {
   if (!enquiryForm.includes(needle)) errors.push("Enquiry form missing " + label + ".");
+}
+
+const comparePage = fs.readFileSync("app/compare/page.tsx", "utf8");
+for (const [needle, label] of [
+  ['<table className="compare-table">', "semantic comparison table"],
+  ['<caption className="visually-hidden">', "comparison table caption"],
+  ['<thead>', "comparison table header group"],
+  ['<tbody>', "comparison table body group"],
+  ['scope="col"', "comparison column headers"],
+  ['scope="row"', "comparison row headers"],
+]) {
+  if (!comparePage.includes(needle)) errors.push("Compare page missing " + label + ".");
 }
 
 const unique = [...new Set(errors)];
