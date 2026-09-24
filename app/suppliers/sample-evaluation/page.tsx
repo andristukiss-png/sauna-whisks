@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { QualityChecklist } from "@/components/QualityChecklist";
 
@@ -13,8 +11,7 @@ export const metadata = pageMetadata({
 
 export default function SupplierSampleEvaluationPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Suppliers", href: "/suppliers" },
@@ -33,8 +30,6 @@ export default function SupplierSampleEvaluationPage() {
           <a className="text-link" href="/api/supplier-sample-template.csv">Download sample-evaluation CSV →</a>
         </div>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
