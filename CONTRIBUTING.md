@@ -41,6 +41,12 @@ This covers validation, lint, TypeScript and the production Next.js build. CI ad
 
 Redirects must remain local, direct, and single-hop. Add legacy paths to `config/redirects.json`; do not use protocol-relative destinations or chain one registered redirect through another.
 
+## Metadata and structured data
+
+- Use `pageMetadata()` for every non-home page, including pages that need a robots override.
+- Render JSON-LD only through `components/StructuredData.tsx`; do not add direct `dangerouslySetInnerHTML` elsewhere.
+- Build canonical URLs from `config/site.json`, not repeated host strings.
+
 ## New routes
 Route validators discover `app/**/page.tsx` automatically. Static indexable pages must appear in the sitemap; dynamic page families are checked for finite static params; rendered internal links must resolve directly without relying on legacy redirects.
 
