@@ -177,7 +177,11 @@ Before final pricing or broad US launch, research and document:
 - landed cost by SKU and bundle
 - import/compliance requirements by material and condition
 
-Use that research to produce a concrete **product + price + bundle + subscription** plan.
+A dated evidence snapshot now lives in `docs/US_MARKET_RESEARCH.md`. It covers current specialist retailers, marketplace terminology, observed price anchors, Latvian-origin positioning, assortment breadth and wholesale signals.
+
+Remaining research still includes reliable Amazon sampling, customer-review coding, shipping economics, subscription/replenishment behavior, wholesale case economics, landed cost and SKU-specific import compliance.
+
+Use the combined evidence to produce a concrete **product + price + bundle + subscription** plan.
 
 ## Guardrails
 
