@@ -112,7 +112,7 @@ export function WhiskFinder() {
         </div>
       </div>
 
-      <div className="finder-result" role="status" aria-live="polite">
+      <div className="finder-result" role="status" aria-live="polite" aria-atomic="true">
         <p>WORKING RECOMMENDATION</p>
         <h2>{result.name}</h2>
         <span>{result.copy}</span>
