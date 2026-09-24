@@ -63,6 +63,9 @@ for (const endpoint of paths) {
 if (!dataPage.includes("publicDataEndpoints.map")) {
   errors.push("/data page is not rendered from the shared endpoint registry.");
 }
+if (docs.includes("/api/enquiry")) {
+  errors.push("Public data docs must not advertise the private enquiry endpoint.");
+}
 
 const publicApiHelper = fs.readFileSync("lib/publicApi.ts", "utf8");
 if (!publicApiHelper.includes('export const PUBLIC_DATA_VERSION = "1"')) {
