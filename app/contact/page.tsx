@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const metadata = pageMetadata({
@@ -12,8 +10,7 @@ export const metadata = pageMetadata({
 
 export default function ContactPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
       <section className="contact-page">
         <p className="section-kicker">CONTACT</p>
@@ -35,7 +32,6 @@ export default function ContactPage() {
 
         <p className="fineprint">Full legal company details will be added before commercial launch.</p>
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }
