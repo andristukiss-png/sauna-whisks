@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import path from "node:path";
 
 const site = JSON.parse(fs.readFileSync("config/site.json", "utf8"));
 const canonical = site.origin;
@@ -72,6 +73,25 @@ for (const file of machineFiles) {
     text.includes(site.publicEmail)
   ) {
     checks.push(["machine file hard-codes public email: " + file, false]);
+  }
+}
+
+function walkIdentityFiles(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const absolute = path.join(dir, entry.name);
+    return entry.isDirectory() ? walkIdentityFiles(absolute) : [absolute];
+  });
+}
+
+for (const file of ["app", "components"]
+  .flatMap((dir) => walkIdentityFiles(dir))
+  .filter((file) => /\.(ts|tsx)$/.test(file))) {
+  const text = fs.readFileSync(file, "utf8");
+  if (text.includes(site.publicEmail)) {
+    checks.push(["application file hard-codes public email: " + file, false]);
+  }
+  if (text.includes(site.origin)) {
+    checks.push(["application file hard-codes canonical origin: " + file, false]);
   }
 }
 
