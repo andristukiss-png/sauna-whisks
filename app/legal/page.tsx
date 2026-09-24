@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = pageMetadata({
   title: "Legal & Policies",
@@ -23,8 +21,7 @@ const links = [
 
 export default function LegalPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Legal" }]} />
       <section className="page-hero">
         <p className="section-kicker">LEGAL & POLICIES</p>
@@ -40,7 +37,6 @@ export default function LegalPage() {
           </Link>
         ))}
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }
