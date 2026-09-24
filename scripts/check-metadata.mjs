@@ -46,7 +46,7 @@ for (const file of pages) {
 
 for (const file of pages) {
   const text = fs.readFileSync(file, "utf8");
-  if (text.includes("dangerouslySetInnerHTML") && text.includes(site.origin)) {
+  if (text.includes("<StructuredData") && text.includes(site.origin)) {
     errors.push("JSON-LD page hard-codes canonical origin instead of site config: " + file);
   }
 }
