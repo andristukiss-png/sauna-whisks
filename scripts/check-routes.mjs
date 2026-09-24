@@ -1,4 +1,5 @@
 import { discoverDynamicPageFiles, discoverStaticPageRoutes } from "./route-utils.mjs";
+import { discoverApiRoutes } from "./api-route-utils.mjs";
 import fs from "node:fs";
 
 const dataFiles = [
@@ -32,37 +33,21 @@ for (const [file, regex] of dataFiles) {
   if (duplicates.length) errors.push(`Duplicate slug(s) in ${file}: ${[...new Set(duplicates)].join(", ")}`);
 }
 
-const expectedApiRoutes = [
-  "app/api/health/route.ts",
-  "app/api/status/route.ts",
-  "app/api/catalog/route.ts",
-  "app/api/catalog.csv/route.ts",
-  "app/api/articles/route.ts",
-  "app/api/search/route.ts",
-  "app/api/markets/route.ts",
-  "app/api/trade/route.ts",
-  "app/api/materials/route.ts",
-  "app/api/conditions/route.ts",
-  "app/api/glossary/route.ts",
-  "app/api/guides/route.ts",
-  "app/api/operations/route.ts",
-  "app/api/sources/route.ts",
-  "app/api/sources.csv/route.ts",
-  "app/api/product-data-template.csv/route.ts",
-  "app/api/supplier-sample-template.csv/route.ts",
-  "app/api/trade-trial-template.csv/route.ts",
-  "app/api/company/route.ts",
-  "app/api/use-cases/route.ts",
-  "app/api/techniques/route.ts",
-  "app/api/faq/route.ts",
-  "app/api/traditions/route.ts",
-  "app/api/comparisons/route.ts",
-  "app/api/editorial/route.ts",
-  "app/api/tools/route.ts",
-];
+const discoveredApiRoutes = discoverApiRoutes();
+if (!discoveredApiRoutes.length) {
+  errors.push("No API routes were discovered.");
+}
 
-for (const route of expectedApiRoutes) {
-  if (!fs.existsSync(route)) errors.push(`Missing API route: ${route}`);
+const apiPaths = discoveredApiRoutes.map(({ path }) => path);
+const duplicateApiPaths = apiPaths.filter((route, index) => apiPaths.indexOf(route) !== index);
+if (duplicateApiPaths.length) {
+  errors.push("Duplicate discovered API path(s): " + [...new Set(duplicateApiPaths)].join(", "));
+}
+
+for (const { file, path: routePath } of discoveredApiRoutes) {
+  if (routePath.includes("[") || routePath.includes("]")) {
+    errors.push("Dynamic API routes are not part of the current public-data contract: " + file);
+  }
 }
 
 const discoveredStaticRoutes = new Set(discoverStaticPageRoutes());
