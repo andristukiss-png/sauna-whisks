@@ -72,7 +72,7 @@ if (faqPage.includes("const faqs = [")) {
 
 const usaPage = fs.readFileSync(path.join(root, "app/usa/page.tsx"), "utf8");
 for (const [needle, label] of [
-  ['import { getMarket, getMarketPath } from "@/lib/markets"', "shared market import"],
+  ['import { getMarket } from "@/lib/markets"', "shared market import"],
   ['getMarket("united-states")', "United States market lookup"],
   ["usMarket.status", "shared US market status"],
   ["usMarket.headline", "shared US market headline"],
