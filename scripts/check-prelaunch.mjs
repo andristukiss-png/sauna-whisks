@@ -31,7 +31,7 @@ if (source.includes('"offers"') || source.includes("offers: {")) {
 }
 
 if (source.includes("Latvian Oak") || source.includes("/shop/latvian-oak")) {
-  errors.push("Unverified Latvian Oak naming/URL reintroduced. Use Baltic Oak; old URL exists only as redirect.");
+  errors.push("Unverified Latvian Oak naming/URL reintroduced. Keep origin out of the product name until verified; the old URL exists only as a redirect.");
 }
 
 const launchChecklist = fs.readFileSync(path.join(root, "docs/LAUNCH_CHECKLIST.md"), "utf8");
