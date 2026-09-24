@@ -75,7 +75,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     term: "Eucalyptus",
     definition: "An aromatic plant material used for sauna whisks and mixed botanical bundles.",
     context: "Eucalyptus is best understood as an aroma-led option rather than the traditional birch benchmark.",
-    related: [{ label: "Eucalyptus whisk", href: "/shop/eucalyptus" }, { label: "Compare materials", href: "/compare" }]
+    related: [{ label: "Eucalyptus Sauna Whisk", href: "/shop/eucalyptus" }, { label: "Compare materials", href: "/compare" }]
   },
   {
     slug: "dried-whisk",
