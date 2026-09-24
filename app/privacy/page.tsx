@@ -27,8 +27,8 @@ export default function PrivacyPage() {
         <section>
           <h2>Email delivery</h2>
           <p>
-            The website may use a third-party transactional email provider to deliver enquiry messages to
-            {site.publicEmail}. We will update this page with the final provider and legal company details before commercial launch.
+            The website may use a third-party transactional email provider to deliver enquiry messages to {site.publicEmail}.
+            We will update this page with the final provider and legal company details before commercial launch.
           </p>
         </section>
 
