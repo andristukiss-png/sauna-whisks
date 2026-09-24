@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { getTradeSegment, tradeSegments } from "@/lib/tradeSegments";
@@ -29,8 +27,7 @@ export default async function TradeSegmentPage({ params }: { params: Promise<{ s
   if (!segment) notFound();
 
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Trade", href: "/trade" },
@@ -64,8 +61,6 @@ export default async function TradeSegmentPage({ params }: { params: Promise<{ s
           messagePlaceholder="Tell us your venue/business type, expected quantity, market and timing..."
         />
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
