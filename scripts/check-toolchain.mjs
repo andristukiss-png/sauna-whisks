@@ -136,6 +136,9 @@ if (!workflow.includes("if: always()")) {
 if (!workflow.includes("git diff --exit-code -- .")) {
   errors.push("CI must fail if checks modify tracked files.");
 }
+if (!workflow.includes("git ls-files --others --exclude-standard")) {
+  errors.push("CI must fail if checks leave unexpected untracked files.");
+}
 
 function pinnedActionSha(text, action) {
   return text.match(new RegExp(action + "@([0-9a-f]{40})"))?.[1] || "";
