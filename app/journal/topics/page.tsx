@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { articleTopics } from "@/lib/articleTopics";
 
 export const metadata = pageMetadata({
@@ -12,8 +10,7 @@ export const metadata = pageMetadata({
 
 export default function JournalTopicsPage() {
   return (
-    <main>
-      <Header />
+    <>
       <section className="page-hero">
         <p className="section-kicker">JOURNAL TOPICS</p>
         <h1>Learn by subject.</h1>
@@ -29,7 +26,6 @@ export default function JournalTopicsPage() {
           </Link>
         ))}
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }
