@@ -1,3 +1,4 @@
+import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import Link from "next/link";
 
@@ -19,10 +20,7 @@ export function Breadcrumbs({
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
-      />
+      <StructuredData data={schema} />
       <nav className="breadcrumbs" aria-label="Breadcrumb">
         <ol>
           {items.map((item, index) => (
