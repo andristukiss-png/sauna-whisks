@@ -190,6 +190,9 @@ for (const [needle, label] of [
   ['id="journal-search-results"', "journal search result container id"],
   ['maxLength={MAX_SEARCH_QUERY_LENGTH}', "journal search query length bound"],
   ['aria-atomic="true"', "journal search atomic announcement"],
+  ["normalizeSearchQuery(query)", "shared query normalization"],
+  ['normalized.split(" ")', "multi-token query matching"],
+  ["tokens.every((token) => haystack.includes(token))", "all-token journal matching"],
 ]) {
   if (!journalSearch.includes(needle)) errors.push("Journal search missing " + label + ".");
 }
