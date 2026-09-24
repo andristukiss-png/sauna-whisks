@@ -125,6 +125,8 @@ If any value is missing or invalid, the enquiry form stays on the mailto fallbac
 
 Use Node 22. The repository pins the version in `.nvmrc` and `.node-version`.
 
+`.npmrc` enforces the declared Node engine. Repository validation also rejects tracked environment files, generated output, caches/logs and common private-key paths.
+
 ```bash
 nvm use
 npm ci
