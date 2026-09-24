@@ -11,6 +11,7 @@ const requiredFiles = [
   "app/journal/page.tsx",
   "app/faq/page.tsx",
   "app/usa/page.tsx",
+  "app/shipping/page.tsx",
   "app/contact/page.tsx",
   "app/privacy/page.tsx",
   "app/terms/page.tsx",
@@ -80,6 +81,20 @@ for (const [needle, label] of [
   ["subject={usMarket.enquiryTopic}", "shared US enquiry topic"],
 ]) {
   if (!usaPage.includes(needle)) errors.push("USA page missing " + label + ".");
+}
+
+const shippingPage = fs.readFileSync(path.join(root, "app/shipping/page.tsx"), "utf8");
+for (const [needle, label] of [
+  ['import { getMarket } from "@/lib/markets"', "shared market import"],
+  ["const shippingMarkets =", "shared shipping market selection"],
+  ["market.name", "shared market name"],
+  ["market.status", "shared market status"],
+  ["market.logistics", "shared market logistics"],
+]) {
+  if (!shippingPage.includes(needle)) errors.push("Shipping page missing " + label + ".");
+}
+if (shippingPage.includes("const markets = [")) {
+  errors.push("Shipping page must not maintain a second market status/logistics dataset.");
 }
 
 

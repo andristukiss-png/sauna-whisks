@@ -33,6 +33,8 @@ for (const file of [
   "app/api/catalog/route.ts",
   "app/api/route.ts",
   "app/api/company/route.ts",
+  "app/api/markets/route.ts",
+  "app/api/trade/route.ts",
 ]) {
   const text = fs.readFileSync(file, "utf8");
   if (!text.includes('import { launchStatus } from "@/lib/status"')) {
