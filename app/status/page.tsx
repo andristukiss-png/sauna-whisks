@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { launchStatus } from "@/lib/status";
 
 export const metadata = pageMetadata({
@@ -12,8 +10,7 @@ export const metadata = pageMetadata({
 
 export default function StatusPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Launch status" }]} />
       <section className="page-hero">
         <p className="section-kicker">LAUNCH STATUS</p>
@@ -30,7 +27,6 @@ export default function StatusPage() {
           </div>
         ))}
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }
