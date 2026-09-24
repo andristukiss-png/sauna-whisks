@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { operationGuides } from "@/lib/operations";
 
 export const metadata = pageMetadata({
@@ -13,8 +11,7 @@ export const metadata = pageMetadata({
 
 export default function OperationsPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Operations" }]} />
       <section className="page-hero">
         <p className="section-kicker">PRODUCT OPERATIONS</p>
@@ -36,7 +33,6 @@ export default function OperationsPage() {
           </Link>
         ))}
       </section>
-      <SiteFooter />
-    </main>
+    </>
   );
 }
