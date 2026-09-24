@@ -1,8 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const metadata = pageMetadata({
@@ -13,8 +11,7 @@ export const metadata = pageMetadata({
 
 export default function PartnersPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Partners / Press" }]} />
       <section className="page-hero dark-page">
         <p className="section-kicker light">PARTNERSHIPS / PRESS</p>
@@ -46,8 +43,6 @@ export default function PartnersPage() {
           messagePlaceholder="Tell us about the organization, project and what you would like to explore..."
         />
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
