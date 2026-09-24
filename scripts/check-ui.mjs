@@ -66,7 +66,17 @@ for (const file of files) {
 const header = fs.readFileSync("components/Header.tsx", "utf8");
 if (!header.includes('href="#main-content"')) errors.push("Skip link missing main-content target.");
 if (header.includes('id="main-content"')) errors.push("Header must not own the main-content target.");
-if (!header.includes('aria-label="Mobile navigation"')) errors.push("Mobile navigation landmark label missing.");
+if (!header.includes("<MobileMenu links={links} />")) errors.push("Header must delegate mobile navigation to the client menu.");
+
+const mobileMenu = fs.readFileSync("components/MobileMenu.tsx", "utf8");
+for (const [needle, label] of [
+  ['ref={detailsRef}', "details ref"],
+  ['detailsRef.current.open = false', "navigation close behavior"],
+  ['onClick={closeMenu}', "link close handler"],
+  ['aria-label="Mobile navigation"', "mobile navigation landmark label"],
+]) {
+  if (!mobileMenu.includes(needle)) errors.push("Mobile menu missing " + label + ".");
+}
 
 const layout = fs.readFileSync("app/layout.tsx", "utf8");
 for (const [needle, label] of [
