@@ -63,6 +63,9 @@ jobs:
       - name: Smoke production server
         run: LOCAL_SMOKE_EXPECTED_COMMIT="$GITHUB_SHA" npm run smoke:local
 
+      - name: Verify tracked files unchanged
+        run: git diff --exit-code -- .
+
       - name: Show production server log on failure
         if: failure()
         run: cat /tmp/sauna-whisks-next.log || true

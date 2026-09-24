@@ -14,19 +14,33 @@ for (const file of [".nvmrc", ".node-version"]) {
   }
 }
 
+const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+
 if (!fs.existsSync("package-lock.json")) {
   errors.push("Missing package-lock.json for reproducible installs.");
 } else {
   const lock = JSON.parse(fs.readFileSync("package-lock.json", "utf8"));
+  const rootLock = lock.packages?.[""] || {};
   if (lock.lockfileVersion !== 3) {
     errors.push("package-lock.json must use lockfileVersion 3.");
   }
-  if (lock.name !== "sauna-whisks") {
-    errors.push("package-lock.json package name does not match the project.");
+  if (lock.name !== pkg.name || rootLock.name !== pkg.name) {
+    errors.push("package-lock.json package name does not match package.json.");
+  }
+  if (lock.version !== pkg.version || rootLock.version !== pkg.version) {
+    errors.push("package-lock.json version does not match package.json.");
+  }
+  if (JSON.stringify(rootLock.dependencies || {}) !== JSON.stringify(pkg.dependencies || {})) {
+    errors.push("package-lock.json dependencies do not match package.json.");
+  }
+  if (JSON.stringify(rootLock.devDependencies || {}) !== JSON.stringify(pkg.devDependencies || {})) {
+    errors.push("package-lock.json devDependencies do not match package.json.");
+  }
+  if (rootLock.engines?.node !== pkg.engines?.node) {
+    errors.push("package-lock.json Node engine does not match package.json.");
   }
 }
 
-const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
 if (pkg.engines?.node !== ">=22 <23") {
   errors.push("package.json engines.node must stay on Node 22.");
 }
@@ -38,6 +52,24 @@ if (pkg.scripts?.["validate:hygiene"] !== "node scripts/check-repo-hygiene.mjs")
 }
 if (!fs.existsSync(".npmrc") || !fs.readFileSync(".npmrc", "utf8").includes("engine-strict=true")) {
   errors.push(".npmrc must enforce engine-strict=true.");
+}
+
+const nextEnv = fs.readFileSync("next-env.d.ts", "utf8");
+for (const required of [
+  'import "./.next/types/routes.d.ts";',
+  'import "./.next/types/root-params.d.ts";',
+]) {
+  if (!nextEnv.includes(required)) {
+    errors.push("next-env.d.ts missing Next.js 16 generated reference: " + required);
+  }
+}
+
+const tsconfig = JSON.parse(fs.readFileSync("tsconfig.json", "utf8"));
+if (tsconfig.compilerOptions?.jsx !== "react-jsx") {
+  errors.push("tsconfig.json jsx must match the Next.js 16 generated react-jsx setting.");
+}
+if (!tsconfig.include?.includes(".next/dev/types/**/*.ts")) {
+  errors.push("tsconfig.json must include Next.js development generated types.");
 }
 if (pkg.scripts?.["wait:production"] !== "node scripts/wait-for-production-commit.mjs") {
   errors.push("package.json missing the production convergence command.");
@@ -100,6 +132,9 @@ if (!workflow.includes("npm start > /tmp/sauna-whisks-next.log")) {
 }
 if (!workflow.includes("if: always()")) {
   errors.push("CI must clean up the production server even after failures.");
+}
+if (!workflow.includes("git diff --exit-code -- .")) {
+  errors.push("CI must fail if checks modify tracked files.");
 }
 
 function pinnedActionSha(text, action) {
