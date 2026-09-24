@@ -127,7 +127,7 @@ const enquiryGuards = [
   ["oversize stream error", "RequestTooLargeError"],
   ["same-origin page context filter", 'submittedPageUrl.startsWith(requestUrl.origin + "/")'],
   ["honeypot guard", "if (website)"],
-  ["fast-submit bot guard", "Date.now() - startedAt < 1800"],
+  ["fast-submit bot guard", "Number.isFinite(elapsedMs) && elapsedMs > 0 && elapsedMs < 1800"],
   ["outbound timeout", "AbortSignal.timeout(10_000)"],
   ["validated sender configuration", "configuredEmail(process.env.ENQUIRY_FROM_EMAIL)"],
   ["validated recipient configuration", "configuredEmail(process.env.ENQUIRY_TO_EMAIL)"],
@@ -165,6 +165,7 @@ for (const [needle, label] of [
   ["/api/enquiry honeypot", "honeypot test"],
   ["/api/enquiry fast submit", "fast-submit test"],
   ["/api/enquiry provider fallback", "provider-fallback test"],
+  ["/api/enquiry negative elapsed duration", "negative elapsed-duration regression test"],
 ]) {
   if (!localSmoke.includes(needle)) errors.push("Local smoke missing " + label + ".");
 }

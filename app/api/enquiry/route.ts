@@ -13,7 +13,7 @@ const STRING_FIELDS = [
   "country",
   "quantity",
   "pageUrl",
-  "startedAt",
+  "elapsedMs",
 ] as const;
 
 const MAX_BODY_BYTES = 20_000;
@@ -163,13 +163,13 @@ export async function POST(request: Request) {
     const quantity = cleanOptional(body.quantity, 120);
     const submittedPageUrl = cleanOptional(body.pageUrl, 500);
     const pageUrl = submittedPageUrl.startsWith(requestUrl.origin + "/") ? submittedPageUrl : "";
-    const startedAt = Number(typeof body.startedAt === "string" ? body.startedAt : "0");
+    const elapsedMs = Number(typeof body.elapsedMs === "string" ? body.elapsedMs : "0");
 
     if (website) {
       return reply({ ok: true });
     }
 
-    if (startedAt && Date.now() - startedAt < 1800) {
+    if (Number.isFinite(elapsedMs) && elapsedMs > 0 && elapsedMs < 1800) {
       return reply({ ok: true });
     }
 

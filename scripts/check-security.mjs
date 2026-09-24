@@ -80,6 +80,29 @@ if (/console\.error\("Resend enquiry error"[\s\S]*details/.test(enquiryRoute)) {
   errors.push("Enquiry provider error logs must not include response-body details.");
 }
 
+for (const [needle, label] of [
+  ['"elapsedMs"', "elapsed-duration field"],
+  ["Number.isFinite(elapsedMs)", "finite elapsed-duration guard"],
+  ["elapsedMs > 0", "positive elapsed-duration guard"],
+  ["elapsedMs < 1800", "fast-submit elapsed-duration threshold"],
+]) {
+  if (!enquiryRoute.includes(needle)) errors.push("Enquiry route missing " + label + ".");
+}
+if (enquiryRoute.includes("Date.now() - startedAt") || enquiryRoute.includes('"startedAt"')) {
+  errors.push("Enquiry fast-submit guard must not compare client and server wall clocks.");
+}
+const enquiryForm = fs.readFileSync("components/EnquiryForm.tsx", "utf8");
+if (!enquiryForm.includes("elapsedMs: String(")) {
+  errors.push("Enquiry form must submit client-computed elapsed duration.");
+}
+if (enquiryForm.includes("startedAt: String(startedAt.current)")) {
+  errors.push("Enquiry form must not submit a client wall-clock timestamp.");
+}
+const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
+if (!localSmoke.includes('/api/enquiry negative elapsed duration')) {
+  errors.push("Local smoke must verify invalid negative elapsed duration is not silently treated as fast-submit.");
+}
+
 const publicApi = fs.readFileSync("lib/publicApi.ts", "utf8");
 if (!security.includes("publicText")) {
   errors.push("security.txt must use the shared public text response helper.");

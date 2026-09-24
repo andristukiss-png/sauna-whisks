@@ -68,7 +68,7 @@ export function EnquiryForm({
       country: String(form.get("country") || "").trim(),
       quantity: String(form.get("quantity") || "").trim(),
       pageUrl: window.location.href,
-      startedAt: String(startedAt.current),
+      elapsedMs: String(startedAt.current ? Math.max(0, Date.now() - startedAt.current) : 0),
     };
 
     setStatus("sending");
@@ -89,8 +89,9 @@ export function EnquiryForm({
 
       if (response.ok && data.ok) {
         setStatus("success");
-        setStatusMessage("Thank you. Your enquiry has been sent.");
+        setStatusMessage("Thank you. Your enquiry was submitted.");
         element.reset();
+        startedAt.current = Date.now();
         return;
       }
 

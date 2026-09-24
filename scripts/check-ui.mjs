@@ -190,6 +190,9 @@ const enquiryForm = fs.readFileSync("components/EnquiryForm.tsx", "utf8");
 for (const [needle, label] of [
   ['minLength={2}', "enquiry name minimum length"],
   ['aria-atomic="true"', "enquiry status atomic announcement"],
+  ['Thank you. Your enquiry was submitted.', "accurate enquiry success message"],
+  ['startedAt.current = Date.now();', "enquiry timing reset after success"],
+  ['elapsedMs: String(startedAt.current ? Math.max(0, Date.now() - startedAt.current) : 0)', "client-computed enquiry elapsed duration"],
 ]) {
   if (!enquiryForm.includes(needle)) errors.push("Enquiry form missing " + label + ".");
 }
