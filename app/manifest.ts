@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     id: "/",
     name: "Sauna Whisks",
     short_name: "Sauna Whisks",
-    description: "Traditional sauna whisks and Baltic sauna knowledge from Latvia.",
+    description: "Sauna whisk knowledge, terminology, care and traditions from a Latvia-based specialist brand.",
     start_url: "/",
     scope: "/",
     lang: "en",
