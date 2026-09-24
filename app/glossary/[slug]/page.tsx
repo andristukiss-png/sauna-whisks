@@ -1,3 +1,4 @@
+import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
@@ -39,7 +40,7 @@ export default async function GlossaryTermPage({ params }: { params: Promise<{ s
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
+      <StructuredData data={schema} />
       <Header />
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
