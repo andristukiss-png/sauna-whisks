@@ -1,6 +1,7 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import site from "@/config/site.json";
 
 export const metadata = pageMetadata({
   title: "Help",
@@ -14,7 +15,7 @@ const links=[
   ["/shipping","Shipping & availability","See current market and pre-launch shipping status."],
   ["/beginners","Beginner path","Start with choosing, preparing and using a first whisk."],
   ["/status","Launch status","See what is open, planned and still being verified."],
-  ["/contact","Contact","Send a direct enquiry to info@SaunaWhisks.com."],
+  ["/contact","Contact",`Send a direct enquiry to ${site.publicEmail}.`],
   ["/wholesale","Wholesale","Trade and recurring supply enquiries."],
   ["/suppliers","Suppliers","Producer and supplier enquiries."]
 ];

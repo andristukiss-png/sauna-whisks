@@ -1,5 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import site from "@/config/site.json";
 
 export const metadata = pageMetadata({
   title: "Terms",
@@ -49,7 +50,7 @@ export default function TermsPage() {
         <section>
           <h2>Contact</h2>
           <p>
-            Questions about these terms can be sent to <a href="mailto:info@SaunaWhisks.com">info@SaunaWhisks.com</a>.
+            Questions about these terms can be sent to <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a>.
           </p>
         </section>
 

@@ -1,6 +1,7 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import site from "@/config/site.json";
 
 export const metadata = pageMetadata({
   title: "Company",
@@ -16,7 +17,7 @@ const links=[
   ["/press","Press facts","Short verified facts for editorial use."],
   ["/editorial-policy","Editorial policy","How factual and commercial claims are sourced and reviewed."],
   ["/legal","Legal & policies","Privacy, terms, returns, cookies and accessibility."],
-  ["/contact","Contact","One public contact address: info@SaunaWhisks.com."]
+  ["/contact","Contact",`One public contact address: ${site.publicEmail}.`]
 ];
 
 export default function CompanyPage(){

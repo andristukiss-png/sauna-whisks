@@ -50,8 +50,13 @@ for (const obsolete of ["hello@saunawhisks.com", "trade@saunawhisks.com"]) {
   }
 }
 
-if (!joined.includes(site.publicEmail)) {
-  errors.push("Primary contact email is missing from public application content.");
+const contactPage = fs.readFileSync(path.join(root, "app/contact/page.tsx"), "utf8");
+const contactUsesConfiguredEmail =
+  contactPage.includes('import site from "@/config/site.json"') &&
+  contactPage.includes("site.publicEmail");
+
+if (!contactUsesConfiguredEmail) {
+  errors.push("Contact page must render the configured public email from config/site.json.");
 }
 
 

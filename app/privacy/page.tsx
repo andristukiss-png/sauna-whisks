@@ -1,5 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import site from "@/config/site.json";
 
 export const metadata = pageMetadata({
   title: "Privacy",
@@ -26,8 +27,8 @@ export default function PrivacyPage() {
         <section>
           <h2>Email delivery</h2>
           <p>
-            The website may use a third-party transactional email provider to deliver enquiry messages to
-            info@SaunaWhisks.com. We will update this page with the final provider and legal company details before commercial launch.
+            The website may use a third-party transactional email provider to deliver enquiry messages to {site.publicEmail}.
+            We will update this page with the final provider and legal company details before commercial launch.
           </p>
         </section>
 
@@ -43,7 +44,7 @@ export default function PrivacyPage() {
           <h2>Contact</h2>
           <p>
             Questions about personal information can be sent to
-            <a href="mailto:info@SaunaWhisks.com"> info@SaunaWhisks.com</a>.
+            <a href={`mailto:${site.publicEmail}`}> {site.publicEmail}</a>.
           </p>
         </section>
 

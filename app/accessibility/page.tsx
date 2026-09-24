@@ -1,5 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import site from "@/config/site.json";
 
 export const metadata = pageMetadata({
   title: "Accessibility",
@@ -34,7 +35,7 @@ export default function AccessibilityPage() {
         <section>
           <h2>Report a problem</h2>
           <p>
-            If something is difficult to use, email <a href="mailto:info@SaunaWhisks.com">info@SaunaWhisks.com</a> and describe the page and issue.
+            If something is difficult to use, email <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a> and describe the page and issue.
           </p>
         </section>
       </article>
