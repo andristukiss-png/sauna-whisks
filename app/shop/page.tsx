@@ -32,7 +32,7 @@ export default function ShopPage() {
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shop" }]} />
       <section className="page-hero">
         <p className="section-kicker">THE COLLECTION</p>
-        <h1>Choose your whisk.</h1>
+        <h1>Choose your sauna whisk.</h1>
         <p>
           A focused collection built around material, origin and ritual character —
           not an anonymous wall of products.
