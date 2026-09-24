@@ -1,5 +1,12 @@
 export const editorialReviewDate = "2026-09-22";
 
+export const editorialReviewLabel = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+}).format(new Date(`${editorialReviewDate}T00:00:00Z`));
+
 export const sourceHierarchy = [
   ["Regulatory / government", "Import, legal, cultural-institution and official market rules."],
   ["Specialist organizations", "Established sauna organizations and technical/tradition guidance."],
