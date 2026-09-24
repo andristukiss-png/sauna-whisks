@@ -1,17 +1,18 @@
 import { pageMetadata } from "@/lib/metadata";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import site from "@/config/site.json";
+import { launchStatus } from "@/lib/status";
 
 export const metadata = pageMetadata({
   title: "Press Facts",
-  description: "Verified pre-launch facts about SaunaWhisks.com for media and editorial reference.",
+  description: `Verified ${launchStatus.status} facts about SaunaWhisks.com for media and editorial reference.`,
   canonical: "/press",
 });
 
 const facts=[
   ["Brand","Sauna Whisks / SaunaWhisks.com"],
   ["Base","Latvia, European Union"],
-  ["Status","Pre-launch; checkout disabled"],
+  ["Status",`${launchStatus.status}; checkout ${launchStatus.checkoutEnabled ? "enabled" : "disabled"}`],
   ["Focus","Sauna whisks, materials, care, traditions, trade supply and producer documentation"],
   ["Planned core products","Birch Sauna Whisk, Oak Sauna Whisk, Eucalyptus Sauna Whisk and the Discovery Trio"],
   ["Public contact",site.publicEmail],
