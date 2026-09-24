@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { discoverApiRoutes } from "./api-route-utils.mjs";
+import { discoverMachineRoutes } from "./machine-route-utils.mjs";
 
 const registryFile = "lib/publicData.ts";
 const docsFile = "docs/PUBLIC_DATA.md";
@@ -43,6 +44,33 @@ for (const path of registeredApiPaths) {
 for (const path of privateApiPaths) {
   if (!discoveredApiPaths.has(path)) {
     errors.push("Expected private API route is missing: " + path);
+  }
+}
+
+const registeredMachinePaths = new Set(
+  paths.filter((endpoint) => !endpoint.startsWith("/api"))
+);
+const discoveredMachinePaths = new Set(discoverMachineRoutes().map(({ path }) => path));
+const specialMachinePaths = new Map([
+  ["/sitemap.xml", "app/sitemap.ts"],
+  ["/robots.txt", "app/robots.ts"],
+]);
+
+for (const path of discoveredMachinePaths) {
+  if (!registeredMachinePaths.has(path)) {
+    errors.push("Discovered machine route is missing from registry: " + path);
+  }
+}
+for (const [path, file] of specialMachinePaths) {
+  if (!fs.existsSync(file)) {
+    errors.push("Special machine route source is missing: " + path + " -> " + file);
+  } else if (!registeredMachinePaths.has(path)) {
+    errors.push("Special machine route is missing from registry: " + path);
+  }
+}
+for (const path of registeredMachinePaths) {
+  if (!discoveredMachinePaths.has(path) && !specialMachinePaths.has(path)) {
+    errors.push("Registered machine path has no discovered/special route: " + path);
   }
 }
 
