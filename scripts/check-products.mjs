@@ -34,6 +34,14 @@ for (const [index, block] of blocks.entries()) {
     errors.push("Product block " + (index + 1) + " must remain unavailable before launch.");
   }
   const name = block.match(/name:\s*"([^"]+)"/)?.[1] || "";
+  const origin = block.match(/origin:\s*"([^"]+)"/)?.[1] || "";
+  const verification = block.match(/verification:\s*"([^"]+)"/)?.[1] || "";
+  if (/(origin pending|origin to be confirmed)/i.test(verification) && origin !== "Origin to be verified") {
+    errors.push(
+      "Product block " + (index + 1) +
+      " must keep the public origin neutral until origin verification is complete."
+    );
+  }
   if (!name.endsWith("Sauna Whisk")) {
     errors.push("Product block " + (index + 1) + " must use Sauna Whisk in the customer-facing product name.");
   }
