@@ -60,6 +60,7 @@ const claimChecks = [
   ["app/shop/page.tsx", "built around material, origin and ritual character", "Shop must not imply launch-SKU origins are already verified."],
   ["app/usa/page.tsx", "Baltic sauna whisks for the US.", "US page must not imply Baltic product origin before SKU verification."],
   ["app/usa/page.tsx", "preparing a US launch for Baltic sauna whisks", "US metadata must not imply Baltic product origin before SKU verification."],
+  ["lib/markets.ts", "Baltic sauna whisks for the US market.", "US market data must not imply Baltic product origin before SKU verification."],
 ];
 
 for (const [file, forbidden, message] of claimChecks) {
