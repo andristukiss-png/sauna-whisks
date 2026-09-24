@@ -547,7 +547,7 @@ if (apiIndexResponse?.ok) {
         expectHeader(response, "x-robots-tag", "noindex", path);
       }
       if (!["/sitemap.xml", "/robots.txt"].includes(path)) {
-        expectHeader(response, "x-saunawhisks-data-version", "1", path);
+        expectHeader(response, "x-saunawhisks-data-version", "2", path);
         expectHeader(response, "access-control-expose-headers", "x-saunawhisks-data-version", path);
       }
 
