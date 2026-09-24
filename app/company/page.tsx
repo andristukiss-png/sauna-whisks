@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const metadata = pageMetadata({
@@ -22,11 +20,9 @@ const links=[
 ];
 
 export default function CompanyPage(){
-  return <main>
-    <Header/>
+  return <>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Company"}]}/>
     <section className="page-hero"><p className="section-kicker">COMPANY</p><h1>A specialist category company, still pre-launch.</h1><p>Company information, supply, partnerships, editorial standards and current commercial status in one place.</p></section>
     <section className="hub-grid">{links.map(([href,title,copy],index)=><Link href={href} key={href}><span>{String(index+1).padStart(2,"0")}</span><h2>{title}</h2><p>{copy}</p><b>Open →</b></Link>)}</section>
-    <SiteFooter/>
-  </main>;
+  </>;
 }
