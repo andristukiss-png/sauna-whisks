@@ -18,6 +18,25 @@ export function isSiteSearchFilter(value: string): value is SiteSearchFilter {
   return siteSearchFilters.includes(value as SiteSearchFilter);
 }
 
+function normalizedText(value: string) {
+  return value.normalize("NFKC").toLowerCase();
+}
+
+function searchScore(item: SiteSearchItem, query: string) {
+  const title = normalizedText(item.title);
+  const description = normalizedText(item.description);
+  const keywords = (item.keywords || []).map(normalizedText);
+
+  if (title === query) return 100;
+  if (title.startsWith(query)) return 80;
+  if (title.includes(query)) return 60;
+  if (keywords.some((keyword) => keyword === query)) return 50;
+  if (keywords.some((keyword) => keyword.startsWith(query))) return 40;
+  if (description.includes(query)) return 30;
+  if (keywords.some((keyword) => keyword.includes(query))) return 20;
+  return 10;
+}
+
 export function filterSiteSearchItems(
   items: SiteSearchItem[],
   query: string,
@@ -31,12 +50,18 @@ export function filterSiteSearchItems(
 
   const tokens = normalized.split(" ");
   return typed
-    .filter((item) => {
+    .map((item, index) => {
       const haystack = [item.title, item.description, item.type, ...(item.keywords || [])]
         .join(" ")
         .normalize("NFKC")
         .toLowerCase();
-      return tokens.every((token) => haystack.includes(token));
+      return { item, index, haystack };
     })
-    .slice(0, limit);
+    .filter(({ haystack }) => tokens.every((token) => haystack.includes(token)))
+    .sort((left, right) => {
+      const scoreDifference = searchScore(right.item, normalized) - searchScore(left.item, normalized);
+      return scoreDifference || left.index - right.index;
+    })
+    .slice(0, limit)
+    .map(({ item }) => item);
 }
