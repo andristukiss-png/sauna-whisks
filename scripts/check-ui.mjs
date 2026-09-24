@@ -133,6 +133,7 @@ const contextualStatusChecks = [
   ["components/LaunchReadinessTool.tsx", "launch gates complete", "launch readiness status"],
   ["components/SupplierScorecardTool.tsx", "criteria scored", "supplier score status"],
   ["components/TradeDemandEstimator.tsx", "whisks per month", "trade demand status"],
+  ["components/WhiskFinder.tsx", "WORKING RECOMMENDATION", "whisk finder status"],
 ];
 
 for (const [file, context, label] of contextualStatusChecks) {
