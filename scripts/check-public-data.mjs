@@ -96,7 +96,7 @@ if (docs.includes("/api/enquiry")) {
 }
 
 const publicApiHelper = fs.readFileSync("lib/publicApi.ts", "utf8");
-if (!publicApiHelper.includes('export const PUBLIC_DATA_VERSION = "1"')) {
+if (!publicApiHelper.includes('export const PUBLIC_DATA_VERSION = "2"')) {
   errors.push("Public data version constant missing.");
 }
 if (!docs.includes("X-SaunaWhisks-Data-Version")) {
@@ -118,7 +118,7 @@ for (const [needle, label] of [
 
 const productionSmoke = fs.readFileSync("scripts/production-smoke.mjs", "utf8");
 for (const [needle, label] of [
-  ['"x-saunawhisks-data-version", "1"', "live data-version header verification"],
+  ['"x-saunawhisks-data-version", "2"', "live data-version header verification"],
   ["unexpectedly exposes X-Powered-By", "live powered-by suppression check"],
 ]) {
   if (!productionSmoke.includes(needle)) {
