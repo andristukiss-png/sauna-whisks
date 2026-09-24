@@ -11,7 +11,7 @@ export default function ErrorPage({
   reset: () => void;
 }) {
   return (
-    <main className="route-error" role="alert" aria-live="assertive">
+    <div className="route-error" role="alert" aria-live="assertive">
       <p className="section-kicker">ERROR</p>
       <h1>This page hit a knot.</h1>
       <p>Try again, return home, or email <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a> if the problem continues.</p>
@@ -21,6 +21,6 @@ export default function ErrorPage({
         <Link className="text-link" href="/status">Launch status →</Link>
         <Link className="text-link" href="/help">Help →</Link>
       </div>
-    </main>
+    </div>
   );
 }
