@@ -1,7 +1,8 @@
+import Link from "next/link";
 import { pageMetadata } from "@/lib/metadata";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EnquiryForm } from "@/components/EnquiryForm";
-import { getMarket } from "@/lib/markets";
+import { getMarket, getMarketPath } from "@/lib/markets";
 
 export const metadata = pageMetadata({
   title: "Shipping & Availability",
@@ -44,6 +45,7 @@ export default function ShippingPage() {
             <h2>{market.name}</h2>
             <b>{market.status}</b>
             <p>{market.logistics}</p>
+            <Link className="text-link" href={getMarketPath(market)}>Market details →</Link>
           </div>
         ))}
       </section>
