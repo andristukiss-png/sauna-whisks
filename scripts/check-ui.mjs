@@ -214,12 +214,18 @@ for (const [needle, label] of [
 
 const whiskFinder = fs.readFileSync("components/WhiskFinder.tsx", "utf8");
 for (const [needle, label] of [
-  ['role="status"', "finder status role"],
+  ['className="finder-result-copy" role="status"', "dedicated finder status boundary"],
   ['aria-live="polite"', "finder polite live region"],
   ['aria-atomic="true"', "finder atomic recommendation announcement"],
   ["WORKING RECOMMENDATION", "finder recommendation context"],
 ]) {
   if (!whiskFinder.includes(needle)) errors.push("Whisk finder missing " + label + ".");
+}
+const finderStatusBlock = whiskFinder.match(/<div className="finder-result-copy" role="status"[\s\S]*?<\/div>/)?.[0] || "";
+if (!finderStatusBlock) {
+  errors.push("Whisk finder recommendation status block is missing.");
+} else if (finderStatusBlock.includes("<Link") || finderStatusBlock.includes("<button")) {
+  errors.push("Whisk finder live status must not contain interactive controls.");
 }
 
 const enquiryForm = fs.readFileSync("components/EnquiryForm.tsx", "utf8");
