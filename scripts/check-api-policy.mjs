@@ -40,7 +40,14 @@ for (const { file, path } of discoverMachineRoutes()) {
     errors.push("Machine route must export GET: " + file);
   }
 
-  if (path.endsWith(".json")) {
+  if (path === "/feed.json") {
+    if (!text.includes("publicText")) {
+      errors.push("JSON Feed route missing shared public text response helper: " + file);
+    }
+    if (!text.includes('application/feed+json; charset=utf-8')) {
+      errors.push("JSON Feed route missing the JSON Feed media type: " + file);
+    }
+  } else if (path.endsWith(".json")) {
     if (!text.includes("publicJson")) {
       errors.push("JSON machine route missing shared public JSON response helper: " + file);
     }
