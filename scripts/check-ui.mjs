@@ -144,6 +144,18 @@ for (const [file, context, label] of contextualStatusChecks) {
   if (!source.includes(context)) errors.push(label + " missing contextual status text.");
 }
 
+const tradeDemandEstimator = fs.readFileSync("components/TradeDemandEstimator.tsx", "utf8");
+for (const [needle, label] of [
+  ["Number.isFinite(parsed)", "finite input guard"],
+  ["Number.isFinite(estimate)", "finite estimate guard"],
+  ['monthly ?? "—"', "non-finite visible fallback"],
+  ["Enter finite numeric values", "non-finite accessible fallback"],
+]) {
+  if (!tradeDemandEstimator.includes(needle)) {
+    errors.push("Trade demand estimator missing " + label + ".");
+  }
+}
+
 const whiskFinder = fs.readFileSync("components/WhiskFinder.tsx", "utf8");
 for (const [needle, label] of [
   ['role="status"', "finder status role"],
