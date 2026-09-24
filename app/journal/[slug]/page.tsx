@@ -6,7 +6,7 @@ import Link from "next/link";
 import { articles, getArticle } from "@/lib/articles";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ArticleTools } from "@/components/ArticleTools";
-import { editorialReviewDate } from "@/lib/editorial";
+import { editorialReviewDate, editorialReviewLabel } from "@/lib/editorial";
 
 export const dynamicParams = false;
 
@@ -67,7 +67,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <p className="article-deck">{article.description}</p>
           <div className="article-meta-row">
             <span>{article.readTime} read</span>
-            <span><time dateTime={editorialReviewDate}>Reviewed Sep 22, 2026</time></span>
+            <span><time dateTime={editorialReviewDate}>Reviewed {editorialReviewLabel}</time></span>
             <span>{article.sources.length} source{article.sources.length === 1 ? "" : "s"}</span>
           </div>
           <ArticleTools />
