@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const metadata = pageMetadata({
@@ -20,8 +18,7 @@ const markets = [
 
 export default function ShippingPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Shipping" }]} />
 
       <section className="page-hero">
@@ -67,8 +64,6 @@ export default function ShippingPage() {
           messagePlaceholder="Tell us which products and shipping destination you are interested in..."
         />
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
