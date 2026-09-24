@@ -2,7 +2,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { SiteSearch } from "@/components/SiteSearch";
 import { siteSearchItems } from "@/lib/siteSearch";
-import { isSiteSearchFilter } from "@/lib/search";
+import { isSiteSearchFilter, MAX_SEARCH_QUERY_LENGTH } from "@/lib/search";
 
 export const metadata = pageMetadata({
   title: "Search",
@@ -11,13 +11,22 @@ export const metadata = pageMetadata({
   robots: { index: false, follow: true },
 });
 
+type SearchParamValue = string | string[] | undefined;
+
+function firstSearchParam(value: SearchParamValue) {
+  if (Array.isArray(value)) return value[0] || "";
+  return value || "";
+}
+
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string; type?: string }>;
+  searchParams: Promise<{ q?: SearchParamValue; type?: SearchParamValue }>;
 }) {
-  const { q = "", type = "All" } = await searchParams;
-  const initialType = isSiteSearchFilter(type) ? type : "All";
+  const { q, type } = await searchParams;
+  const initialQuery = firstSearchParam(q).slice(0, MAX_SEARCH_QUERY_LENGTH);
+  const requestedType = firstSearchParam(type) || "All";
+  const initialType = isSiteSearchFilter(requestedType) ? requestedType : "All";
 
   return (
     <>
@@ -27,7 +36,7 @@ export default async function SearchPage({
         <h1>Find the branch you need.</h1>
         <p>Search products, materials, preparation guides, traditions, launch markets and trade information.</p>
       </section>
-      <SiteSearch items={siteSearchItems} initialQuery={q} initialType={initialType} />
+      <SiteSearch items={siteSearchItems} initialQuery={initialQuery} initialType={initialType} />
     </>
   );
 }
