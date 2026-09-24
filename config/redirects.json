@@ -1,12 +1,86 @@
 [
-  { "source": "/markets/united-states", "destination": "/usa" },
-  { "source": "/shop/latvian-oak", "destination": "/shop/baltic-oak" },
-  { "source": "/sauna-broom", "destination": "/journal/sauna-whisk-vs-sauna-broom" },
-  { "source": "/sauna-brooms", "destination": "/journal/sauna-whisk-vs-sauna-broom" },
-  { "source": "/venik", "destination": "/journal/venik-vihta-vasta" },
-  { "source": "/vihta", "destination": "/journal/venik-vihta-vasta" },
-  { "source": "/vasta", "destination": "/journal/venik-vihta-vasta" },
-  { "source": "/how-to-use-sauna-whisk", "destination": "/journal/how-to-use-a-sauna-whisk" },
-  { "source": "/dried-sauna-whisk", "destination": "/journal/how-to-prepare-dried-sauna-whisk" },
-  { "source": "/wholesale-sauna-whisks", "destination": "/wholesale" }
+  {
+    "source": "/markets/united-states",
+    "destination": "/usa"
+  },
+  {
+    "source": "/shop/latvian-oak",
+    "destination": "/shop/baltic-oak"
+  },
+  {
+    "source": "/sauna-broom",
+    "destination": "/journal/sauna-whisk-vs-sauna-broom"
+  },
+  {
+    "source": "/sauna-brooms",
+    "destination": "/journal/sauna-whisk-vs-sauna-broom"
+  },
+  {
+    "source": "/venik",
+    "destination": "/journal/venik-vihta-vasta"
+  },
+  {
+    "source": "/vihta",
+    "destination": "/journal/venik-vihta-vasta"
+  },
+  {
+    "source": "/vasta",
+    "destination": "/journal/venik-vihta-vasta"
+  },
+  {
+    "source": "/how-to-use-sauna-whisk",
+    "destination": "/journal/how-to-use-a-sauna-whisk"
+  },
+  {
+    "source": "/dried-sauna-whisk",
+    "destination": "/journal/how-to-prepare-dried-sauna-whisk"
+  },
+  {
+    "source": "/wholesale-sauna-whisks",
+    "destination": "/wholesale"
+  },
+  {
+    "source": "/birch-sauna-whisk",
+    "destination": "/shop/baltic-birch"
+  },
+  {
+    "source": "/oak-sauna-whisk",
+    "destination": "/shop/baltic-oak"
+  },
+  {
+    "source": "/eucalyptus-sauna-whisk",
+    "destination": "/shop/eucalyptus"
+  },
+  {
+    "source": "/sauna-whisk-sets",
+    "destination": "/shop/discovery-trio"
+  },
+  {
+    "source": "/what-is-a-sauna-whisk",
+    "destination": "/journal/what-is-a-sauna-whisk"
+  },
+  {
+    "source": "/how-to-use-a-sauna-whisk",
+    "destination": "/journal/how-to-use-a-sauna-whisk"
+  },
+  {
+    "source": "/how-to-soak-a-sauna-whisk",
+    "destination": "/journal/how-to-prepare-dried-sauna-whisk"
+  },
+  {
+    "source": "/sauna-whisk-vs-sauna-broom",
+    "destination": "/journal/sauna-whisk-vs-sauna-broom"
+  },
+  {
+    "source": "/venik-guide",
+    "destination": "/journal/venik-vihta-vasta"
+  },
+  {
+    "source": "/vihta-vs-vasta",
+    "destination": "/journal/venik-vihta-vasta"
+  },
+  {
+    "source": "/birch-vs-oak-sauna-whisk",
+    "destination": "/journal/birch-vs-oak-sauna-whisk"
+  }
 ]
