@@ -14,6 +14,7 @@ export function GET() {
       id: `${site.origin}/journal/${article.slug}`,
       url: `${site.origin}/journal/${article.slug}`,
       title: article.title,
+      content_text: article.description,
       summary: article.description,
     })),
   });

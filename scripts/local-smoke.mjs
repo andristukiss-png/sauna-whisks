@@ -132,6 +132,20 @@ async function validatePublicEndpointBody(response, path) {
       if (body.feed_url !== `${site.origin}/feed.json`) {
         fail("/feed.json feed_url does not match the canonical origin.");
       }
+      if (!Array.isArray(body.items)) {
+        fail("/feed.json items must be an array.");
+      } else {
+        for (const [index, item] of body.items.entries()) {
+          if (!item || typeof item.id !== "string" || !item.id.trim()) {
+            fail(`/feed.json item ${index + 1} is missing a valid id.`);
+          }
+          const contentText = typeof item?.content_text === "string" ? item.content_text.trim() : "";
+          const contentHtml = typeof item?.content_html === "string" ? item.content_html.trim() : "";
+          if (!contentText && !contentHtml) {
+            fail(`/feed.json item ${index + 1} must include content_text or content_html.`);
+          }
+        }
+      }
     }
   } catch {
     fail(path + " did not contain valid JSON.");

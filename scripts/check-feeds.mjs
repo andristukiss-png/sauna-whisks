@@ -27,6 +27,7 @@ const jsonRequirements = [
   ['home_page_url: `${site.origin}/journal`', "JSON Feed configured home page"],
   ['feed_url: `${site.origin}/feed.json`', "JSON Feed configured canonical URL"],
   ['language: "en"', "JSON Feed language"],
+  ["content_text: article.description", "JSON Feed required item content"],
   ["publicJson", "shared public JSON response helper"],
 ];
 
