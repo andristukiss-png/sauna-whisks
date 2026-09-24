@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getOperationGuide, operationGuides } from "@/lib/operations";
 
@@ -28,8 +26,7 @@ export default async function OperationGuidePage({ params }: { params: Promise<{
   if (!guide) notFound();
 
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[
         { label: "Home", href: "/" },
         { label: "Operations", href: "/operations" },
@@ -50,8 +47,6 @@ export default async function OperationGuidePage({ params }: { params: Promise<{
           </article>
         ))}
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
