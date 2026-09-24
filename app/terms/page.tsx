@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = pageMetadata({
   title: "Terms",
@@ -11,8 +9,7 @@ export const metadata = pageMetadata({
 
 export default function TermsPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Terms" }]} />
       <article className="legal-page">
         <p className="section-kicker">TERMS</p>
@@ -60,7 +57,6 @@ export default function TermsPage() {
           These are interim pre-launch terms. Formal seller identity, governing law, consumer rights and checkout terms will be completed before sales open.
         </p>
       </article>
-      <SiteFooter />
-    </main>
+    </>
   );
 }
