@@ -1,7 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
-import { Header } from "@/components/Header";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { SiteFooter } from "@/components/SiteFooter";
 import Link from "next/link";
 
 export const metadata = pageMetadata({
@@ -12,8 +10,7 @@ export const metadata = pageMetadata({
 
 export default function TraditionsPage() {
   return (
-    <main>
-      <Header />
+    <>
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Traditions" }]} />
       <section className="page-hero">
         <p className="section-kicker">TRADITIONS</p>
@@ -61,8 +58,6 @@ export default function TraditionsPage() {
           We will document regional terms, techniques and materials separately, with sources and producer knowledge where possible.
         </p>
       </section>
-
-      <SiteFooter />
-    </main>
+    </>
   );
 }
