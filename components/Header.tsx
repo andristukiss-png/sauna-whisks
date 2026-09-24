@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LeafMark } from "./LeafMark";
 import { MobileMenu } from "./MobileMenu";
+import { launchStatus } from "@/lib/status";
 
 const links = [
   ["/shop", "Whisks"],
@@ -16,7 +17,7 @@ export function Header() {
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <div className="prelaunch-bar">
-        <span>PRE-LAUNCH · ENQUIRIES OPEN · CHECKOUT DISABLED</span>
+        <span>{launchStatus.status.toUpperCase()} · {launchStatus.enquiriesOpen ? "ENQUIRIES OPEN" : "ENQUIRIES CLOSED"} · {launchStatus.checkoutEnabled ? "CHECKOUT OPEN" : "CHECKOUT DISABLED"}</span>
         <Link href="/status">Launch status →</Link>
       </div>
       <header className="site-header">
