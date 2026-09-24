@@ -34,7 +34,7 @@ export default function ShopPage() {
         <p className="section-kicker">THE COLLECTION</p>
         <h1>Choose your sauna whisk.</h1>
         <p>
-          A focused collection built around material, origin and ritual character —
+          A focused pre-launch collection built around material, verification status and ritual character —
           not an anonymous wall of products.
         </p>
       </section>
