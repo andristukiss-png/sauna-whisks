@@ -1,6 +1,7 @@
 import { pageMetadata } from "@/lib/metadata";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EnquiryForm } from "@/components/EnquiryForm";
+import site from "@/config/site.json";
 
 export const metadata = pageMetadata({
   title: "Contact",
@@ -17,7 +18,7 @@ export default function ContactPage() {
         <h1>Talk to Sauna Whisks.</h1>
         <p className="contact-intro">
           Product question, wholesale request, sourcing enquiry or something else?
-          Send us a message and we will reply from <strong>info@SaunaWhisks.com</strong>.
+          Send us a message and we will reply from <strong>{site.publicEmail}</strong>.
         </p>
 
         <EnquiryForm
@@ -26,7 +27,7 @@ export default function ContactPage() {
         />
 
         <div className="contact-meta">
-          <div><span>EMAIL</span><a href="mailto:info@SaunaWhisks.com">info@SaunaWhisks.com</a></div>
+          <div><span>EMAIL</span><a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a></div>
           <div><span>BASE</span><p>Latvia · European Union</p></div>
         </div>
 
