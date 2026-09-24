@@ -83,7 +83,6 @@ if (!fs.existsSync(a11yFile)) {
   if (!css.includes("prefers-reduced-motion")) errors.push("Reduced-motion treatment missing.");
   if (!css.includes(".skip-link:focus")) errors.push("Skip-link focus treatment missing.");
   if (!css.includes(".skip-target")) errors.push("Skip-target styling missing.");
-  if (!css.includes(".visually-hidden")) errors.push("Visually hidden utility missing.");
 }
 
 for (const file of files) {
@@ -137,10 +136,13 @@ for (const [needle, label] of [
   if (!enquiryForm.includes(needle)) errors.push("Enquiry form missing " + label + ".");
 }
 
+const globalCss = fs.readFileSync("app/globals.css", "utf8");
+if (!globalCss.includes(".sr-only")) errors.push("Screen-reader-only utility missing.");
+
 const comparePage = fs.readFileSync("app/compare/page.tsx", "utf8");
 for (const [needle, label] of [
   ['<table className="compare-table">', "semantic comparison table"],
-  ['<caption className="visually-hidden">', "comparison table caption"],
+  ['<caption className="sr-only">', "comparison table caption"],
   ['<thead>', "comparison table header group"],
   ['<tbody>', "comparison table body group"],
   ['scope="col"', "comparison column headers"],
