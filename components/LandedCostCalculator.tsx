@@ -15,12 +15,17 @@ function percentage(value: string) {
   return Math.min(100, nonNegative(value));
 }
 
-function money(value: number) {
+function finiteResult(value: number) {
+  return Number.isFinite(value) ? value : null;
+}
+
+function money(value: number | null) {
+  if (value === null) return "—";
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 2,
-  }).format(value || 0);
+  }).format(value);
 }
 
 export function LandedCostCalculator() {
@@ -46,7 +51,16 @@ export function LandedCostCalculator() {
     const total = base + payment + nonNegative(shippingSubsidy);
     const contribution = retailValue - total;
     const margin = retailValue > 0 ? (contribution / retailValue) * 100 : 0;
-    return { inbound, total, contribution, margin };
+    const result = {
+      inbound: finiteResult(inbound),
+      total: finiteResult(total),
+      contribution: finiteResult(contribution),
+      margin: finiteResult(margin),
+    };
+    return {
+      ...result,
+      hasInvalidResult: Object.values(result).some((value) => value === null),
+    };
   }, [supplier, freight, units, packaging, fulfilment, processing, retail, shippingSubsidy]);
 
   const fields = [
@@ -78,12 +92,16 @@ export function LandedCostCalculator() {
           </label>
         ))}
       </div>
-      <div className="calculator-result" role="status" aria-live="polite">
+      <div className="calculator-result" role="status" aria-live="polite" aria-atomic="true">
         <div><span>Inbound freight / unit</span><b>{money(calc.inbound)}</b></div>
         <div><span>Estimated variable cost / unit</span><b>{money(calc.total)}</b></div>
         <div><span>Contribution before CAC</span><b>{money(calc.contribution)}</b></div>
-        <div><span>Contribution margin</span><b>{calc.margin.toFixed(1)}%</b></div>
-        <small>Planning model only. Taxes, duties, returns, damage, storage and other costs may still apply.</small>
+        <div><span>Contribution margin</span><b>{calc.margin === null ? "—" : `${calc.margin.toFixed(1)}%`}</b></div>
+        <small>
+          {calc.hasInvalidResult
+            ? "Enter smaller finite values to calculate a usable landed-cost estimate."
+            : "Planning model only. Taxes, duties, returns, damage, storage and other costs may still apply."}
+        </small>
       </div>
     </div>
   );
