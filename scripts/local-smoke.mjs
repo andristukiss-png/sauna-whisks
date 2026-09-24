@@ -613,6 +613,17 @@ if (searchPage?.ok) {
   if (!hasNoindex(html)) fail("/search must render noindex.");
 }
 
+const repeatedSearchParams = await request("/search?q=birch&q=oak&type=Guide&type=Product");
+expectStatus(
+  repeatedSearchParams,
+  200,
+  "/search repeated q/type parameters"
+);
+if (repeatedSearchParams?.ok) {
+  const html = await repeatedSearchParams.text();
+  if (!hasNoindex(html)) fail("/search with repeated parameters must remain noindex.");
+}
+
 const rssResponse = await request("/feed.xml");
 if (rssResponse?.ok) {
   const rss = await rssResponse.text();
