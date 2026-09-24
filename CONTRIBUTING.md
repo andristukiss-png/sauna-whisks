@@ -47,6 +47,12 @@ Redirects must remain local, direct, and single-hop. Add legacy paths to `config
 - Render JSON-LD only through `components/StructuredData.tsx`; do not add direct `dangerouslySetInnerHTML` elsewhere.
 - Build canonical URLs from `config/site.json`, not repeated host strings.
 
+## API routes
+
+- Public GET routes under `app/api` are discovered automatically. Add every public route to `lib/publicData.ts`; CI rejects unregistered API surfaces.
+- Public JSON/CSV routes must use the shared response helpers so cache, CORS and compatibility headers stay consistent.
+- `/api/enquiry` is intentionally private, POST-only and excluded from the public-data registry.
+
 ## New routes
 Route validators discover `app/**/page.tsx` automatically. Static indexable pages must appear in the sitemap; dynamic page families are checked for finite static params; rendered internal links must resolve directly without relying on legacy redirects.
 
