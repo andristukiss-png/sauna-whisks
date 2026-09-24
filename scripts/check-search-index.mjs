@@ -54,6 +54,7 @@ for (const requirement of sharedRequirements) {
 }
 if (!searchApi.includes("filterSiteSearchItems")) errors.push("Search API bypasses shared search helper.");
 if (!searchUi.includes("filterSiteSearchItems")) errors.push("Search UI bypasses shared search helper.");
+if (!siteSearch.includes("...article.sections.map((section) => section.heading)")) errors.push("Article section headings are missing from site-search keywords.");
 if (!searchUi.includes("maxLength={MAX_SEARCH_QUERY_LENGTH}")) errors.push("Search UI input is not bounded to shared query length.");
 const localSmoke = fs.readFileSync("scripts/local-smoke.mjs", "utf8");
 if (!localSmoke.includes('/api/search?q=venik') || !localSmoke.includes('/glossary/venik')) {
