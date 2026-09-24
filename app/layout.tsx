@@ -9,7 +9,7 @@ import "./a11y.css";
 export const metadata: Metadata = {
   metadataBase: new URL(site.origin),
   title: {
-    default: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
+    default: "Sauna Whisks — Sauna Ritual Knowledge from Latvia",
     template: "%s | Sauna Whisks",
   },
   description:
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     "@type": "WebSite",
     name: site.name,
     url: site.origin,
-    description: "Sauna whisks and sauna tradition knowledge from Latvia.",
+    description: "Sauna whisk knowledge, terminology, care and traditions from a Latvia-based specialist brand.",
     potentialAction: {
       "@type": "SearchAction",
       target: `${site.origin}/search?q={search_term_string}`,
