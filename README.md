@@ -159,7 +159,7 @@ SAUNAWHISKS_EXPECTED_COMMIT=<git-sha> npm run verify:production
 
 See `docs/PRODUCTION_DIAGNOSTICS.md` for the domain/TLS incident playbook.
 
-The CI pipeline uses the committed npm lockfile, runs validation, lint, TypeScript and the production Next.js build, then boots the built server and runs HTTP smoke tests.
+The CI pipeline uses the committed npm lockfile, runs validation, lint, TypeScript and the production Next.js build, then boots the built server and runs HTTP smoke tests. It also verifies that those checks leave tracked source files unchanged.
 
 Metadata and JSON-LD are centralized through `lib/metadata.ts`, `config/site.json` and `components/StructuredData.tsx`; validators reject page-level drift.
 
