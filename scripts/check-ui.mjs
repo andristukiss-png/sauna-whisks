@@ -124,6 +124,15 @@ for (const [needle, label] of [
   if (!loading.includes(needle)) errors.push("Loading fallback missing " + label + ".");
 }
 
+const articleTools = fs.readFileSync("components/ArticleTools.tsx", "utf8");
+for (const [needle, label] of [
+  ['role="status"', "article tools status role"],
+  ['aria-live="polite"', "article tools polite live region"],
+  ['aria-atomic="true"', "article tools atomic announcement"],
+]) {
+  if (!articleTools.includes(needle)) errors.push("Article tools missing " + label + ".");
+}
+
 const journalSearch = fs.readFileSync("components/JournalSearch.tsx", "utf8");
 for (const [needle, label] of [
   ['aria-controls="journal-search-results"', "journal search controls relationship"],
