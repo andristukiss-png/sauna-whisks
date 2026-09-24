@@ -73,6 +73,9 @@ for (const [needle, label] of [
   ['ref={detailsRef}', "details ref"],
   ['detailsRef.current.open = false', "navigation close behavior"],
   ['onClick={closeMenu}', "link close handler"],
+  ['usePathname()', "route-change signal"],
+  ['useEffect(() => {', "route-change effect"],
+  ['}, [pathname]);', "pathname effect dependency"],
   ['aria-label="Mobile navigation"', "mobile navigation landmark label"],
 ]) {
   if (!mobileMenu.includes(needle)) errors.push("Mobile menu missing " + label + ".");

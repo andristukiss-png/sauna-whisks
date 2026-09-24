@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 const extraLinks = [
   ["/faq", "FAQ"],
@@ -18,6 +19,11 @@ export function MobileMenu({
   links: readonly (readonly [string, string])[];
 }) {
   const detailsRef = useRef<HTMLDetailsElement>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (detailsRef.current) detailsRef.current.open = false;
+  }, [pathname]);
 
   function closeMenu() {
     if (detailsRef.current) detailsRef.current.open = false;
