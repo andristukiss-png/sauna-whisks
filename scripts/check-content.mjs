@@ -54,6 +54,18 @@ if (!joined.includes(site.publicEmail)) {
   errors.push("Primary contact email is missing from public application content.");
 }
 
+
+const claimChecks = [
+  ["app/page.tsx", "clear origins", "Homepage must not imply launch-SKU origins are already verified."],
+  ["app/usa/page.tsx", "Baltic sauna whisks for the US.", "US page must not imply Baltic product origin before SKU verification."],
+  ["app/usa/page.tsx", "preparing a US launch for Baltic sauna whisks", "US metadata must not imply Baltic product origin before SKU verification."],
+];
+
+for (const [file, forbidden, message] of claimChecks) {
+  const source = fs.readFileSync(path.join(root, file), "utf8");
+  if (source.includes(forbidden)) errors.push(message);
+}
+
 const readmePath = path.join(root, "README.md");
 const readme = fs.existsSync(readmePath) ? fs.readFileSync(readmePath, "utf8") : "";
 if (!readme.includes("Commercial launch gates")) {

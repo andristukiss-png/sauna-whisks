@@ -7,7 +7,7 @@ import { discoveryTrio } from "@/lib/bundles";
 
 export const metadata: Metadata = {
   openGraph: {
-    title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
+    title: "Sauna Whisks — Sauna Ritual Knowledge from Latvia",
     description: "Traditional sauna whisks and the living sauna traditions behind them.",
     url: site.origin,
     siteName: site.name,
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sauna Whisks — Baltic Sauna Tradition from Latvia",
+    title: "Sauna Whisks — Sauna Ritual Knowledge from Latvia",
     description: "Traditional sauna whisks and the living sauna traditions behind them.",
   },
 };
@@ -72,7 +72,7 @@ export default function Home() {
       <section className="products" id="whisks">
         <div className="section-heading">
           <div><p className="section-kicker">THE FIRST COLLECTION</p><h2>Choose your forest.</h2></div>
-          <p>Our launch collection is intentionally small: recognizable species, clear origins and different ritual characteristics.</p>
+          <p>Our launch collection is intentionally small: recognizable materials, transparent verification status and different ritual characteristics.</p>
         </div>
         <div className="product-grid">
           {products.map((p, i) => (

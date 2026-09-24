@@ -4,7 +4,7 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const metadata = pageMetadata({
   title: "Sauna Whisks USA — Planned US Launch",
-  description: "SaunaWhisks.com is preparing a US launch for Baltic sauna whisks. Learn about the planned assortment, product standards and import-compliance approach.",
+  description: "SaunaWhisks.com is preparing a US launch for sauna whisks. Learn about the planned assortment, product standards and import-compliance approach.",
   canonical: "/usa",
 });
 
@@ -13,7 +13,7 @@ export default function USAPage() {
     <>
       <section className="page-hero usa-hero">
         <p className="section-kicker">UNITED STATES / LAUNCH PLANNING</p>
-        <h1>Baltic sauna whisks for the US.</h1>
+        <h1>Sauna whisks for the US.</h1>
         <p>
           We are preparing the US market around a small dried-whisk assortment, clear preparation guidance
           and bundles that make international logistics sensible. US orders are not open yet.
