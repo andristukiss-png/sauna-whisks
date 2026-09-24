@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s | Sauna Whisks",
   },
   description:
-    "Traditional sauna whisks, veniks, vihta and Baltic sauna knowledge from Latvia. Birch, oak, eucalyptus and herbal sauna rituals for homes, saunas and trade partners.",
+    "Traditional sauna whisks — also known as sauna brooms, venik, vihta or vasta — plus Baltic sauna knowledge for homes, saunas and trade partners.",
   applicationName: "Sauna Whisks",
   creator: "Sauna Whisks",
   publisher: "Sauna Whisks",

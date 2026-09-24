@@ -79,7 +79,7 @@ export const useCases: UseCase[] = [
     summary:"The first purchase should help you understand the category rather than overwhelm you with species and tradition terminology.",
     priorities:["Birch benchmark","Simple preparation","Soft feel","Clear next step"],
     recommendation:"Choose birch first unless you specifically want to compare materials, in which case use the Discovery Trio.",
-    related:[{label:"First whisk guide",href:"/guides/first-sauna-whisk"},{label:"Baltic Birch",href:"/shop/baltic-birch"}]
+    related:[{label:"First whisk guide",href:"/guides/first-sauna-whisk"},{label:"Birch Sauna Whisk",href:"/shop/baltic-birch"}]
   }
 ];
 

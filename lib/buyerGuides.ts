@@ -14,7 +14,7 @@ export const buyerGuides: BuyerGuide[] = [
     description: "A simple buying path for someone who has never used a whisk before.",
     recommendation: "Start with birch, or choose the Discovery Trio if you want to compare three materials immediately.",
     reasons: ["Birch is the easiest traditional reference point", "Soft leaves make the material easy to understand", "Preparation guidance is straightforward", "You can compare oak/eucalyptus later"],
-    links: [{ label: "Baltic Birch", href: "/shop/baltic-birch" }, { label: "Beginner guide", href: "/beginners" }]
+    links: [{ label: "Birch Sauna Whisk", href: "/shop/baltic-birch" }, { label: "Beginner guide", href: "/beginners" }]
   },
   {
     slug: "home-sauna",
@@ -38,7 +38,7 @@ export const buyerGuides: BuyerGuide[] = [
     description: "What to look for when your priority is the classic birch experience.",
     recommendation: "Focus on origin, condition, branch selection, tying and preparation rather than only price.",
     reasons: ["Birch quality varies by harvest and preservation", "Leaf retention matters in actual use", "The handle should be usable", "Origin should be documented when possible"],
-    links: [{ label: "Baltic Birch", href: "/shop/baltic-birch" }, { label: "Birch material guide", href: "/materials/birch" }]
+    links: [{ label: "Birch Sauna Whisk", href: "/shop/baltic-birch" }, { label: "Birch material guide", href: "/materials/birch" }]
   },
   {
     slug: "oak-whisk",
@@ -46,7 +46,7 @@ export const buyerGuides: BuyerGuide[] = [
     description: "For sauna users who want a broader, denser and firmer whisk.",
     recommendation: "Choose oak when you specifically want more body and broader leaf contact than birch.",
     reasons: ["Broad leaves create a different feel", "Oak is a useful contrast to birch", "Species/origin should be disclosed", "Preparation still matters for dried products"],
-    links: [{ label: "Baltic Oak", href: "/shop/baltic-oak" }, { label: "Birch vs oak", href: "/journal/birch-vs-oak-sauna-whisk" }]
+    links: [{ label: "Oak Sauna Whisk", href: "/shop/baltic-oak" }, { label: "Birch vs oak", href: "/journal/birch-vs-oak-sauna-whisk" }]
   },
   {
     slug: "aromatic-whisk",
@@ -54,7 +54,7 @@ export const buyerGuides: BuyerGuide[] = [
     description: "For buyers who care most about botanical scent and aroma.",
     recommendation: "Eucalyptus is the clearest aroma-led option in the planned launch assortment.",
     reasons: ["Distinctive aroma profile", "Easy contrast with birch/oak", "Useful in discovery bundles", "Ingredients and origin still need clear labeling"],
-    links: [{ label: "Eucalyptus", href: "/shop/eucalyptus" }, { label: "Eucalyptus material guide", href: "/materials/eucalyptus" }]
+    links: [{ label: "Eucalyptus Sauna Whisk", href: "/shop/eucalyptus" }, { label: "Eucalyptus material guide", href: "/materials/eucalyptus" }]
   },
   {
     slug: "pirts-inspired",

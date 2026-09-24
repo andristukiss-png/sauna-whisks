@@ -12,7 +12,7 @@ const facts=[
   ["Base","Latvia, European Union"],
   ["Status","Pre-launch; checkout disabled"],
   ["Focus","Sauna whisks, materials, care, traditions, trade supply and producer documentation"],
-  ["Planned core products","Baltic Birch, Baltic Oak, Eucalyptus and the Discovery Trio"],
+  ["Planned core products","Birch Sauna Whisk, Oak Sauna Whisk, Eucalyptus Sauna Whisk and the Discovery Trio"],
   ["Public contact","info@SaunaWhisks.com"],
   ["Editorial principle","Publish what can be verified; distinguish traditions rather than flattening them together"],
   ["Commercial principle","Open markets only after product, fulfilment and import paths are validated"]

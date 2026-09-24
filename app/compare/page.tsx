@@ -59,19 +59,19 @@ export default function ComparePage() {
             <span>01</span>
             <h2>Choose birch first</h2>
             <p>Birch is the easiest reference point for understanding what a traditional sauna whisk feels like.</p>
-            <Link className="text-link" href="/shop/baltic-birch">View Baltic Birch →</Link>
+            <Link className="text-link" href="/shop/baltic-birch">View Birch Sauna Whisk →</Link>
           </article>
           <article>
             <span>02</span>
             <h2>Choose oak for body</h2>
             <p>Oak is broader, denser and usually better suited to people who want a firmer tool.</p>
-            <Link className="text-link" href="/shop/baltic-oak">View Baltic Oak →</Link>
+            <Link className="text-link" href="/shop/baltic-oak">View Oak Sauna Whisk →</Link>
           </article>
           <article>
             <span>03</span>
             <h2>Choose eucalyptus for aroma</h2>
             <p>Eucalyptus is the most fragrance-led option in the launch collection.</p>
-            <Link className="text-link" href="/shop/eucalyptus">View Eucalyptus →</Link>
+            <Link className="text-link" href="/shop/eucalyptus">View Eucalyptus Sauna Whisk →</Link>
           </article>
         </div>
       </section>

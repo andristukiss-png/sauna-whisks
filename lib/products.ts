@@ -17,7 +17,7 @@ export type SaunaWhisk = {
 export const saunaWhisks: SaunaWhisk[] = [
   {
     slug: "baltic-birch",
-    name: "Baltic Birch",
+    name: "Birch Sauna Whisk",
     latin: "Betula",
     material: "Birch",
     origin: "Baltic region — final supplier/harvest origin pending",
@@ -38,7 +38,7 @@ export const saunaWhisks: SaunaWhisk[] = [
   },
   {
     slug: "baltic-oak",
-    name: "Baltic Oak",
+    name: "Oak Sauna Whisk",
     latin: "Quercus",
     material: "Oak",
     origin: "Baltic region — final supplier/harvest origin pending",
@@ -59,7 +59,7 @@ export const saunaWhisks: SaunaWhisk[] = [
   },
   {
     slug: "eucalyptus",
-    name: "Eucalyptus",
+    name: "Eucalyptus Sauna Whisk",
     latin: "Eucalyptus",
     material: "Eucalyptus",
     origin: "Producer and harvest origin to be confirmed",

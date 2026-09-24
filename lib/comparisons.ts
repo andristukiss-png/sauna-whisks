@@ -16,7 +16,7 @@ export const comparisons: Comparison[] = [
     left: { name: "Birch", points: ["Softer leaf contact", "Classic first whisk", "Fresh forest aroma", "Traditional Finnish/Baltic reference"] },
     right: { name: "Oak", points: ["Broader leaves", "Firmer, denser feel", "Earthier profile", "Strong banya/Baltic association"] },
     conclusion: "Choose birch for the classic softer benchmark; choose oak when you want a fuller, firmer tool.",
-    related: [{ label: "Baltic Birch", href: "/shop/baltic-birch" }, { label: "Baltic Oak", href: "/shop/baltic-oak" }]
+    related: [{ label: "Birch Sauna Whisk", href: "/shop/baltic-birch" }, { label: "Oak Sauna Whisk", href: "/shop/baltic-oak" }]
   },
   {
     slug: "birch-vs-eucalyptus",
@@ -25,7 +25,7 @@ export const comparisons: Comparison[] = [
     left: { name: "Birch", points: ["Traditional reference", "Soft and leafy", "Subtle forest aroma", "Good first whisk"] },
     right: { name: "Eucalyptus", points: ["Aroma-forward", "Distinctive scent", "Different leaf structure", "Contemporary discovery option"] },
     conclusion: "Choose birch to learn traditional whisking; choose eucalyptus when aroma is the primary reason for the product.",
-    related: [{ label: "Baltic Birch", href: "/shop/baltic-birch" }, { label: "Eucalyptus", href: "/shop/eucalyptus" }]
+    related: [{ label: "Birch Sauna Whisk", href: "/shop/baltic-birch" }, { label: "Eucalyptus Sauna Whisk", href: "/shop/eucalyptus" }]
   },
   {
     slug: "oak-vs-eucalyptus",
@@ -34,7 +34,7 @@ export const comparisons: Comparison[] = [
     left: { name: "Oak", points: ["Dense feel", "Broad leaf contact", "Earthy/woody profile", "Stronger physical character"] },
     right: { name: "Eucalyptus", points: ["Aromatic focus", "Lighter feel", "Distinct scent", "Useful in mixed discovery sets"] },
     conclusion: "Oak is the physical-feel choice; eucalyptus is the aroma-first choice.",
-    related: [{ label: "Baltic Oak", href: "/shop/baltic-oak" }, { label: "Eucalyptus", href: "/shop/eucalyptus" }]
+    related: [{ label: "Oak Sauna Whisk", href: "/shop/baltic-oak" }, { label: "Eucalyptus Sauna Whisk", href: "/shop/eucalyptus" }]
   },
   {
     slug: "fresh-vs-dried",
