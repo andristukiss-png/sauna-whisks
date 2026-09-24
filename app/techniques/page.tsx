@@ -2,8 +2,6 @@ import { StructuredData } from "@/components/StructuredData";
 import site from "@/config/site.json";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
-import { Header } from "@/components/Header";
-import { SiteFooter } from "@/components/SiteFooter";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { techniques } from "@/lib/techniques";
 
@@ -25,9 +23,8 @@ export default function TechniquesPage(){
     }))
   };
 
-  return <main>
+  return <>
     <StructuredData data={schema} />
-    <Header/>
     <Breadcrumbs items={[{label:"Home",href:"/"},{label:"Techniques"}]}/>
     <section className="page-hero">
       <p className="section-kicker">TECHNIQUES</p>
@@ -42,6 +39,5 @@ export default function TechniquesPage(){
         <b>Open technique →</b>
       </Link>)}
     </section>
-    <SiteFooter/>
-  </main>;
+  </>;
 }
