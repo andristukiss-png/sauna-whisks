@@ -1,3 +1,4 @@
+import { StructuredData } from "@/components/StructuredData";
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { Header } from "@/components/Header";
@@ -31,10 +32,7 @@ export default function WholesalePage() {
 
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }}
-      />
+      <StructuredData data={faqSchema} />
       <Header />
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Wholesale" }]} />
       <section className="page-hero dark-page">
