@@ -908,7 +908,7 @@ const fastSubmit = await request("/api/enquiry", {
     name: "Fast User",
     email: "fast@example.com",
     message: "A fast-submit test enquiry.",
-    startedAt: String(Date.now()),
+    elapsedMs: "500",
   }),
 });
 const fastSubmitBody = await verifyEnquiryResponse(fastSubmit, 200, "/api/enquiry fast submit");
@@ -943,7 +943,7 @@ const noProvider = await request("/api/enquiry", {
     name: "Test User",
     email: "test@example.com",
     message: "A valid local smoke test enquiry.",
-    startedAt: String(Date.now() - 5000),
+    elapsedMs: "5000",
   }),
 });
 const noProviderBody = await verifyEnquiryResponse(
@@ -953,6 +953,25 @@ const noProviderBody = await verifyEnquiryResponse(
 );
 if (noProviderBody.fallback !== "mailto") {
   fail("/api/enquiry missing mailto fallback when provider is unavailable.");
+}
+
+const negativeElapsed = await request("/api/enquiry", {
+  method: "POST",
+  headers: { "content-type": "application/json" },
+  body: JSON.stringify({
+    name: "Clock Skew User",
+    email: "clock@example.com",
+    message: "A valid enquiry with an invalid negative elapsed duration.",
+    elapsedMs: "-5000",
+  }),
+});
+const negativeElapsedBody = await verifyEnquiryResponse(
+  negativeElapsed,
+  503,
+  "/api/enquiry negative elapsed duration"
+);
+if (negativeElapsedBody.fallback !== "mailto") {
+  fail("/api/enquiry negative elapsed duration was incorrectly treated as a fast-submit signal.");
 }
 
 if (failures.length) {
