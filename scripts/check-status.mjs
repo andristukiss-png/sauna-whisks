@@ -35,6 +35,9 @@ for (const file of [
   "app/api/company/route.ts",
   "app/api/markets/route.ts",
   "app/api/trade/route.ts",
+  "components/Header.tsx",
+  "app/press/page.tsx",
+  "lib/faqTopics.ts",
 ]) {
   const text = fs.readFileSync(file, "utf8");
   if (!text.includes('import { launchStatus } from "@/lib/status"')) {
@@ -47,6 +50,19 @@ for (const file of [
 
 if (!api.includes("noStoreJson(launchStatus)")) {
   errors.push("Status API is not served from shared launch status data.");
+}
+
+const header = fs.readFileSync("components/Header.tsx", "utf8");
+for (const field of ["launchStatus.status", "launchStatus.enquiriesOpen", "launchStatus.checkoutEnabled"]) {
+  if (!header.includes(field)) errors.push("Header must render shared " + field + ".");
+}
+const press = fs.readFileSync("app/press/page.tsx", "utf8");
+if (!press.includes("launchStatus.checkoutEnabled")) {
+  errors.push("Press facts must render checkout state from shared launch status.");
+}
+const faqTopics = fs.readFileSync("lib/faqTopics.ts", "utf8");
+if (!faqTopics.includes("launchStatus.checkoutEnabled")) {
+  errors.push("FAQ order availability must derive from shared launch status.");
 }
 
 if (!prelaunch.includes("availableForPurchase: true")) {
