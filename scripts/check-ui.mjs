@@ -136,6 +136,21 @@ for (const [needle, label] of [
   if (!enquiryForm.includes(needle)) errors.push("Enquiry form missing " + label + ".");
 }
 
+const globalCss = fs.readFileSync("app/globals.css", "utf8");
+if (!globalCss.includes(".sr-only")) errors.push("Screen-reader-only utility missing.");
+
+const comparePage = fs.readFileSync("app/compare/page.tsx", "utf8");
+for (const [needle, label] of [
+  ['<table className="compare-table">', "semantic comparison table"],
+  ['<caption className="sr-only">', "comparison table caption"],
+  ['<thead>', "comparison table header group"],
+  ['<tbody>', "comparison table body group"],
+  ['scope="col"', "comparison column headers"],
+  ['scope="row"', "comparison row headers"],
+]) {
+  if (!comparePage.includes(needle)) errors.push("Compare page missing " + label + ".");
+}
+
 const unique = [...new Set(errors)];
 if (unique.length) {
   console.error("UI validation failed:");
