@@ -1,5 +1,6 @@
 import { pageMetadata } from "@/lib/metadata";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import site from "@/config/site.json";
 
 export const metadata = pageMetadata({
   title: "Returns & Refunds",
@@ -41,7 +42,7 @@ export default function ReturnsPage() {
         <section>
           <h2>Questions</h2>
           <p>
-            For pre-launch questions, contact <a href="mailto:info@SaunaWhisks.com">info@SaunaWhisks.com</a>.
+            For pre-launch questions, contact <a href={`mailto:${site.publicEmail}`}>{site.publicEmail}</a>.
           </p>
         </section>
       </article>
