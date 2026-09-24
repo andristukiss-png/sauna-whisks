@@ -70,7 +70,7 @@ Public API routes are deliberately excluded from crawler indexing with both `rob
 Shared public JSON, CSV, text and feed responses include:
 
 ```
-X-SaunaWhisks-Data-Version: 1
+X-SaunaWhisks-Data-Version: 2
 ```
 
-The header is exposed through CORS so browser-based tooling can read it. Version changes are reserved for intentional compatibility changes to the public machine-data contract; ordinary content updates do not require a version bump. Sitemap and robots metadata routes are outside this shared response-helper contract.
+The header is exposed through CORS so browser-based tooling can read it. Version changes are reserved for intentional compatibility changes to the public machine-data contract; ordinary content updates do not require a version bump. Version 2 introduces the standards-specific `application/feed+json` media type for `/feed.json`. Sitemap and robots metadata routes are outside this shared response-helper contract.
