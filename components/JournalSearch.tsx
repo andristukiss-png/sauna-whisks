@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { MAX_SEARCH_QUERY_LENGTH } from "@/lib/search";
+import { MAX_SEARCH_QUERY_LENGTH, normalizeSearchQuery } from "@/lib/search";
 
 type JournalItem = {
   slug: string;
@@ -15,16 +15,21 @@ type JournalItem = {
 export function JournalSearch({ items }: { items: JournalItem[] }) {
   const [query, setQuery] = useState("");
 
+  const normalized = normalizeSearchQuery(query);
+
   const filtered = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
     if (!normalized) return items;
-    return items.filter((item) =>
-      [item.title, item.eyebrow, item.description]
+
+    const tokens = normalized.split(" ");
+    return items.filter((item) => {
+      const haystack = [item.title, item.eyebrow, item.description]
         .join(" ")
-        .toLowerCase()
-        .includes(normalized)
-    );
-  }, [items, query]);
+        .normalize("NFKC")
+        .toLowerCase();
+
+      return tokens.every((token) => haystack.includes(token));
+    });
+  }, [items, normalized]);
 
   return (
     <section className="journal-search-section" aria-label="Search sauna guides">
@@ -42,7 +47,7 @@ export function JournalSearch({ items }: { items: JournalItem[] }) {
       </label>
 
       <p id="journal-search-count" className="search-count" role="status" aria-live="polite" aria-atomic="true">
-        {query.trim()
+        {normalized
           ? `${filtered.length} guide${filtered.length === 1 ? "" : "s"}`
           : `${filtered.length} guides in the library`}
       </p>
