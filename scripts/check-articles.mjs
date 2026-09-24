@@ -8,6 +8,22 @@ const sourceBlocks = [...source.matchAll(/sources:\s*\[([\s\S]*?)\]/g)].map((m) 
 
 const errors = [];
 
+const editorial = fs.readFileSync("lib/editorial.ts", "utf8");
+const articlePage = fs.readFileSync("app/journal/[slug]/page.tsx", "utf8");
+for (const [needle, label] of [
+  ["export const editorialReviewLabel", "shared editorial review label"],
+  ['timeZone: "UTC"', "deterministic editorial review timezone"],
+]) {
+  if (!editorial.includes(needle)) errors.push("Editorial metadata missing " + label + ".");
+}
+if (!articlePage.includes("editorialReviewLabel")) {
+  errors.push("Journal article page must render the shared editorial review label.");
+}
+if (/Reviewed\s+[A-Z][a-z]{2}\s+\d{1,2},\s+\d{4}/.test(articlePage)) {
+  errors.push("Journal article page must not hard-code a visible editorial review date.");
+}
+
+
 const duplicate = (values) => values.filter((value, index) => values.indexOf(value) !== index);
 const duplicateSlugs = [...new Set(duplicate(slugs))];
 const duplicateTitles = [...new Set(duplicate(titles))];
