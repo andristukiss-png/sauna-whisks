@@ -42,7 +42,8 @@ function searchScore(item: SiteSearchItem, query: string) {
   ).length;
   const descriptionTokenMatches = tokens.filter((token) => description.includes(token)).length;
 
-  return 10 + titleTokenMatches * 8 + keywordTokenMatches * 5 + descriptionTokenMatches * 2;
+  const tokenScore = 10 + titleTokenMatches * 8 + keywordTokenMatches * 5 + descriptionTokenMatches * 2;
+  return Math.min(19, tokenScore);
 }
 
 export function filterSiteSearchItems(
