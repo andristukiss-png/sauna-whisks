@@ -22,13 +22,15 @@ export type SiteSearchItem = {
   keywords?: string[];
 };
 
+const saunaWhiskAliases = ["sauna broom", "venik", "vihta", "vasta"];
+
 const pages: SiteSearchItem[] = [
-  { title: "Learn", description: "Learning hub for sauna whisk materials, care and traditions.", href: "/learn", type: "Page", keywords: ["education", "beginner"] },
+  { title: "Learn", description: "Learning hub for sauna whisk materials, care and traditions.", href: "/learn", type: "Page", keywords: ["education", "beginner", ...saunaWhiskAliases] },
   { title: "Beginners", description: "A first-whisk path from choosing material to using it.", href: "/beginners", type: "Page", keywords: ["first whisk", "beginner"] },
   { title: "Materials", description: "Birch, oak and eucalyptus material hub.", href: "/materials", type: "Page", keywords: ["birch", "oak", "eucalyptus"] },
   { title: "Care", description: "Preparation, storage, reuse and troubleshooting.", href: "/care", type: "Page", keywords: ["storage", "prepare", "reuse"] },
   { title: "Traditions", description: "Latvian pirts, Finnish vihta/vasta and banya venik context.", href: "/traditions", type: "Page", keywords: ["pirts", "vihta", "vasta", "venik"] },
-  { title: "Glossary", description: "Definitions for sauna whisk terminology.", href: "/glossary", type: "Page", keywords: ["terms", "definitions"] },
+  { title: "Glossary", description: "Definitions for sauna whisk terminology.", href: "/glossary", type: "Page", keywords: ["terms", "definitions", ...saunaWhiskAliases] },
   { title: "Sourcing standards", description: "How SaunaWhisks.com plans to document product origin and quality.", href: "/standards", type: "Page", keywords: ["origin", "quality", "supplier"] },
   { title: "Shipping & availability", description: "Current pre-launch shipping and market status.", href: "/shipping", type: "Page", keywords: ["shipping", "country", "availability"] },
   { title: "FAQ", description: "Common questions about sauna whisks and launch plans.", href: "/faq", type: "Page", keywords: ["questions", "help"] },
@@ -69,14 +71,14 @@ export const siteSearchItems: SiteSearchItem[] = [
     description: whisk.description,
     href: `/shop/${whisk.slug}`,
     type: "Product" as const,
-    keywords: [whisk.material, whisk.latin, whisk.character]
+    keywords: [whisk.material, whisk.latin, whisk.character, ...saunaWhiskAliases]
   })),
   {
     title: "Discovery Trio",
     description: "Planned birch, oak and eucalyptus three-whisk comparison bundle.",
     href: "/shop/discovery-trio",
     type: "Product" as const,
-    keywords: ["bundle", "birch", "oak", "eucalyptus"]
+    keywords: ["bundle", "birch", "oak", "eucalyptus", ...saunaWhiskAliases]
   },
   ...articles.map((article) => ({
     title: article.title,
