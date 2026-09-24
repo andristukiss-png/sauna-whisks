@@ -33,7 +33,7 @@ Run:
 npm run check
 ```
 
-This covers validation, lint, TypeScript and the production Next.js build. CI additionally audits production dependencies, runs CodeQL, boots the production server and runs HTTP smoke tests.
+This covers validation, lint, TypeScript and the production Next.js build. CI additionally audits production dependencies, runs CodeQL, boots the production server, runs HTTP smoke tests, and fails if checks modify tracked files or leave unexpected non-ignored files behind.
 
 ## Next.js boundaries
 
