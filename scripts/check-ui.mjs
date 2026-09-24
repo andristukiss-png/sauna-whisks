@@ -174,6 +174,23 @@ for (const [needle, label] of [
   if (!enquiryForm.includes(needle)) errors.push("Enquiry form missing " + label + ".");
 }
 
+const siteFooter = fs.readFileSync("components/SiteFooter.tsx", "utf8");
+for (const [needle, label] of [
+  ['aria-label="Shop and explore"', "shop and explore navigation"],
+  ['aria-label="Learn"', "learning navigation"],
+  ['aria-label="Trade and operations"', "trade and operations navigation"],
+  ['aria-label="Company and trust"', "company and trust navigation"],
+  ['aria-label="Help and legal"', "help and legal navigation"],
+  ['className="footer-menu-grid"', "grouped footer navigation layout"],
+]) {
+  if (!siteFooter.includes(needle)) errors.push("Footer missing " + label + ".");
+}
+const footerHrefs = [...siteFooter.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
+const duplicateFooterHrefs = footerHrefs.filter((href, index) => footerHrefs.indexOf(href) !== index);
+if (duplicateFooterHrefs.length) {
+  errors.push("Footer contains duplicate destinations: " + [...new Set(duplicateFooterHrefs)].join(", "));
+}
+
 const globalCss = fs.readFileSync("app/globals.css", "utf8");
 if (!globalCss.includes(".sr-only")) errors.push("Screen-reader-only utility missing.");
 
