@@ -89,8 +89,9 @@ export function EnquiryForm({
 
       if (response.ok && data.ok) {
         setStatus("success");
-        setStatusMessage("Thank you. Your enquiry has been sent.");
+        setStatusMessage("Thank you. Your enquiry was submitted.");
         element.reset();
+        startedAt.current = Date.now();
         return;
       }
 
