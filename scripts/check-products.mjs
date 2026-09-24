@@ -78,6 +78,20 @@ if (fs.readFileSync("app/api/catalog/route.ts", "utf8").includes('plannedPrice: 
   errors.push("Catalog API reintroduced a conflicting Discovery Trio price.");
 }
 
+for (const [file, needle, label] of [
+  ["app/catalog/page.tsx", "whisk.availableForPurchase", "catalog product availability"],
+  ["app/shop/[slug]/page.tsx", "whisk.availableForPurchase", "product-page availability"],
+  ["app/shop/discovery-trio/page.tsx", "discoveryTrio.availableForPurchase", "Discovery Trio availability"],
+]) {
+  const text = fs.readFileSync(file, "utf8");
+  if (!text.includes(needle)) {
+    errors.push(file + " must render " + label + " from shared data.");
+  }
+}
+if (fs.readFileSync("app/catalog/page.tsx", "utf8").includes("<dd>No — pre-launch</dd>")) {
+  errors.push("Catalog page must not hard-code purchasability independently of product data.");
+}
+
 if (!source.includes('slug: "baltic-oak"')) errors.push("Stable oak product slug is missing.");
 if (source.includes("Latvian Oak")) errors.push("Unverified Latvian Oak naming reintroduced.");
 
