@@ -85,11 +85,13 @@ for (const [needle, label] of [
 
 const shippingPage = fs.readFileSync(path.join(root, "app/shipping/page.tsx"), "utf8");
 for (const [needle, label] of [
-  ['import { getMarket } from "@/lib/markets"', "shared market import"],
+  ['from "@/lib/markets"', "shared market import"],
+  ["getMarket(", "shared market lookup"],
   ["const shippingMarkets =", "shared shipping market selection"],
   ["market.name", "shared market name"],
   ["market.status", "shared market status"],
   ["market.logistics", "shared market logistics"],
+  ["getMarketPath(market)", "canonical market-page links"],
 ]) {
   if (!shippingPage.includes(needle)) errors.push("Shipping page missing " + label + ".");
 }
