@@ -1,9 +1,9 @@
 import site from "@/config/site.json";
 import { articles } from "@/lib/articles";
-import { publicJson } from "@/lib/publicApi";
+import { publicText } from "@/lib/publicApi";
 
 export function GET() {
-  return publicJson({
+  const feed = {
     version: "https://jsonfeed.org/version/1.1",
     title: "Sauna Whisks Journal",
     home_page_url: `${site.origin}/journal`,
@@ -17,5 +17,10 @@ export function GET() {
       content_text: article.description,
       summary: article.description,
     })),
+  };
+
+  return publicText(JSON.stringify(feed), {
+    contentType: "application/feed+json; charset=utf-8",
+    maxAge: 3600,
   });
 }

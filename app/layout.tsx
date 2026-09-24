@@ -25,7 +25,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     types: {
-      "application/rss+xml": `${site.origin}/feed.xml`
+      "application/rss+xml": `${site.origin}/feed.xml`,
+      "application/feed+json": `${site.origin}/feed.json`,
     }
   },
   twitter: {

@@ -547,7 +547,7 @@ if (apiIndexResponse?.ok) {
         expectHeader(response, "x-robots-tag", "noindex", path);
       }
       if (!["/sitemap.xml", "/robots.txt"].includes(path)) {
-        expectHeader(response, "x-saunawhisks-data-version", "1", path);
+        expectHeader(response, "x-saunawhisks-data-version", "2", path);
         expectHeader(response, "access-control-expose-headers", "x-saunawhisks-data-version", path);
       }
 
@@ -558,6 +558,8 @@ if (apiIndexResponse?.ok) {
         expectHeader(response, "content-disposition", "filename=", path);
       } else if (path === "/feed.xml") {
         expectHeader(response, "content-type", "application/rss+xml", path);
+      } else if (path === "/feed.json") {
+        expectHeader(response, "content-type", "application/feed+json", path);
       } else if (path === "/sitemap.xml") {
         expectHeader(response, "content-type", "xml", path);
       } else if (
@@ -578,7 +580,7 @@ for (const [path, type] of [
   ["/robots.txt", "text/plain"],
   ["/sitemap.xml", "xml"],
   ["/feed.xml", "application/rss+xml"],
-  ["/feed.json", "application/json"],
+  ["/feed.json", "application/feed+json"],
   ["/.well-known/security.txt", "text/plain"],
   ["/humans.txt", "text/plain"],
   ["/llms.txt", "text/plain"],

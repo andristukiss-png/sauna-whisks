@@ -1,4 +1,4 @@
-export const PUBLIC_DATA_VERSION = "1";
+export const PUBLIC_DATA_VERSION = "2";
 
 const publicAccessHeaders = {
   "Access-Control-Allow-Origin": "*",

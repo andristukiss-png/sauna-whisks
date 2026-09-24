@@ -356,7 +356,7 @@ async function checkSecurityTxt() {
     }
 
     for (const [header, expected] of [
-      ["x-saunawhisks-data-version", "1"],
+      ["x-saunawhisks-data-version", "2"],
       ["access-control-allow-origin", "*"],
       ["cross-origin-resource-policy", "cross-origin"],
     ]) {
@@ -445,7 +445,7 @@ await check(`${baseUrl}/api/health`, {
     ["access-control-allow-origin", "*"],
     ["cross-origin-resource-policy", "cross-origin"],
     ["x-robots-tag", "noindex"],
-    ["x-saunawhisks-data-version", "1"],
+    ["x-saunawhisks-data-version", "2"],
     ["access-control-expose-headers", "x-saunawhisks-data-version"],
   ],
 });
@@ -454,15 +454,15 @@ await check(`${baseUrl}/sitemap.xml`, { contentTypeIncludes: "xml" });
 await check(`${baseUrl}/feed.xml`, {
   contentTypeIncludes: "application/rss+xml",
   headerIncludes: [
-    ["x-saunawhisks-data-version", "1"],
+    ["x-saunawhisks-data-version", "2"],
     ["access-control-allow-origin", "*"],
     ["cross-origin-resource-policy", "cross-origin"],
   ],
 });
 await check(`${baseUrl}/feed.json`, {
-  contentTypeIncludes: "application/json",
+  contentTypeIncludes: "application/feed+json",
   headerIncludes: [
-    ["x-saunawhisks-data-version", "1"],
+    ["x-saunawhisks-data-version", "2"],
     ["access-control-allow-origin", "*"],
     ["cross-origin-resource-policy", "cross-origin"],
   ],
