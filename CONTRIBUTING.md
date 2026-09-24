@@ -11,6 +11,11 @@
 
 Use `config/site.json` as the source of truth for the canonical origin, hostnames and public contact in runtime configuration, APIs, feeds and structured data. Do not introduce new hard-coded copies of those values in machine-readable output.
 
+## Repository hygiene
+
+- Never commit `.env` files, Vercel state, build output, coverage, caches, debug logs or private-key material. Use `.env.example` for documented variable names only.
+- `npm run validate:hygiene` checks tracked files rather than the working directory, so generated dependencies/build output do not create false positives.
+
 ## Runtime
 
 Use Node 22. Run `nvm use` (or use a tool that honors `.node-version`), then install the committed dependency graph with `npm ci`. Do not delete or hand-edit `package-lock.json`.
