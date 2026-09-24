@@ -53,6 +53,24 @@ if (pkg.scripts?.["validate:hygiene"] !== "node scripts/check-repo-hygiene.mjs")
 if (!fs.existsSync(".npmrc") || !fs.readFileSync(".npmrc", "utf8").includes("engine-strict=true")) {
   errors.push(".npmrc must enforce engine-strict=true.");
 }
+
+const nextEnv = fs.readFileSync("next-env.d.ts", "utf8");
+for (const required of [
+  'import "./.next/types/routes.d.ts";',
+  'import "./.next/types/root-params.d.ts";',
+]) {
+  if (!nextEnv.includes(required)) {
+    errors.push("next-env.d.ts missing Next.js 16 generated reference: " + required);
+  }
+}
+
+const tsconfig = JSON.parse(fs.readFileSync("tsconfig.json", "utf8"));
+if (tsconfig.compilerOptions?.jsx !== "react-jsx") {
+  errors.push("tsconfig.json jsx must match the Next.js 16 generated react-jsx setting.");
+}
+if (!tsconfig.include?.includes(".next/dev/types/**/*.ts")) {
+  errors.push("tsconfig.json must include Next.js development generated types.");
+}
 if (pkg.scripts?.["wait:production"] !== "node scripts/wait-for-production-commit.mjs") {
   errors.push("package.json missing the production convergence command.");
 }
