@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { discoverApiRoutes } from "./api-route-utils.mjs";
 
 const registryFile = "lib/publicData.ts";
 const docsFile = "docs/PUBLIC_DATA.md";
@@ -12,6 +13,39 @@ const apiIndex = fs.readFileSync(apiIndexFile, "utf8");
 
 const paths = [...registry.matchAll(/path:\s*"([^"]+)"/g)].map((match) => match[1]);
 const errors = [];
+const registeredApiPaths = new Set(
+  paths
+    .map((endpoint) => endpoint.split("?")[0])
+    .filter((endpoint) => endpoint === "/api" || endpoint.startsWith("/api/"))
+);
+const privateApiPaths = new Set(["/api/enquiry"]);
+const discoveredApiRoutes = discoverApiRoutes();
+const discoveredApiPaths = new Set(discoveredApiRoutes.map(({ path }) => path));
+
+for (const { path } of discoveredApiRoutes) {
+  if (privateApiPaths.has(path)) {
+    if (registeredApiPaths.has(path)) {
+      errors.push("Private API route must not appear in public registry: " + path);
+    }
+    continue;
+  }
+  if (!registeredApiPaths.has(path)) {
+    errors.push("Discovered public API route is missing from registry: " + path);
+  }
+}
+
+for (const path of registeredApiPaths) {
+  if (!discoveredApiPaths.has(path)) {
+    errors.push("Registered API path has no discovered route: " + path);
+  }
+}
+
+for (const path of privateApiPaths) {
+  if (!discoveredApiPaths.has(path)) {
+    errors.push("Expected private API route is missing: " + path);
+  }
+}
+
 
 if (!paths.length) errors.push("Public data registry contains no endpoints.");
 
@@ -28,6 +62,9 @@ for (const endpoint of paths) {
 
 if (!dataPage.includes("publicDataEndpoints.map")) {
   errors.push("/data page is not rendered from the shared endpoint registry.");
+}
+if (docs.includes("/api/enquiry")) {
+  errors.push("Public data docs must not advertise the private enquiry endpoint.");
 }
 
 const publicApiHelper = fs.readFileSync("lib/publicApi.ts", "utf8");

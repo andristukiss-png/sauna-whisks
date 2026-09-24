@@ -1,41 +1,5 @@
 import fs from "node:fs";
-
-const cached = [
-  "app/api/catalog/route.ts",
-  "app/api/articles/route.ts",
-  "app/api/markets/route.ts",
-  "app/api/trade/route.ts",
-  "app/api/materials/route.ts",
-  "app/api/conditions/route.ts",
-  "app/api/glossary/route.ts",
-  "app/api/guides/route.ts",
-  "app/api/operations/route.ts",
-  "app/api/sources/route.ts",
-  "app/api/company/route.ts",
-  "app/api/use-cases/route.ts",
-  "app/api/techniques/route.ts",
-  "app/api/faq/route.ts",
-  "app/api/traditions/route.ts",
-  "app/api/comparisons/route.ts",
-  "app/api/editorial/route.ts",
-  "app/api/tools/route.ts",
-  "app/api/route.ts",
-  "app/feed.json/route.ts"
-];
-
-const noStore = [
-  "app/api/search/route.ts",
-  "app/api/status/route.ts",
-  "app/api/health/route.ts"
-];
-
-const cachedCsv = [
-  "app/api/catalog.csv/route.ts",
-  "app/api/sources.csv/route.ts",
-  "app/api/product-data-template.csv/route.ts",
-  "app/api/supplier-sample-template.csv/route.ts",
-  "app/api/trade-trial-template.csv/route.ts"
-];
+import { discoverApiRoutes } from "./api-route-utils.mjs";
 
 const publicTextRoutes = [
   "app/feed.xml/route.ts",
@@ -46,20 +10,39 @@ const publicTextRoutes = [
 
 const errors = [];
 
-for (const file of cached) {
+const privateApiPaths = new Set(["/api/enquiry"]);
+const noStoreApiPaths = new Set(["/api/search", "/api/status", "/api/health"]);
+
+for (const { file, path } of discoverApiRoutes()) {
   const text = fs.readFileSync(file, "utf8");
-  if (!text.includes("publicJson")) errors.push("Public API missing cache helper: " + file);
+
+  if (privateApiPaths.has(path)) {
+    if (!/export\s+async\s+function\s+POST\b|export\s+function\s+POST\b/.test(text)) {
+      errors.push("Private enquiry API must export POST: " + file);
+    }
+    if (/export\s+(?:async\s+)?function\s+GET\b/.test(text)) {
+      errors.push("Private enquiry API must not export GET: " + file);
+    }
+    continue;
+  }
+
+  if (!/export\s+(?:async\s+)?function\s+GET\b/.test(text)) {
+    errors.push("Public API route must export GET: " + file);
+  }
+
+  if (path.endsWith(".csv")) {
+    if (!text.includes("publicCsv")) errors.push("Public CSV missing shared response helper: " + file);
+    if (!text.includes("encodeCsv")) errors.push("Public CSV missing shared encoder: " + file);
+  } else if (noStoreApiPaths.has(path)) {
+    if (!text.includes("noStoreJson")) errors.push("Dynamic API missing no-store helper: " + file);
+  } else if (!text.includes("publicJson")) {
+    errors.push("Public API missing cache helper: " + file);
+  }
 }
 
-for (const file of noStore) {
-  const text = fs.readFileSync(file, "utf8");
-  if (!text.includes("noStoreJson")) errors.push("Dynamic API missing no-store helper: " + file);
-}
-
-for (const file of cachedCsv) {
-  const text = fs.readFileSync(file, "utf8");
-  if (!text.includes("publicCsv")) errors.push("Public CSV missing shared response helper: " + file);
-  if (!text.includes("encodeCsv")) errors.push("Public CSV missing shared encoder: " + file);
+const jsonFeed = fs.readFileSync("app/feed.json/route.ts", "utf8");
+if (!jsonFeed.includes("publicJson")) {
+  errors.push("JSON Feed missing shared public JSON response helper.");
 }
 
 for (const file of publicTextRoutes) {

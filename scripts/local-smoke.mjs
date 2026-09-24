@@ -501,6 +501,7 @@ if (apiIndexResponse?.ok) {
       .filter(Boolean);
     const unique = [...new Set(paths)];
     if (unique.length !== paths.length) fail("/api index contains duplicate endpoint paths.");
+    if (unique.includes("/api/enquiry")) fail("/api index must not expose the private enquiry endpoint.");
 
     for (const path of unique) {
       const response = await request(path);
