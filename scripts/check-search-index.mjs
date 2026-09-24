@@ -61,6 +61,16 @@ if (!localSmoke.includes('/api/search?q=venik') || !localSmoke.includes('/glossa
 }
 const searchPage = fs.readFileSync("app/search/page.tsx", "utf8");
 if (!searchPage.includes("isSiteSearchFilter")) errors.push("Search page bypasses shared filter validation.");
+for (const [needle, label] of [
+  ["string | string[] | undefined", "repeated query-parameter type"],
+  ["function firstSearchParam", "repeated query-parameter normalizer"],
+  [".slice(0, MAX_SEARCH_QUERY_LENGTH)", "server-side initial query length bound"],
+]) {
+  if (!searchPage.includes(needle)) errors.push("Search page missing " + label + ".");
+}
+if (!localSmoke.includes("/search?q=birch&q=oak&type=Guide&type=Product")) {
+  errors.push("Local smoke must verify repeated search query parameters.");
+}
 
 if (errors.length) {
   console.error("Search-index validation failed:");
