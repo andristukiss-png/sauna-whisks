@@ -133,7 +133,6 @@ const contextualStatusChecks = [
   ["components/LaunchReadinessTool.tsx", "launch gates complete", "launch readiness status"],
   ["components/SupplierScorecardTool.tsx", "criteria scored", "supplier score status"],
   ["components/TradeDemandEstimator.tsx", "whisks per month", "trade demand status"],
-  ["components/WhiskFinder.tsx", "WORKING RECOMMENDATION", "whisk finder status"],
 ];
 
 for (const [file, context, label] of contextualStatusChecks) {
@@ -143,6 +142,16 @@ for (const [file, context, label] of contextualStatusChecks) {
   if (!source.includes('aria-atomic="true"')) errors.push(label + " missing atomic announcement.");
   if (!source.includes('className="sr-only"')) errors.push(label + " missing screen-reader context.");
   if (!source.includes(context)) errors.push(label + " missing contextual status text.");
+}
+
+const whiskFinder = fs.readFileSync("components/WhiskFinder.tsx", "utf8");
+for (const [needle, label] of [
+  ['role="status"', "finder status role"],
+  ['aria-live="polite"', "finder polite live region"],
+  ['aria-atomic="true"', "finder atomic recommendation announcement"],
+  ["WORKING RECOMMENDATION", "finder recommendation context"],
+]) {
+  if (!whiskFinder.includes(needle)) errors.push("Whisk finder missing " + label + ".");
 }
 
 const enquiryForm = fs.readFileSync("components/EnquiryForm.tsx", "utf8");
