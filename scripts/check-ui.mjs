@@ -234,6 +234,8 @@ for (const [needle, label] of [
 }
 
 const siteFooter = fs.readFileSync("components/SiteFooter.tsx", "utf8");
+if (!siteFooter.includes("new Date().getUTCFullYear()")) errors.push("Footer copyright year must be derived in UTC.");
+if (/©\s+20\d{2}\s+SaunaWhisks\.com/.test(siteFooter)) errors.push("Footer must not hard-code a copyright year.");
 for (const [needle, label] of [
   ['aria-label="Shop and explore"', "shop and explore navigation"],
   ['aria-label="Learn"', "learning navigation"],
