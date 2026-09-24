@@ -1,10 +1,15 @@
 import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { EnquiryForm } from "@/components/EnquiryForm";
+import { getMarket } from "@/lib/markets";
+
+const usMarketConfig = getMarket("united-states");
+if (!usMarketConfig) throw new Error("United States market configuration is missing.");
+const usMarket = usMarketConfig;
 
 export const metadata = pageMetadata({
   title: "Sauna Whisks USA — Planned US Launch",
-  description: "SaunaWhisks.com is preparing a US launch for sauna whisks. Learn about the planned assortment, product standards and import-compliance approach.",
+  description: `${usMarket.summary} US orders are not open yet.`,
   canonical: "/usa",
 });
 
@@ -12,12 +17,9 @@ export default function USAPage() {
   return (
     <>
       <section className="page-hero usa-hero">
-        <p className="section-kicker">UNITED STATES / LAUNCH PLANNING</p>
-        <h1>Sauna whisks for the US.</h1>
-        <p>
-          We are preparing the US market around a small dried-whisk assortment, clear preparation guidance
-          and bundles that make international logistics sensible. US orders are not open yet.
-        </p>
+        <p className="section-kicker">UNITED STATES / {usMarket.status.toUpperCase()}</p>
+        <h1>{usMarket.headline}</h1>
+        <p>{usMarket.summary} US orders are not open yet.</p>
         <div className="usa-actions">
           <a className="button button-dark" href="#usa-enquiry">Send US enquiry</a>
           <Link className="text-link" href="/standards">Read our product standard →</Link>
@@ -56,7 +58,7 @@ export default function USAPage() {
         <div>
           <p>
             APHIS directs importers to its Agricultural Commodity Import Requirements database because rules depend on the exact plant product and origin.
-            We will publish shipping availability only after the relevant product form and origin have been checked.
+            {" "}{usMarket.logistics}
           </p>
           <a
             className="text-link"
@@ -77,7 +79,7 @@ export default function USAPage() {
           send us a message below.
         </p>
         <EnquiryForm
-          subject="SaunaWhisks.com USA enquiry"
+          subject={usMarket.enquiryTopic}
           topics={["Home customer", "Retailer", "Public sauna / venue", "Sauna builder", "Distributor", "Other"]}
           messagePlaceholder="Tell us what you are interested in and where in the US you are based..."
         />
