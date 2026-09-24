@@ -64,7 +64,7 @@ export default function Home() {
         <p className="section-kicker">A LIVING TRADITION</p>
         <div>
           <h2>Not an accessory.<br /><em>A sauna instrument.</em></h2>
-          <p>Across Latvia and the wider Baltic and banya traditions, leafy bundles are used to move heat, release aroma and work with the body. The names change — whisk, venik, vihta, vasta — but the idea is older than modern wellness.</p>
+          <p>Across Latvia and the wider Baltic and banya traditions, leafy bundles are used to move heat, release aroma and work with the body. The names change — sauna whisk, sauna broom, venik, vihta, vasta — but the idea is older than modern wellness.</p>
           <p>SaunaWhisks.com exists to preserve that depth while making the ritual understandable, dependable and accessible to sauna owners around the world.</p>
         </div>
       </section>

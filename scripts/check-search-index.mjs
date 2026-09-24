@@ -28,6 +28,13 @@ requiredPages.forEach((route) => {
   if (!text.includes('href: "' + route + '"')) errors.push("Missing page: " + route);
 });
 
+for (const alias of ["sauna broom", "venik", "vihta", "vasta"]) {
+  if (!text.includes('"' + alias + '"')) errors.push("Missing sauna-whisk search alias: " + alias);
+}
+if (!text.includes("...saunaWhiskAliases")) {
+  errors.push("Search index does not reuse the sauna-whisk alias set.");
+}
+
 
 const searchHelper = fs.readFileSync("lib/search.ts", "utf8");
 const searchApi = fs.readFileSync("app/api/search/route.ts", "utf8");
