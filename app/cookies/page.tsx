@@ -69,6 +69,14 @@ export default function CookiesPage() {
           <p>
             Latvia&apos;s Data State Inspectorate also publishes public guidance about cookies and data-protection rights.
           </p>
+          <a
+            className="text-link"
+            href="https://www.dvi.gov.lv/lv/jaunums/dviskaidro-kas-man-jazina-par-sikdatnem-jeb-cookies"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Latvia Data State Inspectorate — cookie guidance ↗<span className="sr-only"> (opens in a new tab)</span>
+          </a>
         </section>
       </article>
     </>
