@@ -1,4 +1,5 @@
 import { pageMetadata } from "@/lib/metadata";
+import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import site from "@/config/site.json";
 
@@ -128,7 +129,7 @@ export default function PrivacyPage() {
           <h2>Cookies</h2>
           <p>
             The current site does not intentionally use non-essential analytics or advertising cookies.
-            See the <a href="/cookies">Cookie Notice</a> for the current position and how future consent controls will work.
+            See the <Link href="/cookies">Cookie Notice</Link> for the current position and how future consent controls will work.
           </p>
         </section>
 
