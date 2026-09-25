@@ -15,6 +15,8 @@ const requiredFiles = [
   "app/contact/page.tsx",
   "app/privacy/page.tsx",
   "app/terms/page.tsx",
+  "app/legal/page.tsx",
+  "app/cookies/page.tsx",
   "app/sitemap.ts",
   "app/robots.ts",
   "lib/products.ts",
@@ -60,6 +62,25 @@ const contactUsesConfiguredEmail =
 
 if (!contactUsesConfiguredEmail) {
   errors.push("Contact page must render the configured public email from config/site.json.");
+}
+
+if (site.publicEmail !== "info@saunawhisks.com") {
+  errors.push("Configured public email must be info@saunawhisks.com.");
+}
+
+for (const [file, requiredText, label] of [
+  ["app/cookies/page.tsx", "Non-essential cookies and consent", "cookie consent disclosure"],
+  ["app/cookies/page.tsx", "does not intentionally set advertising", "current no-advertising-cookie disclosure"],
+  ["app/terms/page.tsx", "No online sales yet", "pre-launch sales status"],
+  ["app/terms/page.tsx", "Seller information before checkout", "seller-information launch gate"],
+  ["app/privacy/page.tsx", "Who is responsible for your data", "controller disclosure"],
+  ["app/privacy/page.tsx", "Your rights", "data-subject rights"],
+  ["app/privacy/page.tsx", "www.dvi.gov.lv", "Latvian privacy regulator link"],
+  ["app/legal/page.tsx", "CURRENT LEGAL STATUS", "legal status disclosure"],
+  ["app/legal/page.tsx", "www.ptac.gov.lv", "Latvian consumer regulator link"],
+]) {
+  const text = fs.readFileSync(path.join(root, file), "utf8");
+  if (!text.includes(requiredText)) errors.push(file + " missing " + label + ".");
 }
 
 const faqPage = fs.readFileSync(path.join(root, "app/faq/page.tsx"), "utf8");
