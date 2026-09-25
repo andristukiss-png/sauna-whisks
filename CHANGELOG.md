@@ -16,6 +16,11 @@
 - hardened landed-cost calculator input ranges
 - strengthened CI, metadata, sitemap, UI, API and security validation
 
+### 2026-09-25 legal policy batch
+- published cookie notice, website terms, privacy notice and expanded legal hub
+- standardized the public contact email as info@saunawhisks.com
+- added validation for legal disclosures and canonical contact configuration
+
 ### Current
 - specialist sauna-whisk product architecture
 - searchable knowledge library
