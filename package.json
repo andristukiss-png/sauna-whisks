@@ -43,7 +43,7 @@
     "validate:hygiene": "node scripts/check-repo-hygiene.mjs"
   },
   "dependencies": {
-    "next": "^16.0.0",
+    "next": "^16.4.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
